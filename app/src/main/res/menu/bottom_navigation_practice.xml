@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/practice_navigation_test_series"
+        android:icon="@drawable/ic_computer_black"
+        android:title="Test Series"
+        app:showAsAction="always"
+        />
+
+    <item
+        android:id="@+id/practice_navigation_company_wise"
+        android:icon="@drawable/ic_computer_black"
+        android:title="Company Wise"
+        app:showAsAction="always"
+        />
+
+    <item
+        android:id="@+id/practice_navigation_topic_wise"
+        android:icon="@drawable/ic_computer_black"
+        android:title="Topic Wise"
+        app:showAsAction="always"
+        />
+
+    <item
+        android:id="@+id/practice_navigation_exam_wise"
+        android:icon="@drawable/ic_computer_black"
+        android:title="Exam Wise"
+        app:showAsAction="always"
+        />
+
+</menu>

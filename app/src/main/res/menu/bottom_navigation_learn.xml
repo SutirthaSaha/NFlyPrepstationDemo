@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/learn_navigation_course"
+        android:icon="@drawable/ic_computer_black"
+        android:title="Course"
+        app:showAsAction="always"
+        />
+
+    <item
+        android:id="@+id/learn_navigation_interview"
+        android:icon="@drawable/ic_computer_black"
+        android:title="Interviews"
+        app:showAsAction="always"
+        />
+
+    <item
+        android:id="@+id/learn_navigation_gd"
+        android:icon="@drawable/ic_computer_black"
+        android:title="GD"
+        app:showAsAction="always"
+        />
+
+    <item
+        android:id="@+id/learn_navigation_papers"
+        android:icon="@drawable/ic_computer_black"
+        android:title="Papers"
+        app:showAsAction="always"
+        />
+
+    <item
+        android:id="@+id/learn_navigation_tips"
+        android:icon="@drawable/ic_computer_black"
+        android:title="Tips"
+        app:showAsAction="always"
+        />
+
+</menu>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group
+        android:id="@+id/grp1"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/home"
+            android:title="Home"
+            android:checkable="true"
+            android:icon="@drawable/ic_computer_black"
+            ></item>
+        <item
+            android:id="@+id/dashboard"
+            android:title="Dashboard"
+            android:checkable="true"
+            android:icon="@drawable/ic_computer_black"
+            ></item>
+        <item
+            android:id="@+id/learn"
+            android:title="Learn"
+            android:checkable="true"
+            android:icon="@drawable/ic_computer_black"
+            ></item>
+        <item
+            android:id="@+id/practice"
+            android:title="Practice"
+            android:checkable="true"
+            android:icon="@drawable/ic_computer_black"
+            ></item>
+        <item
+            android:id="@+id/knowledgeBase"
+            android:title="Knowledge Base"
+            android:checkable="true"
+            android:icon="@drawable/ic_computer_black"
+            ></item>
+    </group>
+    <group
+        android:id="@+id/grp2"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/resume"
+            android:title="Resume"
+            android:checkable="true"
+            android:icon="@drawable/ic_computer_black"
+            ></item>
+        <item
+            android:id="@+id/salCalc"
+            android:title="Salary Calculator"
+            android:checkable="true"
+            android:icon="@drawable/ic_computer_black"
+            ></item>
+        <item
+            android:id="@+id/signout"
+            android:title="Sign Out"
+            android:checkable="true"
+            android:icon="@drawable/ic_computer_black"
+            ></item>
+    </group>
+
+</menu>
