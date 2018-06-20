@@ -19,11 +19,6 @@ import android.widget.Toast;
 
 import in.nfly.dell.nflydemo.R;
 import in.nfly.dell.nflydemo.User;
-import in.nfly.dell.nflydemo.fragments.LearnCourseFragment;
-import in.nfly.dell.nflydemo.fragments.LearnGDFragment;
-import in.nfly.dell.nflydemo.fragments.LearnInterviewFragment;
-import in.nfly.dell.nflydemo.fragments.LearnPaperFragment;
-import in.nfly.dell.nflydemo.fragments.LearnTipsFragment;
 import in.nfly.dell.nflydemo.fragments.PracticeCompanyWiseFragment;
 import in.nfly.dell.nflydemo.fragments.PracticeExamWiseFragment;
 import in.nfly.dell.nflydemo.fragments.PracticeTestSeriesFragment;

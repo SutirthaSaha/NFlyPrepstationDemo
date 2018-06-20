@@ -9,6 +9,13 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import in.nfly.dell.nflydemo.JobWiseFragments.JobRoleCareerAdviseFragment;
+import in.nfly.dell.nflydemo.JobWiseFragments.JobRoleCareerPathFragment;
+import in.nfly.dell.nflydemo.JobWiseFragments.JobRoleFAQsFragment;
+import in.nfly.dell.nflydemo.JobWiseFragments.JobRoleOverviewFragment;
+import in.nfly.dell.nflydemo.JobWiseFragments.JobRoleResourcesFragment;
+import in.nfly.dell.nflydemo.JobWiseFragments.JobRoleStatsFragment;
+import in.nfly.dell.nflydemo.JobWiseFragments.JobRoleVideosFragment;
 import in.nfly.dell.nflydemo.R;
 import in.nfly.dell.nflydemo.adapters.ViewPagerAdapter;
 import in.nfly.dell.nflydemo.fragments.CompanyDetailsCompanyIntroFragment;
@@ -43,13 +50,13 @@ public class JobRoleWiseDetailsActivity extends AppCompatActivity {
 
         viewPagerAdapter=new ViewPagerAdapter(getSupportFragmentManager());
 
-        viewPagerAdapter.addFragments(new CompanyDetailsCompanyIntroFragment(),"Overview");
-        viewPagerAdapter.addFragments(new CompanyDetailsCompanyIntroFragment(),"Stats");
-        viewPagerAdapter.addFragments(new CompanyDetailsCompanyIntroFragment(),"Career Path");
-        viewPagerAdapter.addFragments(new CompanyDetailsCompanyIntroFragment(),"Resources");
-        viewPagerAdapter.addFragments(new CompanyDetailsCompanyIntroFragment(),"Career Advise");
-        viewPagerAdapter.addFragments(new CompanyDetailsCompanyIntroFragment(),"Videos");
-        viewPagerAdapter.addFragments(new CompanyDetailsCompanyIntroFragment(),"FAQs");
+        viewPagerAdapter.addFragments(JobRoleOverviewFragment.newInstance(job_role_id,job_role_name),"Overview");
+        viewPagerAdapter.addFragments(JobRoleStatsFragment.newInstance(job_role_id,job_role_name),"Stats");
+        viewPagerAdapter.addFragments(JobRoleCareerPathFragment.newInstance(job_role_id,job_role_name),"Career Path");
+        viewPagerAdapter.addFragments(JobRoleResourcesFragment.newInstance(job_role_id,job_role_name),"Resources");
+        viewPagerAdapter.addFragments(JobRoleCareerAdviseFragment.newInstance(job_role_id,job_role_name),"Career Advise");
+        viewPagerAdapter.addFragments(JobRoleVideosFragment.newInstance(job_role_id,job_role_name),"Videos");
+        viewPagerAdapter.addFragments(JobRoleFAQsFragment.newInstance(job_role_id,job_role_name),"FAQs");
 
         viewPagerJobWiseDetails.setAdapter(viewPagerAdapter);
         tabLayoutJobWiseDetails.setupWithViewPager(viewPagerJobWiseDetails);

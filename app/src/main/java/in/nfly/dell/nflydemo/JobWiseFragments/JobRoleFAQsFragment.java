@@ -1,15 +1,13 @@
-package in.nfly.dell.nflydemo.fragments;
+package in.nfly.dell.nflydemo.JobWiseFragments;
 
 
-import android.app.ProgressDialog;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.text.Html;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -22,30 +20,38 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import in.nfly.dell.nflydemo.MySingleton;
 import in.nfly.dell.nflydemo.R;
-import in.nfly.dell.nflydemo.adapters.LearnPapersAdapter;
+import in.nfly.dell.nflydemo.adapters.CompDetailsInterviewExpAdapter;
+import in.nfly.dell.nflydemo.adapters.JobRoleFAQsAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CompanyDetailsCompanyIntroFragment extends Fragment {
+public class JobRoleFAQsFragment extends Fragment {
 
-    public String company_id,company_name;
-    private String urlCompany="http://nfly.in/gapi/load_rows_one";
-    private TextView companyDetailsCompanyIntroText;
-    private String companyIntro;
+    private String job_role_id,job_role_name;
+    private String urlJob="http://nfly.in/gapi/load_rows_one";
 
-    public CompanyDetailsCompanyIntroFragment() {
+    private RecyclerView jobRoleFAQsRecyclerView;
+    private RecyclerView.Adapter adapter;
+    private RecyclerView.LayoutManager layoutManager;
+
+    private ArrayList<String> questionDataSet=new ArrayList<String>(){};
+    private ArrayList<String> answerDataSet=new ArrayList<String>(){};
+
+    public JobRoleFAQsFragment() {
         // Required empty public constructor
     }
-    public static CompanyDetailsCompanyIntroFragment  newInstance(String company_id, String company_name) {
-        CompanyDetailsCompanyIntroFragment fragment = new CompanyDetailsCompanyIntroFragment();
-        fragment.company_id=company_id;
-        fragment.company_name=company_name;
+
+    public static JobRoleFAQsFragment newInstance(String job_role_id, String job_role_name) {
+        JobRoleFAQsFragment fragment=new JobRoleFAQsFragment();
+        fragment.job_role_id=job_role_id;
+        fragment.job_role_name=job_role_name;
         return fragment;
     }
 
@@ -53,28 +59,30 @@ public class CompanyDetailsCompanyIntroFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v= inflater.inflate(R.layout.fragment_company_details_company_intro, container, false);
-        Toast.makeText(getContext(), company_id+company_name, Toast.LENGTH_SHORT).show();
-        companyDetailsCompanyIntroText=v.findViewById(R.id.companyDetailsCompanyIntroText);
+        View v= inflater.inflate(R.layout.fragment_job_role_faqs, container, false);
+        jobRoleFAQsRecyclerView=v.findViewById(R.id.jobRoleFAQsRecyclerView);
+        layoutManager=new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
+        jobRoleFAQsRecyclerView.setLayoutManager(layoutManager);
         setValues();
         return v;
     }
 
     private void setValues() {
-        StringRequest stringRequest=new StringRequest(Request.Method.POST, urlCompany, new Response.Listener<String>() {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, urlJob, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
                     JSONObject jsonObject;
                     JSONArray parentArray=new JSONArray(response);
-                    jsonObject=parentArray.getJSONObject(0);
-                    companyIntro=jsonObject.getString("company_intro");
-                    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
-                        companyDetailsCompanyIntroText.setText(Html.fromHtml(companyIntro,Html.FROM_HTML_MODE_COMPACT));
+
+                    for(int i=0;i<parentArray.length();i++){
+                        jsonObject=parentArray.getJSONObject(i);
+                        questionDataSet.add(jsonObject.getString("question"));
+                        answerDataSet.add(jsonObject.getString("answer"));
                     }
-                    else{
-                        companyDetailsCompanyIntroText.setText(Html.fromHtml(companyIntro));
-                    }
+                    adapter=new JobRoleFAQsAdapter(getContext(),questionDataSet,answerDataSet);
+                    jobRoleFAQsRecyclerView.setAdapter(adapter);
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -96,9 +104,9 @@ public class CompanyDetailsCompanyIntroFragment extends Fragment {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("key", "company_id");
-                params.put("value", company_id);
-                params.put("table", "company");
+                params.put("key", "job_role_id");
+                params.put("value", job_role_id);
+                params.put("table", "jr_faq");
                 return params;
             }
         };

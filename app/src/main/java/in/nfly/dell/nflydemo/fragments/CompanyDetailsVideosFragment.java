@@ -1,7 +1,6 @@
 package in.nfly.dell.nflydemo.fragments;
 
 
-import android.app.ProgressDialog;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,6 +8,9 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,40 +24,46 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import in.nfly.dell.nflydemo.MySingleton;
 import in.nfly.dell.nflydemo.R;
-import in.nfly.dell.nflydemo.adapters.LearnPapersAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CompanyDetailsCompanyIntroFragment extends Fragment {
+public class CompanyDetailsVideosFragment extends Fragment {
 
     public String company_id,company_name;
     private String urlCompany="http://nfly.in/gapi/load_rows_one";
-    private TextView companyDetailsCompanyIntroText;
-    private String companyIntro;
 
-    public CompanyDetailsCompanyIntroFragment() {
+    private TextView companyDetailsVideoView;
+    private ListView companyDetailsVideoList;
+
+    private ArrayList<String> titleDataSet=new ArrayList<String>(){};
+    private ArrayList<String> urlDataSet=new ArrayList<String>(){};
+
+    public CompanyDetailsVideosFragment() {
         // Required empty public constructor
     }
-    public static CompanyDetailsCompanyIntroFragment  newInstance(String company_id, String company_name) {
-        CompanyDetailsCompanyIntroFragment fragment = new CompanyDetailsCompanyIntroFragment();
+
+    public static CompanyDetailsVideosFragment newInstance(String company_id, String company_name) {
+        CompanyDetailsVideosFragment fragment = new CompanyDetailsVideosFragment();
         fragment.company_id=company_id;
         fragment.company_name=company_name;
         return fragment;
     }
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v= inflater.inflate(R.layout.fragment_company_details_company_intro, container, false);
-        Toast.makeText(getContext(), company_id+company_name, Toast.LENGTH_SHORT).show();
-        companyDetailsCompanyIntroText=v.findViewById(R.id.companyDetailsCompanyIntroText);
+        View v= inflater.inflate(R.layout.fragment_company_details_videos, container, false);
+        companyDetailsVideoView=v.findViewById(R.id.companyDetailsVideoView);
+        companyDetailsVideoList=v.findViewById(R.id.companyDetailsVideoList);
         setValues();
         return v;
     }
@@ -65,16 +73,21 @@ public class CompanyDetailsCompanyIntroFragment extends Fragment {
             @Override
             public void onResponse(String response) {
                 try {
-                    JSONObject jsonObject;
+                    JSONObject arrayObject;
                     JSONArray parentArray=new JSONArray(response);
-                    jsonObject=parentArray.getJSONObject(0);
-                    companyIntro=jsonObject.getString("company_intro");
-                    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
-                        companyDetailsCompanyIntroText.setText(Html.fromHtml(companyIntro,Html.FROM_HTML_MODE_COMPACT));
+                    for(int i=0;i<parentArray.length();i++){
+                        arrayObject=parentArray.getJSONObject(i);
+                        titleDataSet.add(arrayObject.getString("video_title"));
+                        urlDataSet.add(arrayObject.getString("video_url"));
                     }
-                    else{
-                        companyDetailsCompanyIntroText.setText(Html.fromHtml(companyIntro));
-                    }
+                    ArrayAdapter<String> adapter=new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1,titleDataSet);
+                    companyDetailsVideoList.setAdapter(adapter);
+                    companyDetailsVideoList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            companyDetailsVideoView.setText(urlDataSet.get(position));
+                        }
+                    });
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -98,7 +111,7 @@ public class CompanyDetailsCompanyIntroFragment extends Fragment {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("key", "company_id");
                 params.put("value", company_id);
-                params.put("table", "company");
+                params.put("table", "company_videos");
                 return params;
             }
         };

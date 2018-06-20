@@ -1,7 +1,6 @@
 package in.nfly.dell.nflydemo.fragments;
 
 
-import android.app.ProgressDialog;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -27,23 +26,23 @@ import java.util.Map;
 
 import in.nfly.dell.nflydemo.MySingleton;
 import in.nfly.dell.nflydemo.R;
-import in.nfly.dell.nflydemo.adapters.LearnPapersAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CompanyDetailsCompanyIntroFragment extends Fragment {
+public class CompanyDetailsHiringProcessFragment extends Fragment {
 
     public String company_id,company_name;
     private String urlCompany="http://nfly.in/gapi/load_rows_one";
-    private TextView companyDetailsCompanyIntroText;
-    private String companyIntro;
+    private TextView companyDetailsCompanyHiringText;
+    private String companyHire;
 
-    public CompanyDetailsCompanyIntroFragment() {
+    public CompanyDetailsHiringProcessFragment() {
         // Required empty public constructor
     }
-    public static CompanyDetailsCompanyIntroFragment  newInstance(String company_id, String company_name) {
-        CompanyDetailsCompanyIntroFragment fragment = new CompanyDetailsCompanyIntroFragment();
+
+    public static CompanyDetailsHiringProcessFragment newInstance(String company_id, String company_name) {
+        CompanyDetailsHiringProcessFragment fragment = new CompanyDetailsHiringProcessFragment();
         fragment.company_id=company_id;
         fragment.company_name=company_name;
         return fragment;
@@ -53,9 +52,8 @@ public class CompanyDetailsCompanyIntroFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v= inflater.inflate(R.layout.fragment_company_details_company_intro, container, false);
-        Toast.makeText(getContext(), company_id+company_name, Toast.LENGTH_SHORT).show();
-        companyDetailsCompanyIntroText=v.findViewById(R.id.companyDetailsCompanyIntroText);
+        View v= inflater.inflate(R.layout.fragment_company_details_hiring_process, container, false);
+        companyDetailsCompanyHiringText=v.findViewById(R.id.companyDetailsCompanyHiringText);
         setValues();
         return v;
     }
@@ -68,13 +66,14 @@ public class CompanyDetailsCompanyIntroFragment extends Fragment {
                     JSONObject jsonObject;
                     JSONArray parentArray=new JSONArray(response);
                     jsonObject=parentArray.getJSONObject(0);
-                    companyIntro=jsonObject.getString("company_intro");
+                    companyHire=jsonObject.getString("company_hiring_process");
                     if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
-                        companyDetailsCompanyIntroText.setText(Html.fromHtml(companyIntro,Html.FROM_HTML_MODE_COMPACT));
+                        companyDetailsCompanyHiringText.setText(Html.fromHtml(companyHire,Html.FROM_HTML_MODE_COMPACT));
                     }
                     else{
-                        companyDetailsCompanyIntroText.setText(Html.fromHtml(companyIntro));
+                        companyDetailsCompanyHiringText.setText(Html.fromHtml(companyHire));
                     }
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -104,4 +103,5 @@ public class CompanyDetailsCompanyIntroFragment extends Fragment {
         };
         MySingleton.getmInstance(getContext()).addToRequestQueue(stringRequest);
     }
+
 }

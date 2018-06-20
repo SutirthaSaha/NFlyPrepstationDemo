@@ -50,7 +50,7 @@ public class KnowledgeBaseJobWiseAdapter extends RecyclerView.Adapter<KnowledgeB
             public void onClick(View v) {
                 Toast.makeText(context, idDataSet.get(position), Toast.LENGTH_SHORT).show();
                 Intent intent=new Intent(context, JobRoleWiseDetailsActivity.class);
-                intent.putExtra("job_role__id",idDataSet.get(position));
+                intent.putExtra("job_role_id",idDataSet.get(position));
                 intent.putExtra("job_role_name",titleDataSet.get(position));
                 context.startActivity(intent);
             }
