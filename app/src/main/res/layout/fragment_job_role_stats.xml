@@ -3,11 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".JobWiseFragments.JobRoleStatsFragment">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textColor="#000"
+        android:paddingBottom="17dp"
+        android:textSize="15sp"
+        android:paddingRight="17dp"
+        android:paddingLeft="17dp"
+        app:fontFamily="@font/roboto"
         android:id="@+id/jobRoleStatsText"/>
 
 </FrameLayout>

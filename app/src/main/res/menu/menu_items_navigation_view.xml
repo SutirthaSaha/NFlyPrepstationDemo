@@ -8,31 +8,31 @@
             android:id="@+id/home"
             android:title="Home"
             android:checkable="true"
-            android:icon="@drawable/ic_computer_black"
-            ></item>
+            android:icon="@drawable/home"
+            />
         <item
             android:id="@+id/dashboard"
             android:title="Dashboard"
             android:checkable="true"
-            android:icon="@drawable/ic_computer_black"
+            android:icon="@drawable/dashboard"
             ></item>
         <item
             android:id="@+id/learn"
             android:title="Learn"
             android:checkable="true"
-            android:icon="@drawable/ic_computer_black"
+            android:icon="@drawable/learn"
             ></item>
         <item
             android:id="@+id/practice"
             android:title="Practice"
             android:checkable="true"
-            android:icon="@drawable/ic_computer_black"
+            android:icon="@drawable/practise"
             ></item>
         <item
             android:id="@+id/knowledgeBase"
             android:title="Knowledge Base"
             android:checkable="true"
-            android:icon="@drawable/ic_computer_black"
+            android:icon="@drawable/knowledgehub"
             ></item>
     </group>
     <group
@@ -42,19 +42,19 @@
             android:id="@+id/resume"
             android:title="Resume"
             android:checkable="true"
-            android:icon="@drawable/ic_computer_black"
+            android:icon="@drawable/resume"
             ></item>
         <item
             android:id="@+id/salCalc"
             android:title="Salary Calculator"
             android:checkable="true"
-            android:icon="@drawable/ic_computer_black"
+            android:icon="@drawable/salarycalculator"
             ></item>
         <item
             android:id="@+id/signout"
             android:title="Sign Out"
             android:checkable="true"
-            android:icon="@drawable/ic_computer_black"
+            android:icon="@drawable/signout"
             ></item>
     </group>
 

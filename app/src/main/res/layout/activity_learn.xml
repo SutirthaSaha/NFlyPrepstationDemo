@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:id="@+id/learnFragmentContainer"></FrameLayout>
+            android:id="@+id/learnFragmentContainer"/>
 
         <android.support.design.widget.BottomNavigationView
             android:id="@+id/learnBottomNavigation"
@@ -39,10 +39,9 @@
         android:layout_height="match_parent"
         android:id="@+id/navigationViewLearn"
         android:layout_gravity="start"
-        app:itemIconTint="#90A4AE"
-        app:itemTextColor="#90A4AE"
-        app:itemTextAppearance="@style/TextAppearance.AppCompat.Small"
+        app:itemTextColor="#343642"
+        app:itemIconTint="#605193"
         app:headerLayout="@layout/navigation_header"
         app:menu="@menu/menu_items_navigation_view"
-        ></android.support.design.widget.NavigationView>
+        />
 </android.support.v4.widget.DrawerLayout>

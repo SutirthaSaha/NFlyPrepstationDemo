@@ -10,15 +10,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="GD Topics"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textStyle="bold"
+        android:textSize="15sp"
+        android:textColor="#000"
+        android:layout_marginLeft="7dp"
         android:layout_margin="5dp"/>
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/learnGDRecyclerView"
-        android:layout_margin="5dp"></android.support.v7.widget.RecyclerView>
+        android:layout_margin="5dp"/>
 
 
 </LinearLayout>

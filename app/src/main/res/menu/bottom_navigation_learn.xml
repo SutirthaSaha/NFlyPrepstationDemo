@@ -3,35 +3,35 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/learn_navigation_course"
-        android:icon="@drawable/ic_computer_black"
+        android:icon="@drawable/courses"
         android:title="Course"
         app:showAsAction="always"
         />
 
     <item
         android:id="@+id/learn_navigation_interview"
-        android:icon="@drawable/ic_computer_black"
+        android:icon="@drawable/interview"
         android:title="Interviews"
         app:showAsAction="always"
         />
 
     <item
         android:id="@+id/learn_navigation_gd"
-        android:icon="@drawable/ic_computer_black"
+        android:icon="@drawable/gd"
         android:title="GD"
         app:showAsAction="always"
         />
 
     <item
         android:id="@+id/learn_navigation_papers"
-        android:icon="@drawable/ic_computer_black"
+        android:icon="@drawable/papers"
         android:title="Papers"
         app:showAsAction="always"
         />
 
     <item
         android:id="@+id/learn_navigation_tips"
-        android:icon="@drawable/ic_computer_black"
+        android:icon="@drawable/tips"
         android:title="Tips"
         app:showAsAction="always"
         />

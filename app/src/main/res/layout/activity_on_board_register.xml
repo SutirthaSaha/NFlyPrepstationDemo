@@ -6,18 +6,18 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@color/colorPrimary"
+    android:background="#fff"
     tools:context=".activities.OnBoardRegisterActivity">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="User OnBoarding"
+        android:textStyle="bold"
         android:textColor="@color/colorAccent"
-        android:layout_marginTop="30dp"
-        android:layout_margin="30dp"
+        android:layout_marginBottom="40dp"
         android:layout_gravity="center"
-        android:textSize="30sp"/>
+        android:textSize="20sp"/>
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
@@ -27,36 +27,35 @@
             android:layout_width="match_parent"
             android:layout_margin="10dp"
             android:layout_height="60sp"
-            android:textColor="#fff"
+            android:textColor="#000"
+            android:textSize="15dp"
             android:id="@+id/collegeRegister"/>
     </android.support.design.widget.TextInputLayout>
 
     <Spinner
         android:layout_width="match_parent"
-        android:layout_height="60sp"
+        android:layout_height="50sp"
         android:layout_margin="10dp"
-        android:background="#fff"
-        android:id="@+id/courseRegister"></Spinner>
+        android:id="@+id/courseRegister"/>
 
     <Spinner
         android:layout_width="match_parent"
-        android:layout_height="60sp"
+        android:layout_height="50sp"
         android:layout_margin="10dp"
-        android:background="#fff"
-        android:id="@+id/branchRegister"></Spinner>
+        android:id="@+id/branchRegister"/>
 
     <Spinner
         android:layout_width="match_parent"
-        android:layout_height="60sp"
+        android:layout_height="50sp"
         android:layout_margin="10dp"
-        android:background="#fff"
-        android:id="@+id/passingYearRegsiter"></Spinner>
+        android:theme="@style/AlertDialog.AppCompat.Light"
+        android:id="@+id/passingYearRegsiter"/>
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Complete Registration"
-        android:background="@color/colorAccent"
+        android:background="@drawable/button_shape_color"
         android:textColor="#fff"
         android:layout_margin="10dp"
         android:onClick="onCompleteRegistrationclick"/>

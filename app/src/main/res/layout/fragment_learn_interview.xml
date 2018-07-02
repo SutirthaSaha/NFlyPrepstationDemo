@@ -10,15 +10,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Interview Topics"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textStyle="bold"
+        android:layout_marginLeft="7dp"
+        android:textSize="15sp"
+        android:textColor="#000"
         android:layout_margin="5dp"/>
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/learnInterviewRecyclerView"
-        android:layout_margin="5dp"></android.support.v7.widget.RecyclerView>
+        android:layout_margin="5dp"/>
 
 
 </LinearLayout>

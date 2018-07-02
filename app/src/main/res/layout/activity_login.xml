@@ -6,40 +6,45 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@color/colorPrimary"
+    android:padding="7dp"
+    android:background="@drawable/gradient_login"
     tools:context=".activities.LoginActivity">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Login"
-        android:textColor="@color/colorAccent"
-        android:layout_marginTop="30dp"
-        android:layout_margin="30dp"
+        android:text="Nfly"
+        android:textStyle="bold"
+        android:textColor="#fff"
+        android:layout_marginBottom="40dp"
         android:layout_gravity="center"
-        android:textSize="30sp"/>
+        android:textSize="23sp"/>
 
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColorHint="@color/colorAccent"
+        android:textColorHint="#fff"
         android:hint="Email">
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#fff"
+            android:theme="@style/EditTextStyle"
+            android:textSize="15sp"
             android:layout_margin="10dp"
             android:id="@+id/emailId"/>
     </android.support.design.widget.TextInputLayout>
     <android.support.design.widget.TextInputLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColorHint="@color/colorAccent"
+        android:textColorHint="#fff"
         android:hint="Password">
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="#fff"
             android:layout_margin="10dp"
+            android:textSize="15sp"
+            android:theme="@style/EditTextStyle"
             android:inputType="textPassword"
             android:id="@+id/passWord"/>
     </android.support.design.widget.TextInputLayout>
@@ -47,7 +52,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Login"
-        android:background="@color/colorAccent"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="17dp"
+        android:layout_marginRight="17dp"
+        android:textAllCaps="false"
+        android:background="@drawable/button_shape"
         android:layout_margin="10dp"
         android:textColor="#fff"
         android:id="@+id/loginBtn"
@@ -56,8 +66,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Register Now"
+        android:textAllCaps="false"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="17dp"
+        android:layout_marginRight="17dp"
         android:textColor="#fff"
-        android:background="@color/colorAccent"
+        android:background="@drawable/button_shape"
         android:layout_margin="10dp"
 
         android:onClick="onRegisterBtnClick"/>

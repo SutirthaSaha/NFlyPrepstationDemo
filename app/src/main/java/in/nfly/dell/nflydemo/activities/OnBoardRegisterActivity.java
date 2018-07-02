@@ -53,6 +53,13 @@ public class OnBoardRegisterActivity extends AppCompatActivity {
     private ArrayAdapter<String> courseAdapter,branchAdapter,passingYearAdapter;
 
     private String college,course,branch,passing_year;
+    @Override
+    public void onBackPressed() //asksir
+    {
+        super.onBackPressed();
+        Intent i= new Intent(OnBoardRegisterActivity.this,RegisterActivity.class);
+        startActivity(i);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,15 +75,15 @@ public class OnBoardRegisterActivity extends AppCompatActivity {
         email=intent.getStringExtra("email");
 
 
-        courseAdapter=new ArrayAdapter<String>(OnBoardRegisterActivity.this,android.R.layout.simple_spinner_item,courseList);
+        courseAdapter=new ArrayAdapter<String>(OnBoardRegisterActivity.this,R.layout.custom_spinner_onboard_textview,courseList);
         courseRegister.setAdapter(courseAdapter);
 
 
-        branchAdapter=new ArrayAdapter<String>(OnBoardRegisterActivity.this,android.R.layout.simple_spinner_item,branchList);
+        branchAdapter=new ArrayAdapter<String>(OnBoardRegisterActivity.this,R.layout.custom_spinner_onboard_textview,branchList);
         branchRegister.setAdapter(branchAdapter);
 
 
-        passingYearAdapter=new ArrayAdapter<String>(OnBoardRegisterActivity.this,android.R.layout.simple_spinner_item,passingYearList);
+        passingYearAdapter=new ArrayAdapter<String>(OnBoardRegisterActivity.this,R.layout.custom_spinner_onboard_textview,passingYearList);
         passingYearRegister.setAdapter(passingYearAdapter);
 
         setValues();

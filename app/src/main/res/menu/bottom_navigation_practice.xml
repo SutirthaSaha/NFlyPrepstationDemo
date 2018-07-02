@@ -4,28 +4,28 @@
 
     <item
         android:id="@+id/practice_navigation_test_series"
-        android:icon="@drawable/ic_computer_black"
+        android:icon="@drawable/testseries"
         android:title="Test Series"
         app:showAsAction="always"
         />
 
     <item
         android:id="@+id/practice_navigation_company_wise"
-        android:icon="@drawable/ic_computer_black"
+        android:icon="@drawable/interview"
         android:title="Company Wise"
         app:showAsAction="always"
         />
 
     <item
         android:id="@+id/practice_navigation_topic_wise"
-        android:icon="@drawable/ic_computer_black"
+        android:icon="@drawable/topicwise"
         android:title="Topic Wise"
         app:showAsAction="always"
         />
 
     <item
         android:id="@+id/practice_navigation_exam_wise"
-        android:icon="@drawable/ic_computer_black"
+        android:icon="@drawable/papers"
         android:title="Exam Wise"
         app:showAsAction="always"
         />
