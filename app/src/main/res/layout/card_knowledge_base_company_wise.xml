@@ -3,32 +3,37 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent" android:layout_height="wrap_content"
     android:layout_marginTop="10dp"
-    android:layout_marginBottom="10dp"
-    android:layout_marginLeft="15dp"
-    android:layout_marginRight="15dp"
-    android:padding="5dp"
+    android:layout_marginBottom="7dp"
+    android:layout_marginLeft="7dp"
+    android:layout_marginRight="7dp"
+    app:cardCornerRadius="10dp"
     android:id="@+id/knowBaseCompanyWiseCard">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#cc1abc9c"
         android:orientation="vertical">
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="140dp"
             android:scaleType="fitXY"
+            android:src="#000342"
             android:id="@+id/knowBaseCompanyWiseCardImage"
-            android:layout_margin="5dp"/>
+            android:layout_marginBottom="5dp"/>
 
         <TextView
             android:id="@+id/knowBaseCompanyWiseCardTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_margin="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             android:text="Course Name"
-            android:textColor="#000"
+            android:layout_marginBottom="5dp"
+            android:textColor="#fff"
             android:textSize="15dp"
+
 
             app:fontFamily="@font/roboto" />
 

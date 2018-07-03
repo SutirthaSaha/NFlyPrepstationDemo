@@ -68,24 +68,25 @@ public class MainActivity extends AppCompatActivity {
 
     private String userDetails="http://nfly.in/gapi/get_details_one";
     private String email;
-    private int[] swipe_image_resources= {R.drawable.interview,R.drawable.home,R.drawable.dashboard};
-    private String[] swipe_title_resources={"Videos","Placement Papers","Resume Builder"};
+    private int[] swipe_image_resources= {R.drawable.imagevideo,R.drawable.imagepaper,R.drawable.imageresume};
+    private String[] swipe_title_resources={"Video Courses","Placement Papers","Resume Builder"};
 
 
     private ArrayList<Integer> feature_icon_image_resources=new ArrayList<Integer>(){
-        {add(R.drawable.home);
-            add(R.drawable.dashboard);
+        {
+            add(R.drawable.colorvideo);
+            add(R.drawable.coloredtest);
+            add(R.drawable.home);
             add(R.drawable.interview);
-            add(R.drawable.interview);
-            add(R.drawable.interview);
-            add(R.drawable.interview);}};
+            add(R.drawable.resume);
+            add(R.drawable.resume);}};
     private ArrayList<String> feature_icon_title_resources=new ArrayList<String>(){
-        {add("2500+ happy users");
-            add("200+ indepth videos");
-            add("100+ articles");
-            add("2500+ happy users");
-            add("2500+ happy users");
-            add("2500+ happy users");}};
+        {add("Video Courses");
+            add("Weekly Test Series");
+            add("Company/Topic Test");
+            add("Placement Papers");
+            add("Preparation Hub");
+            add("Resume Builder");}};
 
 
     private ArrayList<Integer> banner_image_resources=new ArrayList<Integer>(){
@@ -116,10 +117,26 @@ public class MainActivity extends AppCompatActivity {
         setBanner();
         setFeaturesIcons();
         setPrepHubIcons();
+        setPractiseIcons();
 
 
 
 
+
+    }
+
+    private void setPractiseIcons()
+    {
+        RecyclerView PractiseRecyclerView;
+        RecyclerView.Adapter Practiseiconsadapter;
+        RecyclerView.LayoutManager PractiselayoutManager;
+
+        PractiseRecyclerView=findViewById(R.id.homePractiseRecyclerView);
+        PractiselayoutManager=new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL,false);
+        PractiseRecyclerView.setLayoutManager(PractiselayoutManager);
+
+        Practiseiconsadapter= new HomePrepHubAdapter(feature_icon_title_resources,feature_icon_image_resources);
+        PractiseRecyclerView.setAdapter(Practiseiconsadapter);
     }
 
     private void setPrepHubIcons()
