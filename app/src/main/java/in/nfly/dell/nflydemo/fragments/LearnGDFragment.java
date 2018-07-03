@@ -26,6 +26,7 @@ import java.util.Map;
 
 import in.nfly.dell.nflydemo.MySingleton;
 import in.nfly.dell.nflydemo.R;
+import in.nfly.dell.nflydemo.adapters.LearnGDAdapter;
 import in.nfly.dell.nflydemo.adapters.LearnInterviewAdapter;
 
 /**
@@ -41,6 +42,8 @@ public class LearnGDFragment extends Fragment {
 
     private String urlGD="http://nfly.in/gapi/load_all_rows";
     private ArrayList<String> titleDataSet=new ArrayList<String>(){};
+    private ArrayList<String> idDataSet=new ArrayList<String>(){};
+
     public LearnGDFragment() {
         // Required empty public constructor
     }
@@ -69,8 +72,9 @@ public class LearnGDFragment extends Fragment {
                     for(int i=0;i<parentArray.length();i++){
                         arrayObject=parentArray.getJSONObject(i);
                         titleDataSet.add(arrayObject.getString("section_name"));
+                        idDataSet.add(arrayObject.getString("section_id"));
                     }
-                    adapter=new LearnInterviewAdapter(titleDataSet,imageDataSet);
+                    adapter=new LearnGDAdapter(getContext(),titleDataSet,imageDataSet,idDataSet);
                     learnGDRecyclerView.setAdapter(adapter);
                 } catch (JSONException e) {
                     e.printStackTrace();

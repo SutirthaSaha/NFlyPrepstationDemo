@@ -1,7 +1,6 @@
 package in.nfly.dell.nflydemo.adapters;
 
 import android.content.Context;
-import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -14,30 +13,28 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import in.nfly.dell.nflydemo.R;
-import in.nfly.dell.nflydemo.activities.GDTopicsActivity;
 
-public class LearnInterviewAdapter extends RecyclerView.Adapter<LearnInterviewAdapter.LearnInterviewHolder> {
+public class LearnTipsAdapter extends RecyclerView.Adapter<LearnTipsAdapter.LearnTipsHolder>{
 
     private Context context;
-    private ArrayList<String> titleDataSet,imageDataSet,idDataSet;
+    private ArrayList<String> titleDataSet,imageDataSet;
 
-    public LearnInterviewAdapter(Context context, ArrayList<String> titleDataSet, ArrayList<String> imageDataSet, ArrayList<String> idDataSet) {
+    public LearnTipsAdapter(Context context, ArrayList<String> titleDataSet, ArrayList<String> imageDataSet) {
         this.context = context;
         this.titleDataSet = titleDataSet;
         this.imageDataSet = imageDataSet;
-        this.idDataSet = idDataSet;
     }
 
     @NonNull
     @Override
-    public LearnInterviewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public LearnTipsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.card_learn_interview,parent,false);
-        LearnInterviewHolder holder=new LearnInterviewHolder(view);
+        LearnTipsHolder holder=new LearnTipsHolder(view);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull LearnInterviewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull LearnTipsHolder holder, int position) {
         holder.learnInterviewTitle.setText(titleDataSet.get(position));
         holder.learnInterviewImage.setImageResource(Integer.parseInt(imageDataSet.get(position)));
     }
@@ -47,12 +44,12 @@ public class LearnInterviewAdapter extends RecyclerView.Adapter<LearnInterviewAd
         return imageDataSet.size();
     }
 
-    public class LearnInterviewHolder extends RecyclerView.ViewHolder{
+    public class LearnTipsHolder extends RecyclerView.ViewHolder{
 
         public CardView learnInterviewCardView;
         public TextView learnInterviewTitle;
         public ImageView learnInterviewImage;
-        public LearnInterviewHolder(View itemView) {
+        public LearnTipsHolder(View itemView) {
             super(itemView);
 
             learnInterviewCardView=itemView.findViewById(R.id.learnInterviewCardView);

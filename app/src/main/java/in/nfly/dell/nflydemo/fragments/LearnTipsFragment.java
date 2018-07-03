@@ -27,6 +27,7 @@ import java.util.Map;
 import in.nfly.dell.nflydemo.MySingleton;
 import in.nfly.dell.nflydemo.R;
 import in.nfly.dell.nflydemo.adapters.LearnInterviewAdapter;
+import in.nfly.dell.nflydemo.adapters.LearnTipsAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -71,7 +72,7 @@ public class LearnTipsFragment extends Fragment {
                         arrayObject=parentArray.getJSONObject(i);
                         titleDataSet.add(arrayObject.getString("topic_name"));
                     }
-                    adapter=new LearnInterviewAdapter(titleDataSet,imageDataSet);
+                    adapter=new LearnTipsAdapter(getContext(),titleDataSet,imageDataSet);
                     learnTipsRecyclerView.setAdapter(adapter);
                 } catch (JSONException e) {
                     e.printStackTrace();

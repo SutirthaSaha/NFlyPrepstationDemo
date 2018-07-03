@@ -42,6 +42,7 @@ public class LearnInterviewFragment extends Fragment {
 
     private String urlInterview="http://nfly.in/gapi/load_all_rows";
     private ArrayList<String> titleDataSet=new ArrayList<String>(){};
+    private ArrayList<String> idDataSet=new ArrayList<String>(){};
     public LearnInterviewFragment() {
         // Required empty public constructor
     }
@@ -71,8 +72,9 @@ public class LearnInterviewFragment extends Fragment {
                     for(int i=0;i<parentArray.length();i++){
                         arrayObject=parentArray.getJSONObject(i);
                         titleDataSet.add(arrayObject.getString("topic_name"));
+                        idDataSet.add(arrayObject.getString("topic_id"));
                     }
-                    adapter=new LearnInterviewAdapter(titleDataSet,imageDataSet);
+                    adapter=new LearnInterviewAdapter(getContext(),titleDataSet,imageDataSet,idDataSet);
                     learnInterviewRecyclerView.setAdapter(adapter);
 
                 } catch (JSONException e) {
