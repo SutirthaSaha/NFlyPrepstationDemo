@@ -34,7 +34,8 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity android:name=".activities.CourseStudyActivity" />
-        <activity android:name=".activities.GDTopicsActivity"></activity>
+        <activity android:name=".activities.GDTopicsActivity" />
+        <activity android:name=".activities.PracticePaperDetailsActivity"></activity>
     </application>
 
 </manifest>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:padding="5dp"
+    android:id="@+id/practiceCompanyWiseCardView"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8sp">
+
+        <ImageView
+            android:layout_width="120sp"
+            android:layout_height="120sp"
+            android:id="@+id/practiceCompanyWiseCardImage"
+            android:src="@color/cardview_dark_background"
+            android:layout_alignParentLeft="true"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/practiceCompanyWiseCardTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10sp"
+                android:fontFamily="@font/roboto"
+                android:textColor="#000"
+                android:textSize="15sp"
+                android:layout_marginTop="30sp"
+                android:layout_marginLeft="30sp"
+                android:text="Title"
+                android:textStyle="normal" />
+
+            <TextView
+                android:id="@+id/practiceCompanyWiseCardNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="Tests: "
+                android:textSize="15sp"
+                android:textColor="#000"
+                android:fontFamily="@font/roboto"
+                android:layout_marginLeft="30sp"
+                android:textStyle="normal" />
+        </LinearLayout>
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

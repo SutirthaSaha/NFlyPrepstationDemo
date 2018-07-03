@@ -5,19 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activities.GDTopicsActivity">
+    tools:context=".activities.PracticePaperDetailsActivity">
 
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        android:id="@+id/gdTopicsToolbar"></android.support.v7.widget.Toolbar>
+        android:id="@+id/practicePaperDetailsToolbar"></android.support.v7.widget.Toolbar>
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/gdTopicsRecyclerView"
+        android:id="@+id/practicePaperDetailsRecyclerView"
         android:layout_margin="5dp"></android.support.v7.widget.RecyclerView>
+
 
 </LinearLayout>
