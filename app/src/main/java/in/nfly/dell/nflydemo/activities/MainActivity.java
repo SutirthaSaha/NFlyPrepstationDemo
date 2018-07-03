@@ -39,6 +39,8 @@ import java.util.Map;
 import in.nfly.dell.nflydemo.MySingleton;
 import in.nfly.dell.nflydemo.R;
 import in.nfly.dell.nflydemo.User;
+import in.nfly.dell.nflydemo.adapters.HomeCareerAdapter;
+import in.nfly.dell.nflydemo.adapters.HomeCompanyAdapter;
 import in.nfly.dell.nflydemo.adapters.HomeIconsAdapter;
 import in.nfly.dell.nflydemo.adapters.HomePrepHubAdapter;
 import in.nfly.dell.nflydemo.adapters.HomeSwipeAdapter;
@@ -98,6 +100,15 @@ public class MainActivity extends AppCompatActivity {
             add("200+ indepth videos");
             add("100+ articles");}};
 
+    private ArrayList<Integer> company_image_resources=new ArrayList<Integer>(){
+        {add(R.drawable.imageresume);
+            add(R.drawable.imagepaper);
+            add(R.drawable.imageresume);}};
+    private ArrayList<String> company_title_resources=new ArrayList<String>(){
+        {add("ABC");
+            add("ABC");
+            add("ABC");}};
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,10 +129,40 @@ public class MainActivity extends AppCompatActivity {
         setFeaturesIcons();
         setPrepHubIcons();
         setPractiseIcons();
+        setCompanyCards();
+        setCareerCards();
 
 
 
 
+
+    }
+    private void setCareerCards()
+    {
+        RecyclerView CareerRecyclerView;
+        RecyclerView.Adapter Careericonsadapter;
+        RecyclerView.LayoutManager CareerlayoutManager;
+
+        CareerRecyclerView=findViewById(R.id.homeCareerRecyclerView);
+        CareerlayoutManager=new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL,false);
+        CareerRecyclerView.setLayoutManager(CareerlayoutManager);
+
+        Careericonsadapter= new HomeCareerAdapter(company_title_resources,company_image_resources);
+        CareerRecyclerView.setAdapter(Careericonsadapter);
+
+    }
+    private void setCompanyCards()
+    {
+        RecyclerView CompanyRecyclerView;
+        RecyclerView.Adapter Companyadapter;
+        RecyclerView.LayoutManager CompanylayoutManager;
+
+        CompanyRecyclerView=findViewById(R.id.homeCompanyRecyclerView);
+        CompanylayoutManager=new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL,false);
+        CompanyRecyclerView.setLayoutManager(CompanylayoutManager);
+
+        Companyadapter= new HomeCompanyAdapter(company_title_resources,company_image_resources);
+        CompanyRecyclerView.setAdapter(Companyadapter);
 
     }
 
