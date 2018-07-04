@@ -5,19 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".singleActivities.GDTopicsActivity">
+    tools:context=".singleActivities.TipsDetailsActivity">
 
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        android:id="@+id/gdTopicsToolbar"></android.support.v7.widget.Toolbar>
+        android:id="@+id/tipsDetailsToolbar"></android.support.v7.widget.Toolbar>
 
-    <android.support.v7.widget.RecyclerView
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/gdTopicsRecyclerView"
-        android:layout_margin="5dp"></android.support.v7.widget.RecyclerView>
+        android:padding="5dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tipsDetailsTextView"/>
+    </ScrollView>
 
 </LinearLayout>

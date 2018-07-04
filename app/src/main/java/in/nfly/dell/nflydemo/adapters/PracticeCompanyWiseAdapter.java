@@ -11,12 +11,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
 
 import in.nfly.dell.nflydemo.R;
-import in.nfly.dell.nflydemo.activities.PracticePaperDetailsActivity;
+import in.nfly.dell.nflydemo.singleActivities.PracticePaperDetailsActivity;
 
 public class PracticeCompanyWiseAdapter extends RecyclerView.Adapter<PracticeCompanyWiseAdapter.PracticeCompanyWiseHolder>{
 

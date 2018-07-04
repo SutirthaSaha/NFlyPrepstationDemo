@@ -14,8 +14,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import in.nfly.dell.nflydemo.R;
-import in.nfly.dell.nflydemo.activities.CourseStudyActivity;
-import in.nfly.dell.nflydemo.activities.GDTopicsActivity;
+import in.nfly.dell.nflydemo.singleActivities.GDTopicsActivity;
 
 public class LearnGDAdapter extends RecyclerView.Adapter<LearnGDAdapter.LearnGDHolder> {
     private Context context;
@@ -39,7 +38,7 @@ public class LearnGDAdapter extends RecyclerView.Adapter<LearnGDAdapter.LearnGDH
     @Override
     public void onBindViewHolder(@NonNull LearnGDHolder holder, final int position) {
         holder.learnInterviewTitle.setText(titleDataSet.get(position));
-        holder.learnInterviewImage.setImageResource(Integer.parseInt(imageDataSet.get(position)));
+        holder.learnInterviewImage.setImageResource(Integer.parseInt(imageDataSet.get(0)));
         holder.learnInterviewCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,7 +52,7 @@ public class LearnGDAdapter extends RecyclerView.Adapter<LearnGDAdapter.LearnGDH
 
     @Override
     public int getItemCount() {
-        return imageDataSet.size();
+        return titleDataSet.size();
     }
 
 

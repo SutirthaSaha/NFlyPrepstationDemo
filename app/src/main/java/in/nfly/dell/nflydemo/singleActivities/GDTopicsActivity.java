@@ -1,4 +1,4 @@
-package in.nfly.dell.nflydemo.activities;
+package in.nfly.dell.nflydemo.singleActivities;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -26,28 +26,31 @@ import java.util.Map;
 
 import in.nfly.dell.nflydemo.MySingleton;
 import in.nfly.dell.nflydemo.R;
-import in.nfly.dell.nflydemo.adapters.PracticePaperDetailsAdapter;
+import in.nfly.dell.nflydemo.adapters.GDTopicsAdapter;
 
-public class PracticePaperDetailsActivity extends AppCompatActivity {
+public class GDTopicsActivity extends AppCompatActivity {
 
-    private String subtopic_id,subtopic_name;
+    private String section_id,section_name;
+    private String urlGdTopics="http://nfly.in/gapi/load_rows_one";
     private Toolbar toolbar;
-    private String urlPracticePapers="http://nfly.in/gapi/load_rows_one";
 
-    private RecyclerView practicePaperDetailsRecyclerView;
+    private ArrayList<String> titleDataSet=new ArrayList<String>(){};
+    private ArrayList<String> forLogicDataSet=new ArrayList<String>(){};
+    private ArrayList<String> againstLogicDataSet=new ArrayList<String>(){};
+
+    private RecyclerView gdTopicsRecyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.Adapter adapter;
 
-    private ArrayList<String> titleDataSet=new ArrayList<String>(){};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_practice_paper_details);
+        setContentView(R.layout.activity_gdtopics);
 
         Intent intent=getIntent();
-        subtopic_id=intent.getStringExtra("subtopic_id");
-        subtopic_name=intent.getStringExtra("subtopic_name");
-        Toast.makeText(this, subtopic_id, Toast.LENGTH_SHORT).show();
+        section_id=intent.getStringExtra("section_id");
+        section_name=intent.getStringExtra("section_name");
+        Toast.makeText(this, section_id+" "+section_name, Toast.LENGTH_SHORT).show();
 
         setToolbar();
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -56,33 +59,35 @@ public class PracticePaperDetailsActivity extends AppCompatActivity {
                 finish();
             }
         });
-        practicePaperDetailsRecyclerView=findViewById(R.id.practicePaperDetailsRecyclerView);
-        layoutManager=new LinearLayoutManager(PracticePaperDetailsActivity.this,LinearLayoutManager.VERTICAL,false);
-        practicePaperDetailsRecyclerView.setLayoutManager(layoutManager);
+
+        gdTopicsRecyclerView=findViewById(R.id.gdTopicsRecyclerView);
+        layoutManager=new LinearLayoutManager(GDTopicsActivity.this,LinearLayoutManager.VERTICAL,false);
+        gdTopicsRecyclerView.setLayoutManager(layoutManager);
         setValues();
     }
 
     private void setToolbar() {
-        toolbar=findViewById(R.id.practicePaperDetailsToolbar);
-        toolbar.setTitle(subtopic_name);
+        toolbar=findViewById(R.id.gdTopicsToolbar);
+        toolbar.setTitle(section_name);
         toolbar.setTitleTextColor(Color.WHITE);
         toolbar.setNavigationIcon(R.drawable.arrow_left);
     }
 
     private void setValues() {
-        StringRequest stringRequest=new StringRequest(Request.Method.POST, urlPracticePapers, new Response.Listener<String>() {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, urlGdTopics, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(PracticePaperDetailsActivity.this, response, Toast.LENGTH_SHORT).show();
                 try {
                     JSONObject arrayObject;
                     JSONArray parentArray=new JSONArray(response);
                     for(int i=0;i<parentArray.length();i++){
                         arrayObject=parentArray.getJSONObject(i);
-                        titleDataSet.add(arrayObject.getString("test_name"));
+                        titleDataSet.add(arrayObject.getString("topic_name"));
+                        forLogicDataSet.add(arrayObject.getString("for_logic"));
+                        againstLogicDataSet.add(arrayObject.getString("against_logic"));
                     }
-                    adapter=new PracticePaperDetailsAdapter(PracticePaperDetailsActivity.this,titleDataSet);
-                    practicePaperDetailsRecyclerView.setAdapter(adapter);
+                    adapter=new GDTopicsAdapter(GDTopicsActivity.this,titleDataSet,forLogicDataSet,againstLogicDataSet);
+                    gdTopicsRecyclerView.setAdapter(adapter);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -90,7 +95,7 @@ public class PracticePaperDetailsActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(PracticePaperDetailsActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                Toast.makeText(GDTopicsActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
             }
         })
         {
@@ -104,12 +109,12 @@ public class PracticePaperDetailsActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("key", "subtopic_id");
-                params.put("value", subtopic_id);
-                params.put("table", "nfly_test");
+                params.put("key", "section_id");
+                params.put("value", section_id);
+                params.put("table", "nfly_gd_topics");
                 return params;
             }
         };
-        MySingleton.getmInstance(PracticePaperDetailsActivity.this).addToRequestQueue(stringRequest);
+        MySingleton.getmInstance(GDTopicsActivity.this).addToRequestQueue(stringRequest);
     }
 }

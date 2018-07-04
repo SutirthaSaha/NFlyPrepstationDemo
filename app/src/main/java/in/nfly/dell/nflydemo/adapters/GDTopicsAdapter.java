@@ -1,6 +1,7 @@
 package in.nfly.dell.nflydemo.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -12,15 +13,18 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import in.nfly.dell.nflydemo.R;
+import in.nfly.dell.nflydemo.singleActivities.GDForAgainstActivity;
 
 public class GDTopicsAdapter extends RecyclerView.Adapter<GDTopicsAdapter.GDTopicsHolder>{
 
     private Context context;
-    private ArrayList<String> titleDataSet;
+    private ArrayList<String> titleDataSet,forLogicDataSet,againstLogicDataSet;
 
-    public GDTopicsAdapter(Context context, ArrayList<String> titleDataSet) {
+    public GDTopicsAdapter(Context context, ArrayList<String> titleDataSet, ArrayList<String> forLogicDataSet, ArrayList<String> againstLogicDataSet) {
         this.context = context;
         this.titleDataSet = titleDataSet;
+        this.forLogicDataSet = forLogicDataSet;
+        this.againstLogicDataSet = againstLogicDataSet;
     }
 
     @NonNull
@@ -32,12 +36,16 @@ public class GDTopicsAdapter extends RecyclerView.Adapter<GDTopicsAdapter.GDTopi
     }
 
     @Override
-    public void onBindViewHolder(@NonNull GDTopicsHolder holder, int position) {
+    public void onBindViewHolder(@NonNull GDTopicsHolder holder, final int position) {
         holder.GDTopicsCardText.setText(titleDataSet.get(position));
         holder.GDTopicsCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent=new Intent(context, GDForAgainstActivity.class);
+                intent.putExtra("for_logic",forLogicDataSet.get(position));
+                intent.putExtra("against_logic",againstLogicDataSet.get(position));
+                intent.putExtra("topic_name",titleDataSet.get(position));
+                context.startActivity(intent);
             }
         });
     }

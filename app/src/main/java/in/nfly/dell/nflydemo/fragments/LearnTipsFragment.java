@@ -43,6 +43,8 @@ public class LearnTipsFragment extends Fragment {
 
     private String urlTips="http://nfly.in/gapi/load_all_rows";
     private ArrayList<String> titleDataSet=new ArrayList<String>(){};
+    private ArrayList<String> textDataSet=new ArrayList<String>(){};
+    private ArrayList<String> idDataSet=new ArrayList<String>(){};
 
     public LearnTipsFragment() {
         // Required empty public constructor
@@ -71,9 +73,11 @@ public class LearnTipsFragment extends Fragment {
                     JSONArray parentArray=new JSONArray(response);
                     for(int i=0;i<parentArray.length();i++){
                         arrayObject=parentArray.getJSONObject(i);
+                        idDataSet.add(arrayObject.getString("tip_id"));
                         titleDataSet.add(arrayObject.getString("topic_name"));
+                        textDataSet.add(arrayObject.getString("topic_text"));
                     }
-                    adapter=new LearnTipsAdapter(getContext(),titleDataSet,imageDataSet);
+                    adapter=new LearnTipsAdapter(getContext(),titleDataSet,imageDataSet,textDataSet,idDataSet);
                     learnTipsRecyclerView.setAdapter(adapter);
                 } catch (JSONException e) {
                     e.printStackTrace();

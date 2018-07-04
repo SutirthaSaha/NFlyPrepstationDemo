@@ -17,8 +17,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 import in.nfly.dell.nflydemo.R;
-import in.nfly.dell.nflydemo.activities.CompanyWiseDetailsActivity;
-import in.nfly.dell.nflydemo.activities.JobRoleWiseDetailsActivity;
+import in.nfly.dell.nflydemo.singleActivities.JobRoleWiseDetailsActivity;
 
 public class KnowledgeBaseJobWiseAdapter extends RecyclerView.Adapter<KnowledgeBaseJobWiseAdapter.KnowledgeBaseJobWiseHolder>{
 

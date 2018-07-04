@@ -1,6 +1,7 @@
 package in.nfly.dell.nflydemo.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -13,16 +14,19 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import in.nfly.dell.nflydemo.R;
+import in.nfly.dell.nflydemo.singleActivities.TipsDetailsActivity;
 
 public class LearnTipsAdapter extends RecyclerView.Adapter<LearnTipsAdapter.LearnTipsHolder>{
 
     private Context context;
-    private ArrayList<String> titleDataSet,imageDataSet;
+    private ArrayList<String> titleDataSet,imageDataSet,textDataSet,idDataSet;
 
-    public LearnTipsAdapter(Context context, ArrayList<String> titleDataSet, ArrayList<String> imageDataSet) {
+    public LearnTipsAdapter(Context context, ArrayList<String> titleDataSet, ArrayList<String> imageDataSet, ArrayList<String> textDataSet, ArrayList<String> idDataSet) {
         this.context = context;
         this.titleDataSet = titleDataSet;
         this.imageDataSet = imageDataSet;
+        this.textDataSet = textDataSet;
+        this.idDataSet = idDataSet;
     }
 
     @NonNull
@@ -34,14 +38,24 @@ public class LearnTipsAdapter extends RecyclerView.Adapter<LearnTipsAdapter.Lear
     }
 
     @Override
-    public void onBindViewHolder(@NonNull LearnTipsHolder holder, int position) {
+    public void onBindViewHolder(@NonNull LearnTipsHolder holder, final int position) {
         holder.learnInterviewTitle.setText(titleDataSet.get(position));
-        holder.learnInterviewImage.setImageResource(Integer.parseInt(imageDataSet.get(position)));
+        holder.learnInterviewImage.setImageResource(Integer.parseInt(imageDataSet.get(0)));
+        holder.learnInterviewCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(context, TipsDetailsActivity.class);
+                intent.putExtra("tip_id",idDataSet.get(position));
+                intent.putExtra("topic_name",titleDataSet.get(position));
+                intent.putExtra("topic_text",textDataSet.get(position));
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
-        return imageDataSet.size();
+        return titleDataSet.size();
     }
 
     public class LearnTipsHolder extends RecyclerView.ViewHolder{

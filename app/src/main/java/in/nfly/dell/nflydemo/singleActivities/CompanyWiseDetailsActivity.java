@@ -1,6 +1,5 @@
-package in.nfly.dell.nflydemo.activities;
+package in.nfly.dell.nflydemo.singleActivities;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.design.widget.TabLayout;
@@ -11,22 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import in.nfly.dell.nflydemo.MySingleton;
 import in.nfly.dell.nflydemo.R;
-import in.nfly.dell.nflydemo.adapters.LearnPapersAdapter;
 import in.nfly.dell.nflydemo.fragments.CompanyDetailsCompanyIntroFragment;
 import in.nfly.dell.nflydemo.adapters.ViewPagerAdapter;
 import in.nfly.dell.nflydemo.fragments.CompanyDetailsHiringProcessFragment;

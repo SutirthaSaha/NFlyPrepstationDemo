@@ -10,14 +10,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 import in.nfly.dell.nflydemo.R;
-import in.nfly.dell.nflydemo.activities.CompanyWiseDetailsActivity;
+import in.nfly.dell.nflydemo.singleActivities.CompanyWiseDetailsActivity;
 
 public class KnowledgeBaseCompanyWiseAdapter extends RecyclerView.Adapter<KnowledgeBaseCompanyWiseAdapter.KnowledgeBaseCompanyWiseHolder>{
 

@@ -1,4 +1,4 @@
-package in.nfly.dell.nflydemo.activities;
+package in.nfly.dell.nflydemo.singleActivities;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -18,7 +18,6 @@ import in.nfly.dell.nflydemo.JobWiseFragments.JobRoleStatsFragment;
 import in.nfly.dell.nflydemo.JobWiseFragments.JobRoleVideosFragment;
 import in.nfly.dell.nflydemo.R;
 import in.nfly.dell.nflydemo.adapters.ViewPagerAdapter;
-import in.nfly.dell.nflydemo.fragments.CompanyDetailsCompanyIntroFragment;
 
 public class JobRoleWiseDetailsActivity extends AppCompatActivity {
 
