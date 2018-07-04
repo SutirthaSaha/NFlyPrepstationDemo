@@ -131,12 +131,29 @@ public class MainActivity extends AppCompatActivity {
         setPractiseIcons();
         setCompanyCards();
         setCareerCards();
+        setCoursesCards();
 
 
 
 
 
     }
+
+    private void setCoursesCards()
+    {
+        RecyclerView CoursesRecyclerView;
+        RecyclerView.Adapter Coursesadapter;
+        RecyclerView.LayoutManager CourseslayoutManager;
+
+        CoursesRecyclerView=findViewById(R.id.homeCoursesRecyclerView);
+        CourseslayoutManager=new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL,false);
+        CoursesRecyclerView.setLayoutManager(CourseslayoutManager);
+
+        Coursesadapter= new HomeCompanyAdapter(company_title_resources,company_image_resources);
+        CoursesRecyclerView.setAdapter(Coursesadapter);
+
+    }
+
     private void setCareerCards()
     {
         RecyclerView CareerRecyclerView;

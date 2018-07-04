@@ -10,7 +10,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#efefef"
+        android:background="#f1f3f4"
         android:orientation="vertical">
         <android.support.v7.widget.Toolbar
             android:layout_width="match_parent"
@@ -26,10 +26,13 @@
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
                 <android.support.v4.view.ViewPager
                     android:id="@+id/homeViewPager"
                     android:layout_width="match_parent"
-                    android:layout_height="240dp"
+                    android:layout_height="230dp"
                     android:layout_marginBottom="0dp">
                 </android.support.v4.view.ViewPager>
                 <me.relex.circleindicator.CircleIndicator
@@ -37,7 +40,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     app:ci_drawable="@drawable/slider_indicator_shape"
-                    android:layout_marginBottom="10dp" />
+                    android:layout_marginBottom="10dp"
+                    android:layout_alignBottom="@+id/homeViewPager" />
+                </RelativeLayout>
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -48,7 +53,6 @@
                     app:cardElevation="0dp">
                     <android.support.v7.widget.RecyclerView
                         android:layout_width="match_parent"
-                        android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp"
                         android:layout_height="wrap_content"
                         android:id="@+id/homeBannerIconsRecyclerView">
@@ -84,6 +88,27 @@
                     </LinearLayout>
                 </android.support.v7.widget.CardView>
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:layout_marginTop="7dp"
+                        android:layout_marginBottom="7dp"
+                        android:text="Courses"
+                        android:layout_marginLeft="10dp"
+                        android:textSize="17sp"
+                        android:textColor="#000"/>
+                    <android.support.v7.widget.RecyclerView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:id="@+id/homeCoursesRecyclerView"/>
+                </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -117,7 +142,7 @@
                             android:layout_marginLeft="7dp"
                             android:textSize="17sp"
                             android:layout_marginBottom="7dp"
-                            android:text="Practise"
+                            android:text="Practice"
                             android:textColor="#000"/>
                         <android.support.v7.widget.RecyclerView
                             android:layout_width="match_parent"
