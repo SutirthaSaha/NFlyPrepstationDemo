@@ -1,36 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="wrap_content"
-    android:layout_margin="20dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="5dp">
+    android:padding="10dp"
+    android:layout_marginLeft="25dp"
+    android:layout_marginRight="25dp"
+    android:layout_marginTop="10dp"
+    app:cardCornerRadius="20dp"
+    android:layout_marginBottom="10dp">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
         android:gravity="center"
         android:orientation="vertical">
+
         <TextView
+            android:id="@+id/careerPathCardTitle"
             android:layout_width="wrap_content"
-            android:textColor="#000"
             android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal"
             android:layout_marginTop="13dp"
-            android:textStyle="bold"
-            android:id="@+id/careerPathCardTitle"/>
-        <TextView
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:text="Title "
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <RelativeLayout
+            android:id="@+id/RL1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/careerPathCardSalary"
-            android:textColor="#000"
-            android:layout_margin="5dp"
-            android:textStyle="normal"/>
-        <TextView
+            android:layout_alignBottom="@+id/careerPathCardTitle"
+            android:layout_centerHorizontal="true"
+            >
+
+            <TextView
+                android:id="@+id/careerPathCardSalary1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Salary:"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/careerPathCardSalary"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_toRightOf="@+id/careerPathCardSalary1"
+                android:text="20k"
+                android:textColor="@color/colorAccent"
+                android:textStyle="normal" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/RL2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/careerPathCardTime"
-            android:textColor="#000"
-            android:layout_margin="5dp"
-            android:textStyle="normal"/>
-    </LinearLayout>
+            android:layout_below="@+id/RL1"
+            android:layout_centerHorizontal="true">
+
+
+            <TextView
+                android:id="@+id/careerPathCardTime1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:text="Duration:"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/careerPathCardTime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:layout_toRightOf="@+id/careerPathCardTime1"
+                android:text="1 year"
+                android:textColor="@color/colorAccent"
+                android:textStyle="normal"
+                />
+        </RelativeLayout>
+    </RelativeLayout>
 
 </android.support.v7.widget.CardView>

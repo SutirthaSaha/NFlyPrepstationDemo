@@ -35,12 +35,15 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import in.nfly.dell.nflydemo.MySingleton;
 import in.nfly.dell.nflydemo.R;
 import in.nfly.dell.nflydemo.User;
 import in.nfly.dell.nflydemo.adapters.HomeCareerAdapter;
 import in.nfly.dell.nflydemo.adapters.HomeCompanyAdapter;
+import in.nfly.dell.nflydemo.adapters.HomeFeaturesIconsAdapter;
 import in.nfly.dell.nflydemo.adapters.HomeIconsAdapter;
 import in.nfly.dell.nflydemo.adapters.HomePrepHubAdapter;
 import in.nfly.dell.nflydemo.adapters.HomeSwipeAdapter;
@@ -78,10 +81,10 @@ public class MainActivity extends AppCompatActivity {
         {
             add(R.drawable.colorvideo);
             add(R.drawable.coloredtest);
-            add(R.drawable.home);
-            add(R.drawable.interview);
-            add(R.drawable.resume);
-            add(R.drawable.resume);}};
+            add(R.drawable.colored_company);
+            add(R.drawable.colored_placementpapers);
+            add(R.drawable.colored_prep);
+            add(R.drawable.colorresume);}};
     private ArrayList<String> feature_icon_title_resources=new ArrayList<String>(){
         {add("Video Courses");
             add("Weekly Test Series");
@@ -92,12 +95,14 @@ public class MainActivity extends AppCompatActivity {
 
 
     private ArrayList<Integer> banner_image_resources=new ArrayList<Integer>(){
-        {add(R.drawable.gd);
-        add(R.drawable.courses);
-        add(R.drawable.papers);}};
+        {
+        add(R.drawable.colored_video);
+            add(R.drawable.colored_group);
+        add(R.drawable.colored_articles);}};
     private ArrayList<String> banner_title_resources=new ArrayList<String>(){
-        {add("2500+ happy users");
+        {
             add("200+ indepth videos");
+            add("2500+ happy users");
             add("100+ articles");}};
 
     private ArrayList<Integer> company_image_resources=new ArrayList<Integer>(){
@@ -134,23 +139,20 @@ public class MainActivity extends AppCompatActivity {
         setCoursesCards();
 
 
-
-
-
     }
 
     private void setCoursesCards()
     {
         RecyclerView CoursesRecyclerView;
-        RecyclerView.Adapter Coursesadapter;
-        RecyclerView.LayoutManager CourseslayoutManager;
+        RecyclerView.Adapter CoursesAdapter;
+        RecyclerView.LayoutManager CoursesLayoutManager;
 
         CoursesRecyclerView=findViewById(R.id.homeCoursesRecyclerView);
-        CourseslayoutManager=new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL,false);
-        CoursesRecyclerView.setLayoutManager(CourseslayoutManager);
+        CoursesLayoutManager=new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL,false);
+        CoursesRecyclerView.setLayoutManager(CoursesLayoutManager);
 
-        Coursesadapter= new HomeCompanyAdapter(company_title_resources,company_image_resources);
-        CoursesRecyclerView.setAdapter(Coursesadapter);
+        CoursesAdapter= new HomeCompanyAdapter(company_title_resources,company_image_resources);
+        CoursesRecyclerView.setAdapter(CoursesAdapter);
 
     }
 
@@ -158,11 +160,11 @@ public class MainActivity extends AppCompatActivity {
     {
         RecyclerView CareerRecyclerView;
         RecyclerView.Adapter Careericonsadapter;
-        RecyclerView.LayoutManager CareerlayoutManager;
+        RecyclerView.LayoutManager CareerLayoutManager;
 
         CareerRecyclerView=findViewById(R.id.homeCareerRecyclerView);
-        CareerlayoutManager=new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL,false);
-        CareerRecyclerView.setLayoutManager(CareerlayoutManager);
+        CareerLayoutManager=new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL,false);
+        CareerRecyclerView.setLayoutManager(CareerLayoutManager);
 
         Careericonsadapter= new HomeCareerAdapter(company_title_resources,company_image_resources);
         CareerRecyclerView.setAdapter(Careericonsadapter);
@@ -218,7 +220,7 @@ public class MainActivity extends AppCompatActivity {
         homeFeaturelayoutManager=new GridLayoutManager(MainActivity.this,3);
         HomeFeatureIconsRecyclerView.setLayoutManager(homeFeaturelayoutManager);
 
-        homeFeatureiconsadapter= new HomeIconsAdapter(feature_icon_title_resources,feature_icon_image_resources);
+        homeFeatureiconsadapter= new HomeFeaturesIconsAdapter(feature_icon_title_resources,feature_icon_image_resources);
         HomeFeatureIconsRecyclerView.setAdapter(homeFeatureiconsadapter);
     }
 
@@ -254,26 +256,30 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onPageScrollStateChanged(int state) {
+                int pageCount = swipe_title_resources.length;
                 if (state == ViewPager.SCROLL_STATE_IDLE) {
-                    int pageCount = swipe_title_resources.length;
                     if (currentPage == 0) {
-                        viewPager.setCurrentItem(0, false);
-                    } else if (currentPage == pageCount - 1) {
                         viewPager.setCurrentItem(pageCount-1, false);
                     }
                 }
+
             }
         });
         final Handler handler = new Handler();
         final Runnable update = new Runnable() {
             @Override
             public void run() {
-                if (currentPage == NUM_PAGES) {
-                    currentPage = 0;
-                }
+
                 viewPager.setCurrentItem(currentPage++, true);
             }
         };
+        Timer swipeTimer = new Timer();
+        swipeTimer.schedule(new TimerTask() {
+
+            @Override
+            public void run() {
+                handler.post(update);}
+        }, 2000, 2000);
 
     }
 

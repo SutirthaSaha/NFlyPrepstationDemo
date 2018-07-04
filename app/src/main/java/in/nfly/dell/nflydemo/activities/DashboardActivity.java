@@ -9,20 +9,31 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 import in.nfly.dell.nflydemo.R;
 import in.nfly.dell.nflydemo.User;
+import in.nfly.dell.nflydemo.adapters.DashBoardAdapter;
 
 public class DashboardActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayoutDashboard;
     private Toolbar toolbar;
     private TextView headerTitle;
+    private ArrayList<String> number_data_set=new ArrayList<String>(){
+        { add("23/50"); }};
+    private ArrayList<String> title_data_set=new ArrayList<String>(){
+        { add("Title"); }};
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +41,7 @@ public class DashboardActivity extends AppCompatActivity {
         drawerLayoutDashboard=findViewById(R.id.drawerLayoutDashboard);
         setToolbar();
         setNavigationDrawer();
+        setCards();
     }
     private void setNavigationDrawer() {
         final NavigationView navigationView;
@@ -84,5 +96,20 @@ public class DashboardActivity extends AppCompatActivity {
         toolbar=findViewById(R.id.dashboardToolbar);
         toolbar.setTitle("Dashboard");
         toolbar.setTitleTextColor(Color.WHITE);
+    }
+    private void setCards()
+    {
+
+
+        RecyclerView DashboardRecyclerView;
+        RecyclerView.Adapter dashboardAdapter;
+        RecyclerView.LayoutManager PrepHublayoutManager;
+
+        DashboardRecyclerView=findViewById(R.id.dashboardRecyclerView);
+        PrepHublayoutManager=new LinearLayoutManager(DashboardActivity.this, LinearLayoutManager.HORIZONTAL,false);
+        DashboardRecyclerView.setLayoutManager(PrepHublayoutManager);
+
+        dashboardAdapter= new DashBoardAdapter(title_data_set,number_data_set);
+        DashboardRecyclerView.setAdapter(dashboardAdapter);
     }
 }
