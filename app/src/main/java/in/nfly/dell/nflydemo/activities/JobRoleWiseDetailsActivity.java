@@ -1,4 +1,4 @@
-package in.nfly.dell.nflydemo.singleActivities;
+package in.nfly.dell.nflydemo.activities;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -9,13 +9,13 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-import in.nfly.dell.nflydemo.JobWiseFragments.JobRoleCareerAdviseFragment;
-import in.nfly.dell.nflydemo.JobWiseFragments.JobRoleCareerPathFragment;
-import in.nfly.dell.nflydemo.JobWiseFragments.JobRoleFAQsFragment;
-import in.nfly.dell.nflydemo.JobWiseFragments.JobRoleOverviewFragment;
-import in.nfly.dell.nflydemo.JobWiseFragments.JobRoleResourcesFragment;
-import in.nfly.dell.nflydemo.JobWiseFragments.JobRoleStatsFragment;
-import in.nfly.dell.nflydemo.JobWiseFragments.JobRoleVideosFragment;
+import in.nfly.dell.nflydemo.fragments.JobWiseFragments.JobRoleCareerAdviseFragment;
+import in.nfly.dell.nflydemo.fragments.JobWiseFragments.JobRoleCareerPathFragment;
+import in.nfly.dell.nflydemo.fragments.JobWiseFragments.JobRoleFAQsFragment;
+import in.nfly.dell.nflydemo.fragments.JobWiseFragments.JobRoleOverviewFragment;
+import in.nfly.dell.nflydemo.fragments.JobWiseFragments.JobRoleResourcesFragment;
+import in.nfly.dell.nflydemo.fragments.JobWiseFragments.JobRoleStatsFragment;
+import in.nfly.dell.nflydemo.fragments.JobWiseFragments.JobRoleVideosFragment;
 import in.nfly.dell.nflydemo.R;
 import in.nfly.dell.nflydemo.adapters.ViewPagerAdapter;
 

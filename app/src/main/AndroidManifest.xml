@@ -26,18 +26,21 @@
         </activity>
         <activity android:name=".activities.RegisterActivity" />
         <activity android:name=".activities.OnBoardRegisterActivity" />
-        <activity android:name=".singleActivities.CompanyWiseDetailsActivity" />
-        <activity android:name=".singleActivities.JobRoleWiseDetailsActivity" />
+        <activity android:name=".activities.CompanyWiseDetailsActivity" />
+        <activity android:name=".activities.JobRoleWiseDetailsActivity" />
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
         <activity android:name=".activities.CourseStudyActivity" />
-        <activity android:name=".singleActivities.GDTopicsActivity" />
-        <activity android:name=".singleActivities.PracticePaperDetailsActivity" />
-        <activity android:name=".singleActivities.GDForAgainstActivity" />
-        <activity android:name=".singleActivities.TipsDetailsActivity"></activity>
+        <activity android:name=".activities.singleActivities.GDTopicsActivity" />
+        <activity android:name=".activities.singleActivities.PracticePaperDetailsActivity" />
+        <activity android:name=".activities.singleActivities.GDForAgainstActivity" />
+        <activity android:name=".activities.singleActivities.TipsDetailsActivity" />
+        <activity android:name=".activities.singleActivities.LearnCompanyPaperDetailsActivity" />
+        <activity android:name=".activities.singleActivities.InterviewSubtopicsActivity" />
+        <activity android:name=".activities.singleActivities.InterviewSubTopicsDetailsActivity"></activity>
     </application>
 
 </manifest>

@@ -14,7 +14,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import in.nfly.dell.nflydemo.R;
-import in.nfly.dell.nflydemo.singleActivities.GDTopicsActivity;
+import in.nfly.dell.nflydemo.activities.singleActivities.GDTopicsActivity;
 
 public class LearnGDAdapter extends RecyclerView.Adapter<LearnGDAdapter.LearnGDHolder> {
     private Context context;

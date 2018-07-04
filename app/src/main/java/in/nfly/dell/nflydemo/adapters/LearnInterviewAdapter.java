@@ -1,6 +1,7 @@
 package in.nfly.dell.nflydemo.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import in.nfly.dell.nflydemo.R;
+import in.nfly.dell.nflydemo.activities.singleActivities.InterviewSubtopicsActivity;
 
 public class LearnInterviewAdapter extends RecyclerView.Adapter<LearnInterviewAdapter.LearnInterviewHolder> {
 
@@ -38,6 +40,16 @@ public class LearnInterviewAdapter extends RecyclerView.Adapter<LearnInterviewAd
     public void onBindViewHolder(@NonNull LearnInterviewHolder holder, final int position) {
         holder.learnInterviewTitle.setText(titleDataSet.get(position));
         holder.learnInterviewImage.setImageResource(Integer.parseInt(imageDataSet.get(0)));
+
+        holder.learnInterviewCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(context, InterviewSubtopicsActivity.class);
+                intent.putExtra("topic_id",idDataSet.get(position));
+                intent.putExtra("topic_name",titleDataSet.get(position));
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override

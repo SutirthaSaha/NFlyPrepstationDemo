@@ -14,7 +14,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import in.nfly.dell.nflydemo.R;
-import in.nfly.dell.nflydemo.singleActivities.TipsDetailsActivity;
+import in.nfly.dell.nflydemo.activities.singleActivities.TipsDetailsActivity;
 
 public class LearnTipsAdapter extends RecyclerView.Adapter<LearnTipsAdapter.LearnTipsHolder>{
 

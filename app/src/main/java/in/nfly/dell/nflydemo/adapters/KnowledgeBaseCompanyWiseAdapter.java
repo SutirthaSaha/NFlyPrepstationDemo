@@ -16,7 +16,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 import in.nfly.dell.nflydemo.R;
-import in.nfly.dell.nflydemo.singleActivities.CompanyWiseDetailsActivity;
+import in.nfly.dell.nflydemo.activities.CompanyWiseDetailsActivity;
 
 public class KnowledgeBaseCompanyWiseAdapter extends RecyclerView.Adapter<KnowledgeBaseCompanyWiseAdapter.KnowledgeBaseCompanyWiseHolder>{
 

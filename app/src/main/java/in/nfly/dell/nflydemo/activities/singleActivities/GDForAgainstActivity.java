@@ -1,4 +1,4 @@
-package in.nfly.dell.nflydemo.singleActivities;
+package in.nfly.dell.nflydemo.activities.singleActivities;
 
 import android.content.Intent;
 import android.graphics.Color;

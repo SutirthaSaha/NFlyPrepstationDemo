@@ -13,7 +13,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import in.nfly.dell.nflydemo.R;
-import in.nfly.dell.nflydemo.singleActivities.GDForAgainstActivity;
+import in.nfly.dell.nflydemo.activities.singleActivities.GDForAgainstActivity;
 
 public class GDTopicsAdapter extends RecyclerView.Adapter<GDTopicsAdapter.GDTopicsHolder>{
 

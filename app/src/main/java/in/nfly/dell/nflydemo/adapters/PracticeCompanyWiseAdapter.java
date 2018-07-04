@@ -14,7 +14,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import in.nfly.dell.nflydemo.R;
-import in.nfly.dell.nflydemo.singleActivities.PracticePaperDetailsActivity;
+import in.nfly.dell.nflydemo.activities.singleActivities.PracticePaperDetailsActivity;
 
 public class PracticeCompanyWiseAdapter extends RecyclerView.Adapter<PracticeCompanyWiseAdapter.PracticeCompanyWiseHolder>{
 

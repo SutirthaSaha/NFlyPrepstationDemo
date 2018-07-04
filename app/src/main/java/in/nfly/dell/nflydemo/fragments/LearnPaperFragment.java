@@ -47,6 +47,7 @@ public class LearnPaperFragment extends Fragment {
     private ArrayList<String> titleDataSet=new ArrayList<String>(){};
     private ArrayList<String> imageDataSet=new ArrayList<String>(){};
     private ArrayList<String> numberDataSet=new ArrayList<String>(){};
+    private ArrayList<String> idDataSet=new ArrayList<String>(){};
 
     private ProgressDialog progressDialog;
     public LearnPaperFragment() {
@@ -81,10 +82,11 @@ public class LearnPaperFragment extends Fragment {
                     for(int i=0;i<parentArray.length();i++){
                         arrayObject=parentArray.getJSONObject(i);
                         titleDataSet.add(arrayObject.getString("company_name"));
+                        idDataSet.add(arrayObject.getString("company_id"));
                         numberDataSet.add(Integer.toString(5));
                         imageDataSet.add("http://nfly.in/assets/images/company/"+arrayObject.getString("company_cover"));
                     }
-                    adapter=new LearnPapersAdapter(titleDataSet,imageDataSet,numberDataSet,getContext());
+                    adapter=new LearnPapersAdapter(titleDataSet,imageDataSet,numberDataSet,idDataSet,getContext());
                     learnPapersRecyclerView.setAdapter(adapter);
                     progressDialog.cancel();
                 } catch (JSONException e) {
