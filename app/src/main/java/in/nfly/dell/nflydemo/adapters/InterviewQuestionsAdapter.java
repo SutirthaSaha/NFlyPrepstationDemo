@@ -27,7 +27,7 @@ public class InterviewQuestionsAdapter extends RecyclerView.Adapter<InterviewQue
     @NonNull
     @Override
     public InterviewQuestionsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.card_interview_questions,parent,false);
+        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.card_learn_interview_ques_ans,parent,false);
         InterviewQuestionsHolder holder=new InterviewQuestionsHolder(view);
         return holder;
     }

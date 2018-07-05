@@ -30,7 +30,7 @@ public class InterviewSubTopicsAdapter extends RecyclerView.Adapter<InterviewSub
     @NonNull
     @Override
     public InterviewSubTopicsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.card_interview_subtopics,parent,false);
+        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.card_learn_interview_subtopics,parent,false);
         InterviewSubTopicsHolder holder=new InterviewSubTopicsHolder(view);
         return holder;
     }

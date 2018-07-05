@@ -5,16 +5,203 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.JobWiseFragments.JobRoleStatsFragment">
-
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColor="#000"
-        android:paddingBottom="17dp"
-        android:textSize="15sp"
-        android:paddingRight="17dp"
-        android:paddingLeft="17dp"
-        app:fontFamily="@font/roboto"
-        android:id="@+id/jobRoleStatsText"/>
+        android:layout_height="match_parent">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="7dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="50dp"
+                    android:layout_margin="5dp"
+                    android:paddingLeft="17dp"
+                    android:text="Job Market Score:"
+                    android:textColor="#000"
+                    android:textSize="17sp"
+                    app:fontFamily="@font/roboto" />
+
+                <TextView
+                    android:id="@+id/jobRoleStatsJobMarketText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_margin="5dp"
+                    android:paddingLeft="45dp"
+                    android:paddingRight="45dp"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp"
+                    android:background="#DDEFC5"
+                    android:gravity="center"
+                    android:text="0"
+                    android:textColor="#000"
+                    android:textSize="15sp"
+                    app:fontFamily="@font/roboto" />
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="7dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="50dp"
+                    android:layout_margin="5dp"
+                    android:gravity="left"
+                    android:paddingLeft="17dp"
+                    android:text="Salary Score:"
+                    android:textColor="#000"
+                    android:textSize="17sp"
+                    app:fontFamily="@font/roboto" />
+
+                <TextView
+                    android:id="@+id/jobRoleStatsSalaryScoreText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:paddingLeft="45dp"
+                    android:paddingRight="45dp"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp"
+                    android:layout_margin="5dp"
+                    android:background="#DDEFC5"
+                    android:gravity="center"
+                    android:text="0"
+                    android:textColor="#000"
+                    android:textSize="15sp"
+                    app:fontFamily="@font/roboto" />
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="7dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:gravity="left"
+                    android:paddingLeft="17dp"
+                    android:text="Future Score:"
+                    android:textColor="#000"
+                    android:textSize="17sp"
+                    app:fontFamily="@font/roboto" />
+
+                <TextView
+                    android:id="@+id/jobRoleStatsFutureScoreText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_margin="5dp"
+                    android:paddingLeft="45dp"
+                    android:paddingRight="45dp"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp"
+                    android:background="#DDEFC5"
+                    android:gravity="center"
+                    android:text="0"
+                    android:textColor="#000"
+                    android:textSize="15sp"
+                    app:fontFamily="@font/roboto" />
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="7dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_margin="5dp"
+                    android:layout_weight="1"
+                    android:paddingLeft="17dp"
+                    android:text="Work-life Balance:"
+                    android:textColor="#000"
+                    android:textSize="17sp"
+                    app:fontFamily="@font/roboto" />
+
+                <TextView
+                    android:id="@+id/jobRoleStatsWorkLifeText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_margin="5dp"
+                    android:paddingLeft="45dp"
+                    android:paddingRight="45dp"
+                    android:paddingBottom="15dp"
+                    android:paddingTop="15dp"
+                    android:background="#DDEFC5	"
+                    android:gravity="center"
+                    android:text="0"
+                    android:textColor="#000"
+                    android:textSize="15sp"
+                    app:fontFamily="@font/roboto" />
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="7dp"
+            app:cardElevation="2dp"
+            app:cardPreventCornerOverlap="false">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                android:paddingBottom="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="Other Stats"
+                    android:textColor="#000"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/jobRoleStatsRecyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="0dp"
+                    android:padding="7dp"/>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+    </ScrollView>
 </FrameLayout>

@@ -4,6 +4,7 @@ package in.nfly.dell.nflydemo.fragments;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -61,7 +62,7 @@ public class LearnPaperFragment extends Fragment {
         // Inflate the layout for this fragment
         View v= inflater.inflate(R.layout.fragment_learn_paper, container, false);
         learnPapersRecyclerView=v.findViewById(R.id.learnPapersRecyclerView);
-        layoutManager=new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
+        layoutManager=new GridLayoutManager(getContext(),2);
         learnPapersRecyclerView.setLayoutManager(layoutManager);
         setValues();
         return v;

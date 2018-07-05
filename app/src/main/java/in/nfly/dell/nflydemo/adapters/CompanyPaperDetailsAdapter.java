@@ -29,7 +29,7 @@ public class CompanyPaperDetailsAdapter extends RecyclerView.Adapter<CompanyPape
     @NonNull
     @Override
     public CompanyPaperDetailsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.card_company_papers_details,parent,false);
+        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.card_learn_company_papers_details,parent,false);
         CompanyPaperDetailsHolder holder=new CompanyPaperDetailsHolder(view);
         return holder;
     }

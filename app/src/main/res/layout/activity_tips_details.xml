@@ -17,10 +17,13 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="5dp">
+        android:padding="10dp">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:textColor="#000"
+            android:lineSpacingMultiplier="1.3"
             android:id="@+id/tipsDetailsTextView"/>
     </ScrollView>
 
