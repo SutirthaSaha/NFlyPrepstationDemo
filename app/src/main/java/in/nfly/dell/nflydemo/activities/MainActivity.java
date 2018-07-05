@@ -54,30 +54,33 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout drawerLayoutHome;
     private Toolbar toolbar;
     private TextView headerTitle;
+
     private ViewPager viewPager;
-    private HomeSwipeAdapter adapter;
+    private HomeSwipeAdapter swipeAdapter;
 
     private RecyclerView HomeBannerIconsRecyclerView;
-    private RecyclerView.Adapter homeiconsadapter;
-    private RecyclerView.LayoutManager bannerlayoutManager;
-
-
     private RecyclerView HomeFeatureIconsRecyclerView;
-    private RecyclerView.Adapter homeFeatureiconsadapter;
-    private RecyclerView.LayoutManager homeFeaturelayoutManager;
+    private RecyclerView CareerRecyclerView;
+    private RecyclerView CoursesRecyclerView;
+    private RecyclerView CompanyRecyclerView;;
+    private RecyclerView PractiseRecyclerView;
+    private RecyclerView PrepHubIconsRecyclerView;
 
+    private RecyclerView.Adapter adapter;
+    private RecyclerView.LayoutManager layoutManager;
 
     private static int currentPage = 0;
-    private static int NUM_PAGES = 0;
+    private static int NUM_PAGES;
 
 
     private String userDetails="http://nfly.in/gapi/get_details_one";
     private String email;
-    private int[] swipe_image_resources= {R.drawable.imagevideo,R.drawable.imagepaper,R.drawable.imageresume};
-    private String[] swipe_title_resources={"Video Courses","Placement Papers","Resume Builder"};
+    
+    private int[] swipeImageDataSet= {R.drawable.imagevideo,R.drawable.imagepaper,R.drawable.imageresume};
+    private String[] swipeTitleDataSet={"Video Courses","Placement Papers","Resume Builder"};
 
 
-    private ArrayList<Integer> feature_icon_image_resources=new ArrayList<Integer>(){
+    private ArrayList<Integer> featureImageDataSet=new ArrayList<Integer>(){
         {
             add(R.drawable.colorvideo);
             add(R.drawable.coloredtest);
@@ -85,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
             add(R.drawable.colored_placementpapers);
             add(R.drawable.colored_prep);
             add(R.drawable.colorresume);}};
-    private ArrayList<String> feature_icon_title_resources=new ArrayList<String>(){
+    private ArrayList<String> featureTitleDataSet=new ArrayList<String>(){
         {add("Video Courses");
             add("Weekly Test Series");
             add("Company/Topic Test");
@@ -94,22 +97,24 @@ public class MainActivity extends AppCompatActivity {
             add("Resume Builder");}};
 
 
-    private ArrayList<Integer> banner_image_resources=new ArrayList<Integer>(){
+    private ArrayList<Integer> bannerImageDataSet=new ArrayList<Integer>(){
         {
         add(R.drawable.colored_video);
             add(R.drawable.colored_group);
         add(R.drawable.colored_articles);}};
-    private ArrayList<String> banner_title_resources=new ArrayList<String>(){
+
+    private ArrayList<String> bannerTitleDataSet=new ArrayList<String>(){
         {
-            add("200+ indepth videos");
+            add("200+ in-depth videos");
             add("2500+ happy users");
             add("100+ articles");}};
 
-    private ArrayList<Integer> company_image_resources=new ArrayList<Integer>(){
+    private ArrayList<Integer> companyImageDataSet=new ArrayList<Integer>(){
         {add(R.drawable.imageresume);
             add(R.drawable.imagepaper);
             add(R.drawable.imageresume);}};
-    private ArrayList<String> company_title_resources=new ArrayList<String>(){
+
+    private ArrayList<String> companyTitleDataSet=new ArrayList<String>(){
         {add("ABC");
             add("ABC");
             add("ABC");}};
@@ -143,133 +148,94 @@ public class MainActivity extends AppCompatActivity {
 
     private void setCoursesCards()
     {
-        RecyclerView CoursesRecyclerView;
-        RecyclerView.Adapter CoursesAdapter;
-        RecyclerView.LayoutManager CoursesLayoutManager;
-
         CoursesRecyclerView=findViewById(R.id.homeCoursesRecyclerView);
-        CoursesLayoutManager=new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL,false);
-        CoursesRecyclerView.setLayoutManager(CoursesLayoutManager);
+        layoutManager=new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL,false);
+        CoursesRecyclerView.setLayoutManager(layoutManager);
 
-        CoursesAdapter= new HomeCompanyAdapter(company_title_resources,company_image_resources);
-        CoursesRecyclerView.setAdapter(CoursesAdapter);
+        adapter= new HomeCompanyAdapter(companyTitleDataSet,companyImageDataSet);
+        CoursesRecyclerView.setAdapter(adapter);
 
     }
 
     private void setCareerCards()
     {
-        RecyclerView CareerRecyclerView;
-        RecyclerView.Adapter Careericonsadapter;
-        RecyclerView.LayoutManager CareerLayoutManager;
-
         CareerRecyclerView=findViewById(R.id.homeCareerRecyclerView);
-        CareerLayoutManager=new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL,false);
-        CareerRecyclerView.setLayoutManager(CareerLayoutManager);
+        layoutManager=new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL,false);
+        CareerRecyclerView.setLayoutManager(layoutManager);
 
-        Careericonsadapter= new HomeCareerAdapter(company_title_resources,company_image_resources);
-        CareerRecyclerView.setAdapter(Careericonsadapter);
+        adapter= new HomeCareerAdapter(companyTitleDataSet,companyImageDataSet);
+        CareerRecyclerView.setAdapter(adapter);
 
     }
     private void setCompanyCards()
     {
-        RecyclerView CompanyRecyclerView;
-        RecyclerView.Adapter Companyadapter;
-        RecyclerView.LayoutManager CompanylayoutManager;
-
         CompanyRecyclerView=findViewById(R.id.homeCompanyRecyclerView);
-        CompanylayoutManager=new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL,false);
-        CompanyRecyclerView.setLayoutManager(CompanylayoutManager);
+        layoutManager=new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL,false);
+        CompanyRecyclerView.setLayoutManager(layoutManager);
 
-        Companyadapter= new HomeCompanyAdapter(company_title_resources,company_image_resources);
-        CompanyRecyclerView.setAdapter(Companyadapter);
+        adapter= new HomeCompanyAdapter(companyTitleDataSet,companyImageDataSet);
+        CompanyRecyclerView.setAdapter(adapter);
 
     }
 
     private void setPractiseIcons()
     {
-        RecyclerView PractiseRecyclerView;
-        RecyclerView.Adapter Practiseiconsadapter;
-        RecyclerView.LayoutManager PractiselayoutManager;
-
         PractiseRecyclerView=findViewById(R.id.homePractiseRecyclerView);
-        PractiselayoutManager=new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL,false);
-        PractiseRecyclerView.setLayoutManager(PractiselayoutManager);
+        layoutManager=new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL,false);
+        PractiseRecyclerView.setLayoutManager(layoutManager);
 
-        Practiseiconsadapter= new HomePrepHubAdapter(feature_icon_title_resources,feature_icon_image_resources);
-        PractiseRecyclerView.setAdapter(Practiseiconsadapter);
+        adapter= new HomePrepHubAdapter(featureTitleDataSet,featureImageDataSet);
+        PractiseRecyclerView.setAdapter(adapter);
     }
 
     private void setPrepHubIcons()
     {
-        RecyclerView PrepHubIconsRecyclerView;
-        RecyclerView.Adapter PrepHubiconsadapter;
-        RecyclerView.LayoutManager PrepHublayoutManager;
-
         PrepHubIconsRecyclerView=findViewById(R.id.homePrepHubRecyclerView);
-        PrepHublayoutManager=new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL,false);
-        PrepHubIconsRecyclerView.setLayoutManager(PrepHublayoutManager);
+        layoutManager=new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL,false);
+        PrepHubIconsRecyclerView.setLayoutManager(layoutManager);
 
-        PrepHubiconsadapter= new HomePrepHubAdapter(feature_icon_title_resources,feature_icon_image_resources);
-        PrepHubIconsRecyclerView.setAdapter(PrepHubiconsadapter);
+        adapter= new HomePrepHubAdapter(featureTitleDataSet,featureImageDataSet);
+        PrepHubIconsRecyclerView.setAdapter(adapter);
 
     }
 
     private void setFeaturesIcons()
     {
         HomeFeatureIconsRecyclerView=findViewById(R.id.homeFeaturesIconsRecyclerView);
-        homeFeaturelayoutManager=new GridLayoutManager(MainActivity.this,3);
-        HomeFeatureIconsRecyclerView.setLayoutManager(homeFeaturelayoutManager);
+        layoutManager=new GridLayoutManager(MainActivity.this,3);
+        HomeFeatureIconsRecyclerView.setLayoutManager(layoutManager);
 
-        homeFeatureiconsadapter= new HomeFeaturesIconsAdapter(feature_icon_title_resources,feature_icon_image_resources);
-        HomeFeatureIconsRecyclerView.setAdapter(homeFeatureiconsadapter);
+        adapter= new HomeFeaturesIconsAdapter(featureTitleDataSet,featureImageDataSet);
+        HomeFeatureIconsRecyclerView.setAdapter(adapter);
     }
 
     private void setBanner()
     {
         HomeBannerIconsRecyclerView=findViewById(R.id.homeBannerIconsRecyclerView);
-        bannerlayoutManager=new GridLayoutManager(MainActivity.this,3);
-        HomeBannerIconsRecyclerView.setLayoutManager(bannerlayoutManager);
+        layoutManager=new GridLayoutManager(MainActivity.this,3);
+        HomeBannerIconsRecyclerView.setLayoutManager(layoutManager);
 
-        homeiconsadapter= new HomeIconsAdapter(banner_title_resources,banner_image_resources);
-        HomeBannerIconsRecyclerView.setAdapter(homeiconsadapter);
+        adapter= new HomeIconsAdapter(bannerTitleDataSet,bannerImageDataSet);
+        HomeBannerIconsRecyclerView.setAdapter(adapter);
 
     }
 
     private void setViewPager()
     {
         viewPager=findViewById(R.id.homeViewPager);
-        adapter= new HomeSwipeAdapter(this,swipe_image_resources,swipe_title_resources);
-        viewPager.setAdapter(adapter);
-        CircleIndicator indicator = (CircleIndicator) findViewById(R.id.homeSliderIndicator);
+        swipeAdapter= new HomeSwipeAdapter(this,swipeImageDataSet,swipeTitleDataSet);
+        viewPager.setAdapter(swipeAdapter);
+        CircleIndicator indicator = findViewById(R.id.homeSliderIndicator);
         indicator.setViewPager(viewPager);
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        NUM_PAGES=swipeImageDataSet.length;
 
-            @Override
-            public void onPageSelected(int position) {
-                currentPage = position;
-            }
-
-            @Override
-            public void onPageScrolled(int arg0, float arg1, int arg2) {
-                // TODO Auto-generated method stub
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-                int pageCount = swipe_title_resources.length;
-                if (state == ViewPager.SCROLL_STATE_IDLE) {
-                    if (currentPage == 0) {
-                        viewPager.setCurrentItem(pageCount-1, false);
-                    }
-                }
-
-            }
-        });
         final Handler handler = new Handler();
         final Runnable update = new Runnable() {
             @Override
             public void run() {
-
+                if(currentPage==NUM_PAGES){
+                    currentPage=0;
+                }
                 viewPager.setCurrentItem(currentPage++, true);
             }
         };
@@ -281,6 +247,21 @@ public class MainActivity extends AppCompatActivity {
                 handler.post(update);}
         }, 2000, 2000);
 
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
+            @Override
+            public void onPageSelected(int position) {
+                currentPage = position;
+            }
+
+            @Override
+            public void onPageScrolled(int arg0, float arg1, int arg2) {
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+            }
+        });
     }
 
     private void setNavigationDrawer() {
@@ -337,6 +318,7 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setTitle("Home");
         toolbar.setTitleTextColor(Color.WHITE);
     }
+    
     private void getUserDetails(final String  email) {
         StringRequest stringRequest=new StringRequest(Request.Method.POST,userDetails, new Response.Listener<String>() {
             @Override
