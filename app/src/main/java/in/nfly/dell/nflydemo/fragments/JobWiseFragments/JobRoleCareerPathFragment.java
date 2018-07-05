@@ -115,5 +115,4 @@ public class JobRoleCareerPathFragment extends Fragment {
         };
         MySingleton.getmInstance(getContext()).addToRequestQueue(stringRequest);
     }
-
 }
