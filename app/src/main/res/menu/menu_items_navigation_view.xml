@@ -51,6 +51,12 @@
             android:icon="@drawable/salarycalculator"
             ></item>
         <item
+            android:id="@+id/feedback"
+            android:title="Feedback"
+            android:icon="@drawable/feedback"
+            android:checkable="true"
+            />
+        <item
             android:id="@+id/signout"
             android:title="Sign Out"
             android:checkable="true"

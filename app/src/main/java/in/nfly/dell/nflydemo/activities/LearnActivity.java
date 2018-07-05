@@ -123,6 +123,10 @@ public class LearnActivity extends AppCompatActivity {
                     intent=new Intent(LearnActivity.this,KnowledgeBaseActivity.class);
                     startActivity(intent);
                 }
+                if (item.getTitle().equals("Feedback")){
+                    intent=new Intent(LearnActivity.this,FeedBackActivity.class);
+                    startActivity(intent);
+                }
                 if(item.getTitle().equals("Sign Out")){
                     User user=new User(LearnActivity.this);
                     user.logOut();

@@ -107,6 +107,10 @@ public class PracticeActivity extends AppCompatActivity {
                     intent=new Intent(PracticeActivity.this,KnowledgeBaseActivity.class);
                     startActivity(intent);
                 }
+                if (item.getTitle().equals("Feedback")){
+                    intent=new Intent(PracticeActivity.this,FeedBackActivity.class);
+                    startActivity(intent);
+                }
                 if(item.getTitle().equals("Sign Out")){
                     User user=new User(PracticeActivity.this);
                     user.logOut();

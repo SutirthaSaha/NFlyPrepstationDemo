@@ -39,6 +39,8 @@ public class PracticePaperDetailsActivity extends AppCompatActivity {
     private RecyclerView.Adapter adapter;
 
     private ArrayList<String> titleDataSet=new ArrayList<String>(){};
+    private ArrayList<String> idDataSet=new ArrayList<String>(){};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,9 +81,11 @@ public class PracticePaperDetailsActivity extends AppCompatActivity {
                     JSONArray parentArray=new JSONArray(response);
                     for(int i=0;i<parentArray.length();i++){
                         arrayObject=parentArray.getJSONObject(i);
+
+                        idDataSet.add(arrayObject.getString("test_id"));
                         titleDataSet.add(arrayObject.getString("test_name"));
                     }
-                    adapter=new PracticePaperDetailsAdapter(PracticePaperDetailsActivity.this,titleDataSet);
+                    adapter=new PracticePaperDetailsAdapter(PracticePaperDetailsActivity.this,titleDataSet,idDataSet);
                     practicePaperDetailsRecyclerView.setAdapter(adapter);
                 } catch (JSONException e) {
                     e.printStackTrace();

@@ -301,6 +301,10 @@ public class MainActivity extends AppCompatActivity {
                     intent=new Intent(MainActivity.this,KnowledgeBaseActivity.class);
                     startActivity(intent);
                 }
+                if (item.getTitle().equals("Feedback")){
+                    intent=new Intent(MainActivity.this,FeedBackActivity.class);
+                    startActivity(intent);
+                }
                 if(item.getTitle().equals("Sign Out")){
                     User user=new User(MainActivity.this);
                     user.logOut();
