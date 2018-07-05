@@ -318,7 +318,7 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setTitle("Home");
         toolbar.setTitleTextColor(Color.WHITE);
     }
-    
+
     private void getUserDetails(final String  email) {
         StringRequest stringRequest=new StringRequest(Request.Method.POST,userDetails, new Response.Listener<String>() {
             @Override

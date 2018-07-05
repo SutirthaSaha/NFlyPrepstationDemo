@@ -40,7 +40,7 @@
         <activity android:name=".activities.singleActivities.TipsDetailsActivity" />
         <activity android:name=".activities.singleActivities.LearnCompanyPaperDetailsActivity" />
         <activity android:name=".activities.singleActivities.InterviewSubtopicsActivity" />
-        <activity android:name=".activities.singleActivities.InterviewSubTopicsDetailsActivity"></activity>
+        <activity android:name=".activities.singleActivities.InterviewQuestionsActivity"></activity>
     </application>
 
 </manifest>

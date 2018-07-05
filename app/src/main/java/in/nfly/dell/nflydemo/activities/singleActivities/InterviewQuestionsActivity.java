@@ -9,7 +9,7 @@ import android.view.View;
 
 import in.nfly.dell.nflydemo.R;
 
-public class InterviewSubTopicsDetailsActivity extends AppCompatActivity {
+public class InterviewQuestionsActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private String subtopic_id,subtopic_name;
@@ -17,13 +17,11 @@ public class InterviewSubTopicsDetailsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_interview_sub_topics_details);
+        setContentView(R.layout.activity_interview_questions);
 
         Intent intent=getIntent();
         subtopic_id=intent.getStringExtra("subtopic_id");
         subtopic_name=intent.getStringExtra("subtopic_name");
-
-
         setToolbar();
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -33,7 +31,7 @@ public class InterviewSubTopicsDetailsActivity extends AppCompatActivity {
         });
     }
     private void setToolbar() {
-        toolbar=findViewById(R.id.interviewSubTopicsDetailsToolbar);
+        toolbar=findViewById(R.id.interviewQuestionsToolbar);
         toolbar.setTitle(subtopic_name);
         toolbar.setTitleTextColor(Color.WHITE);
         toolbar.setNavigationIcon(R.drawable.arrow_left);
