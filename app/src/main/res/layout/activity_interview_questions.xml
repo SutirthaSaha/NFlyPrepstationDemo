@@ -14,7 +14,7 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         android:id="@+id/interviewQuestionsToolbar"></android.support.v7.widget.Toolbar>
 
-    <ScrollView
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="10dp">
@@ -28,11 +28,13 @@
                 android:layout_margin="10dp"
                 android:textStyle="bold"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:text="Easy"/>
+                android:text="Easy"
+                android:id="@+id/easyQuestionsTextView"/>
 
             <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:nestedScrollingEnabled="false"
                 android:id="@+id/easyInterviewQuestionsRecyclerView"
                 android:layout_margin="5dp"></android.support.v7.widget.RecyclerView>
 
@@ -42,11 +44,13 @@
                 android:textStyle="bold"
                 android:layout_margin="10dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:text="Medium"/>
+                android:text="Medium"
+                android:id="@+id/mediumQuestionsTextView"/>
 
             <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:nestedScrollingEnabled="false"
                 android:id="@+id/mediumInterviewQuestionsRecyclerView"
                 android:layout_margin="5dp"></android.support.v7.widget.RecyclerView>
 
@@ -56,15 +60,17 @@
                 android:textStyle="bold"
                 android:layout_margin="10dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:text="Difficult"/>
+                android:text="Difficult"
+                android:id="@+id/difficultQuestionsTextView"/>
 
             <android.support.v7.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:nestedScrollingEnabled="false"
                 android:id="@+id/difficultInterviewQuestionsRecyclerView"
                 android:layout_margin="5dp"></android.support.v7.widget.RecyclerView>
 
         </LinearLayout>
-    </ScrollView>
+    </android.support.v4.widget.NestedScrollView>
 
 </LinearLayout>
