@@ -3,52 +3,61 @@
     android:layout_width="match_parent" android:layout_height="wrap_content"
     android:layout_margin="10dp"
     android:id="@+id/practicePaperDetailsCardView"
-    android:padding="10dp">
+    android:padding="20dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="10dp">
+        android:padding="20dp">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimaryDark"
+            android:text="MockTest"
             android:textStyle="bold"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textSize="16dp"
+            android:layout_marginBottom="5dp"
             android:id="@+id/practicePaperDetailsCardText"/>
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
             android:orientation="horizontal">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="@color/colorPrimaryDark"
                 android:text="Duration: "
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textSize="16sp"
+                android:textColor="#000"
                 android:id="@+id/practicePaperDetailsCardDuration"/>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
             android:orientation="horizontal">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="@color/colorPrimaryDark"
                 android:text="Number of Questions: "
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                 />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="#000"
+                android:textSize="16sp"
                 android:id="@+id/practicePaperDetailsCardNumQues"/>
         </LinearLayout>
     </LinearLayout>

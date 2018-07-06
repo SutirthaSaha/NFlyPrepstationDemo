@@ -123,6 +123,7 @@ public class PracticeTestActivity extends AppCompatActivity {
                 Toast.makeText(PracticeTestActivity.this, "Waah pehla attempt mubaarak ho", Toast.LENGTH_SHORT).show();
                 previous_attempt_id=0;
                 attempt_id=1;
+                setTestQuestions();
             }
         })
         {
@@ -223,6 +224,8 @@ public class PracticeTestActivity extends AppCompatActivity {
                         finish();
                     }
                     else {
+                        practiceTestNextBtn.setVisibility(View.VISIBLE);
+                        practiceTestNextBtn.setEnabled(true);
                         practiceTestQuestion.setText(questionDataSet.get(count));
                         practiceTestOption1.setText(questionOptionsSet.get(questionDataSet.get(count)).get(0));
                         practiceTestOption2.setText(questionOptionsSet.get(questionDataSet.get(count)).get(1));

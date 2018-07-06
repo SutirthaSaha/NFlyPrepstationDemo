@@ -17,8 +17,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
         android:layout_margin="10dp"
+        android:paddingTop="20dp"
         android:orientation="vertical">
         <TextView
             android:layout_width="match_parent"
@@ -26,6 +26,7 @@
             android:textColor="@color/colorPrimary"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textStyle="bold"
+            android:text="What is your name?"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:id="@+id/practiceTestQuestion"/>
@@ -37,19 +38,23 @@
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="Option one"
                 android:id="@+id/practiceTestOption1"/>
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="Option two"
                 android:id="@+id/practiceTestOption2"/>
 
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="Option three"
                 android:id="@+id/practiceTestOption3"/>
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="Option four"
                 android:id="@+id/practiceTestOption4"/>
         </RadioGroup>
         <LinearLayout
@@ -63,6 +68,8 @@
                 android:text="Previous"
                 android:visibility="gone"
                 android:layout_margin="10dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
                 android:background="@color/colorAccent"
                 android:textColor="#fff"
                 android:id="@+id/practiceTestPreviousBtn"
@@ -72,6 +79,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="0.5"
                 android:text="Next"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
                 android:visibility="visible"
                 android:layout_margin="10dp"
                 android:background="@color/colorAccent"
@@ -85,6 +94,8 @@
             android:text="Submit"
             android:visibility="gone"
             android:layout_margin="10dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
             android:background="@color/colorAccent"
             android:textColor="#fff"
             android:id="@+id/practiceTestSubmitBtn"

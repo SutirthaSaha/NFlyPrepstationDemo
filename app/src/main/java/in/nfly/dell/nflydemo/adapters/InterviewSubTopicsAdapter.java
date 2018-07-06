@@ -38,7 +38,7 @@ public class InterviewSubTopicsAdapter extends RecyclerView.Adapter<InterviewSub
     @Override
     public void onBindViewHolder(@NonNull InterviewSubTopicsHolder holder, final int position) {
         holder.InterviewSubTopicsCardText.setText(titleDataSet.get(position));
-        holder.InterviewSubTopicsCardView.setOnClickListener(new View.OnClickListener() {
+        holder.InterviewSubTopicsLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(context, idDataSet.get(position), Toast.LENGTH_SHORT).show();
@@ -57,11 +57,11 @@ public class InterviewSubTopicsAdapter extends RecyclerView.Adapter<InterviewSub
 
     public class InterviewSubTopicsHolder extends RecyclerView.ViewHolder{
 
-        public LinearLayout InterviewSubTopicsCardView;
+        public LinearLayout InterviewSubTopicsLayout;
         public TextView InterviewSubTopicsCardText;
         public InterviewSubTopicsHolder(View itemView) {
             super(itemView);
-            InterviewSubTopicsCardView=itemView.findViewById(R.id.interviewSubTopicsLayout);
+            InterviewSubTopicsLayout=itemView.findViewById(R.id.interviewSubTopicsLayout);
             InterviewSubTopicsCardText=itemView.findViewById(R.id.interviewSubTopicsCardText);
         }
     }

@@ -67,7 +67,7 @@ public class LearnInterviewQAActivity extends AppCompatActivity {
             }
         });
 
-        easyInterviewQuestionsRecyclerView=findViewById(R.id.easyInterviewQuestionsRecyclerView);
+       /* easyInterviewQuestionsRecyclerView=findViewById(R.id.easyInterviewQuestionsRecyclerView);
         easyLayoutManager=new LinearLayoutManager(LearnInterviewQAActivity.this,LinearLayoutManager.VERTICAL,false);
         easyInterviewQuestionsRecyclerView.setLayoutManager(easyLayoutManager);
 
@@ -83,7 +83,7 @@ public class LearnInterviewQAActivity extends AppCompatActivity {
         mediumQuestionsTextView=findViewById(R.id.mediumQuestionsTextView);
         difficultQuestionsTextView=findViewById(R.id.difficultQuestionsTextView);
 
-        setValues();
+        setValues();*/
     }
     private void setToolbar() {
         toolbar=findViewById(R.id.interviewQuestionsToolbar);

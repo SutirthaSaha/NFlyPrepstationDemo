@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -37,8 +38,8 @@ public class GDTopicsAdapter extends RecyclerView.Adapter<GDTopicsAdapter.GDTopi
 
     @Override
     public void onBindViewHolder(@NonNull GDTopicsHolder holder, final int position) {
-        holder.GDTopicsCardText.setText(titleDataSet.get(position));
-        holder.GDTopicsCardView.setOnClickListener(new View.OnClickListener() {
+        holder.GDTopicsLayoutText.setText(titleDataSet.get(position));
+        holder.GDTopicsLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(context, LearnGDForAgainstActivity.class);
@@ -57,12 +58,12 @@ public class GDTopicsAdapter extends RecyclerView.Adapter<GDTopicsAdapter.GDTopi
 
     public class GDTopicsHolder extends RecyclerView.ViewHolder{
 
-        public CardView GDTopicsCardView;
-        public TextView GDTopicsCardText;
+        public LinearLayout GDTopicsLayout;
+        public TextView GDTopicsLayoutText;
         public GDTopicsHolder(View itemView) {
             super(itemView);
-            GDTopicsCardView=itemView.findViewById(R.id.GDTopicsCardView);
-            GDTopicsCardText=itemView.findViewById(R.id.GDTopicsCardText);
+            GDTopicsLayout=itemView.findViewById(R.id.GDTopicsLayout);
+            GDTopicsLayoutText=itemView.findViewById(R.id.GDTopicsLayoutText);
         }
     }
 }
