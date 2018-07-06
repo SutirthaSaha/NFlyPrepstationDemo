@@ -27,7 +27,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:textStyle="bold"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/colorAccent"
+                android:textSize="18sp"
                 android:text="Easy"
                 android:id="@+id/easyQuestionsTextView"/>
 
@@ -36,14 +37,15 @@
                 android:layout_height="match_parent"
                 android:nestedScrollingEnabled="false"
                 android:id="@+id/easyInterviewQuestionsRecyclerView"
-                android:layout_margin="5dp"></android.support.v7.widget.RecyclerView>
+                android:layout_margin="5dp"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:layout_margin="10dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textSize="18sp"
+                android:textColor="@color/colorAccent"
                 android:text="Medium"
                 android:id="@+id/mediumQuestionsTextView"/>
 
@@ -59,7 +61,8 @@
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:layout_margin="10dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textSize="18sp"
+                android:textColor="@color/colorAccent"
                 android:text="Difficult"
                 android:id="@+id/difficultQuestionsTextView"/>
 

@@ -19,7 +19,7 @@
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             android:id="@+id/homeToolbar"/>
 
-        <ScrollView
+        <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <LinearLayout
@@ -85,6 +85,7 @@
                             android:padding="7dp"
                             android:layout_gravity="center"
                             android:id="@+id/homeFeaturesIconsRecyclerView"
+                            android:nestedScrollingEnabled="false"
                             android:layout_marginBottom="0dp">
                         </android.support.v7.widget.RecyclerView>
                     </LinearLayout>
@@ -195,7 +196,7 @@
                         android:id="@+id/homeCareerRecyclerView"/>
                 </LinearLayout>
             </LinearLayout>
-        </ScrollView>
+        </android.support.v4.widget.NestedScrollView>
     </LinearLayout>
 
     <android.support.design.widget.NavigationView

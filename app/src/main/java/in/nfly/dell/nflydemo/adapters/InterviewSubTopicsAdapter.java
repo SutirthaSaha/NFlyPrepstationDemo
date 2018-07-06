@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,7 +58,7 @@ public class InterviewSubTopicsAdapter extends RecyclerView.Adapter<InterviewSub
 
     public class InterviewSubTopicsHolder extends RecyclerView.ViewHolder{
 
-        public CardView InterviewSubTopicsCardView;
+        public LinearLayout InterviewSubTopicsCardView;
         public TextView InterviewSubTopicsCardText;
         public InterviewSubTopicsHolder(View itemView) {
             super(itemView);

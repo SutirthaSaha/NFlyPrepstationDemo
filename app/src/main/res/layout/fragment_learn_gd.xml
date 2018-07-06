@@ -4,16 +4,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.LearnGDFragment">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="GD Topics"
-        android:textSize="15sp"
-        android:textColor="#000"
-        android:layout_marginLeft="7dp"
-        android:layout_margin="5dp"/>
+        app:fontFamily="@font/sanchez"
+        android:textStyle="bold"
+        android:layout_marginLeft="10dp"
+        android:textSize="17sp"
+        android:textColor="@color/colorAccent"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="5dp"/>
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
