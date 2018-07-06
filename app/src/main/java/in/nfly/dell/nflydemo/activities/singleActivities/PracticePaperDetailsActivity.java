@@ -40,6 +40,9 @@ public class PracticePaperDetailsActivity extends AppCompatActivity {
 
     private ArrayList<String> titleDataSet=new ArrayList<String>(){};
     private ArrayList<String> idDataSet=new ArrayList<String>(){};
+    private ArrayList<String> numQuesDataSet=new ArrayList<String>(){};
+    private ArrayList<String> durationDataSet=new ArrayList<String>(){};
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +52,6 @@ public class PracticePaperDetailsActivity extends AppCompatActivity {
         Intent intent=getIntent();
         subtopic_id=intent.getStringExtra("subtopic_id");
         subtopic_name=intent.getStringExtra("subtopic_name");
-        Toast.makeText(this, subtopic_id, Toast.LENGTH_SHORT).show();
 
         setToolbar();
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -75,7 +77,6 @@ public class PracticePaperDetailsActivity extends AppCompatActivity {
         StringRequest stringRequest=new StringRequest(Request.Method.POST, urlPracticePapers, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(PracticePaperDetailsActivity.this, response, Toast.LENGTH_SHORT).show();
                 try {
                     JSONObject arrayObject;
                     JSONArray parentArray=new JSONArray(response);
@@ -84,8 +85,10 @@ public class PracticePaperDetailsActivity extends AppCompatActivity {
 
                         idDataSet.add(arrayObject.getString("test_id"));
                         titleDataSet.add(arrayObject.getString("test_name"));
+                        numQuesDataSet.add(arrayObject.getString("test_num_questions"));
+                        durationDataSet.add(arrayObject.getString("test_duration"));
                     }
-                    adapter=new PracticePaperDetailsAdapter(PracticePaperDetailsActivity.this,titleDataSet,idDataSet);
+                    adapter=new PracticePaperDetailsAdapter(PracticePaperDetailsActivity.this,titleDataSet,idDataSet,numQuesDataSet,durationDataSet);
                     practicePaperDetailsRecyclerView.setAdapter(adapter);
                 } catch (JSONException e) {
                     e.printStackTrace();

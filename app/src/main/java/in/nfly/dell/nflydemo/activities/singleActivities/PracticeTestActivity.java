@@ -8,6 +8,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -20,6 +24,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,11 +44,32 @@ public class PracticeTestActivity extends AppCompatActivity {
     private String urlUserGivenTest="http://nfly.in/gapi/data_exists_two";
     private String urlPrevAttemptId="http://nfly.in/gapi/select_max_on_2";
     private String urlInsertAttempt="http://nfly.in/gapi/insert";
+    private String urlGetTest="http://nfly.in/gapi/load_rows_one";
+    private String urlUpdateTest="http://nfly.in/testapi/update_with_3";
 
     private String prev_attempt_id;
     private Integer previous_attempt_id,attempt_id;
 
-    @Override
+    private HashMap<String,HashMap<String,String>> quizDetails=new HashMap<>();
+    private HashMap<String,ArrayList<String>> questionOptionsSet=new HashMap<>();
+    private HashMap<String,String> optionDetails=new HashMap<>();
+    private ArrayList<String> optionsDataSet=new ArrayList<String>();
+    private ArrayList<String> questionDataSet=new ArrayList<String>(){};
+    private ArrayList<String> answerDataSet=new ArrayList<String>(){};
+
+    private int[] userOptions;
+
+    private int count=0;
+    private TextView practiceTestQuestion;
+    private RadioButton practiceTestOption1,practiceTestOption2,practiceTestOption3,practiceTestOption4;
+    private RadioGroup practiceTestOptions;
+    private Button practiceTestPreviousBtn,practiceTestNextBtn,practiceTestSubmitBtn;
+
+    private int optionIdSelected;
+    private RadioButton optionSelected;
+    private String userAnswer;
+    private int user_score,max_score;
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_practice_test);
@@ -64,6 +90,17 @@ public class PracticeTestActivity extends AppCompatActivity {
         });
 
         checkUserGivenTest();
+
+        practiceTestQuestion=findViewById(R.id.practiceTestQuestion);
+        practiceTestOption1=findViewById(R.id.practiceTestOption1);
+        practiceTestOption2=findViewById(R.id.practiceTestOption2);
+        practiceTestOption3=findViewById(R.id.practiceTestOption3);
+        practiceTestOption4=findViewById(R.id.practiceTestOption4);
+        practiceTestOptions=findViewById(R.id.practiceTestOptions);
+        practiceTestPreviousBtn=findViewById(R.id.practiceTestPreviousBtn);
+        practiceTestNextBtn=findViewById(R.id.practiceTestNextBtn);
+        practiceTestSubmitBtn=findViewById(R.id.practiceTestSubmitBtn);
+        practiceTestSubmitBtn.setEnabled(false);
     }
 
     private void setToolbar() {
@@ -77,13 +114,13 @@ public class PracticeTestActivity extends AppCompatActivity {
         StringRequest stringRequest=new StringRequest(Request.Method.POST, urlUserGivenTest, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(PracticeTestActivity.this, "User Has Given Test Before", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(PracticeTestActivity.this, "User Has Given Test Before", Toast.LENGTH_SHORT).show();
                 getPrevAttemptId();
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(PracticeTestActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                Toast.makeText(PracticeTestActivity.this, "Waah pehla attempt mubaarak ho", Toast.LENGTH_SHORT).show();
                 previous_attempt_id=0;
                 attempt_id=1;
                 insertAttempt();
@@ -117,12 +154,9 @@ public class PracticeTestActivity extends AppCompatActivity {
             public void onResponse(String response) {
                 try {
                     JSONObject jsonObject=new JSONObject(response);
-                    Toast.makeText(PracticeTestActivity.this, response, Toast.LENGTH_SHORT).show();
-
                     prev_attempt_id=jsonObject.getString("previous_attempt_id");
                     previous_attempt_id=Integer.parseInt(prev_attempt_id);
                     attempt_id=previous_attempt_id+1;
-                    //Toast.makeText(PracticeTestActivity.this, Integer.toString(previous_attempt_id)+"\n"+Integer.toString(current_attempt_id), Toast.LENGTH_SHORT).show();
 
                     insertAttempt();
 
@@ -160,7 +194,7 @@ public class PracticeTestActivity extends AppCompatActivity {
     }
 
     private void insertAttempt() {
-        Toast.makeText(this, "Am Here", Toast.LENGTH_SHORT).show();
+
         StringRequest stringRequest=new StringRequest(Request.Method.POST,urlInsertAttempt, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -168,9 +202,7 @@ public class PracticeTestActivity extends AppCompatActivity {
                     JSONObject arrayObject=new JSONObject(response);
                     status=arrayObject.getInt("status");
                     if(status==200){
-
-                        Toast.makeText(PracticeTestActivity.this, "Insertion Successful", Toast.LENGTH_SHORT).show();
-
+                        setTestQuestions();
                     }
                     else{
                         Toast.makeText(PracticeTestActivity.this, "Insertion Failed", Toast.LENGTH_SHORT).show();
@@ -210,5 +242,206 @@ public class PracticeTestActivity extends AppCompatActivity {
         MySingleton.getmInstance(PracticeTestActivity.this).addToRequestQueue(stringRequest);
     }
 
+    private void setTestQuestions() {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST,urlGetTest, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject arrayObject;
+                    JSONArray parentArray=new JSONArray(response);
+                    for(int i=0;i<parentArray.length();i++){
+                        arrayObject=parentArray.getJSONObject(i);
+                        optionDetails=new HashMap<>();
+                        optionsDataSet=new ArrayList<String>();
 
+                        questionDataSet.add(arrayObject.getString("question"));
+                        answerDataSet.add(arrayObject.getString("correct_option"));
+
+                        optionsDataSet.add(arrayObject.getString("option_1"));
+                        optionsDataSet.add(arrayObject.getString("option_2"));
+                        optionsDataSet.add(arrayObject.getString("option_3"));
+                        optionsDataSet.add(arrayObject.getString("option_4"));
+
+                        questionOptionsSet.put(questionDataSet.get(i),optionsDataSet);
+                    }
+
+                    if (questionDataSet.isEmpty()){
+                        Toast.makeText(PracticeTestActivity.this, "No Questions There", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                    else {
+                        practiceTestQuestion.setText(questionDataSet.get(count));
+                        practiceTestOption1.setText(questionOptionsSet.get(questionDataSet.get(count)).get(0));
+                        practiceTestOption2.setText(questionOptionsSet.get(questionDataSet.get(count)).get(1));
+                        practiceTestOption3.setText(questionOptionsSet.get(questionDataSet.get(count)).get(2));
+                        practiceTestOption4.setText(questionOptionsSet.get(questionDataSet.get(count)).get(3));
+
+                        userOptions = new int[questionDataSet.size()];
+                        for (int i = 0; i < questionDataSet.size(); i++) {
+                            userOptions[i] = 0;
+                        }
+                        user_score = 0;
+                        max_score = 3 * questionDataSet.size();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(PracticeTestActivity.this, "Error", Toast.LENGTH_SHORT).show();
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+
+            @Override
+            protected Map<String,String> getParams() throws AuthFailureError{
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("key", "test_id");
+                params.put("value",test_id);
+                params.put("table","nfly_test_question");
+                return params;
+            }
+        };
+        MySingleton.getmInstance(PracticeTestActivity.this).addToRequestQueue(stringRequest);
+    }
+
+
+    public void onTestPreviousBtnClick(View view) {
+        saveUserOption();
+        count--;
+        if(count==0){
+            practiceTestPreviousBtn.setVisibility(View.INVISIBLE);
+            practiceTestPreviousBtn.setEnabled(false);
+        }
+        if(count>0){
+            practiceTestPreviousBtn.setVisibility(View.VISIBLE);
+            practiceTestPreviousBtn.setEnabled(true);
+
+            practiceTestSubmitBtn.setVisibility(View.INVISIBLE);
+            practiceTestSubmitBtn.setEnabled(false);
+        }
+        practiceTestQuestion.setText(questionDataSet.get(count));
+        practiceTestOption1.setText(questionOptionsSet.get(questionDataSet.get(count)).get(0));
+        practiceTestOption2.setText(questionOptionsSet.get(questionDataSet.get(count)).get(1));
+        practiceTestOption3.setText(questionOptionsSet.get(questionDataSet.get(count)).get(2));
+        practiceTestOption4.setText(questionOptionsSet.get(questionDataSet.get(count)).get(3));
+    }
+
+    public void onTestNextBtnClick(View view) {
+        saveUserOption();
+        count++;
+        if(count==(questionDataSet.size()-1)){
+            practiceTestNextBtn.setVisibility(View.INVISIBLE);
+            practiceTestNextBtn.setEnabled(false);
+
+            practiceTestSubmitBtn.setVisibility(View.VISIBLE);
+            practiceTestSubmitBtn.setEnabled(true);
+        }
+        if(count<(questionDataSet.size()-1)){
+            practiceTestNextBtn.setVisibility(View.VISIBLE);
+            practiceTestNextBtn.setEnabled(true);
+        }
+        practiceTestPreviousBtn.setVisibility(View.VISIBLE);
+        practiceTestQuestion.setText(questionDataSet.get(count));
+        practiceTestOption1.setText(questionOptionsSet.get(questionDataSet.get(count)).get(0));
+        practiceTestOption2.setText(questionOptionsSet.get(questionDataSet.get(count)).get(1));
+        practiceTestOption3.setText(questionOptionsSet.get(questionDataSet.get(count)).get(2));
+        practiceTestOption4.setText(questionOptionsSet.get(questionDataSet.get(count)).get(3));
+    }
+
+    private void saveUserOption() {
+        optionIdSelected=practiceTestOptions.getCheckedRadioButtonId();
+        switch(optionIdSelected){
+            case R.id.practiceTestOption1:
+                userOptions[count]=1;
+                break;
+            case R.id.practiceTestOption2:
+                userOptions[count]=2;
+                break;
+            case R.id.practiceTestOption3:
+                userOptions[count]=3;
+                break;
+            case R.id.practiceTestOption4:
+                userOptions[count]=4;
+                break;
+            case -1:
+                userOptions[count]=0;
+        }
+        practiceTestOptions.clearCheck();
+    }
+
+    public void onTestSubmitBtnClick(View view) {
+        saveUserOption();
+        Toast.makeText(this, Integer.toString(userOptions[count]), Toast.LENGTH_SHORT).show();
+
+        for(int i=0;i<answerDataSet.size();i++){
+            if(userOptions[i]==Integer.parseInt(answerDataSet.get(i))){
+                user_score=user_score+3;
+            }
+        }
+        Toast.makeText(this, user_score+"/"+max_score, Toast.LENGTH_SHORT).show();
+        updateTestTable();
+    }
+
+    private void updateTestTable() {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST,urlUpdateTest, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Toast.makeText(PracticeTestActivity.this, response, Toast.LENGTH_SHORT).show();
+                try {
+                    JSONObject arrayObject=new JSONObject(response);
+                    status=arrayObject.getInt("status");
+                    if(status==200){
+                        Toast.makeText(PracticeTestActivity.this, "Update Successful", Toast.LENGTH_SHORT).show();
+                        finish();
+                    }
+                    else{
+                        Toast.makeText(PracticeTestActivity.this, "Update Failed", Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(PracticeTestActivity.this, "Error", Toast.LENGTH_SHORT).show();
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+
+            @Override
+            protected Map<String,String> getParams() throws AuthFailureError{
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("key1","user_id");
+                params.put("value1",user_id);
+                params.put("key2","test_id");
+                params.put("value2",test_id);
+                params.put("key3","attempt_id");
+                params.put("value3",Integer.toString(attempt_id));
+                params.put("update_array[state]","1");
+                params.put("update_array[score]",Integer.toString(user_score));
+                params.put("table","nfly_test_result");
+                return params;
+            }
+        };
+        MySingleton.getmInstance(PracticeTestActivity.this).addToRequestQueue(stringRequest);
+    }
 }

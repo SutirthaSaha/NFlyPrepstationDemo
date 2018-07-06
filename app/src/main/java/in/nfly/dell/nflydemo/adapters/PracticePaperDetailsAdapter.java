@@ -20,12 +20,14 @@ import in.nfly.dell.nflydemo.activities.singleActivities.PracticeTestActivity;
 public class PracticePaperDetailsAdapter extends RecyclerView.Adapter<PracticePaperDetailsAdapter.PracticePaperDetailsHolder>{
 
     private Context context;
-    private ArrayList<String> titleDataSet,idDataSet;
+    private ArrayList<String> titleDataSet,idDataSet,numQuesDataSet,durationDataSet;
 
-    public PracticePaperDetailsAdapter(Context context, ArrayList<String> titleDataSet, ArrayList<String> idDataSet) {
+    public PracticePaperDetailsAdapter(Context context, ArrayList<String> titleDataSet, ArrayList<String> idDataSet, ArrayList<String> numQuesDataSet, ArrayList<String> durationDataSet) {
         this.context = context;
         this.titleDataSet = titleDataSet;
         this.idDataSet = idDataSet;
+        this.numQuesDataSet = numQuesDataSet;
+        this.durationDataSet = durationDataSet;
     }
 
     @NonNull
@@ -38,7 +40,11 @@ public class PracticePaperDetailsAdapter extends RecyclerView.Adapter<PracticePa
 
     @Override
     public void onBindViewHolder(@NonNull PracticePaperDetailsHolder holder, final int position) {
+
         holder.practicePaperDetailsCardText.setText(titleDataSet.get(position));
+        holder.practicePaperDetailsCardNumQues.setText(numQuesDataSet.get(position));
+        holder.practicePaperDetailsCardDuration.setText(durationDataSet.get(position));
+
         holder.practicePaperDetailsCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,12 +64,13 @@ public class PracticePaperDetailsAdapter extends RecyclerView.Adapter<PracticePa
     public class PracticePaperDetailsHolder extends RecyclerView.ViewHolder{
 
         public CardView practicePaperDetailsCardView;
-        public TextView practicePaperDetailsCardText;
+        public TextView practicePaperDetailsCardText,practicePaperDetailsCardNumQues,practicePaperDetailsCardDuration;
         public PracticePaperDetailsHolder(View itemView) {
             super(itemView);
             practicePaperDetailsCardView=itemView.findViewById(R.id.practicePaperDetailsCardView);
             practicePaperDetailsCardText=itemView.findViewById(R.id.practicePaperDetailsCardText);
-
+            practicePaperDetailsCardNumQues=itemView.findViewById(R.id.practicePaperDetailsCardNumQues);
+            practicePaperDetailsCardDuration=itemView.findViewById(R.id.practicePaperDetailsCardDuration);
         }
     }
 }

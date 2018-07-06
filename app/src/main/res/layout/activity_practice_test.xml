@@ -14,4 +14,81 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         android:id="@+id/practiceTestToolbar"></android.support.v7.widget.Toolbar>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:layout_margin="10dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textStyle="bold"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:id="@+id/practiceTestQuestion"/>
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/practiceTestOptions">
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/practiceTestOption1"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/practiceTestOption2"/>
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/practiceTestOption3"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/practiceTestOption4"/>
+        </RadioGroup>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="Previous"
+                android:visibility="gone"
+                android:layout_margin="10dp"
+                android:background="@color/colorAccent"
+                android:textColor="#fff"
+                android:id="@+id/practiceTestPreviousBtn"
+                android:onClick="onTestPreviousBtnClick"/>
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="Next"
+                android:visibility="visible"
+                android:layout_margin="10dp"
+                android:background="@color/colorAccent"
+                android:textColor="#fff"
+                android:id="@+id/practiceTestNextBtn"
+                android:onClick="onTestNextBtnClick"/>
+        </LinearLayout>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Submit"
+            android:visibility="gone"
+            android:layout_margin="10dp"
+            android:background="@color/colorAccent"
+            android:textColor="#fff"
+            android:id="@+id/practiceTestSubmitBtn"
+            android:onClick="onTestSubmitBtnClick"/>
+    </LinearLayout>
+
 </LinearLayout>

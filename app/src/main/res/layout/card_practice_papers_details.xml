@@ -4,10 +4,52 @@
     android:layout_margin="10dp"
     android:id="@+id/practicePaperDetailsCardView"
     android:padding="10dp">
-    <TextView
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:id="@+id/practicePaperDetailsCardText"/>
+        android:orientation="vertical"
+        android:padding="10dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:id="@+id/practicePaperDetailsCardText"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="Duration: "
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:id="@+id/practicePaperDetailsCardDuration"/>
+        </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="Number of Questions: "
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:id="@+id/practicePaperDetailsCardNumQues"/>
+        </LinearLayout>
+    </LinearLayout>
 </android.support.v7.widget.CardView>
