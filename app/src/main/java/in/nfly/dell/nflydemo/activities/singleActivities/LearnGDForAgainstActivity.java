@@ -3,6 +3,8 @@ package in.nfly.dell.nflydemo.activities.singleActivities;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -12,25 +14,29 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import in.nfly.dell.nflydemo.R;
+import in.nfly.dell.nflydemo.adapters.ViewPagerAdapter;
+import in.nfly.dell.nflydemo.fragments.LearnGDAgainstFragment;
+import in.nfly.dell.nflydemo.fragments.LearnGDForFragment;
+import in.nfly.dell.nflydemo.fragments.LearnInterviewQAEasyFragment;
 
 public class LearnGDForAgainstActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
-    private TextView gdForTextView,gdAgainstTextView;
     private String for_logic,against_logic,topic_name;
+    
+    private TabLayout tabLayoutLearnGDForAgainst;
+    private ViewPager viewPagerLearnGDForAgainst;
+    private ViewPagerAdapter viewPagerAdapter;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_learn_gdfor_against);
 
-        gdForTextView=findViewById(R.id.gdForTextView);
-        gdAgainstTextView=findViewById(R.id.gdAgainstTextView);
-
         Intent intent=getIntent();
         for_logic=intent.getStringExtra("for_logic");
         against_logic=intent.getStringExtra("against_logic");
         topic_name=intent.getStringExtra("topic_name");
-
 
         setToolbar();
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
@@ -39,19 +45,22 @@ public class LearnGDForAgainstActivity extends AppCompatActivity {
                 finish();
             }
         });
-        Toast.makeText(this, for_logic, Toast.LENGTH_SHORT).show();
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
-            gdForTextView.setText(Html.fromHtml(for_logic,Html.FROM_HTML_MODE_COMPACT));
-            gdAgainstTextView.setText(Html.fromHtml(against_logic,Html.FROM_HTML_MODE_COMPACT));
-        }
-        else{
-            gdForTextView.setText(Html.fromHtml(for_logic));
-            gdAgainstTextView.setText(Html.fromHtml(against_logic));
-        }
+
+        tabLayoutLearnGDForAgainst=findViewById(R.id.tabLayoutLearnGDForAgainst);
+        viewPagerLearnGDForAgainst=findViewById(R.id.viewPagerLearnGDForAgainst);
+
+        viewPagerAdapter=new ViewPagerAdapter(getSupportFragmentManager());
+
+        viewPagerAdapter.addFragments(LearnGDForFragment.newInstance(for_logic),"For");
+        viewPagerAdapter.addFragments(LearnGDAgainstFragment.newInstance(against_logic),"Against");
+
+        viewPagerLearnGDForAgainst.setAdapter(viewPagerAdapter);
+        tabLayoutLearnGDForAgainst.setupWithViewPager(viewPagerLearnGDForAgainst);
+
     }
 
     private void setToolbar() {
-        toolbar=findViewById(R.id.gdForAgainstToolbar);
+        toolbar=findViewById(R.id.learnGdForAgainstToolbar);
         toolbar.setTitle(topic_name);
         toolbar.setTitleTextColor(Color.WHITE);
         toolbar.setNavigationIcon(R.drawable.arrow_left);
