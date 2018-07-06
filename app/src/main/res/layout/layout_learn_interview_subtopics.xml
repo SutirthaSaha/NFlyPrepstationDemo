@@ -4,7 +4,7 @@
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:background="@drawable/layout_border"
-    android:id="@+id/interviewSubTopicsCardView"
+    android:id="@+id/interviewSubTopicsLayout"
     android:layout_margin="9dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 

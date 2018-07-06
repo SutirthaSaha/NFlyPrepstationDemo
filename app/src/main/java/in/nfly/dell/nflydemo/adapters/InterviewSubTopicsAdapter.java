@@ -3,7 +3,6 @@ package in.nfly.dell.nflydemo.adapters;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,7 +30,7 @@ public class InterviewSubTopicsAdapter extends RecyclerView.Adapter<InterviewSub
     @NonNull
     @Override
     public InterviewSubTopicsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.card_learn_interview_subtopics,parent,false);
+        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_learn_interview_subtopics,parent,false);
         InterviewSubTopicsHolder holder=new InterviewSubTopicsHolder(view);
         return holder;
     }
@@ -62,7 +61,7 @@ public class InterviewSubTopicsAdapter extends RecyclerView.Adapter<InterviewSub
         public TextView InterviewSubTopicsCardText;
         public InterviewSubTopicsHolder(View itemView) {
             super(itemView);
-            InterviewSubTopicsCardView=itemView.findViewById(R.id.interviewSubTopicsCardView);
+            InterviewSubTopicsCardView=itemView.findViewById(R.id.interviewSubTopicsLayout);
             InterviewSubTopicsCardText=itemView.findViewById(R.id.interviewSubTopicsCardText);
         }
     }
