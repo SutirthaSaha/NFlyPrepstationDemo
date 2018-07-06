@@ -34,13 +34,13 @@
             android:resource="@array/preloaded_fonts" />
 
         <activity android:name=".activities.CourseStudyActivity" />
-        <activity android:name=".activities.singleActivities.GDTopicsActivity" />
+        <activity android:name=".activities.singleActivities.LearnGDTopicsActivity" />
         <activity android:name=".activities.singleActivities.PracticePaperDetailsActivity" />
-        <activity android:name=".activities.singleActivities.GDForAgainstActivity" />
-        <activity android:name=".activities.singleActivities.TipsDetailsActivity" />
+        <activity android:name=".activities.singleActivities.LearnGDForAgainstActivity" />
+        <activity android:name=".activities.singleActivities.LearnTipsDetailsActivity" />
         <activity android:name=".activities.singleActivities.LearnCompanyPaperDetailsActivity" />
-        <activity android:name=".activities.singleActivities.InterviewSubtopicsActivity" />
-        <activity android:name=".activities.singleActivities.InterviewQuestionsActivity" />
+        <activity android:name=".activities.singleActivities.LearnInterviewSubtopicsActivity" />
+        <activity android:name=".activities.singleActivities.LearnInterviewQAActivity" />
         <activity android:name=".activities.FeedBackActivity" />
         <activity android:name=".activities.singleActivities.PracticeTestActivity"></activity>
     </application>

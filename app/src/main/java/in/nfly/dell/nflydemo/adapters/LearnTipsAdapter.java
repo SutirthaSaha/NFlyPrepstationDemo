@@ -14,7 +14,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import in.nfly.dell.nflydemo.R;
-import in.nfly.dell.nflydemo.activities.singleActivities.TipsDetailsActivity;
+import in.nfly.dell.nflydemo.activities.singleActivities.LearnTipsDetailsActivity;
 
 public class LearnTipsAdapter extends RecyclerView.Adapter<LearnTipsAdapter.LearnTipsHolder>{
 
@@ -44,7 +44,7 @@ public class LearnTipsAdapter extends RecyclerView.Adapter<LearnTipsAdapter.Lear
         holder.learnInterviewCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(context, TipsDetailsActivity.class);
+                Intent intent=new Intent(context, LearnTipsDetailsActivity.class);
                 intent.putExtra("tip_id",idDataSet.get(position));
                 intent.putExtra("topic_name",titleDataSet.get(position));
                 intent.putExtra("topic_text",textDataSet.get(position));

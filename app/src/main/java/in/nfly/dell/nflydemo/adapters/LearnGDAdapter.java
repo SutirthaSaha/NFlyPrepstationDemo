@@ -14,7 +14,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import in.nfly.dell.nflydemo.R;
-import in.nfly.dell.nflydemo.activities.singleActivities.GDTopicsActivity;
+import in.nfly.dell.nflydemo.activities.singleActivities.LearnGDTopicsActivity;
 
 public class LearnGDAdapter extends RecyclerView.Adapter<LearnGDAdapter.LearnGDHolder> {
     private Context context;
@@ -42,7 +42,7 @@ public class LearnGDAdapter extends RecyclerView.Adapter<LearnGDAdapter.LearnGDH
         holder.learnInterviewCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(context, GDTopicsActivity.class);
+                Intent intent=new Intent(context, LearnGDTopicsActivity.class);
                 intent.putExtra("section_id",idDataSet.get(position));
                 intent.putExtra("section_name",titleDataSet.get(position));
                 context.startActivity(intent);

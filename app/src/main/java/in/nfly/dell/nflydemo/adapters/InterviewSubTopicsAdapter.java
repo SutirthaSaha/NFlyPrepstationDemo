@@ -14,7 +14,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import in.nfly.dell.nflydemo.R;
-import in.nfly.dell.nflydemo.activities.singleActivities.InterviewQuestionsActivity;
+import in.nfly.dell.nflydemo.activities.singleActivities.LearnInterviewQAActivity;
 
 public class InterviewSubTopicsAdapter extends RecyclerView.Adapter<InterviewSubTopicsAdapter.InterviewSubTopicsHolder>{
 
@@ -42,7 +42,7 @@ public class InterviewSubTopicsAdapter extends RecyclerView.Adapter<InterviewSub
             @Override
             public void onClick(View v) {
                 Toast.makeText(context, idDataSet.get(position), Toast.LENGTH_SHORT).show();
-                Intent intent=new Intent(context, InterviewQuestionsActivity.class);
+                Intent intent=new Intent(context, LearnInterviewQAActivity.class);
                 intent.putExtra("subtopic_id",idDataSet.get(position));
                 intent.putExtra("subtopic_name",titleDataSet.get(position));
                 context.startActivity(intent);

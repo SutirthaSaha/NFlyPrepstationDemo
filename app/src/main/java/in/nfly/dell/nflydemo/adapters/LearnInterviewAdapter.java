@@ -14,7 +14,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import in.nfly.dell.nflydemo.R;
-import in.nfly.dell.nflydemo.activities.singleActivities.InterviewSubtopicsActivity;
+import in.nfly.dell.nflydemo.activities.singleActivities.LearnInterviewSubtopicsActivity;
 
 public class LearnInterviewAdapter extends RecyclerView.Adapter<LearnInterviewAdapter.LearnInterviewHolder> {
 
@@ -44,7 +44,7 @@ public class LearnInterviewAdapter extends RecyclerView.Adapter<LearnInterviewAd
         holder.learnInterviewCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(context, InterviewSubtopicsActivity.class);
+                Intent intent=new Intent(context, LearnInterviewSubtopicsActivity.class);
                 intent.putExtra("topic_id",idDataSet.get(position));
                 intent.putExtra("topic_name",titleDataSet.get(position));
                 context.startActivity(intent);

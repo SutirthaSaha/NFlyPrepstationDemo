@@ -282,7 +282,7 @@ public class PracticeTestActivity extends AppCompatActivity {
             practiceTestSubmitBtn.setVisibility(View.INVISIBLE);
             practiceTestSubmitBtn.setEnabled(false);
         }
-        //showUserOption(count);
+        showUserOption(count);
         practiceTestNextBtn.setVisibility(View.VISIBLE);
         practiceTestNextBtn.setEnabled(true);
         practiceTestQuestion.setText(questionDataSet.get(count));
@@ -306,7 +306,7 @@ public class PracticeTestActivity extends AppCompatActivity {
             practiceTestNextBtn.setVisibility(View.VISIBLE);
             practiceTestNextBtn.setEnabled(true);
         }
-        //showUserOption(count);
+        showUserOption(count);
         practiceTestPreviousBtn.setVisibility(View.VISIBLE);
         practiceTestPreviousBtn.setEnabled(true);
         practiceTestQuestion.setText(questionDataSet.get(count));
@@ -317,8 +317,10 @@ public class PracticeTestActivity extends AppCompatActivity {
     }
 
     private void showUserOption(int id) {
-        int userPrevOption=-1;
-        switch(id){
+        int userPrevOption=R.id.practiceTestOption1;
+        switch(userOptions[id]){
+            case 0:
+                return;
             case 1:
                 userPrevOption=R.id.practiceTestOption1;
                 break;
@@ -332,6 +334,7 @@ public class PracticeTestActivity extends AppCompatActivity {
                 userPrevOption=R.id.practiceTestOption3;;
                 break;
         }
+
         selectRadioBtn=findViewById(userPrevOption);
         selectRadioBtn.setChecked(true);
     }

@@ -13,7 +13,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import in.nfly.dell.nflydemo.R;
-import in.nfly.dell.nflydemo.activities.singleActivities.GDForAgainstActivity;
+import in.nfly.dell.nflydemo.activities.singleActivities.LearnGDForAgainstActivity;
 
 public class GDTopicsAdapter extends RecyclerView.Adapter<GDTopicsAdapter.GDTopicsHolder>{
 
@@ -41,7 +41,7 @@ public class GDTopicsAdapter extends RecyclerView.Adapter<GDTopicsAdapter.GDTopi
         holder.GDTopicsCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(context, GDForAgainstActivity.class);
+                Intent intent=new Intent(context, LearnGDForAgainstActivity.class);
                 intent.putExtra("for_logic",forLogicDataSet.get(position));
                 intent.putExtra("against_logic",againstLogicDataSet.get(position));
                 intent.putExtra("topic_name",titleDataSet.get(position));
