@@ -45,7 +45,7 @@ public class PracticeTestActivity extends AppCompatActivity {
     private String urlPrevAttemptId="http://nfly.in/gapi/select_max_on_2";
     private String urlInsertAttempt="http://nfly.in/gapi/insert";
     private String urlGetTest="http://nfly.in/gapi/load_rows_one";
-    private String urlUpdateTest="http://nfly.in/testapi/update_with_3";
+    private String urlUpdateTest="http://nfly.in/testapi/update_with_three";
 
     private String prev_attempt_id;
     private Integer previous_attempt_id,attempt_id;
@@ -56,6 +56,7 @@ public class PracticeTestActivity extends AppCompatActivity {
     private ArrayList<String> optionsDataSet=new ArrayList<String>();
     private ArrayList<String> questionDataSet=new ArrayList<String>(){};
     private ArrayList<String> answerDataSet=new ArrayList<String>(){};
+    private ArrayList<String> quesIdDataSet=new ArrayList<String>(){};
 
     private int[] userOptions;
 
@@ -63,11 +64,10 @@ public class PracticeTestActivity extends AppCompatActivity {
     private TextView practiceTestQuestion;
     private RadioButton practiceTestOption1,practiceTestOption2,practiceTestOption3,practiceTestOption4;
     private RadioGroup practiceTestOptions;
+    private RadioButton selectRadioBtn;
     private Button practiceTestPreviousBtn,practiceTestNextBtn,practiceTestSubmitBtn;
 
     private int optionIdSelected;
-    private RadioButton optionSelected;
-    private String userAnswer;
     private int user_score,max_score;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,7 +123,6 @@ public class PracticeTestActivity extends AppCompatActivity {
                 Toast.makeText(PracticeTestActivity.this, "Waah pehla attempt mubaarak ho", Toast.LENGTH_SHORT).show();
                 previous_attempt_id=0;
                 attempt_id=1;
-                insertAttempt();
             }
         })
         {
@@ -148,17 +147,18 @@ public class PracticeTestActivity extends AppCompatActivity {
         MySingleton.getmInstance(PracticeTestActivity.this).addToRequestQueue(stringRequest);
     }
 
-    private void getPrevAttemptId(){
-        StringRequest stringRequest=new StringRequest(Request.Method.POST, urlPrevAttemptId, new Response.Listener<String>() {
+    private void getPrevAttemptId() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, urlPrevAttemptId, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 try {
-                    JSONObject jsonObject=new JSONObject(response);
-                    prev_attempt_id=jsonObject.getString("previous_attempt_id");
-                    previous_attempt_id=Integer.parseInt(prev_attempt_id);
-                    attempt_id=previous_attempt_id+1;
+                    JSONObject jsonObject = new JSONObject(response);
+                    prev_attempt_id = jsonObject.getString("previous_attempt_id");
+                    previous_attempt_id = Integer.parseInt(prev_attempt_id);
+                    attempt_id = previous_attempt_id + 1;
 
-                    insertAttempt();
+                    //insertAttempt();
+                    setTestQuestions();
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -169,8 +169,7 @@ public class PracticeTestActivity extends AppCompatActivity {
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(PracticeTestActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
             }
-        })
-        {
+        }) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
                 HashMap<String, String> headers = new HashMap<String, String>();
@@ -193,55 +192,6 @@ public class PracticeTestActivity extends AppCompatActivity {
         MySingleton.getmInstance(PracticeTestActivity.this).addToRequestQueue(stringRequest);
     }
 
-    private void insertAttempt() {
-
-        StringRequest stringRequest=new StringRequest(Request.Method.POST,urlInsertAttempt, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                try {
-                    JSONObject arrayObject=new JSONObject(response);
-                    status=arrayObject.getInt("status");
-                    if(status==200){
-                        setTestQuestions();
-                    }
-                    else{
-                        Toast.makeText(PracticeTestActivity.this, "Insertion Failed", Toast.LENGTH_SHORT).show();
-                    }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(PracticeTestActivity.this, "Error", Toast.LENGTH_SHORT).show();
-            }
-        })
-        {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> headers = new HashMap<String, String>();
-                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
-                return headers;
-            }
-
-            @Override
-            protected Map<String,String> getParams() throws AuthFailureError{
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("insert_array[user_id]", user_id);
-                params.put("insert_array[test_id]",test_id);
-                params.put("insert_array[attempt_id]",Integer.toString(attempt_id));
-                params.put("insert_array[state]","0");
-                params.put("insert_array[score]","0");
-                params.put("table","nfly_test_result");
-                return params;
-            }
-        };
-        MySingleton.getmInstance(PracticeTestActivity.this).addToRequestQueue(stringRequest);
-    }
-
     private void setTestQuestions() {
         StringRequest stringRequest=new StringRequest(Request.Method.POST,urlGetTest, new Response.Listener<String>() {
             @Override
@@ -254,6 +204,7 @@ public class PracticeTestActivity extends AppCompatActivity {
                         optionDetails=new HashMap<>();
                         optionsDataSet=new ArrayList<String>();
 
+                        quesIdDataSet.add(arrayObject.getString("question_id"));
                         questionDataSet.add(arrayObject.getString("question"));
                         answerDataSet.add(arrayObject.getString("correct_option"));
 
@@ -264,6 +215,8 @@ public class PracticeTestActivity extends AppCompatActivity {
 
                         questionOptionsSet.put(questionDataSet.get(i),optionsDataSet);
                     }
+
+                    Toast.makeText(PracticeTestActivity.this, quesIdDataSet.toString(), Toast.LENGTH_SHORT).show();
 
                     if (questionDataSet.isEmpty()){
                         Toast.makeText(PracticeTestActivity.this, "No Questions There", Toast.LENGTH_SHORT).show();
@@ -329,6 +282,9 @@ public class PracticeTestActivity extends AppCompatActivity {
             practiceTestSubmitBtn.setVisibility(View.INVISIBLE);
             practiceTestSubmitBtn.setEnabled(false);
         }
+        //showUserOption(count);
+        practiceTestNextBtn.setVisibility(View.VISIBLE);
+        practiceTestNextBtn.setEnabled(true);
         practiceTestQuestion.setText(questionDataSet.get(count));
         practiceTestOption1.setText(questionOptionsSet.get(questionDataSet.get(count)).get(0));
         practiceTestOption2.setText(questionOptionsSet.get(questionDataSet.get(count)).get(1));
@@ -350,12 +306,34 @@ public class PracticeTestActivity extends AppCompatActivity {
             practiceTestNextBtn.setVisibility(View.VISIBLE);
             practiceTestNextBtn.setEnabled(true);
         }
+        //showUserOption(count);
         practiceTestPreviousBtn.setVisibility(View.VISIBLE);
+        practiceTestPreviousBtn.setEnabled(true);
         practiceTestQuestion.setText(questionDataSet.get(count));
         practiceTestOption1.setText(questionOptionsSet.get(questionDataSet.get(count)).get(0));
         practiceTestOption2.setText(questionOptionsSet.get(questionDataSet.get(count)).get(1));
         practiceTestOption3.setText(questionOptionsSet.get(questionDataSet.get(count)).get(2));
         practiceTestOption4.setText(questionOptionsSet.get(questionDataSet.get(count)).get(3));
+    }
+
+    private void showUserOption(int id) {
+        int userPrevOption=-1;
+        switch(id){
+            case 1:
+                userPrevOption=R.id.practiceTestOption1;
+                break;
+            case 2:
+                userPrevOption=R.id.practiceTestOption2;
+                break;
+            case 3:
+                userPrevOption=R.id.practiceTestOption3;
+                break;
+            case 4:
+                userPrevOption=R.id.practiceTestOption3;;
+                break;
+        }
+        selectRadioBtn=findViewById(userPrevOption);
+        selectRadioBtn.setChecked(true);
     }
 
     private void saveUserOption() {
@@ -389,8 +367,117 @@ public class PracticeTestActivity extends AppCompatActivity {
             }
         }
         Toast.makeText(this, user_score+"/"+max_score, Toast.LENGTH_SHORT).show();
-        updateTestTable();
+        //updateTestTable();
+        for(int i=0;i<quesIdDataSet.size();i++){
+            int marks=0;
+            if(userOptions[i]==Integer.parseInt(answerDataSet.get(i))){
+                marks=3;
+            }
+            insertResponse(quesIdDataSet.get(i),i,marks);
+        }
+        insertAttempt();
     }
+
+    private void insertAttempt() {
+
+        StringRequest stringRequest=new StringRequest(Request.Method.POST,urlInsertAttempt, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject arrayObject=new JSONObject(response);
+                    status=arrayObject.getInt("status");
+                    if(status==200){
+                        finish();
+                    }
+                    else{
+                        Toast.makeText(PracticeTestActivity.this, "Insertion Failed", Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(PracticeTestActivity.this, "Error", Toast.LENGTH_SHORT).show();
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+
+            @Override
+            protected Map<String,String> getParams() throws AuthFailureError{
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("insert_array[user_id]", user_id);
+                params.put("insert_array[test_id]",test_id);
+                params.put("insert_array[attempt_id]",Integer.toString(attempt_id));
+                //params.put("insert_array[state]","0");
+                //params.put("insert_array[score]","0");
+                params.put("insert_array[state]","1");
+                params.put("insert_array[score]",Integer.toString(user_score));
+                params.put("table","nfly_test_result");
+                return params;
+            }
+        };
+        MySingleton.getmInstance(PracticeTestActivity.this).addToRequestQueue(stringRequest);
+    }
+
+    private void insertResponse(final String question_id, final int i, final int marks) {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST,urlInsertAttempt, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject arrayObject=new JSONObject(response);
+                    status=arrayObject.getInt("status");
+                    if(status==200){
+                        Toast.makeText(PracticeTestActivity.this, "Response Insertion "+ i+" Successful", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        Toast.makeText(PracticeTestActivity.this, "Insertion Failed", Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(PracticeTestActivity.this, "Error", Toast.LENGTH_SHORT).show();
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+
+            @Override
+            protected Map<String,String> getParams() throws AuthFailureError{
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("insert_array[user_id]", user_id);
+                params.put("insert_array[test_id]",test_id);
+                params.put("insert_array[attempt_id]",Integer.toString(attempt_id));
+                params.put("insert_array[question_id]",question_id);
+                params.put("insert_array[user_response]",Integer.toString(userOptions[i]));
+                params.put("insert_array[marks]",Integer.toString(marks));
+                params.put("table","nfly_test_response");
+                return params;
+            }
+        };
+        MySingleton.getmInstance(PracticeTestActivity.this).addToRequestQueue(stringRequest);
+    }
+
 
     private void updateTestTable() {
         StringRequest stringRequest=new StringRequest(Request.Method.POST,urlUpdateTest, new Response.Listener<String>() {
@@ -444,4 +531,5 @@ public class PracticeTestActivity extends AppCompatActivity {
         };
         MySingleton.getmInstance(PracticeTestActivity.this).addToRequestQueue(stringRequest);
     }
+
 }
