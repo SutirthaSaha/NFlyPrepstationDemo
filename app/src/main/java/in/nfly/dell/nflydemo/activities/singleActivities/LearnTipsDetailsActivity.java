@@ -2,9 +2,11 @@ package in.nfly.dell.nflydemo.activities.singleActivities;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,7 +28,6 @@ public class LearnTipsDetailsActivity extends AppCompatActivity {
         topic_name=intent.getStringExtra("topic_name");
         topic_text=intent.getStringExtra("topic_text");
 
-        Toast.makeText(this, topic_text, Toast.LENGTH_SHORT).show();
         setToolbar();
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -36,7 +37,12 @@ public class LearnTipsDetailsActivity extends AppCompatActivity {
         });
 
         tipsDetailsTextView=findViewById(R.id.tipsDetailsTextView);
-        tipsDetailsTextView.setText(topic_text);
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+            tipsDetailsTextView.setText(Html.fromHtml(topic_text,Html.FROM_HTML_MODE_COMPACT));
+        }
+        else{
+            tipsDetailsTextView.setText(Html.fromHtml(topic_text));
+        }
     }
 
     private void setToolbar() {

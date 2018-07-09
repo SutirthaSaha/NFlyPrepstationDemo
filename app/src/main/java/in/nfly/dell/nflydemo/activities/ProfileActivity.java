@@ -12,6 +12,7 @@ import android.widget.ProgressBar;
 import in.nfly.dell.nflydemo.R;
 import in.nfly.dell.nflydemo.adapters.ViewPagerAdapter;
 import in.nfly.dell.nflydemo.fragments.ProfileAcademicFragment;
+import in.nfly.dell.nflydemo.fragments.ProfilePersonalFragment;
 import in.nfly.dell.nflydemo.fragments.ProfilePersonalityFragment;
 import in.nfly.dell.nflydemo.fragments.ProfileResumeFragment;
 
@@ -44,7 +45,7 @@ public class ProfileActivity extends AppCompatActivity {
         viewPagerProfile.setOffscreenPageLimit(5);
         viewPagerAdapter=new ViewPagerAdapter(getSupportFragmentManager());
 
-        viewPagerAdapter.addFragments(new ProfileAcademicFragment(),"Personal");
+        viewPagerAdapter.addFragments(new ProfilePersonalFragment(),"Personal");
         viewPagerAdapter.addFragments(new ProfileAcademicFragment(),"Academic");
         viewPagerAdapter.addFragments(new ProfilePersonalityFragment(),"Personality");
         viewPagerAdapter.addFragments(new ProfileResumeFragment(),"Resume");
