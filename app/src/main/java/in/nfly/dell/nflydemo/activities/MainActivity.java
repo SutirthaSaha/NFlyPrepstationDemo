@@ -289,6 +289,10 @@ public class MainActivity extends AppCompatActivity {
                     intent=new Intent(MainActivity.this,DashboardActivity.class);
                     startActivity(intent);
                 }
+                if (item.getTitle().equals("Profile")){
+                    intent=new Intent(MainActivity.this,ProfileActivity.class);
+                    startActivity(intent);
+                }
                 if (item.getTitle().equals("Learn")){
                     intent=new Intent(MainActivity.this,LearnActivity.class);
                     startActivity(intent);

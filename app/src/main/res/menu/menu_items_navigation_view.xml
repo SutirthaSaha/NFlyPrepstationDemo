@@ -39,10 +39,10 @@
         android:id="@+id/grp2"
         android:checkableBehavior="single">
         <item
-            android:id="@+id/resume"
-            android:title="Resume"
+            android:id="@+id/profile"
+            android:title="Profile"
             android:checkable="true"
-            android:icon="@drawable/resume"
+            android:icon="@drawable/account"
             ></item>
         <item
             android:id="@+id/salCalc"

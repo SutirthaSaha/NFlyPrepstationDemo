@@ -115,6 +115,10 @@ public class LearnActivity extends AppCompatActivity {
                     intent=new Intent(LearnActivity.this,LearnActivity.class);
                     startActivity(intent);
                 }
+                if (item.getTitle().equals("Profile")){
+                    intent=new Intent(LearnActivity.this,ProfileActivity.class);
+                    startActivity(intent);
+                }
                 if(item.getTitle().equals("Practice")){
                     intent=new Intent(LearnActivity.this,PracticeActivity.class);
                     startActivity(intent);

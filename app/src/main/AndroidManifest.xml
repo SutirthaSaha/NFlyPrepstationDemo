@@ -42,7 +42,8 @@
         <activity android:name=".activities.singleActivities.LearnInterviewSubtopicsActivity" />
         <activity android:name=".activities.singleActivities.LearnInterviewQAActivity" />
         <activity android:name=".activities.FeedBackActivity" />
-        <activity android:name=".activities.singleActivities.PracticeTestActivity"></activity>
+        <activity android:name=".activities.singleActivities.PracticeTestActivity" />
+        <activity android:name=".activities.ProfileActivity"></activity>
     </application>
 
 </manifest>

@@ -93,6 +93,10 @@ public class KnowledgeBaseActivity extends AppCompatActivity {
                     intent=new Intent(KnowledgeBaseActivity.this,FeedBackActivity.class);
                     startActivity(intent);
                 }
+                if (item.getTitle().equals("Profile")){
+                    intent=new Intent(KnowledgeBaseActivity.this,ProfileActivity.class);
+                    startActivity(intent);
+                }
                 if(item.getTitle().equals("Sign Out")){
                     User user=new User(KnowledgeBaseActivity.this);
                     user.logOut();
