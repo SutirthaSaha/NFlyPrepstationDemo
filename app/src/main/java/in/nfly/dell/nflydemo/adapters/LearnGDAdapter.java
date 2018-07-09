@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 import in.nfly.dell.nflydemo.R;
@@ -38,7 +40,8 @@ public class LearnGDAdapter extends RecyclerView.Adapter<LearnGDAdapter.LearnGDH
     @Override
     public void onBindViewHolder(@NonNull LearnGDHolder holder, final int position) {
         holder.learnInterviewTitle.setText(titleDataSet.get(position));
-        holder.learnInterviewImage.setImageResource(Integer.parseInt(imageDataSet.get(0)));
+        Picasso.with(context).load(imageDataSet.get(position)).into(holder.learnInterviewImage);
+      //  holder.learnInterviewImage.setImageResource(Integer.parseInt(imageDataSet.get(0)));
         holder.learnInterviewCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -17,7 +17,7 @@
         <activity android:name=".activities.LearnActivity" />
         <activity android:name=".activities.PracticeActivity" />
         <activity android:name=".activities.KnowledgeBaseActivity" />
-        <activity android:name=".activities.LoginActivity">
+        <activity android:name=".activities.SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -43,7 +43,9 @@
         <activity android:name=".activities.singleActivities.LearnInterviewQAActivity" />
         <activity android:name=".activities.FeedBackActivity" />
         <activity android:name=".activities.singleActivities.PracticeTestActivity" />
-        <activity android:name=".activities.ProfileActivity"></activity>
+        <activity android:name=".activities.ProfileActivity" />
+        <activity android:name=".activities.LoginActivity" />
+        <activity android:name=".activities.singleActivities.LearnPapersDisplayActivity"></activity>
     </application>
 
 </manifest>

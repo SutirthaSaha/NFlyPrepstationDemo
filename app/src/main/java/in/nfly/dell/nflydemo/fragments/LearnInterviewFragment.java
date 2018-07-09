@@ -38,11 +38,13 @@ public class LearnInterviewFragment extends Fragment {
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     //private ArrayList<String> titleDataSet=new ArrayList<String>(){{add("HR Questions");add("Software Tools");add("Eng. Topics");add("Company wise");add("Puzzles");add("Miscellaneous");}};
-    private ArrayList<String> imageDataSet=new ArrayList<String>(){{add(Integer.toString(R.drawable.ic_computer_white));add(Integer.toString(R.drawable.ic_computer_white));add(Integer.toString(R.drawable.ic_computer_white));add(Integer.toString(R.drawable.ic_computer_white));add(Integer.toString(R.drawable.ic_computer_white));add(Integer.toString(R.drawable.ic_computer_white));}};
+    //private ArrayList<String> imageDataSet=new ArrayList<String>(){{add(Integer.toString(R.drawable.learn_interview_company_wise));add(Integer.toString(R.drawable.ic_computer_white));add(Integer.toString(R.drawable.ic_computer_white));add(Integer.toString(R.drawable.ic_computer_white));add(Integer.toString(R.drawable.ic_computer_white));add(Integer.toString(R.drawable.ic_computer_white));}};
 
     private String urlInterview="http://nfly.in/gapi/load_all_rows";
     private ArrayList<String> titleDataSet=new ArrayList<String>(){};
     private ArrayList<String> idDataSet=new ArrayList<String>(){};
+    private ArrayList<String> imageDataSet=new ArrayList<String>(){};
+
     public LearnInterviewFragment() {
         // Required empty public constructor
     }
@@ -73,6 +75,7 @@ public class LearnInterviewFragment extends Fragment {
                         arrayObject=parentArray.getJSONObject(i);
                         titleDataSet.add(arrayObject.getString("topic_name"));
                         idDataSet.add(arrayObject.getString("topic_id"));
+                        imageDataSet.add("http://nfly.in/assets/images/app_icons/"+arrayObject.getString("app_icon"));
                     }
                     adapter=new LearnInterviewAdapter(getContext(),titleDataSet,imageDataSet,idDataSet);
                     learnInterviewRecyclerView.setAdapter(adapter);

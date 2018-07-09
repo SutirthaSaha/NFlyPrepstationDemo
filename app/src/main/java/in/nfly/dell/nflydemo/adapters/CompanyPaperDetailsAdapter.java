@@ -1,6 +1,7 @@
 package in.nfly.dell.nflydemo.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import in.nfly.dell.nflydemo.R;
+import in.nfly.dell.nflydemo.activities.singleActivities.LearnPapersDisplayActivity;
 
 public class CompanyPaperDetailsAdapter extends RecyclerView.Adapter<CompanyPaperDetailsAdapter.CompanyPaperDetailsHolder>{
 
@@ -40,7 +42,11 @@ public class CompanyPaperDetailsAdapter extends RecyclerView.Adapter<CompanyPape
         holder.CompanyPaperDetailsCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, idDataSet.get(position)+"\n"+nameDataSet.get(position), Toast.LENGTH_SHORT).show();
+                Intent intent= new Intent(context,LearnPapersDisplayActivity.class);
+                intent.putExtra("paper_name",nameDataSet.get(position));
+                intent.putExtra("paper_id",idDataSet.get(position));
+                intent.putExtra("paper_text",textDataSet.get(position));
+                context.startActivity(intent);
             }
         });
     }

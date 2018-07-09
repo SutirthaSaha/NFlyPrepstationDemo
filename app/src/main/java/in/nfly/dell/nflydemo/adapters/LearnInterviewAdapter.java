@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 import in.nfly.dell.nflydemo.R;
@@ -39,7 +41,7 @@ public class LearnInterviewAdapter extends RecyclerView.Adapter<LearnInterviewAd
     @Override
     public void onBindViewHolder(@NonNull LearnInterviewHolder holder, final int position) {
         holder.learnInterviewTitle.setText(titleDataSet.get(position));
-        holder.learnInterviewImage.setImageResource(Integer.parseInt(imageDataSet.get(0)));
+        Picasso.with(context).load(imageDataSet.get(position)).into(holder.learnInterviewImage);
 
         holder.learnInterviewCardView.setOnClickListener(new View.OnClickListener() {
             @Override

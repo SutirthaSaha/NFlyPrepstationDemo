@@ -37,13 +37,14 @@ public class LearnTipsFragment extends Fragment {
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     //private ArrayList<String> titleDataSet=new ArrayList<String>(){{add("HR Questions");add("Software Tools");add("Eng. Topics");add("Company wise");add("Puzzles");add("Miscellaneous");}};
-    private ArrayList<String> imageDataSet=new ArrayList<String>(){
-        {add(Integer.toString(R.drawable.ic_computer_white));add(Integer.toString(R.drawable.ic_computer_white));add(Integer.toString(R.drawable.ic_computer_white));add(Integer.toString(R.drawable.ic_computer_white));add(Integer.toString(R.drawable.ic_computer_white));add(Integer.toString(R.drawable.ic_computer_white));}};
+  //  private ArrayList<String> imageDataSet=new ArrayList<String>(){
+   //     {add(Integer.toString(R.drawable.ic_computer_white));add(Integer.toString(R.drawable.ic_computer_white));add(Integer.toString(R.drawable.ic_computer_white));add(Integer.toString(R.drawable.ic_computer_white));add(Integer.toString(R.drawable.ic_computer_white));add(Integer.toString(R.drawable.ic_computer_white));}};
 
     private String urlTips="http://nfly.in/gapi/load_all_rows";
     private ArrayList<String> titleDataSet=new ArrayList<String>(){};
     private ArrayList<String> textDataSet=new ArrayList<String>(){};
     private ArrayList<String> idDataSet=new ArrayList<String>(){};
+    private ArrayList<String> imageDataSet=new ArrayList<String>(){};
 
     public LearnTipsFragment() {
         // Required empty public constructor
@@ -75,6 +76,7 @@ public class LearnTipsFragment extends Fragment {
                         idDataSet.add(arrayObject.getString("tip_id"));
                         titleDataSet.add(arrayObject.getString("topic_name"));
                         textDataSet.add(arrayObject.getString("topic_text"));
+                        imageDataSet.add("http://nfly.in/assets/images/app_icons/"+arrayObject.getString("app_icon"));
                     }
                     adapter=new LearnTipsAdapter(getContext(),titleDataSet,imageDataSet,textDataSet,idDataSet);
                     learnTipsRecyclerView.setAdapter(adapter);
