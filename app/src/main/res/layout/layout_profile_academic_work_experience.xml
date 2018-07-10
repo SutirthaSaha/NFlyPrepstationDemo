@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Company Name: "
+            android:textStyle="bold"
+            android:textSize="13sp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Company Name "
+            android:textSize="13sp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:id="@+id/profileCompanyName"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textSize="13sp"
+            android:text="Position: "
+            android:textStyle="bold"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textSize="13sp"
+            android:text="Position: "
+            android:id="@+id/profilePosition"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:text="Job Type: "
+            android:textStyle="bold"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:text="Job Type: "
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:id="@+id/profileJobType"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Start Date: "
+            android:textStyle="bold"
+            android:textSize="13sp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Start Date: "
+            android:textSize="13sp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:id="@+id/profileStartDate"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Last Date: "
+            android:textStyle="bold"
+            android:textSize="13sp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Last Date: "
+            android:textSize="13sp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:id="@+id/profileLastDate"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Job Description: "
+            android:textStyle="bold"
+            android:textSize="13sp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Job Description: "
+            android:textSize="13sp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:id="@+id/profileJobDescription"/>
+    </LinearLayout>
+
+</LinearLayout>

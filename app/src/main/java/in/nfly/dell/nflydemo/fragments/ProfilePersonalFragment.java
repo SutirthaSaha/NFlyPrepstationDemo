@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -39,16 +40,20 @@ import in.nfly.dell.nflydemo.adapters.LearnTipsAdapter;
 public class ProfilePersonalFragment extends Fragment {
 
     private TextView profileFullName,profileCurrentDesignation,profileGender,profileDob,
-            profileCurrentCity,profileHomeTown,profileCoverLeterTextDialog,
-            profileHobbiesTextDialog,profileLanguagesTextDialog,profileFacebook,profileLinkedin,profileTwitter,
+            profileCurrentCity,profileHomeTown,profileCoverLetter,
+            profileHobbiesTextDialog,profileLanguagesTextDialog,profileFacebook,profileLinkedIn,profileTwitter,
     profileQuora,profileEmail, profilePhone,profileAddress;
 
-    private EditText editBasicDetailsName,editBasicDetailsCurrentDesignation,editBasicDetailsGender,editBasicDetailsDob,editBasicDetailsCurrentCity,editBasicDetailsHomeTown;
+    private EditText editBasicDetailsName,editBasicDetailsCurrentDesignation,editBasicDetailsGender,editBasicDetailsDob,
+            editBasicDetailsCurrentCity,editBasicDetailsHomeTown,editCoverLetter,editHobbies,editLanguages,
+            editContactDetailsPhone, editContactDetailsAddress,
+            editSocialProfilesFacebook,editSocialProfilesLinkedIn,editSocialProfilesTwitter,editSocialProfilesQuora;
     private String urlPersonal="http://nfly.in/profileapi/personal_details";
 
     private ImageView profileImage;
 
-    private ImageView basicDetailsEditBtn;
+    private ImageView basicDetailsEditBtn, coverLetterAddBtn, coverLetterEditBtn, hobbiesAddBtn, hobbiesEditBtn, languagesEditBtn,
+    languagesAddBtn, contactDetailsEditBtn,socialProfilesEditBtn;
 
     private String user_id;
 
@@ -75,13 +80,13 @@ public class ProfilePersonalFragment extends Fragment {
         profileCurrentCity=view.findViewById(R.id.profileCurrentCity);
         profileHomeTown=view.findViewById(R.id.profileHomeTown);
 
-        profileCoverLeterTextDialog=view.findViewById(R.id.profileCoverLetterTextDialog);
+        profileCoverLetter=view.findViewById(R.id.profileCoverLetter);
         profileHobbiesTextDialog= view.findViewById(R.id.profileHobbiesTextDialog);
         profileLanguagesTextDialog=view.findViewById(R.id.profileLanguagesTextDialog);
 
         profileFacebook=view.findViewById(R.id.profileFacebook);
         profileTwitter=view.findViewById(R.id.profileTwitter);
-        profileLinkedin=view.findViewById(R.id.profileLinkedin);
+        profileLinkedIn=view.findViewById(R.id.profileLinkedIn);
         profileQuora=view.findViewById(R.id.profileQuora);
 
         profileEmail=view.findViewById(R.id.profileEmail);
@@ -89,6 +94,312 @@ public class ProfilePersonalFragment extends Fragment {
         profileAddress=view.findViewById(R.id.profileAddress);
 
         basicDetailsEditBtn=view.findViewById(R.id.basicDetailsEditBtn);
+        coverLetterAddBtn=view.findViewById(R.id.coverLetterAddBtn);
+        coverLetterEditBtn=view.findViewById(R.id.coverLetterEditBtn);
+        hobbiesAddBtn=view.findViewById(R.id.hobbiesAddBtn);
+        hobbiesEditBtn=view.findViewById(R.id.hobbiesEditBtn);
+        languagesAddBtn=view.findViewById(R.id.languagesAddBtn);
+        languagesEditBtn=view.findViewById(R.id.languagesEditBtn);
+        contactDetailsEditBtn=view.findViewById(R.id.contactDetailsEditBtn);
+        socialProfilesEditBtn=view.findViewById(R.id.socialProfilesEditBtn);
+
+        socialProfilesEditBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LayoutInflater layoutInflater=getLayoutInflater();
+                View contactDetailsEditLayout=layoutInflater.inflate(R.layout.dialog_edit_social_profiles,null);
+
+                editSocialProfilesFacebook=contactDetailsEditLayout.findViewById(R.id.editSocialProfilesFacebook);
+                editSocialProfilesLinkedIn=contactDetailsEditLayout.findViewById(R.id.editSocialProfilesLinkedIn);
+                editSocialProfilesQuora=contactDetailsEditLayout.findViewById(R.id.editSocialProfilesQuora);
+                editSocialProfilesTwitter=contactDetailsEditLayout.findViewById(R.id.editSocialProfilesTwitter);
+
+                AlertDialog.Builder alertDialog=new AlertDialog.Builder(getActivity());
+                alertDialog.setView(contactDetailsEditLayout);
+                alertDialog.setCancelable(false);
+
+                alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getActivity(), "Cancel clicked", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                alertDialog.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getActivity(), "Submit clicked", Toast.LENGTH_SHORT).show();
+                        if(!editSocialProfilesFacebook.getText().toString().isEmpty()){
+                            profileFacebook.setText(editSocialProfilesFacebook.getText().toString());
+                        }
+                        if(!editSocialProfilesLinkedIn.getText().toString().isEmpty()){
+                            profileLinkedIn.setText(editSocialProfilesLinkedIn.getText().toString());
+                        }
+                        if(!editSocialProfilesQuora.getText().toString().isEmpty()){
+                            profileQuora.setText(editSocialProfilesQuora.getText().toString());
+                        }
+                        if(!editSocialProfilesTwitter.getText().toString().isEmpty()){
+                            profileTwitter.setText(editSocialProfilesTwitter.getText().toString());
+                        }
+                    }
+                });
+                AlertDialog alert=alertDialog.create();
+                alert.show();
+
+            }
+        });
+
+
+
+
+        contactDetailsEditBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LayoutInflater layoutInflater=getLayoutInflater();
+                View contactDetailsEditLayout=layoutInflater.inflate(R.layout.dialog_edit_contact_details,null);
+
+                editContactDetailsAddress=contactDetailsEditLayout.findViewById(R.id.editContactDetailsAddress);
+                editContactDetailsPhone=contactDetailsEditLayout.findViewById(R.id.editContactDetailsPhone);
+
+                AlertDialog.Builder alertDialog=new AlertDialog.Builder(getActivity());
+                alertDialog.setView(contactDetailsEditLayout);
+                alertDialog.setCancelable(false);
+
+                alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getActivity(), "Cancel clicked", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                alertDialog.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if(!editContactDetailsAddress.getText().toString().isEmpty()){
+                            profileAddress.setText(editContactDetailsAddress.getText().toString());
+                        }
+
+                        if(!editContactDetailsPhone.getText().toString().isEmpty()){
+                            profilePhone.setText(editContactDetailsPhone.getText().toString());
+                        }
+                        Toast.makeText(getActivity(), "Submit clicked", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                AlertDialog alert=alertDialog.create();
+                alert.show();
+
+            }
+        });
+
+
+
+
+        languagesEditBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LayoutInflater layoutInflater=getLayoutInflater();
+                View languagesEditLayout=layoutInflater.inflate(R.layout.dialog_edit_languages,null);
+
+                editLanguages=languagesEditLayout.findViewById(R.id.editLanguages);
+
+                AlertDialog.Builder alertDialog=new AlertDialog.Builder(getActivity());
+                alertDialog.setView(languagesEditLayout);
+                alertDialog.setCancelable(false);
+
+                alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getActivity(), "Cancel clicked", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                alertDialog.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        Toast.makeText(getActivity(), "Submit clicked", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                AlertDialog alert=alertDialog.create();
+                alert.show();
+
+            }
+        });
+
+        languagesAddBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LayoutInflater layoutInflater=getLayoutInflater();
+                View languagesAddLayout=layoutInflater.inflate(R.layout.dialog_edit_languages,null);
+
+                editLanguages=languagesAddLayout.findViewById(R.id.editLanguages);
+
+                AlertDialog.Builder alertDialog=new AlertDialog.Builder(getActivity());
+                alertDialog.setView(languagesAddLayout);
+                alertDialog.setCancelable(false);
+
+                alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getActivity(), "Cancel clicked", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                alertDialog.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getActivity(), "Submit clicked", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                AlertDialog alert=alertDialog.create();
+                alert.show();
+
+            }
+        });
+
+
+
+
+
+        hobbiesEditBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LayoutInflater layoutInflater=getLayoutInflater();
+                View hobbiesEditLayout=layoutInflater.inflate(R.layout.dialog_edit_hobbies,null);
+
+                editHobbies=hobbiesEditLayout.findViewById(R.id.editHobbies);
+
+                AlertDialog.Builder alertDialog=new AlertDialog.Builder(getActivity());
+                alertDialog.setView(hobbiesEditLayout);
+                alertDialog.setCancelable(false);
+
+                alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getActivity(), "Cancel clicked", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                alertDialog.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getActivity(), "Submit clicked", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                AlertDialog alert=alertDialog.create();
+                alert.show();
+
+            }
+        });
+
+
+        hobbiesAddBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LayoutInflater layoutInflater=getLayoutInflater();
+                View hobbiesAddLayout=layoutInflater.inflate(R.layout.dialog_edit_hobbies,null);
+
+                editHobbies=hobbiesAddLayout.findViewById(R.id.editHobbies);
+
+                AlertDialog.Builder alertDialog=new AlertDialog.Builder(getActivity());
+                alertDialog.setView(hobbiesAddLayout);
+                alertDialog.setCancelable(false);
+
+                alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getActivity(), "Cancel clicked", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                alertDialog.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getActivity(), "Submit clicked", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                AlertDialog alert=alertDialog.create();
+                alert.show();
+
+            }
+        });
+
+
+
+
+        coverLetterEditBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LayoutInflater layoutInflater=getLayoutInflater();
+                View coverLetterEditLayout=layoutInflater.inflate(R.layout.dialog_edit_cover_letter,null);
+
+                editCoverLetter=coverLetterEditLayout.findViewById(R.id.editCoverLetter);
+
+                AlertDialog.Builder alertDialog=new AlertDialog.Builder(getActivity());
+                alertDialog.setView(coverLetterEditLayout);
+                alertDialog.setCancelable(false);
+
+                alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getActivity(), "Cancel clicked", Toast.LENGTH_SHORT).show();
+
+                    }
+                });
+
+                alertDialog.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getActivity(), "Submit clicked", Toast.LENGTH_SHORT).show();
+                        if(!editCoverLetter.getText().toString().isEmpty()){
+                            profileCoverLetter.setText(editCoverLetter.getText().toString());
+                        }
+                    }
+                });
+                AlertDialog alert=alertDialog.create();
+                alert.show();
+
+            }
+        });
+
+        coverLetterAddBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LayoutInflater layoutInflater=getLayoutInflater();
+                View coverLetterAddLayout=layoutInflater.inflate(R.layout.dialog_edit_cover_letter,null);
+
+                editCoverLetter=coverLetterAddLayout.findViewById(R.id.editCoverLetter);
+
+                AlertDialog.Builder alertDialog=new AlertDialog.Builder(getActivity());
+                alertDialog.setView(coverLetterAddLayout);
+                alertDialog.setCancelable(false);
+
+                alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getActivity(), "Cancel clicked", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                alertDialog.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getActivity(), "Submit clicked", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                AlertDialog alert=alertDialog.create();
+                alert.show();
+            }
+        });
+
         basicDetailsEditBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -155,7 +466,7 @@ public class ProfilePersonalFragment extends Fragment {
 
                     JSONObject user_social_profile=jsonObject.getJSONObject("user_social_profile");
                     profileFacebook.setText(user_social_profile.getString("user_fb"));
-                    profileLinkedin.setText(user_social_profile.getString("user_ln"));
+                    profileLinkedIn.setText(user_social_profile.getString("user_ln"));
                     profileTwitter.setText(user_social_profile.getString("user_tw"));
                     profileQuora.setText(user_social_profile.getString("user_qr"));
 

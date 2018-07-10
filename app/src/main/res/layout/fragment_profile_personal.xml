@@ -47,14 +47,14 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:src="@drawable/add"
                 android:layout_margin="10dp"
                 android:tint="@color/colorAccent"/>
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
                 android:src="@drawable/pencil"
                 android:layout_margin="10dp"
                 android:tint="@color/colorAccent"/>
@@ -224,24 +224,41 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Cover Letter "
-                    android:textStyle="bold"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                    android:layout_margin="5dp"/>
-                <ListView
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="Cover Letter "
+                        android:textStyle="bold"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                        android:layout_margin="5dp"/>
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/add"
+                        android:layout_margin="10dp"
+                        android:id="@+id/coverLetterAddBtn"
+                        android:tint="@color/colorAccent"/>
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/pencil"
+                        android:id="@+id/coverLetterEditBtn"
+                        android:layout_margin="10dp"
+                        android:tint="@color/colorAccent"/>
+
+                </LinearLayout>
+                <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:id="@+id/profileCoverLetter">
-                </ListView>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/profileCoverLetterTextDialog"
-                    android:visibility="gone"/>
+                </TextView>
+
             </LinearLayout>
         </android.support.v7.widget.CardView>
 
@@ -253,13 +270,33 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:text="Hobbies "
                     android:textStyle="bold"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
                     android:layout_margin="5dp"/>
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/add"
+                    android:layout_margin="10dp"
+                    android:id="@+id/hobbiesAddBtn"
+                    android:tint="@color/colorAccent"/>
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/pencil"
+                    android:id="@+id/hobbiesEditBtn"
+                    android:layout_margin="10dp"
+                    android:tint="@color/colorAccent"/>
+            </LinearLayout>
                 <ListView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -283,13 +320,33 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:text="Languages "
                     android:textStyle="bold"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
                     android:layout_margin="5dp"/>
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/add"
+                    android:layout_margin="10dp"
+                    android:id="@+id/languagesAddBtn"
+                    android:tint="@color/colorAccent"/>
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/pencil"
+                    android:id="@+id/languagesEditBtn"
+                    android:layout_margin="10dp"
+                    android:tint="@color/colorAccent"/>
+                </LinearLayout>
                 <ListView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -312,13 +369,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:text="Social Profiles"
                     android:textStyle="bold"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
                     android:layout_margin="5dp"/>
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/pencil"
+                    android:id="@+id/socialProfilesEditBtn"
+                    android:layout_margin="10dp"
+                    android:tint="@color/colorAccent"/>
+            </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -350,7 +420,7 @@
                         android:layout_height="wrap_content"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textSize="13sp"
-                        android:text="Linkedin: "
+                        android:text="LinkedIn: "
                         android:textStyle="bold"
                         />
                     <TextView
@@ -358,8 +428,8 @@
                         android:layout_height="wrap_content"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textSize="13sp"
-                        android:text="Linkedin "
-                        android:id="@+id/profileLinkedin"/>
+                        android:text="LinkedIn "
+                        android:id="@+id/profileLinkedIn"/>
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -412,13 +482,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:text="Contact Details"
                     android:textStyle="bold"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
                     android:layout_margin="5dp"/>
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/pencil"
+                    android:id="@+id/contactDetailsEditBtn"
+                    android:layout_margin="10dp"
+                    android:tint="@color/colorAccent"/>
+                </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
