@@ -305,6 +305,10 @@ public class MainActivity extends AppCompatActivity {
                     intent=new Intent(MainActivity.this,KnowledgeBaseActivity.class);
                     startActivity(intent);
                 }
+                if (item.getTitle().equals("Salary Calculator")){
+                    intent=new Intent(MainActivity.this,SalaryCalculatorActivity.class);
+                    startActivity(intent);
+                }
                 if (item.getTitle().equals("Feedback")){
                     intent=new Intent(MainActivity.this,FeedBackActivity.class);
                     startActivity(intent);

@@ -1,5 +1,6 @@
 package in.nfly.dell.nflydemo.adapters;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -14,12 +15,14 @@ import in.nfly.dell.nflydemo.R;
 
 public class DashBoardAdapter extends RecyclerView.Adapter<DashBoardAdapter.DashBoardHolder> {
 
-    private ArrayList<String> titleDataSet;
-    private ArrayList<String> numberDataSet;
+    private Context context;
+    private ArrayList<String> titleDataSet,marksDataSet,dateDataSet;
 
-    public DashBoardAdapter(ArrayList<String> titleDataSet, ArrayList<String> numberDataSet) {
+    public DashBoardAdapter(Context context, ArrayList<String> titleDataSet, ArrayList<String> marksDataSet, ArrayList<String> dateDataSet) {
+        this.context = context;
         this.titleDataSet = titleDataSet;
-        this.numberDataSet = numberDataSet;
+        this.marksDataSet = marksDataSet;
+        this.dateDataSet = dateDataSet;
     }
 
     @NonNull
@@ -32,23 +35,25 @@ public class DashBoardAdapter extends RecyclerView.Adapter<DashBoardAdapter.Dash
 
     @Override
     public void onBindViewHolder(@NonNull DashBoardHolder holder, int position) {
-        holder.DashBoardTitle.setText(titleDataSet.get(position));
-        holder.DashBoardNumber.setText(numberDataSet.get(position));
+        holder.DashboardTitle.setText(titleDataSet.get(position));
+        holder.DashboardMarks.setText(marksDataSet.get(position));
+        holder.DashboardDate.setText(dateDataSet.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return numberDataSet.size();
+        return marksDataSet.size();
     }
 
     public class DashBoardHolder extends RecyclerView.ViewHolder{
 
-        public TextView DashBoardTitle, DashBoardNumber;
+        public TextView DashboardTitle, DashboardMarks,DashboardDate;
         public DashBoardHolder(View itemView) {
             super(itemView);
 
-            DashBoardTitle=itemView.findViewById(R.id.dashboardText);
-            DashBoardNumber=itemView.findViewById(R.id.dashboardNumber);
+            DashboardDate=itemView.findViewById(R.id.dashboardDate);
+            DashboardTitle=itemView.findViewById(R.id.dashboardText);
+            DashboardMarks=itemView.findViewById(R.id.dashboardMarks);
         }
     }
 }

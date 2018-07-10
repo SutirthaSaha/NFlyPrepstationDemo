@@ -45,7 +45,8 @@
         <activity android:name=".activities.singleActivities.PracticeTestActivity" />
         <activity android:name=".activities.ProfileActivity" />
         <activity android:name=".activities.LoginActivity" />
-        <activity android:name=".activities.singleActivities.LearnPapersDisplayActivity"></activity>
+        <activity android:name=".activities.singleActivities.LearnPapersDisplayActivity" />
+        <activity android:name=".activities.SalaryCalculatorActivity"></activity>
     </application>
 
 </manifest>

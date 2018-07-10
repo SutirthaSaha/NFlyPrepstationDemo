@@ -93,6 +93,10 @@ public class KnowledgeBaseActivity extends AppCompatActivity {
                     intent=new Intent(KnowledgeBaseActivity.this,FeedBackActivity.class);
                     startActivity(intent);
                 }
+                if (item.getTitle().equals("Salary Calculator")){
+                    intent=new Intent(KnowledgeBaseActivity.this,SalaryCalculatorActivity.class);
+                    startActivity(intent);
+                }
                 if (item.getTitle().equals("Profile")){
                     intent=new Intent(KnowledgeBaseActivity.this,ProfileActivity.class);
                     startActivity(intent);

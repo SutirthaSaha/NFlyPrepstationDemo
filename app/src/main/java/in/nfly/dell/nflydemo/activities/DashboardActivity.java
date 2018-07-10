@@ -17,23 +17,41 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import in.nfly.dell.nflydemo.MySingleton;
 import in.nfly.dell.nflydemo.R;
 import in.nfly.dell.nflydemo.User;
 import in.nfly.dell.nflydemo.adapters.DashBoardAdapter;
+import in.nfly.dell.nflydemo.adapters.LearnTipsAdapter;
 
 public class DashboardActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayoutDashboard;
     private Toolbar toolbar;
     private TextView headerTitle;
-    private ArrayList<String> number_data_set=new ArrayList<String>(){
-        { add("23/50"); }};
-    private ArrayList<String> title_data_set=new ArrayList<String>(){
-        { add("Title"); }};
+    private ArrayList<String> marksDataSet=new ArrayList<String>(){};
+    private ArrayList<String> titleDataSet=new ArrayList<String>(){};
+    private ArrayList<String> dateDataSet=new ArrayList<String>(){};
 
+    private RecyclerView dashboardRecyclerView;
+    private RecyclerView.Adapter adapter;
+    private RecyclerView.LayoutManager layoutManager;
 
+    private String urlDashBoard="http://nfly.in/testapi/test_result";
+    private  String user_id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +59,14 @@ public class DashboardActivity extends AppCompatActivity {
         drawerLayoutDashboard=findViewById(R.id.drawerLayoutDashboard);
         setToolbar();
         setNavigationDrawer();
-        setCards();
+        dashboardRecyclerView=findViewById(R.id.dashboardRecyclerView);
+
+        User user=new User(DashboardActivity.this);
+        user_id=user.getUser_id();
+
+        layoutManager=new LinearLayoutManager(DashboardActivity.this, LinearLayoutManager.VERTICAL,false);
+        dashboardRecyclerView.setLayoutManager(layoutManager);
+        setValues();
     }
     private void setNavigationDrawer() {
         final NavigationView navigationView;
@@ -105,19 +130,49 @@ public class DashboardActivity extends AppCompatActivity {
         toolbar.setTitle("Dashboard");
         toolbar.setTitleTextColor(Color.WHITE);
     }
-    private void setCards()
-    {
+    private void setValues() {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, urlDashBoard, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Toast.makeText(DashboardActivity.this, response, Toast.LENGTH_SHORT).show();
+                try {
+                    JSONObject arrayObject;
+                    JSONArray parentArray=new JSONArray(response);
+                    for(int i=0;i<parentArray.length();i++){
+                        arrayObject=parentArray.getJSONObject(i);
+                        titleDataSet.add(arrayObject.getString("test_name"));
+                        dateDataSet.add(arrayObject.getString("date"));
+                        marksDataSet.add(arrayObject.getString("score")+"/"+Integer.parseInt(arrayObject.getString("test_num_questions"))*3);
+                    }
+                    adapter=new DashBoardAdapter(DashboardActivity.this,titleDataSet,marksDataSet,dateDataSet);
+                    dashboardRecyclerView.setAdapter(adapter);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(DashboardActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
 
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
 
-        RecyclerView DashboardRecyclerView;
-        RecyclerView.Adapter dashboardAdapter;
-        RecyclerView.LayoutManager PrepHublayoutManager;
-
-        DashboardRecyclerView=findViewById(R.id.dashboardRecyclerView);
-        PrepHublayoutManager=new LinearLayoutManager(DashboardActivity.this, LinearLayoutManager.HORIZONTAL,false);
-        DashboardRecyclerView.setLayoutManager(PrepHublayoutManager);
-
-        dashboardAdapter= new DashBoardAdapter(title_data_set,number_data_set);
-        DashboardRecyclerView.setAdapter(dashboardAdapter);
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("key", "user_id");
+                params.put("value", user_id);
+                return params;
+            }
+        };
+        MySingleton.getmInstance(DashboardActivity.this).addToRequestQueue(stringRequest);
     }
 }

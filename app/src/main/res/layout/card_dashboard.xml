@@ -38,15 +38,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="5dp"
+                android:layout_marginTop="10dp"
                 android:textSize="14sp"
                 android:textColor="#000"
-                android:text="Subtitle"
+                android:id="@+id/dashboardDate"
                 />
 
         </LinearLayout>
 
         <TextView
-            android:id="@+id/dashboardNumber"
+            android:id="@+id/dashboardMarks"
             android:layout_width="90dp"
             android:layout_height="85dp"
             android:background="#DDEFC5"
