@@ -42,14 +42,6 @@
                         android:tint="@color/colorAccent"
                         android:id="@+id/workExperienceAddBtn"
                         />
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/pencil"
-                        android:layout_margin="10dp"
-                        android:tint="@color/colorAccent"
-                        android:id="@+id/workExperienceEditBtn"
-                        />
                 </LinearLayout>
                 <android.support.v7.widget.RecyclerView
                     android:layout_width="match_parent"
@@ -78,7 +70,7 @@
                         android:textStyle="bold"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
                         android:layout_margin="5dp"/>
-                  
+
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
@@ -457,14 +449,6 @@
                         android:tint="@color/colorAccent"
                         android:id="@+id/trainingsAddBtn"
                         />
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/pencil"
-                        android:layout_margin="10dp"
-                        android:tint="@color/colorAccent"
-                        android:id="@+id/trainingsEditBtn"
-                        />
                 </LinearLayout>
                 <android.support.v7.widget.RecyclerView
                     android:layout_width="match_parent"
@@ -500,14 +484,6 @@
                             android:layout_margin="10dp"
                             android:tint="@color/colorAccent"
                             android:id="@+id/projectsAddBtn"
-                            />
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:src="@drawable/pencil"
-                            android:layout_margin="10dp"
-                            android:tint="@color/colorAccent"
-                            android:id="@+id/projectsEditBtn"
                             />
                     </LinearLayout>
                     <android.support.v7.widget.RecyclerView
@@ -545,14 +521,6 @@
                             android:layout_margin="10dp"
                             android:tint="@color/colorAccent"
                             android:id="@+id/achievementsAddBtn"
-                            />
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:src="@drawable/pencil"
-                            android:layout_margin="10dp"
-                            android:tint="@color/colorAccent"
-                            android:id="@+id/achievementsEditBtn"
                             />
                     </LinearLayout>
                     <android.support.v7.widget.RecyclerView
