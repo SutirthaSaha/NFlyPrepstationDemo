@@ -45,6 +45,7 @@ public class LearnTipsFragment extends Fragment {
     private ArrayList<String> textDataSet=new ArrayList<String>(){};
     private ArrayList<String> idDataSet=new ArrayList<String>(){};
     private ArrayList<String> imageDataSet=new ArrayList<String>(){};
+    private ArrayList<String> bgImageDataSet=new ArrayList<String>(){};
 
     public LearnTipsFragment() {
         // Required empty public constructor
@@ -77,8 +78,9 @@ public class LearnTipsFragment extends Fragment {
                         titleDataSet.add(arrayObject.getString("topic_name"));
                         textDataSet.add(arrayObject.getString("topic_text"));
                         imageDataSet.add("http://nfly.in/assets/images/app_icons/"+arrayObject.getString("app_icon"));
+                        bgImageDataSet.add(arrayObject.getString("tip_bg_image"));
                     }
-                    adapter=new LearnTipsAdapter(getContext(),titleDataSet,imageDataSet,textDataSet,idDataSet);
+                    adapter=new LearnTipsAdapter(getContext(),titleDataSet,imageDataSet,textDataSet,idDataSet,bgImageDataSet);
                     learnTipsRecyclerView.setAdapter(adapter);
                 } catch (JSONException e) {
                     e.printStackTrace();

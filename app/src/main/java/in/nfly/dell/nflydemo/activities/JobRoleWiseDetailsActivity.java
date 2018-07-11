@@ -47,6 +47,7 @@ public class JobRoleWiseDetailsActivity extends AppCompatActivity {
         viewPagerJobWiseDetails=findViewById(R.id.viewPagerJobWiseDetails);
         tabLayoutJobWiseDetails=findViewById(R.id.tabLayoutJobWiseDetails);
 
+        viewPagerJobWiseDetails.setOffscreenPageLimit(10);
         viewPagerAdapter=new ViewPagerAdapter(getSupportFragmentManager());
 
         viewPagerAdapter.addFragments(JobRoleOverviewFragment.newInstance(job_role_id,job_role_name),"Overview");

@@ -24,8 +24,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import in.nfly.dell.nflydemo.MySingleton;
@@ -69,6 +72,7 @@ public class PracticeTestActivity extends AppCompatActivity {
 
     private int optionIdSelected;
     private int user_score,max_score;
+    private String date;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -386,6 +390,7 @@ public class PracticeTestActivity extends AppCompatActivity {
 
     private void insertAttempt() {
 
+        date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
         StringRequest stringRequest=new StringRequest(Request.Method.POST,urlInsertAttempt, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -424,10 +429,9 @@ public class PracticeTestActivity extends AppCompatActivity {
                 params.put("insert_array[user_id]", user_id);
                 params.put("insert_array[test_id]",test_id);
                 params.put("insert_array[attempt_id]",Integer.toString(attempt_id));
-                //params.put("insert_array[state]","0");
-                //params.put("insert_array[score]","0");
                 params.put("insert_array[state]","1");
                 params.put("insert_array[score]",Integer.toString(user_score));
+                params.put("insert_array[date]",date);
                 params.put("table","nfly_test_result");
                 return params;
             }

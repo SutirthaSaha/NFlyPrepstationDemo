@@ -9,8 +9,10 @@ import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.Toolbar;
@@ -31,6 +33,7 @@ import java.util.Map;
 import in.nfly.dell.nflydemo.MySingleton;
 import in.nfly.dell.nflydemo.R;
 import in.nfly.dell.nflydemo.User;
+import in.nfly.dell.nflydemo.activities.SalaryCalculatorActivity;
 import in.nfly.dell.nflydemo.activities.singleActivities.PracticeTestActivity;
 import in.nfly.dell.nflydemo.adapters.LearnTipsAdapter;
 
@@ -44,11 +47,15 @@ public class ProfilePersonalFragment extends Fragment {
             profileHobbiesTextDialog,profileLanguagesTextDialog,profileFacebook,profileLinkedIn,profileTwitter,
     profileQuora,profileEmail, profilePhone,profileAddress;
 
-    private EditText editBasicDetailsName,editBasicDetailsCurrentDesignation,editBasicDetailsGender,editBasicDetailsDob,
+    private Spinner editBasicDetailsGender;
+    private String[] genderOptions={"Male","Female","Others"};
+    private EditText editBasicDetailsCurrentDesignation,editBasicDetailsDob,
             editBasicDetailsCurrentCity,editBasicDetailsHomeTown,editCoverLetter,editHobbies,editLanguages,
             editContactDetailsPhone, editContactDetailsAddress,
             editSocialProfilesFacebook,editSocialProfilesLinkedIn,editSocialProfilesTwitter,editSocialProfilesQuora;
+
     private String urlPersonal="http://nfly.in/profileapi/personal_details";
+    private String urlUpdate="http://nfly.in/gapi/update";
 
     private ImageView profileImage;
 
@@ -103,6 +110,7 @@ public class ProfilePersonalFragment extends Fragment {
         contactDetailsEditBtn=view.findViewById(R.id.contactDetailsEditBtn);
         socialProfilesEditBtn=view.findViewById(R.id.socialProfilesEditBtn);
 
+        setValues();
         socialProfilesEditBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -114,6 +122,11 @@ public class ProfilePersonalFragment extends Fragment {
                 editSocialProfilesQuora=contactDetailsEditLayout.findViewById(R.id.editSocialProfilesQuora);
                 editSocialProfilesTwitter=contactDetailsEditLayout.findViewById(R.id.editSocialProfilesTwitter);
 
+                editSocialProfilesFacebook.setText(profileFacebook.getText().toString());
+                editSocialProfilesLinkedIn.setText(profileLinkedIn.getText().toString());
+                editSocialProfilesTwitter.setText(profileTwitter.getText().toString());
+                editSocialProfilesQuora.setText(profileQuora.getText().toString());
+
                 AlertDialog.Builder alertDialog=new AlertDialog.Builder(getActivity());
                 alertDialog.setView(contactDetailsEditLayout);
                 alertDialog.setCancelable(false);
@@ -129,19 +142,8 @@ public class ProfilePersonalFragment extends Fragment {
                 alertDialog.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getActivity(), "Submit clicked", Toast.LENGTH_SHORT).show();
-                        if(!editSocialProfilesFacebook.getText().toString().isEmpty()){
-                            profileFacebook.setText(editSocialProfilesFacebook.getText().toString());
-                        }
-                        if(!editSocialProfilesLinkedIn.getText().toString().isEmpty()){
-                            profileLinkedIn.setText(editSocialProfilesLinkedIn.getText().toString());
-                        }
-                        if(!editSocialProfilesQuora.getText().toString().isEmpty()){
-                            profileQuora.setText(editSocialProfilesQuora.getText().toString());
-                        }
-                        if(!editSocialProfilesTwitter.getText().toString().isEmpty()){
-                            profileTwitter.setText(editSocialProfilesTwitter.getText().toString());
-                        }
+                        editSocialDetails();
+
                     }
                 });
                 AlertDialog alert=alertDialog.create();
@@ -149,9 +151,6 @@ public class ProfilePersonalFragment extends Fragment {
 
             }
         });
-
-
-
 
         contactDetailsEditBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -162,6 +161,9 @@ public class ProfilePersonalFragment extends Fragment {
                 editContactDetailsAddress=contactDetailsEditLayout.findViewById(R.id.editContactDetailsAddress);
                 editContactDetailsPhone=contactDetailsEditLayout.findViewById(R.id.editContactDetailsPhone);
 
+                editContactDetailsAddress.setText(profileAddress.getText().toString());
+                editContactDetailsPhone.setText(profilePhone.getText().toString());
+
                 AlertDialog.Builder alertDialog=new AlertDialog.Builder(getActivity());
                 alertDialog.setView(contactDetailsEditLayout);
                 alertDialog.setCancelable(false);
@@ -177,14 +179,7 @@ public class ProfilePersonalFragment extends Fragment {
                 alertDialog.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if(!editContactDetailsAddress.getText().toString().isEmpty()){
-                            profileAddress.setText(editContactDetailsAddress.getText().toString());
-                        }
-
-                        if(!editContactDetailsPhone.getText().toString().isEmpty()){
-                            profilePhone.setText(editContactDetailsPhone.getText().toString());
-                        }
-                        Toast.makeText(getActivity(), "Submit clicked", Toast.LENGTH_SHORT).show();
+                        editContactDetails();
                     }
                 });
                 AlertDialog alert=alertDialog.create();
@@ -260,10 +255,6 @@ public class ProfilePersonalFragment extends Fragment {
 
             }
         });
-
-
-
-
 
         hobbiesEditBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -406,12 +397,20 @@ public class ProfilePersonalFragment extends Fragment {
                 LayoutInflater layoutInflater=getLayoutInflater();
                 View basicDetailsEditLayout=layoutInflater.inflate(R.layout.dialog_edit_basic_details,null);
 
-                editBasicDetailsName=basicDetailsEditLayout.findViewById(R.id.editBasicDetailsName);
                 editBasicDetailsCurrentDesignation=basicDetailsEditLayout.findViewById(R.id.editBasicDetailsCurrentDesignation);
                 editBasicDetailsGender=basicDetailsEditLayout.findViewById(R.id.editBasicDetailsGender);
                 editBasicDetailsDob=basicDetailsEditLayout.findViewById(R.id.editBasicDetailsDob);
                 editBasicDetailsCurrentCity=basicDetailsEditLayout.findViewById(R.id.editBasicDetailsCurrentCity);
                 editBasicDetailsHomeTown=basicDetailsEditLayout.findViewById(R.id.editBasicDetailsHomeTown);
+
+                editBasicDetailsCurrentDesignation.setText(profileCurrentDesignation.getText().toString());
+                editBasicDetailsDob.setText(profileDob.getText().toString());
+                editBasicDetailsCurrentCity.setText(profileCurrentCity.getText().toString());
+                editBasicDetailsHomeTown.setText(profileHomeTown.getText().toString());
+                editBasicDetailsGender.setPrompt(profileGender.getText().toString());
+
+                ArrayAdapter<String> adapter=new ArrayAdapter<String>(getContext(),R.layout.custom_spinner_onboard_textview,genderOptions);
+                editBasicDetailsGender.setAdapter(adapter);
 
                 AlertDialog.Builder alertDialog=new AlertDialog.Builder(getActivity());
                 alertDialog.setView(basicDetailsEditLayout);
@@ -428,10 +427,7 @@ public class ProfilePersonalFragment extends Fragment {
                 alertDialog.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getActivity(), "Submit clicked", Toast.LENGTH_SHORT).show();
-                        if(!editBasicDetailsName.getText().toString().isEmpty()){
-                            profileFullName.setText(editBasicDetailsName.getText().toString());
-                        }
+                        editBasicDetails();
                     }
                 });
 
@@ -439,8 +435,116 @@ public class ProfilePersonalFragment extends Fragment {
                 alert.show();
             }
         });
-        setValues();
         return view;
+    }
+
+    private void editContactDetails() {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, urlUpdate, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                setValues();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("update_array[user_phone]",editContactDetailsPhone.getText().toString());
+                params.put("update_array[user_address]",editContactDetailsAddress.getText().toString());
+                params.put("key", "user_id");
+                params.put("value", user_id);
+                params.put("table","user_additional_details");
+                return params;
+            }
+        };
+        MySingleton.getmInstance(getContext()).addToRequestQueue(stringRequest);
+    }
+
+    private void editSocialDetails() {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, urlUpdate, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                setValues();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("update_array[user_fb]",editSocialProfilesFacebook.getText().toString());
+                params.put("update_array[user_tw]",editSocialProfilesTwitter.getText().toString());
+                params.put("update_array[user_ln]",editSocialProfilesLinkedIn.getText().toString());
+                params.put("update_array[user_qo]",editSocialProfilesQuora.getText().toString());
+                params.put("key", "user_id");
+                params.put("value", user_id);
+                params.put("table","user_additional_details");
+                return params;
+            }
+        };
+        MySingleton.getmInstance(getContext()).addToRequestQueue(stringRequest);
+    }
+
+    private void editBasicDetails() {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, urlUpdate, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                setValues();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("update_array[user_dob]",editBasicDetailsDob.getText().toString());
+                params.put("update_array[user_designation]",editBasicDetailsCurrentDesignation.getText().toString());
+                params.put("update_array[user_current_city]",editBasicDetailsCurrentCity.getText().toString());
+                params.put("update_array[user_city]",editBasicDetailsHomeTown.getText().toString());
+                params.put("key", "user_id");
+                params.put("value", user_id);
+                params.put("table","user_additional_details");
+                return params;
+            }
+        };
+        MySingleton.getmInstance(getContext()).addToRequestQueue(stringRequest);
     }
 
     private void setValues() {

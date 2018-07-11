@@ -109,6 +109,10 @@ public class DashboardActivity extends AppCompatActivity {
                     intent=new Intent(DashboardActivity.this,FeedBackActivity.class);
                     startActivity(intent);
                 }
+                if (item.getTitle().equals("Salary Calculator")){
+                    intent=new Intent(DashboardActivity.this,SalaryCalculatorActivity.class);
+                    startActivity(intent);
+                }
                 if (item.getTitle().equals("Profile")){
                     intent=new Intent(DashboardActivity.this,ProfileActivity.class);
                     startActivity(intent);
@@ -134,7 +138,6 @@ public class DashboardActivity extends AppCompatActivity {
         StringRequest stringRequest=new StringRequest(Request.Method.POST, urlDashBoard, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(DashboardActivity.this, response, Toast.LENGTH_SHORT).show();
                 try {
                     JSONObject arrayObject;
                     JSONArray parentArray=new JSONArray(response);

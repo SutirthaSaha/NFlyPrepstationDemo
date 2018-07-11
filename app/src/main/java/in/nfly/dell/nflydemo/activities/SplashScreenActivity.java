@@ -1,5 +1,6 @@
 package in.nfly.dell.nflydemo.activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -7,9 +8,11 @@ import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
+import android.net.ConnectivityManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import in.nfly.dell.nflydemo.R;
 
@@ -32,9 +35,16 @@ public class SplashScreenActivity extends AppCompatActivity {
             {
                 try {
                     sleep(3000);
-                    Intent intent= new Intent(getApplicationContext(), LoginActivity.class);
-                    startActivity(intent);
-                    finish();
+                    if(checkInternetConnection()) {
+                        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                    else{
+                        Intent intent = new Intent(getApplicationContext(), NoInternetActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -68,5 +78,17 @@ public class SplashScreenActivity extends AppCompatActivity {
 
         // return out final image
         return bmOut;
+    }
+
+    private boolean checkInternetConnection() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        // test for connection
+        if (cm.getActiveNetworkInfo() != null
+                && cm.getActiveNetworkInfo().isAvailable()
+                && cm.getActiveNetworkInfo().isConnected()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

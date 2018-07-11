@@ -47,6 +47,7 @@ public class CompanyWiseDetailsActivity extends AppCompatActivity {
         viewPagerCompanyWiseDetails=findViewById(R.id.viewPagerCompanyWiseDetails);
         tabLayoutCompanyWiseDetails=findViewById(R.id.tabLayoutCompanyWiseDetails);
 
+        viewPagerCompanyWiseDetails.setOffscreenPageLimit(10);
         viewPagerAdapter=new ViewPagerAdapter(getSupportFragmentManager());
 
         viewPagerAdapter.addFragments(CompanyDetailsCompanyIntroFragment.newInstance(company_id,company_name),"Company Intro");

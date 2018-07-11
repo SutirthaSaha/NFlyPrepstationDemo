@@ -43,7 +43,7 @@ public class ProfilePersonalityAdapter extends RecyclerView.Adapter<ProfilePerso
 
     @Override
     public int getItemCount() {
-        return titleDataSet.size();
+        return progressDataSet.size();
     }
 
     public class ProfilePersonalityHolder extends RecyclerView.ViewHolder{

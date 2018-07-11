@@ -21,14 +21,15 @@ import in.nfly.dell.nflydemo.activities.singleActivities.LearnTipsDetailsActivit
 public class LearnTipsAdapter extends RecyclerView.Adapter<LearnTipsAdapter.LearnTipsHolder>{
 
     private Context context;
-    private ArrayList<String> titleDataSet,imageDataSet,textDataSet,idDataSet;
+    private ArrayList<String> titleDataSet,imageDataSet,textDataSet,idDataSet,bgImageDataSet;
 
-    public LearnTipsAdapter(Context context, ArrayList<String> titleDataSet, ArrayList<String> imageDataSet, ArrayList<String> textDataSet, ArrayList<String> idDataSet) {
+    public LearnTipsAdapter(Context context, ArrayList<String> titleDataSet, ArrayList<String> imageDataSet, ArrayList<String> textDataSet, ArrayList<String> idDataSet, ArrayList<String> bgImageDataSet) {
         this.context = context;
         this.titleDataSet = titleDataSet;
         this.imageDataSet = imageDataSet;
         this.textDataSet = textDataSet;
         this.idDataSet = idDataSet;
+        this.bgImageDataSet = bgImageDataSet;
     }
 
     @NonNull
@@ -51,6 +52,7 @@ public class LearnTipsAdapter extends RecyclerView.Adapter<LearnTipsAdapter.Lear
                 intent.putExtra("tip_id",idDataSet.get(position));
                 intent.putExtra("topic_name",titleDataSet.get(position));
                 intent.putExtra("topic_text",textDataSet.get(position));
+                intent.putExtra("topic_image",bgImageDataSet.get(position));
                 context.startActivity(intent);
             }
         });
