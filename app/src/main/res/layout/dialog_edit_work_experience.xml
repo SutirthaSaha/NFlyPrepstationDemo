@@ -90,8 +90,7 @@
                 android:src="@drawable/calendar"
                 android:layout_marginRight="10dp"
                 android:id="@+id/editWorkExperienceLastDateIcon"
-                android:layout_gravity="center_vertical"
-                android:tint="@color/cardview_shadow_start_color"/>
+                android:layout_gravity="center_vertical" />
             </LinearLayout>
 
 
