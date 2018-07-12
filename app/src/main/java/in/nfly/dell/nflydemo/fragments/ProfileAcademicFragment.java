@@ -21,6 +21,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -32,6 +33,7 @@ import in.nfly.dell.nflydemo.MySingleton;
 import in.nfly.dell.nflydemo.R;
 import in.nfly.dell.nflydemo.User;
 import in.nfly.dell.nflydemo.activities.MainActivity;
+import in.nfly.dell.nflydemo.adapters.LearnTipsAdapter;
 import in.nfly.dell.nflydemo.adapters.ProfileAcademicAchievementsAdapter;
 import in.nfly.dell.nflydemo.adapters.ProfileAcademicProjectsAdapter;
 import in.nfly.dell.nflydemo.adapters.ProfileAcademicTrainingsAdapter;
@@ -49,6 +51,7 @@ public class ProfileAcademicFragment extends Fragment {
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private String urlAcademic="http://nfly.in/profileapi/academic_details";
+    private String oneRow="http://nfly.in/gapi/load_rows_one";
     private String urlUpdate="http://nfly.in/gapi/update";
 
     private String user_id;
@@ -72,6 +75,26 @@ public class ProfileAcademicFragment extends Fragment {
         {  add("blahblah");
             add("blah");
          }};
+
+    private ArrayList<String> companyNameDataSet=new ArrayList<String>(){};
+    private ArrayList<String> postionDataSet=new ArrayList<String>(){};
+    private ArrayList<String> jobTypeDataSet=new ArrayList<String>(){};
+    private ArrayList<String> startDateDataSet=new ArrayList<String>(){};
+    private ArrayList<String> endDateDataSet=new ArrayList<String>(){};
+    private ArrayList<String> jobDecriptionDataSet=new ArrayList<String>(){};
+
+    private ArrayList<String> courseDataSet=new ArrayList<String>(){};
+    private ArrayList<String> certDataSet=new ArrayList<String>(){};
+    private ArrayList<String> durationDataSet=new ArrayList<String>(){};
+    private ArrayList<String> detailsDataSet=new ArrayList<String>(){};
+
+    private ArrayList<String> projectTitleDataSet=new ArrayList<String>(){};
+    private ArrayList<String> projectDescriptionDataSet=new ArrayList<String>(){};
+    private ArrayList<String> projectLinkDataSet=new ArrayList<String>(){};
+
+    private ArrayList<String> achievementNameDataSet=new ArrayList<String>(){};
+    private ArrayList<String> achievementDescriptionDataSet=new ArrayList<String>(){};
+
     public ProfileAcademicFragment() {
         // Required empty public constructor
     }
@@ -568,10 +591,53 @@ public class ProfileAcademicFragment extends Fragment {
         layoutManager=new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,false);
         achievementsRecyclerView.setLayoutManager(layoutManager);
 
-        adapter= new ProfileAcademicAchievementsAdapter(DataSet,DataSet);
-        achievementsRecyclerView.setAdapter(adapter);
+        setAchievements();
     }
+    private void setAchievements() {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, oneRow, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                //Toast.makeText(getContext(), "Successful", Toast.LENGTH_SHORT).show();
+                try {
+                    JSONObject arrayObject;
+                    JSONArray parentArray=new JSONArray(response);
+                    for(int i=0;i<parentArray.length();i++){
+                        arrayObject=parentArray.getJSONObject(i);
+                        achievementNameDataSet.add(arrayObject.getString("accolade_title"));
+                        achievementDescriptionDataSet.add(arrayObject.getString("accolade_details"));
+                    }
+                    adapter= new ProfileAcademicAchievementsAdapter(achievementNameDataSet,achievementDescriptionDataSet);
+                    achievementsRecyclerView.setAdapter(adapter);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
 
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("key", "user_id");
+                params.put("value", user_id);
+                params.put("table", "user_accolades");
+                return params;
+            }
+        };
+        MySingleton.getmInstance(getContext()).addToRequestQueue(stringRequest);
+    }
     private void setWorkExperience(View v)
     {
 
@@ -579,10 +645,60 @@ public class ProfileAcademicFragment extends Fragment {
         layoutManager=new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,false);
         workExperienceRecyclerView.setLayoutManager(layoutManager);
 
-        adapter= new ProfileAcademicWorkExperienceAdapter(DataSet,DataSet,DataSet,DataSet,DataSet,DataSet);
-        workExperienceRecyclerView.setAdapter(adapter);
-    }
+        setWorkExp();
 
+
+    }
+    private void setWorkExp() {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, oneRow, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                //Toast.makeText(getContext(), "Successful", Toast.LENGTH_SHORT).show();
+                try {
+                    JSONObject arrayObject;
+                    JSONArray parentArray=new JSONArray(response);
+                    for(int i=0;i<parentArray.length();i++){
+                        arrayObject=parentArray.getJSONObject(i);
+                        companyNameDataSet.add(arrayObject.getString("user_company"));
+                        postionDataSet.add(arrayObject.getString("user_job_profile"));
+                        jobTypeDataSet.add(arrayObject.getString("user_job_type"));
+                        startDateDataSet.add(arrayObject.getString("user_job_start_date"));
+                        endDateDataSet.add(arrayObject.getString("user_job_end_date"));
+                        jobDecriptionDataSet.add(arrayObject.getString("user_job_desc"));
+                    }
+
+                    adapter= new ProfileAcademicWorkExperienceAdapter(companyNameDataSet,postionDataSet,jobTypeDataSet,startDateDataSet,endDateDataSet,jobDecriptionDataSet);
+                    workExperienceRecyclerView.setAdapter(adapter);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("key", "user_id");
+                params.put("value", user_id);
+                params.put("table", "user_employment_details");
+                return params;
+            }
+        };
+        MySingleton.getmInstance(getContext()).addToRequestQueue(stringRequest);
+    }
     private void setTrainings(View v)
     {
 
@@ -590,9 +706,58 @@ public class ProfileAcademicFragment extends Fragment {
         layoutManager=new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,false);
         trainingsRecyclerView.setLayoutManager(layoutManager);
 
-        adapter= new ProfileAcademicTrainingsAdapter(DataSet,DataSet,DataSet,DataSet);
-        trainingsRecyclerView.setAdapter(adapter);
+        setTrainings();
+
     }
+
+    private void setTrainings() {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, oneRow, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                //Toast.makeText(getContext(), "Successful", Toast.LENGTH_SHORT).show();
+                try {
+                    JSONObject arrayObject;
+                    JSONArray parentArray=new JSONArray(response);
+                    for(int i=0;i<parentArray.length();i++) {
+                        arrayObject = parentArray.getJSONObject(i);
+                        courseDataSet.add(arrayObject.getString("user_training_course"));
+                        certDataSet.add(arrayObject.getString("user_training_company"));
+                        durationDataSet.add(arrayObject.getString("user_training_duration"));
+                        detailsDataSet.add(arrayObject.getString("user_training_details"));
+                    }
+                    adapter= new ProfileAcademicTrainingsAdapter(courseDataSet,certDataSet,durationDataSet,detailsDataSet);
+                    trainingsRecyclerView.setAdapter(adapter);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("key", "user_id");
+                params.put("value", user_id);
+                params.put("table", "user_training_details");
+                return params;
+            }
+        };
+        MySingleton.getmInstance(getContext()).addToRequestQueue(stringRequest);
+    }
+
 
     private void setProjects(View v)
     {
@@ -600,8 +765,55 @@ public class ProfileAcademicFragment extends Fragment {
         layoutManager=new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,false);
         projectsRecyclerView.setLayoutManager(layoutManager);
 
-        adapter= new ProfileAcademicProjectsAdapter(DataSet,DataSet,DataSet);
-        projectsRecyclerView.setAdapter(adapter);
+        setProjects();
 
     }
+
+    public void setProjects(){
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, oneRow, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                //Toast.makeText(getContext(), "Successful", Toast.LENGTH_SHORT).show();
+                try {
+                    JSONObject arrayObject;
+                    JSONArray parentArray=new JSONArray(response);
+                    for(int i=0;i<parentArray.length();i++){
+                        arrayObject=parentArray.getJSONObject(i);
+                        projectTitleDataSet.add(arrayObject.getString("user_project_name"));
+                        projectDescriptionDataSet.add(arrayObject.getString("user_project_details"));
+                        projectLinkDataSet.add(arrayObject.getString("user_project_link"));
+                    }
+                    adapter= new ProfileAcademicProjectsAdapter(projectTitleDataSet,projectDescriptionDataSet,projectLinkDataSet);
+                    projectsRecyclerView.setAdapter(adapter);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("key", "user_id");
+                params.put("value", user_id);
+                params.put("table", "user_projects");
+                return params;
+            }
+        };
+        MySingleton.getmInstance(getContext()).addToRequestQueue(stringRequest);
+    }
+
 }
