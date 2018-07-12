@@ -1,8 +1,10 @@
 package in.nfly.dell.nflydemo.fragments;
 
 
-import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
@@ -11,7 +13,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -29,7 +30,7 @@ import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -38,6 +39,8 @@ import in.nfly.dell.nflydemo.MySingleton;
 import in.nfly.dell.nflydemo.R;
 import in.nfly.dell.nflydemo.User;
 import in.nfly.dell.nflydemo.activities.MainActivity;
+import in.nfly.dell.nflydemo.activities.OnBoardRegisterActivity;
+import in.nfly.dell.nflydemo.activities.RegisterActivity;
 import in.nfly.dell.nflydemo.adapters.LearnTipsAdapter;
 import in.nfly.dell.nflydemo.adapters.ProfileAcademicAchievementsAdapter;
 import in.nfly.dell.nflydemo.adapters.ProfileAcademicProjectsAdapter;
@@ -58,8 +61,10 @@ public class ProfileAcademicFragment extends Fragment {
     private String urlAcademic="http://nfly.in/profileapi/academic_details";
     private String oneRow="http://nfly.in/gapi/load_rows_one";
     private String urlUpdate="http://nfly.in/gapi/update";
-
+    private String urlInsert="http://nfly.in/gapi/insert";
     private String user_id;
+    private int status;
+    private String date;
 
     private TextView profileCollegeName,profileCourse,profileBranch,profileClassOf,profileCGPA;
     private TextView profileXIISchool,profileXIIBoard,profileXIIStream,profileXIIPassingyear,profileXIIPercentage;
@@ -68,7 +73,7 @@ public class ProfileAcademicFragment extends Fragment {
 
     private ImageView workExperienceAddBtn, collegeEducationEditBtn, schoolEducationEditBtn, trainingsAddBtn,
     projectsAddBtn, achievementsAddBtn, workSampleEditBtn;
-    
+
     private EditText editSchoolEducationXIISchoolName,editSchoolEducationXIIBoard,editSchoolEducationXIIStream,editSchoolEducationXIIPassingYear,editSchoolEducationXIIPercentage;
     private EditText editSchoolEducationXSchoolName,editSchoolEducationXBoard,editSchoolEducationXStream,editSchoolEducationXPassingYear,editSchoolEducationXPercentage;
 
@@ -76,8 +81,10 @@ public class ProfileAcademicFragment extends Fragment {
 
     private EditText editWorkSampleGithub,editWorkSamplePlayStore,editWorkSampleBehance,editWorkSampleBlogLink;
 
-    private EditText editWorkExperienceStartDate, editWorkExperienceLastDate;
-    private ImageView editWorkExperienceStartDateCalendarBtn,editWorkExperienceLastDateCalendarBtn;
+    private EditText editWorkExperienceJobType,editWorkExperienceCompanyName,editWorkExperiencePosition,editWorkExperienceStartDate,editWorkExperienceLastDate,editWorkExperienceJobDescription;
+    private EditText editTrainingsCourse,editTrainingsCertifiedBy,editTrainingsDuration,editTrainingsDetails;
+    private EditText editProjectsTitle,editProjectsDescription,editProjectsLink;
+    private EditText editAchievementsName,editAchievementsDescription;
 
     private ArrayList<String> DataSet=new ArrayList<String>(){
         {  add("blahblah");
@@ -106,7 +113,7 @@ public class ProfileAcademicFragment extends Fragment {
     public ProfileAcademicFragment() {
         // Required empty public constructor
     }
-    
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -146,8 +153,6 @@ public class ProfileAcademicFragment extends Fragment {
         achievementsAddBtn=view.findViewById(R.id.achievementsAddBtn);
         workSampleEditBtn=view.findViewById(R.id.workSampleEditBtn);
 
-
-
         setWorkExperience(view);
         setTrainings(view);
         setProjects(view);
@@ -160,12 +165,12 @@ public class ProfileAcademicFragment extends Fragment {
                 LayoutInflater layoutInflater=getLayoutInflater();
                 View workExperienceAddLayout=layoutInflater.inflate(R.layout.dialog_edit_work_experience,null);
 
-                editWorkExperienceStartDateCalendarBtn=workExperienceAddLayout.findViewById(R.id.editWorkExperienceStartDateIcon);
-                editWorkExperienceLastDateCalendarBtn=workExperienceAddLayout.findViewById(R.id.editWorkExperienceLastDateIcon);
-
-
-                editWorkExperienceStartDate= workExperienceAddLayout.findViewById(R.id.editWorkExperienceStartDate);
-                editWorkExperienceLastDate= workExperienceAddLayout.findViewById(R.id.editWorkExperienceLastDate);
+                editWorkExperienceCompanyName=workExperienceAddLayout.findViewById(R.id.editWorkExperienceCompanyName);
+                editWorkExperiencePosition=workExperienceAddLayout.findViewById(R.id.editWorkExperiencePosition);
+                editWorkExperienceJobType=workExperienceAddLayout.findViewById(R.id.editWorkExperienceJobType);
+                editWorkExperienceStartDate=workExperienceAddLayout.findViewById(R.id.editWorkExperienceStartDate);
+                editWorkExperienceLastDate=workExperienceAddLayout.findViewById(R.id.editWorkExperienceLastDate);
+                editWorkExperienceJobDescription=workExperienceAddLayout.findViewById(R.id.editWorkExperienceJobDescription);
 
                 AlertDialog.Builder alertDialog=new AlertDialog.Builder(getActivity());
                 alertDialog.setView(workExperienceAddLayout);
@@ -182,60 +187,12 @@ public class ProfileAcademicFragment extends Fragment {
                 alertDialog.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getActivity(), "Submit clicked", Toast.LENGTH_SHORT).show();
-
+                        workExperienceRecyclerView.removeAllViewsInLayout();
+                        addWorkExperience();
                     }
                 });
                 AlertDialog alert=alertDialog.create();
                 alert.show();
-                final Calendar calendarStartDate = Calendar.getInstance();
-                final  DatePickerDialog.OnDateSetListener startDate = new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int monthOfYear,
-                                          int dayOfMonth) {
-                        // TODO Auto-generated method stub
-                        calendarStartDate.set(Calendar.YEAR, year);
-                        calendarStartDate.set(Calendar.MONTH, monthOfYear);
-                        calendarStartDate.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                        updateLabel(editWorkExperienceStartDate,calendarStartDate);
-                    }
-                };
-
-                editWorkExperienceStartDateCalendarBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        // TODO Auto-generated method stub
-                        new DatePickerDialog(getContext(), startDate, calendarStartDate.get(Calendar.YEAR), calendarStartDate.get(Calendar.MONTH),
-                                calendarStartDate.get(Calendar.DAY_OF_MONTH)).show();
-                    }
-                });
-
-
-
-                final Calendar calendarLastDate = Calendar.getInstance();
-                final  DatePickerDialog.OnDateSetListener lastDate = new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int monthOfYear,
-                                          int dayOfMonth) {
-                        // TODO Auto-generated method stub
-                        calendarLastDate.set(Calendar.YEAR, year);
-                        calendarLastDate.set(Calendar.MONTH, monthOfYear);
-                        calendarLastDate.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                        updateLabel(editWorkExperienceLastDate,calendarLastDate);
-                    }
-                };
-
-                editWorkExperienceLastDateCalendarBtn.setOnClickListener(new View.OnClickListener() {
-
-                    @Override
-                    public void onClick(View v) {
-                        // TODO Auto-generated method stub
-                        new DatePickerDialog(getContext(), lastDate, calendarLastDate
-                                .get(Calendar.YEAR), calendarLastDate.get(Calendar.MONTH),
-                                calendarLastDate.get(Calendar.DAY_OF_MONTH)).show();
-                    }
-                });
-
 
             }
         });
@@ -336,6 +293,11 @@ public class ProfileAcademicFragment extends Fragment {
                 LayoutInflater layoutInflater=getLayoutInflater();
                 View trainingsAddLayout=layoutInflater.inflate(R.layout.dialog_edit_trainings,null);
 
+                editTrainingsCourse=trainingsAddLayout.findViewById(R.id.editTrainingsCourse);
+                editTrainingsDetails=trainingsAddLayout.findViewById(R.id.editTrainingsDetails);
+                editTrainingsDuration=trainingsAddLayout.findViewById(R.id.editTrainingsDuration);
+                editTrainingsCertifiedBy=trainingsAddLayout.findViewById(R.id.editTrainingsCertifiedBy);
+
                 AlertDialog.Builder alertDialog=new AlertDialog.Builder(getActivity());
                 alertDialog.setView(trainingsAddLayout);
                 alertDialog.setCancelable(false);
@@ -351,8 +313,8 @@ public class ProfileAcademicFragment extends Fragment {
                 alertDialog.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getActivity(), "Submit clicked", Toast.LENGTH_SHORT).show();
-
+                        trainingsRecyclerView.removeAllViewsInLayout();
+                        addTrainings();
                     }
                 });
                 AlertDialog alert=alertDialog.create();
@@ -366,6 +328,10 @@ public class ProfileAcademicFragment extends Fragment {
             public void onClick(View view) {
                 LayoutInflater layoutInflater=getLayoutInflater();
                 View projectsAddLayout=layoutInflater.inflate(R.layout.dialog_edit_projects,null);
+
+                editProjectsDescription=projectsAddLayout.findViewById(R.id.editProjectDescription);
+                editProjectsLink=projectsAddLayout.findViewById(R.id.editProjectsLink);
+                editProjectsTitle=projectsAddLayout.findViewById(R.id.editProjectsTitle);
 
                 AlertDialog.Builder alertDialog=new AlertDialog.Builder(getActivity());
                 alertDialog.setView(projectsAddLayout);
@@ -382,8 +348,8 @@ public class ProfileAcademicFragment extends Fragment {
                 alertDialog.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getActivity(), "Submit clicked", Toast.LENGTH_SHORT).show();
-
+                        projectsRecyclerView.removeAllViewsInLayout();
+                        addProjects();
                     }
                 });
                 AlertDialog alert=alertDialog.create();
@@ -397,6 +363,9 @@ public class ProfileAcademicFragment extends Fragment {
             public void onClick(View view) {
                 LayoutInflater layoutInflater=getLayoutInflater();
                 View achievementsAddLayout=layoutInflater.inflate(R.layout.dialog_edit_achievements,null);
+
+                editAchievementsName=achievementsAddLayout.findViewById(R.id.editAchievementsName);
+                editAchievementsDescription=achievementsAddLayout.findViewById(R.id.editAchievementsDescription);
 
                 AlertDialog.Builder alertDialog=new AlertDialog.Builder(getActivity());
                 alertDialog.setView(achievementsAddLayout);
@@ -413,7 +382,8 @@ public class ProfileAcademicFragment extends Fragment {
                 alertDialog.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getActivity(), "Submit clicked", Toast.LENGTH_SHORT).show();
+                        achievementsRecyclerView.removeAllViewsInLayout();
+                        addAchievements();
 
                     }
                 });
@@ -464,6 +434,204 @@ public class ProfileAcademicFragment extends Fragment {
             }
         });
         return view;
+    }
+
+    private void addProjects() {
+        date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+
+        StringRequest stringRequest=new StringRequest(Request.Method.POST,urlInsert, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject arrayObject=new JSONObject(response);
+                    status=arrayObject.getInt("status");
+                    if(status==200){
+                        setProjects();
+                    }
+                    else{
+                        Toast.makeText(getActivity(), "Registration Failed", Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+
+            @Override
+            protected Map<String,String> getParams() throws AuthFailureError{
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("insert_array[user_id]", user_id);
+                params.put("insert_array[course_id]", "0");
+                params.put("insert_array[project_id]", "0");
+                params.put("insert_array[user_project_name]",editProjectsTitle.getText().toString().trim());
+                params.put("insert_array[user_project_details]",editProjectsDescription.getText().toString().trim());
+                params.put("insert_array[user_project_link]",editProjectsLink.getText().toString().trim());
+                params.put("insert_array[user_project_type]","0");
+                params.put("insert_array[user_project_remark]","0");
+                params.put("insert_array[user_project_uploaded_on]",date);
+                params.put("table","user_projects");
+                return params;
+            }
+        };
+        MySingleton.getmInstance(getActivity()).addToRequestQueue(stringRequest);
+    }
+
+    private void addAchievements() {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST,urlInsert, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject arrayObject=new JSONObject(response);
+                    status=arrayObject.getInt("status");
+                    if(status==200){
+                        setAchievements();
+                    }
+                    else{
+                        Toast.makeText(getActivity(), "Registration Failed", Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+
+            @Override
+            protected Map<String,String> getParams() throws AuthFailureError{
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("insert_array[user_id]", user_id);
+                params.put("insert_array[accolade_title]",editAchievementsName.getText().toString().trim());
+                params.put("insert_array[accolade_details]",editAchievementsDescription.getText().toString().trim());
+                params.put("table","user_accolades");
+                return params;
+            }
+        };
+        MySingleton.getmInstance(getActivity()).addToRequestQueue(stringRequest);
+    }
+
+    private void addTrainings() {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST,urlInsert, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject arrayObject=new JSONObject(response);
+                    status=arrayObject.getInt("status");
+                    if(status==200){
+                        setTrainings();
+                    }
+                    else{
+                        Toast.makeText(getActivity(), "Registration Failed", Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+
+            @Override
+            protected Map<String,String> getParams() throws AuthFailureError{
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("insert_array[user_id]", user_id);
+                params.put("insert_array[user_training_course]",editTrainingsCourse.getText().toString().trim());
+                params.put("insert_array[user_training_company]",editTrainingsCertifiedBy.getText().toString().trim());
+                params.put("insert_array[user_training_duration]",editTrainingsDuration.getText().toString().trim());
+                params.put("insert_array[user_training_details]",editTrainingsDetails.getText().toString().trim());
+                params.put("table","user_training_details");
+                return params;
+            }
+        };
+        MySingleton.getmInstance(getActivity()).addToRequestQueue(stringRequest);
+    }
+
+    private void addWorkExperience() {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST,urlInsert, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject arrayObject=new JSONObject(response);
+                    status=arrayObject.getInt("status");
+                    if(status==200){
+                        setWorkExp();
+                    }
+                    else{
+                        Toast.makeText(getActivity(), "Registration Failed", Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+
+            @Override
+            protected Map<String,String> getParams() throws AuthFailureError{
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("insert_array[user_id]", user_id);
+                params.put("insert_array[user_job_type]",editWorkExperienceJobType.getText().toString().trim());
+                params.put("insert_array[user_company]",editWorkExperienceCompanyName.getText().toString().trim());
+                params.put("insert_array[user_job_profile]",editWorkExperiencePosition.getText().toString().trim());
+                params.put("insert_array[user_job_start_date]",editWorkExperienceStartDate.getText().toString());
+                params.put("insert_array[user_job_end_date]",editWorkExperienceLastDate.getText().toString().trim());
+                params.put("insert_array[user_job_desc]",editWorkExperienceJobDescription.getText().toString());
+                params.put("table","user_employment_details");
+                return params;
+            }
+        };
+        MySingleton.getmInstance(getActivity()).addToRequestQueue(stringRequest);
     }
 
     private void editCollegeEducation() {
@@ -585,11 +753,6 @@ public class ProfileAcademicFragment extends Fragment {
         };
         MySingleton.getmInstance(getContext()).addToRequestQueue(stringRequest);
     }
-    private void updateLabel(EditText edittext, Calendar calendar) {
-        String Format = "yy/MM/dd"; //In which you need put here
-        SimpleDateFormat sdf = new SimpleDateFormat(Format, Locale.UK);
-        edittext.setText(sdf.format(calendar.getTime()));
-    };
 
     private void setValues() {
         StringRequest stringRequest=new StringRequest(Request.Method.POST, urlAcademic, new Response.Listener<String>() {
