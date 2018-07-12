@@ -19,7 +19,7 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/editCollegeEducationCollege"/>
+                    android:id="@+id/editCollegeEducationCollegeName"/>
             </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout

@@ -188,9 +188,6 @@ public class ProfilePersonalFragment extends Fragment {
             }
         });
 
-
-
-
         languagesEditBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -320,9 +317,6 @@ public class ProfilePersonalFragment extends Fragment {
 
             }
         });
-
-
-
 
         coverLetterEditBtn.setOnClickListener(new View.OnClickListener() {
             @Override

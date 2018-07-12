@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,6 +49,8 @@ public class ProfileAcademicFragment extends Fragment {
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private String urlAcademic="http://nfly.in/profileapi/academic_details";
+    private String urlUpdate="http://nfly.in/gapi/update";
+
     private String user_id;
 
     private TextView profileCollegeName,profileCourse,profileBranch,profileClassOf,profileCGPA;
@@ -57,6 +60,13 @@ public class ProfileAcademicFragment extends Fragment {
 
     private ImageView workExperienceAddBtn, collegeEducationEditBtn, schoolEducationEditBtn, trainingsAddBtn,
     projectsAddBtn, achievementsAddBtn, workSampleEditBtn;
+    
+    private EditText editSchoolEducationXIISchoolName,editSchoolEducationXIIBoard,editSchoolEducationXIIStream,editSchoolEducationXIIPassingYear,editSchoolEducationXIIPercentage;
+    private EditText editSchoolEducationXSchoolName,editSchoolEducationXBoard,editSchoolEducationXStream,editSchoolEducationXPassingYear,editSchoolEducationXPercentage;
+
+    private EditText editCollegeEducationCollegeName,editCollegeEducationCourse,editCollegeEducationBranch,editCollegeEducationClassOf,editCollegeEducationCGPA;
+
+    private EditText editWorkSampleGithub,editWorkSamplePlayStore,editWorkSampleBehance,editWorkSampleBlogLink;
 
     private ArrayList<String> DataSet=new ArrayList<String>(){
         {  add("blahblah");
@@ -65,8 +75,7 @@ public class ProfileAcademicFragment extends Fragment {
     public ProfileAcademicFragment() {
         // Required empty public constructor
     }
-
-
+    
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -98,7 +107,6 @@ public class ProfileAcademicFragment extends Fragment {
         profileBlogLink=view.findViewById(R.id.profileBlogLink);
         profilePlayStore=view.findViewById(R.id.profilePlayStore);
 
-
         workExperienceAddBtn=view.findViewById(R.id.workExperienceAddBtn);
         collegeEducationEditBtn=view.findViewById(R.id.collegeEducationEditBtn);
         schoolEducationEditBtn=view.findViewById(R.id.schoolEducationEditBtn);
@@ -106,7 +114,6 @@ public class ProfileAcademicFragment extends Fragment {
         projectsAddBtn=view.findViewById(R.id.projectsAddBtn);
         achievementsAddBtn=view.findViewById(R.id.achievementsAddBtn);
         workSampleEditBtn=view.findViewById(R.id.workSampleEditBtn);
-
 
         setWorkExperience(view);
         setTrainings(view);
@@ -151,6 +158,18 @@ public class ProfileAcademicFragment extends Fragment {
                 LayoutInflater layoutInflater=getLayoutInflater();
                 View collegeEducationEditLayout=layoutInflater.inflate(R.layout.dialog_edit_college_education,null);
 
+                editCollegeEducationCollegeName=collegeEducationEditLayout.findViewById(R.id.editCollegeEducationCollegeName);
+                editCollegeEducationBranch=collegeEducationEditLayout.findViewById(R.id.editCollegeEducationBranch);
+                editCollegeEducationCourse=collegeEducationEditLayout.findViewById(R.id.editCollegeEducationCourse);
+                editCollegeEducationClassOf=collegeEducationEditLayout.findViewById(R.id.editCollegeEducationClassOf);
+                editCollegeEducationCGPA=collegeEducationEditLayout.findViewById(R.id.editCollegeEducationCgpa);
+
+                editCollegeEducationCollegeName.setText(profileCollegeName.getText().toString().trim());
+                editCollegeEducationBranch.setText(profileBranch.getText().toString().trim());
+                editCollegeEducationCourse.setText(profileCourse.getText().toString().trim());
+                editCollegeEducationClassOf.setText(profileClassOf.getText().toString().trim());
+                editCollegeEducationCGPA.setText(profileCGPA.getText().toString().trim());
+
                 AlertDialog.Builder alertDialog=new AlertDialog.Builder(getActivity());
                 alertDialog.setView(collegeEducationEditLayout);
                 alertDialog.setCancelable(false);
@@ -159,15 +178,14 @@ public class ProfileAcademicFragment extends Fragment {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getActivity(), "Cancel clicked", Toast.LENGTH_SHORT).show();
+
                     }
                 });
 
                 alertDialog.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getActivity(), "Submit clicked", Toast.LENGTH_SHORT).show();
-
+                        editCollegeEducation();
                     }
                 });
                 AlertDialog alert=alertDialog.create();
@@ -181,6 +199,23 @@ public class ProfileAcademicFragment extends Fragment {
             public void onClick(View view) {
                 LayoutInflater layoutInflater=getLayoutInflater();
                 View schoolEducationEditLayout=layoutInflater.inflate(R.layout.dialog_edit_school_education,null);
+
+                editSchoolEducationXIISchoolName=schoolEducationEditLayout.findViewById(R.id.editSchoolEducationXIISchoolName);
+                editSchoolEducationXIIBoard=schoolEducationEditLayout.findViewById(R.id.editSchoolEducationXBoard);
+                editSchoolEducationXIIStream=schoolEducationEditLayout.findViewById(R.id.editSchoolEducationXIIStream);
+                editSchoolEducationXIIPassingYear=schoolEducationEditLayout.findViewById(R.id.editSchoolEducationXIIPassingYear);
+                editSchoolEducationXIIPercentage=schoolEducationEditLayout.findViewById(R.id.editSchoolEducationXIIPercentage);
+
+                editSchoolEducationXSchoolName=schoolEducationEditLayout.findViewById(R.id.editSchoolEducationXSchoolName);
+                editSchoolEducationXBoard=schoolEducationEditLayout.findViewById(R.id.editSchoolEducationXBoard);
+                editSchoolEducationXPassingYear=schoolEducationEditLayout.findViewById(R.id.editSchoolEducationXPassingYear);
+                editSchoolEducationXPercentage=schoolEducationEditLayout.findViewById(R.id.editSchoolEducationXPercentage);
+
+                editSchoolEducationXIISchoolName.setText(profileXIISchool.getText().toString());
+                editSchoolEducationXIIBoard.setText(profileXIIBoard.getText().toString());
+                editSchoolEducationXIIStream.setText(profileXIIStream.getText().toString());
+                editSchoolEducationXIIPassingYear.setText(profileXIIPassingyear.getText().toString());
+                editSchoolEducationXIIPercentage.setText(profileXIIPercentage.getText().toString());
 
                 AlertDialog.Builder alertDialog=new AlertDialog.Builder(getActivity());
                 alertDialog.setView(schoolEducationEditLayout);
@@ -197,7 +232,7 @@ public class ProfileAcademicFragment extends Fragment {
                 alertDialog.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getActivity(), "Submit clicked", Toast.LENGTH_SHORT).show();
+                        editSchoolEducation();
 
                     }
                 });
@@ -304,7 +339,17 @@ public class ProfileAcademicFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 LayoutInflater layoutInflater=getLayoutInflater();
-                View workSampleEditLayout=layoutInflater.inflate(R.layout.dialog_edit_work_experience,null);
+                View workSampleEditLayout=layoutInflater.inflate(R.layout.dialog_edit_work_sample,null);
+
+                editWorkSampleGithub=workSampleEditLayout.findViewById(R.id.editWorkSampleGithub);
+                editWorkSampleBehance=workSampleEditLayout.findViewById(R.id.editWorkSampleBehance);
+                editWorkSamplePlayStore=workSampleEditLayout.findViewById(R.id.editWorkSamplePlayStore);
+                editWorkSampleBlogLink=workSampleEditLayout.findViewById(R.id.editWorkSampleBlogLink);
+
+                editWorkSampleGithub.setText(profileGitHub.getText().toString());
+                editWorkSampleBehance.setText(profileBehance.getText().toString());
+                editWorkSamplePlayStore.setText(profilePlayStore.getText().toString());
+                editWorkSampleBlogLink.setText(profileBlogLink.getText().toString());
 
                 AlertDialog.Builder alertDialog=new AlertDialog.Builder(getActivity());
                 alertDialog.setView(workSampleEditLayout);
@@ -321,7 +366,7 @@ public class ProfileAcademicFragment extends Fragment {
                 alertDialog.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getActivity(), "Submit clicked", Toast.LENGTH_SHORT).show();
+                        editWorkSample();
 
                     }
                 });
@@ -330,16 +375,127 @@ public class ProfileAcademicFragment extends Fragment {
 
             }
         });
-
-
-
-
-
-
         return view;
+    }
+
+    private void editCollegeEducation() {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, urlUpdate, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                setValues();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("update_array[user_college]",editCollegeEducationCollegeName.getText().toString());
+                params.put("update_array[user_course]",editCollegeEducationCourse.getText().toString());
+                params.put("update_array[user_branch]",editCollegeEducationBranch.getText().toString());
+                params.put("update_array[user_passing_year]",editCollegeEducationClassOf.getText().toString());
+                params.put("update_array[user_cgpa]",editCollegeEducationCGPA.getText().toString());
+
+                params.put("key", "user_id");
+                params.put("value", user_id);
+                params.put("table","user_graduation_details");
+                return params;
+            }
+        };
+        MySingleton.getmInstance(getContext()).addToRequestQueue(stringRequest);
+    }
+
+    private void editSchoolEducation() {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, urlUpdate, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                setValues();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("update_array[user_xii_school_name]",editSchoolEducationXIISchoolName.getText().toString());
+                params.put("update_array[user_xii_board]",editSchoolEducationXIIBoard.getText().toString());
+                params.put("update_array[user_xii_stream]",editSchoolEducationXIIStream.getText().toString());
+                params.put("update_array[user_xii_marks]",editSchoolEducationXIIPercentage.getText().toString());
+                params.put("update_array[user_xii_passing_year]",editSchoolEducationXIIPassingYear.getText().toString());
+
+                params.put("update_array[user_x_school_name]",editSchoolEducationXSchoolName.getText().toString());
+                params.put("update_array[user_x_board]",editSchoolEducationXBoard.getText().toString());
+                params.put("update_array[user_x_marks]",editSchoolEducationXPercentage.getText().toString());
+                params.put("update_array[user_x_passing_year]",editSchoolEducationXPassingYear.getText().toString());
 
 
+                params.put("key", "user_id");
+                params.put("value", user_id);
+                params.put("table","user_school_details");
+                return params;
+            }
+        };
+        MySingleton.getmInstance(getContext()).addToRequestQueue(stringRequest);
+    }
 
+    private void editWorkSample() {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, urlUpdate, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                setValues();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("update_array[github_profile]",editWorkSampleGithub.getText().toString());
+                params.put("update_array[playstore_profile]",editWorkSamplePlayStore.getText().toString());
+                params.put("update_array[design_profile]",editWorkSampleBehance.getText().toString());
+                params.put("update_array[blog_profile]",editWorkSampleBlogLink.getText().toString());
+                params.put("key", "user_id");
+                params.put("value", user_id);
+                params.put("table","user_work_sample");
+                return params;
+            }
+        };
+        MySingleton.getmInstance(getContext()).addToRequestQueue(stringRequest);
     }
 
     private void setValues() {
@@ -416,7 +572,6 @@ public class ProfileAcademicFragment extends Fragment {
         achievementsRecyclerView.setAdapter(adapter);
     }
 
-
     private void setWorkExperience(View v)
     {
 
@@ -439,7 +594,6 @@ public class ProfileAcademicFragment extends Fragment {
         trainingsRecyclerView.setAdapter(adapter);
     }
 
-
     private void setProjects(View v)
     {
         projectsRecyclerView=v.findViewById(R.id.profileAcademicProjectsRecyclerView);
@@ -450,5 +604,4 @@ public class ProfileAcademicFragment extends Fragment {
         projectsRecyclerView.setAdapter(adapter);
 
     }
-
 }
