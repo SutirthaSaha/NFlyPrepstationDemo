@@ -27,9 +27,14 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/editBasicDetailsGender"
                 android:layout_margin="10dp"></Spinner>
-
-            <android.support.design.widget.TextInputLayout
+            
+            <LinearLayout
                 android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:hint="Date of Birth(yyyy-mm-dd)"
                 android:layout_margin="10dp">
@@ -38,6 +43,17 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/editBasicDetailsDob"/>
             </android.support.design.widget.TextInputLayout>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/calendar"
+                    android:layout_marginRight="10dp"
+                    android:id="@+id/editBasicDetailsDobIcon"
+                    android:layout_gravity="center_vertical"
+                    android:tint="@color/cardview_shadow_start_color"/>
+           
+           
+            </LinearLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"

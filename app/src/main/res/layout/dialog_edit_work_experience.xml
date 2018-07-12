@@ -36,38 +36,63 @@
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Job Tyoe"
+                android:hint="Job Type"
                 android:layout_margin="10dp">
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/editWorkExperienceJobType"/>
             </android.support.design.widget.TextInputLayout>
-
-
-
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
             <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:hint="Start Date(yyyy-mm-dd)"
                 android:layout_margin="10dp">
                 <EditText
                     android:layout_width="match_parent"
+                    android:inputType="none"
                     android:layout_height="wrap_content"
                     android:id="@+id/editWorkExperienceStartDate"/>
             </android.support.design.widget.TextInputLayout>
-
-
-            <android.support.design.widget.TextInputLayout
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/calendar"
+                android:layout_marginRight="10dp"
+                android:id="@+id/editWorkExperienceStartDateIcon"
+                android:layout_gravity="center_vertical"
+                android:tint="@color/cardview_shadow_start_color"/>
+        </LinearLayout>
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:orientation="horizontal">
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:hint="Last Date(yyyy-mm-dd)"
                 android:layout_margin="10dp">
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:inputType="none"
                     android:id="@+id/editWorkExperienceLastDate"/>
             </android.support.design.widget.TextInputLayout>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/calendar"
+                android:layout_marginRight="10dp"
+                android:id="@+id/editWorkExperienceLastDateIcon"
+                android:layout_gravity="center_vertical"
+                android:tint="@color/cardview_shadow_start_color"/>
+            </LinearLayout>
 
 
             <android.support.design.widget.TextInputLayout

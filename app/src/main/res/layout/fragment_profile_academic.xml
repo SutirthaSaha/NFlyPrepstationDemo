@@ -46,6 +46,7 @@
                 <android.support.v7.widget.RecyclerView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"
                     android:id="@+id/profileAcademicWorkExperienceRecyclerView"/>
             </LinearLayout>
         </android.support.v7.widget.CardView>
@@ -452,6 +453,7 @@
                 </LinearLayout>
                 <android.support.v7.widget.RecyclerView
                     android:layout_width="match_parent"
+                    android:nestedScrollingEnabled="false"
                     android:layout_height="wrap_content"
                     android:id="@+id/profileAcademicTrainingsRecyclerView"/>
             </LinearLayout>
@@ -489,6 +491,7 @@
                     <android.support.v7.widget.RecyclerView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="false"
                         android:id="@+id/profileAcademicProjectsRecyclerView"/>
                 </LinearLayout>
             </android.support.v7.widget.CardView>
@@ -526,6 +529,7 @@
                     <android.support.v7.widget.RecyclerView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="false"
                         android:id="@+id/profileAcademicAchievementsRecyclerView"/>
                 </LinearLayout>
             </android.support.v7.widget.CardView>

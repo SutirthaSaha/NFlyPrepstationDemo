@@ -1,6 +1,7 @@
 package in.nfly.dell.nflydemo.fragments;
 
 
+import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.media.Image;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -27,7 +29,10 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import in.nfly.dell.nflydemo.MySingleton;
@@ -60,7 +65,7 @@ public class ProfilePersonalFragment extends Fragment {
     private ImageView profileImage;
 
     private ImageView basicDetailsEditBtn, coverLetterAddBtn, coverLetterEditBtn, hobbiesAddBtn, hobbiesEditBtn, languagesEditBtn,
-    languagesAddBtn, contactDetailsEditBtn,socialProfilesEditBtn;
+    languagesAddBtn, contactDetailsEditBtn,socialProfilesEditBtn, editBasicDetailsDobCalenderBtn;
 
     private String user_id;
 
@@ -396,12 +401,40 @@ public class ProfilePersonalFragment extends Fragment {
                 editBasicDetailsDob=basicDetailsEditLayout.findViewById(R.id.editBasicDetailsDob);
                 editBasicDetailsCurrentCity=basicDetailsEditLayout.findViewById(R.id.editBasicDetailsCurrentCity);
                 editBasicDetailsHomeTown=basicDetailsEditLayout.findViewById(R.id.editBasicDetailsHomeTown);
+                editBasicDetailsDobCalenderBtn=basicDetailsEditLayout.findViewById(R.id.editBasicDetailsDobIcon);
 
                 editBasicDetailsCurrentDesignation.setText(profileCurrentDesignation.getText().toString());
                 editBasicDetailsDob.setText(profileDob.getText().toString());
                 editBasicDetailsCurrentCity.setText(profileCurrentCity.getText().toString());
                 editBasicDetailsHomeTown.setText(profileHomeTown.getText().toString());
                 editBasicDetailsGender.setPrompt(profileGender.getText().toString());
+
+                final Calendar calendar = Calendar.getInstance();
+                final  DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                          int dayOfMonth) {
+                        // TODO Auto-generated method stub
+                        calendar.set(Calendar.YEAR, year);
+                        calendar.set(Calendar.MONTH, monthOfYear);
+                        calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                        updateLabel(editBasicDetailsDob,calendar);
+                    }
+
+                };
+
+                editBasicDetailsDobCalenderBtn.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        // TODO Auto-generated method stub
+                        new DatePickerDialog(getContext(), date, calendar
+                                .get(Calendar.YEAR), calendar.get(Calendar.MONTH),
+                                calendar.get(Calendar.DAY_OF_MONTH)).show();
+                    }
+                });
+
 
                 ArrayAdapter<String> adapter=new ArrayAdapter<String>(getContext(),R.layout.custom_spinner_onboard_textview,genderOptions);
                 editBasicDetailsGender.setAdapter(adapter);
@@ -502,6 +535,12 @@ public class ProfilePersonalFragment extends Fragment {
             }
         };
         MySingleton.getmInstance(getContext()).addToRequestQueue(stringRequest);
+    }
+
+    private void updateLabel(EditText edittext, Calendar calendar) {
+        String Format = "yy/MM/dd"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(Format, Locale.UK);
+        edittext.setText(sdf.format(calendar.getTime()));
     }
 
     private void editBasicDetails() {

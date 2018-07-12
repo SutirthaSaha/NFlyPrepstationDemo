@@ -1,6 +1,7 @@
 package in.nfly.dell.nflydemo.fragments;
 
 
+import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -25,8 +27,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import in.nfly.dell.nflydemo.MySingleton;
@@ -70,6 +75,9 @@ public class ProfileAcademicFragment extends Fragment {
     private EditText editCollegeEducationCollegeName,editCollegeEducationCourse,editCollegeEducationBranch,editCollegeEducationClassOf,editCollegeEducationCGPA;
 
     private EditText editWorkSampleGithub,editWorkSamplePlayStore,editWorkSampleBehance,editWorkSampleBlogLink;
+
+    private EditText editWorkExperienceStartDate, editWorkExperienceLastDate;
+    private ImageView editWorkExperienceStartDateCalendarBtn,editWorkExperienceLastDateCalendarBtn;
 
     private ArrayList<String> DataSet=new ArrayList<String>(){
         {  add("blahblah");
@@ -138,6 +146,8 @@ public class ProfileAcademicFragment extends Fragment {
         achievementsAddBtn=view.findViewById(R.id.achievementsAddBtn);
         workSampleEditBtn=view.findViewById(R.id.workSampleEditBtn);
 
+
+
         setWorkExperience(view);
         setTrainings(view);
         setProjects(view);
@@ -149,6 +159,13 @@ public class ProfileAcademicFragment extends Fragment {
             public void onClick(View view) {
                 LayoutInflater layoutInflater=getLayoutInflater();
                 View workExperienceAddLayout=layoutInflater.inflate(R.layout.dialog_edit_work_experience,null);
+
+                editWorkExperienceStartDateCalendarBtn=workExperienceAddLayout.findViewById(R.id.editWorkExperienceStartDateIcon);
+                editWorkExperienceLastDateCalendarBtn=workExperienceAddLayout.findViewById(R.id.editWorkExperienceLastDateIcon);
+
+
+                editWorkExperienceStartDate= workExperienceAddLayout.findViewById(R.id.editWorkExperienceStartDate);
+                editWorkExperienceLastDate= workExperienceAddLayout.findViewById(R.id.editWorkExperienceLastDate);
 
                 AlertDialog.Builder alertDialog=new AlertDialog.Builder(getActivity());
                 alertDialog.setView(workExperienceAddLayout);
@@ -171,6 +188,54 @@ public class ProfileAcademicFragment extends Fragment {
                 });
                 AlertDialog alert=alertDialog.create();
                 alert.show();
+                final Calendar calendarStartDate = Calendar.getInstance();
+                final  DatePickerDialog.OnDateSetListener startDate = new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                          int dayOfMonth) {
+                        // TODO Auto-generated method stub
+                        calendarStartDate.set(Calendar.YEAR, year);
+                        calendarStartDate.set(Calendar.MONTH, monthOfYear);
+                        calendarStartDate.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                        updateLabel(editWorkExperienceStartDate,calendarStartDate);
+                    }
+                };
+
+                editWorkExperienceStartDateCalendarBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // TODO Auto-generated method stub
+                        new DatePickerDialog(getContext(), startDate, calendarStartDate.get(Calendar.YEAR), calendarStartDate.get(Calendar.MONTH),
+                                calendarStartDate.get(Calendar.DAY_OF_MONTH)).show();
+                    }
+                });
+
+
+
+                final Calendar calendarLastDate = Calendar.getInstance();
+                final  DatePickerDialog.OnDateSetListener lastDate = new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                          int dayOfMonth) {
+                        // TODO Auto-generated method stub
+                        calendarLastDate.set(Calendar.YEAR, year);
+                        calendarLastDate.set(Calendar.MONTH, monthOfYear);
+                        calendarLastDate.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                        updateLabel(editWorkExperienceLastDate,calendarLastDate);
+                    }
+                };
+
+                editWorkExperienceLastDateCalendarBtn.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        // TODO Auto-generated method stub
+                        new DatePickerDialog(getContext(), lastDate, calendarLastDate
+                                .get(Calendar.YEAR), calendarLastDate.get(Calendar.MONTH),
+                                calendarLastDate.get(Calendar.DAY_OF_MONTH)).show();
+                    }
+                });
+
 
             }
         });
@@ -520,6 +585,11 @@ public class ProfileAcademicFragment extends Fragment {
         };
         MySingleton.getmInstance(getContext()).addToRequestQueue(stringRequest);
     }
+    private void updateLabel(EditText edittext, Calendar calendar) {
+        String Format = "yy/MM/dd"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(Format, Locale.UK);
+        edittext.setText(sdf.format(calendar.getTime()));
+    };
 
     private void setValues() {
         StringRequest stringRequest=new StringRequest(Request.Method.POST, urlAcademic, new Response.Listener<String>() {
