@@ -9,18 +9,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <android.support.v4.view.ViewPager
-            android:id="@+id/homeViewPager"
+            android:id="@+id/splashScreenViewPager"
             android:layout_width="match_parent"
-            android:layout_height="230dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="0dp">
         </android.support.v4.view.ViewPager>
         <me.relex.circleindicator.CircleIndicator
-            android:id="@+id/homeSliderIndicator"
+            android:id="@+id/splashScreenSliderIndicator"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             app:ci_drawable="@drawable/slider_indicator_shape"
             android:layout_marginBottom="10dp"
-            android:layout_alignBottom="@+id/homeViewPager" />
+            android:layout_alignBottom="@+id/splashScreenViewPager" />
     </RelativeLayout>
 
 </LinearLayout>

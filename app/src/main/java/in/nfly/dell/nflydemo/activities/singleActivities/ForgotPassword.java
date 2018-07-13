@@ -30,6 +30,14 @@ public class ForgotPassword extends AppCompatActivity {
             }
         });
 
+        forgotPasswordSubmitBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent=new Intent(ForgotPassword.this, SplashScreenSliderActivity.class);
+                startActivity(intent);
+            }
+        });
+
 
 
 
