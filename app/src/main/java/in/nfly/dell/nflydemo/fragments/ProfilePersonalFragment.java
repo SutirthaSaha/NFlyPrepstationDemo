@@ -7,6 +7,8 @@ import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +32,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Locale;
@@ -38,9 +41,12 @@ import java.util.Map;
 import in.nfly.dell.nflydemo.MySingleton;
 import in.nfly.dell.nflydemo.R;
 import in.nfly.dell.nflydemo.User;
+import in.nfly.dell.nflydemo.activities.MainActivity;
 import in.nfly.dell.nflydemo.activities.SalaryCalculatorActivity;
 import in.nfly.dell.nflydemo.activities.singleActivities.PracticeTestActivity;
 import in.nfly.dell.nflydemo.adapters.LearnTipsAdapter;
+import in.nfly.dell.nflydemo.adapters.ProfilePersonalHobbiesAdapter;
+import in.nfly.dell.nflydemo.adapters.ProfilePersonalLanguagesAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -68,6 +74,19 @@ public class ProfilePersonalFragment extends Fragment {
     languagesAddBtn, contactDetailsEditBtn,socialProfilesEditBtn, editBasicDetailsDobCalenderBtn;
 
     private String user_id;
+
+    private RecyclerView profileHobbiesRecyclerView;
+    private RecyclerView profileLanguagesRecyclerView;
+
+    private RecyclerView.Adapter adapter;
+    private RecyclerView.LayoutManager layoutManager;
+
+    private ArrayList<String> dataSet=new ArrayList<String>(){
+        {
+            add("painting");
+            add("reading");
+           }};
+
 
     public ProfilePersonalFragment() {
         // Required empty public constructor
@@ -462,8 +481,12 @@ public class ProfilePersonalFragment extends Fragment {
                 alert.show();
             }
         });
+        setHobbies(view);
+        setLanguages(view);
+
         return view;
     }
+
 
     private void editContactDetails() {
         StringRequest stringRequest=new StringRequest(Request.Method.POST, urlUpdate, new Response.Listener<String>() {
@@ -635,5 +658,26 @@ public class ProfilePersonalFragment extends Fragment {
             }
         };
         MySingleton.getmInstance(getContext()).addToRequestQueue(stringRequest);
+    }
+    private void setHobbies(View view)
+    {
+        profileHobbiesRecyclerView=view.findViewById(R.id.profileHobbiesRecyclerView);
+        layoutManager=new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,false);
+        profileHobbiesRecyclerView.setLayoutManager(layoutManager);
+
+        adapter= new ProfilePersonalHobbiesAdapter(dataSet);
+        profileHobbiesRecyclerView.setAdapter(adapter);
+
+    }
+
+
+    private void setLanguages(View view) {
+
+        profileLanguagesRecyclerView=view.findViewById(R.id.profileLanguagesRecyclerView);
+        layoutManager=new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,false);
+        profileLanguagesRecyclerView.setLayoutManager(layoutManager);
+
+        adapter= new ProfilePersonalLanguagesAdapter(dataSet);
+        profileLanguagesRecyclerView.setAdapter(adapter);
     }
 }
