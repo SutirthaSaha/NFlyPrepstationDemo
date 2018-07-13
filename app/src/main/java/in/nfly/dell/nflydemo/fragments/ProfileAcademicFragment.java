@@ -3,9 +3,8 @@ package in.nfly.dell.nflydemo.fragments;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
@@ -38,11 +37,6 @@ import java.util.Map;
 import in.nfly.dell.nflydemo.MySingleton;
 import in.nfly.dell.nflydemo.R;
 import in.nfly.dell.nflydemo.User;
-import in.nfly.dell.nflydemo.activities.MainActivity;
-import in.nfly.dell.nflydemo.activities.OnBoardRegisterActivity;
-import in.nfly.dell.nflydemo.activities.RegisterActivity;
-import in.nfly.dell.nflydemo.adapters.LearnTipsAdapter;
-import in.nfly.dell.nflydemo.adapters.ProfileAcademicAchievementsAdapter;
 import in.nfly.dell.nflydemo.adapters.ProfileAcademicProjectsAdapter;
 import in.nfly.dell.nflydemo.adapters.ProfileAcademicTrainingsAdapter;
 import in.nfly.dell.nflydemo.adapters.ProfileAcademicWorkExperienceAdapter;
@@ -52,10 +46,10 @@ import in.nfly.dell.nflydemo.adapters.ProfileAcademicWorkExperienceAdapter;
  */
 public class ProfileAcademicFragment extends Fragment {
 
-    private RecyclerView workExperienceRecyclerView;
-    private RecyclerView trainingsRecyclerView;
-    private RecyclerView projectsRecyclerView;
-    private RecyclerView achievementsRecyclerView;
+    public RecyclerView workExperienceRecyclerView;
+    public RecyclerView trainingsRecyclerView;
+    public RecyclerView projectsRecyclerView;
+    public RecyclerView achievementsRecyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private String urlAcademic="http://nfly.in/profileapi/academic_details";
@@ -91,6 +85,7 @@ public class ProfileAcademicFragment extends Fragment {
             add("blah");
          }};
 
+    private ArrayList<String> workExpIdDataSet=new ArrayList<String>(){};
     private ArrayList<String> companyNameDataSet=new ArrayList<String>(){};
     private ArrayList<String> postionDataSet=new ArrayList<String>(){};
     private ArrayList<String> jobTypeDataSet=new ArrayList<String>(){};
@@ -98,15 +93,18 @@ public class ProfileAcademicFragment extends Fragment {
     private ArrayList<String> endDateDataSet=new ArrayList<String>(){};
     private ArrayList<String> jobDecriptionDataSet=new ArrayList<String>(){};
 
+    private ArrayList<String> trainingIdDataSet=new ArrayList<String>(){};
     private ArrayList<String> courseDataSet=new ArrayList<String>(){};
     private ArrayList<String> certDataSet=new ArrayList<String>(){};
     private ArrayList<String> durationDataSet=new ArrayList<String>(){};
     private ArrayList<String> detailsDataSet=new ArrayList<String>(){};
 
+    private ArrayList<String> projectIdDataSet=new ArrayList<String>(){};
     private ArrayList<String> projectTitleDataSet=new ArrayList<String>(){};
     private ArrayList<String> projectDescriptionDataSet=new ArrayList<String>(){};
     private ArrayList<String> projectLinkDataSet=new ArrayList<String>(){};
 
+    private ArrayList<String> achievementIdDataSet=new ArrayList<String>(){};
     private ArrayList<String> achievementNameDataSet=new ArrayList<String>(){};
     private ArrayList<String> achievementDescriptionDataSet=new ArrayList<String>(){};
 
@@ -491,6 +489,7 @@ public class ProfileAcademicFragment extends Fragment {
     }
 
     private void addAchievements() {
+
         StringRequest stringRequest=new StringRequest(Request.Method.POST,urlInsert, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -826,7 +825,8 @@ public class ProfileAcademicFragment extends Fragment {
 
         setAchievements();
     }
-    private void setAchievements() {
+
+    public void setAchievements() {
         StringRequest stringRequest=new StringRequest(Request.Method.POST, oneRow, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -836,10 +836,11 @@ public class ProfileAcademicFragment extends Fragment {
                     JSONArray parentArray=new JSONArray(response);
                     for(int i=0;i<parentArray.length();i++){
                         arrayObject=parentArray.getJSONObject(i);
+                        achievementIdDataSet.add(arrayObject.getString("ua_id"));
                         achievementNameDataSet.add(arrayObject.getString("accolade_title"));
                         achievementDescriptionDataSet.add(arrayObject.getString("accolade_details"));
                     }
-                    adapter= new ProfileAcademicAchievementsAdapter(achievementNameDataSet,achievementDescriptionDataSet);
+                    adapter= new ProfileAcademicAchievementsAdapter(getActivity(),achievementIdDataSet,achievementNameDataSet,achievementDescriptionDataSet);
                     achievementsRecyclerView.setAdapter(adapter);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -882,7 +883,7 @@ public class ProfileAcademicFragment extends Fragment {
 
 
     }
-    private void setWorkExp() {
+    public void setWorkExp() {
         StringRequest stringRequest=new StringRequest(Request.Method.POST, oneRow, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -943,7 +944,7 @@ public class ProfileAcademicFragment extends Fragment {
 
     }
 
-    private void setTrainings() {
+    public void setTrainings() {
         StringRequest stringRequest=new StringRequest(Request.Method.POST, oneRow, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -1049,4 +1050,134 @@ public class ProfileAcademicFragment extends Fragment {
         MySingleton.getmInstance(getContext()).addToRequestQueue(stringRequest);
     }
 
+    public void editAchievements(final String achievementId, String achievementName, String achievementDetails){
+        LayoutInflater layoutInflater=getLayoutInflater();
+        View achievementsAddLayout=layoutInflater.inflate(R.layout.dialog_edit_achievements,null);
+
+        editAchievementsName=achievementsAddLayout.findViewById(R.id.editAchievementsName);
+        editAchievementsDescription=achievementsAddLayout.findViewById(R.id.editAchievementsDescription);
+
+        AlertDialog.Builder alertDialog=new AlertDialog.Builder(getActivity());
+        alertDialog.setView(achievementsAddLayout);
+        alertDialog.setCancelable(false);
+
+        editAchievementsName.setText(achievementName);
+        editAchievementsDescription.setText(achievementDetails);
+
+        alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getActivity(), "Cancel clicked", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        alertDialog.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                StringRequest stringRequest=new StringRequest(Request.Method.POST, urlUpdate, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject arrayObject=new JSONObject(response);
+                            status=arrayObject.getInt("status");
+                            if(status==200){
+                                achievementIdDataSet.clear();
+                                achievementNameDataSet.clear();
+                                achievementDescriptionDataSet.clear();
+                                setAchievements();
+                            }
+                            else{
+                                Toast.makeText(getActivity(), "Registration Failed", Toast.LENGTH_SHORT).show();
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+
+                    }
+                })
+                {
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        HashMap<String, String> headers = new HashMap<String, String>();
+                        headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                        return headers;
+                    }
+
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> params = new HashMap<String, String>();
+                        params.put("update_array[accolade_title]",editAchievementsName.getText().toString());
+                        params.put("update_array[accolade_details]",editAchievementsDescription.getText().toString());
+                        params.put("key", "ua_id");
+                        params.put("value", achievementId);
+                        params.put("table","user_accolades");
+                        return params;
+                    }
+                };
+                MySingleton.getmInstance(getContext()).addToRequestQueue(stringRequest);
+            }
+        });
+        AlertDialog alert=alertDialog.create();
+        alert.show();
+    }
+
+    public class ProfileAcademicAchievementsAdapter extends RecyclerView.Adapter<ProfileAcademicAchievementsAdapter.ProfileAcademicAchievementsHolder> {
+
+        private Context context;
+        private ArrayList<String> idDataSet,nameDataSet,descriptionDataSet;
+
+        public ProfileAcademicAchievementsAdapter(Context context, ArrayList<String> idDataSet, ArrayList<String> nameDataSet, ArrayList<String> descriptionDataSet) {
+            this.context = context;
+            this.idDataSet = idDataSet;
+            this.nameDataSet = nameDataSet;
+            this.descriptionDataSet = descriptionDataSet;
+        }
+
+        @NonNull
+        @Override
+        public ProfileAcademicAchievementsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_profile_academic_achievements,parent,false);
+            ProfileAcademicAchievementsHolder holder=new ProfileAcademicAchievementsHolder(view);
+            return holder;
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull ProfileAcademicAchievementsHolder holder, final int position) {
+            holder.ProfileAcademicAchievementsName.setText(nameDataSet.get(position));
+            holder.ProfileAcademicAchievementsDescription.setText(descriptionDataSet.get(position));
+            holder.profileAchievementsEditBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    editAchievements(idDataSet.get(position),nameDataSet.get(position),descriptionDataSet.get(position));
+                }
+            });
+        }
+
+        @Override
+        public int getItemCount() {
+            return nameDataSet.size();
+        }
+
+        public class ProfileAcademicAchievementsHolder extends RecyclerView.ViewHolder{
+
+            public TextView ProfileAcademicAchievementsName,ProfileAcademicAchievementsDescription;
+            public ImageView profileAchievementsEditBtn,profileAchievementsDeleteBtn;
+
+            public ProfileAcademicAchievementsHolder(View itemView) {
+                super(itemView);
+                ProfileAcademicAchievementsName=itemView.findViewById(R.id.profileAchievementsName);
+                ProfileAcademicAchievementsDescription=itemView.findViewById(R.id.profileAchievementsDescription);
+                profileAchievementsDeleteBtn=itemView.findViewById(R.id.profileAchievementsDeleteBtn);
+                profileAchievementsEditBtn=itemView.findViewById(R.id.profileAchievementsEditBtn);
+            }
+        }
+    }
 }
