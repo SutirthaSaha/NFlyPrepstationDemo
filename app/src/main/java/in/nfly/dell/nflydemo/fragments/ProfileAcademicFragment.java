@@ -1,6 +1,7 @@
 package in.nfly.dell.nflydemo.fragments;
 
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -26,6 +28,8 @@ import com.android.volley.toolbox.StringRequest;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.Calendar;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -64,6 +68,7 @@ public class ProfileAcademicFragment extends Fragment {
 
     private ImageView workExperienceAddBtn, collegeEducationEditBtn, schoolEducationEditBtn, trainingsAddBtn,
     projectsAddBtn, achievementsAddBtn, workSampleEditBtn;
+    private ImageView editWorkExperienceStartDateCalendarBtn,editWorkExperienceLastDateCalendarBtn;
 
     private EditText editSchoolEducationXIISchoolName,editSchoolEducationXIIBoard,editSchoolEducationXIIStream,editSchoolEducationXIIPassingYear,editSchoolEducationXIIPercentage;
     private EditText editSchoolEducationXSchoolName,editSchoolEducationXBoard,editSchoolEducationXStream,editSchoolEducationXPassingYear,editSchoolEducationXPercentage;
@@ -167,6 +172,13 @@ public class ProfileAcademicFragment extends Fragment {
                 editWorkExperienceLastDate=workExperienceAddLayout.findViewById(R.id.editWorkExperienceLastDate);
                 editWorkExperienceJobDescription=workExperienceAddLayout.findViewById(R.id.editWorkExperienceJobDescription);
 
+                editWorkExperienceStartDateCalendarBtn=workExperienceAddLayout.findViewById(R.id.editWorkExperienceStartDateIcon);
+                editWorkExperienceLastDateCalendarBtn=workExperienceAddLayout.findViewById(R.id.editWorkExperienceLastDateIcon);
+
+
+
+
+
                 AlertDialog.Builder alertDialog=new AlertDialog.Builder(getActivity());
                 alertDialog.setView(workExperienceAddLayout);
                 alertDialog.setCancelable(false);
@@ -189,7 +201,57 @@ public class ProfileAcademicFragment extends Fragment {
                 AlertDialog alert=alertDialog.create();
                 alert.show();
 
-            }
+                final Calendar calendarStartDate = Calendar.getInstance();
+                final  DatePickerDialog.OnDateSetListener startDate = new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                          int dayOfMonth) {
+                        // TODO Auto-generated method stub
+                        calendarStartDate.set(Calendar.YEAR, year);
+                        calendarStartDate.set(Calendar.MONTH, monthOfYear);
+                        calendarStartDate.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                        updateLabel(editWorkExperienceStartDate,calendarStartDate);
+                    }
+                };
+
+                editWorkExperienceStartDateCalendarBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // TODO Auto-generated method stub
+                        new DatePickerDialog(getContext(), startDate, calendarStartDate.get(Calendar.YEAR), calendarStartDate.get(Calendar.MONTH),
+                                calendarStartDate.get(Calendar.DAY_OF_MONTH)).show();
+                    }
+                });
+
+
+
+                final Calendar calendarLastDate = Calendar.getInstance();
+                final  DatePickerDialog.OnDateSetListener lastDate = new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker view, int year, int monthOfYear,
+                                          int dayOfMonth) {
+                        // TODO Auto-generated method stub
+                        calendarLastDate.set(Calendar.YEAR, year);
+                        calendarLastDate.set(Calendar.MONTH, monthOfYear);
+                        calendarLastDate.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                        updateLabel(editWorkExperienceLastDate,calendarLastDate);
+                    }
+                };
+
+                editWorkExperienceLastDateCalendarBtn.setOnClickListener(new View.OnClickListener() {
+
+                    @Override
+                    public void onClick(View v) {
+                        // TODO Auto-generated method stub
+                        new DatePickerDialog(getContext(), lastDate, calendarLastDate
+                                .get(Calendar.YEAR), calendarLastDate.get(Calendar.MONTH),
+                                calendarLastDate.get(Calendar.DAY_OF_MONTH)).show();
+                    }
+                });
+
+
+
+    }
         });
 
         collegeEducationEditBtn.setOnClickListener(new View.OnClickListener() {
@@ -1478,6 +1540,12 @@ public class ProfileAcademicFragment extends Fragment {
             }
         }
     }
+    private void updateLabel(EditText edittext, Calendar calendar) {
+        String Format = "yy/MM/dd"; //In which you need put here
+        SimpleDateFormat sdf = new SimpleDateFormat(Format, Locale.UK);
+        edittext.setText(sdf.format(calendar.getTime()));
+    };
+
 
     public void editWorkExp(final String workExpId, final String workExpCompanyName, String workExpPosition, String workExpJobType, String workExpStartDate, String workExpLastDate, String workExpJobDescription){
         LayoutInflater layoutInflater=getLayoutInflater();

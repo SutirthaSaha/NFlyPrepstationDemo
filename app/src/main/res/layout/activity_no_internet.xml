@@ -14,9 +14,24 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         android:id="@+id/noInternetToolbar"></android.support.v7.widget.Toolbar>
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:orientation="vertical"
         android:gravity="center"
-        android:text="No Internet Connection"/>
+        android:layout_height="match_parent">
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/no_internet_connection"
+        android:tint="@color/cardview_shadow_start_color"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="17sp"
+        android:paddingTop="10dp"
+        android:text="No Internet Connection"
+        android:paddingBottom="?android:attr/actionBarSize"/>
+    </LinearLayout>
 </LinearLayout>

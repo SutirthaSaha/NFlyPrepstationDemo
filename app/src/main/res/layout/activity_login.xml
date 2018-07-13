@@ -74,7 +74,13 @@
         android:textColor="#fff"
         android:background="@drawable/button_shape"
         android:layout_margin="10dp"
-
         android:onClick="onRegisterBtnClick"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Forgot Password?"
+        android:textColor="#fff"
+        android:layout_marginTop="5dp"
+        android:id="@+id/loginForgotPasswordText"/>
 
 </LinearLayout>

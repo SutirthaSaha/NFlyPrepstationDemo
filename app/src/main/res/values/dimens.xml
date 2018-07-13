@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="design_navigation_icon_size"
-        xmlns:tools="http://schemas.android.com/tools"
-        tools:override="true">20dp</dimen>
+    <dimen xmlns:tools="http://schemas.android.com/tools" name="design_navigation_icon_size" tools:override="true">
+        20dp
+    </dimen>
+    <dimen name="fab_margin">16dp</dimen>
 
 </resources>

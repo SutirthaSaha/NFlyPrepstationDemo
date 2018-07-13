@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -27,11 +28,13 @@ import java.util.Map;
 import in.nfly.dell.nflydemo.MySingleton;
 import in.nfly.dell.nflydemo.R;
 import in.nfly.dell.nflydemo.User;
+import in.nfly.dell.nflydemo.activities.singleActivities.ForgotPassword;
 
 public class LoginActivity extends AppCompatActivity {
 
     private EditText emailId,passWord;
     private Button loginBtn;
+    private TextView loginForgotPasswordText;
     private String userLogin="http://nfly.in/gapi/data_exists_two";
     int status;
     private ProgressDialog progressDialog;
@@ -42,6 +45,7 @@ public class LoginActivity extends AppCompatActivity {
         emailId=findViewById(R.id.emailId);
         passWord=findViewById(R.id.passWord);
         loginBtn=findViewById(R.id.loginBtn);
+        loginForgotPasswordText=findViewById(R.id.loginForgotPasswordText);
         User user=new User(LoginActivity.this);
         if(user.getEmail()!=""){
             Intent intent=new Intent(LoginActivity.this,MainActivity.class);
@@ -49,6 +53,14 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
+
+        loginForgotPasswordText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent= new Intent(LoginActivity.this,ForgotPassword.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
