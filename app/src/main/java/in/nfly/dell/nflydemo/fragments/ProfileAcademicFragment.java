@@ -37,9 +37,6 @@ import java.util.Map;
 import in.nfly.dell.nflydemo.MySingleton;
 import in.nfly.dell.nflydemo.R;
 import in.nfly.dell.nflydemo.User;
-import in.nfly.dell.nflydemo.adapters.ProfileAcademicProjectsAdapter;
-import in.nfly.dell.nflydemo.adapters.ProfileAcademicTrainingsAdapter;
-import in.nfly.dell.nflydemo.adapters.ProfileAcademicWorkExperienceAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -311,7 +308,6 @@ public class ProfileAcademicFragment extends Fragment {
                 alertDialog.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        trainingsRecyclerView.removeAllViewsInLayout();
                         addTrainings();
                     }
                 });
@@ -543,6 +539,11 @@ public class ProfileAcademicFragment extends Fragment {
                     JSONObject arrayObject=new JSONObject(response);
                     status=arrayObject.getInt("status");
                     if(status==200){
+                        trainingIdDataSet.clear();
+                        courseDataSet.clear();
+                        durationDataSet.clear();
+                        certDataSet.clear();
+                        detailsDataSet.clear();
                         setTrainings();
                     }
                     else{
@@ -893,6 +894,7 @@ public class ProfileAcademicFragment extends Fragment {
                     JSONArray parentArray=new JSONArray(response);
                     for(int i=0;i<parentArray.length();i++){
                         arrayObject=parentArray.getJSONObject(i);
+                        workExpIdDataSet.add(arrayObject.getString("ued_id"));
                         companyNameDataSet.add(arrayObject.getString("user_company"));
                         postionDataSet.add(arrayObject.getString("user_job_profile"));
                         jobTypeDataSet.add(arrayObject.getString("user_job_type"));
@@ -901,7 +903,7 @@ public class ProfileAcademicFragment extends Fragment {
                         jobDecriptionDataSet.add(arrayObject.getString("user_job_desc"));
                     }
 
-                    adapter= new ProfileAcademicWorkExperienceAdapter(companyNameDataSet,postionDataSet,jobTypeDataSet,startDateDataSet,endDateDataSet,jobDecriptionDataSet);
+                    adapter= new ProfileAcademicWorkExperienceAdapter(getActivity(),workExpIdDataSet,companyNameDataSet,postionDataSet,jobTypeDataSet,startDateDataSet,endDateDataSet,jobDecriptionDataSet);
                     workExperienceRecyclerView.setAdapter(adapter);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -954,12 +956,13 @@ public class ProfileAcademicFragment extends Fragment {
                     JSONArray parentArray=new JSONArray(response);
                     for(int i=0;i<parentArray.length();i++) {
                         arrayObject = parentArray.getJSONObject(i);
+                        trainingIdDataSet.add(arrayObject.getString("utd_id"));
                         courseDataSet.add(arrayObject.getString("user_training_course"));
                         certDataSet.add(arrayObject.getString("user_training_company"));
                         durationDataSet.add(arrayObject.getString("user_training_duration"));
                         detailsDataSet.add(arrayObject.getString("user_training_details"));
                     }
-                    adapter= new ProfileAcademicTrainingsAdapter(courseDataSet,certDataSet,durationDataSet,detailsDataSet);
+                    adapter= new ProfileAcademicTrainingsAdapter(getActivity(),trainingIdDataSet,courseDataSet,certDataSet,durationDataSet,detailsDataSet);
                     trainingsRecyclerView.setAdapter(adapter);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -1013,11 +1016,12 @@ public class ProfileAcademicFragment extends Fragment {
                     JSONArray parentArray=new JSONArray(response);
                     for(int i=0;i<parentArray.length();i++){
                         arrayObject=parentArray.getJSONObject(i);
+                        projectIdDataSet.add(arrayObject.getString("up_id"));
                         projectTitleDataSet.add(arrayObject.getString("user_project_name"));
                         projectDescriptionDataSet.add(arrayObject.getString("user_project_details"));
                         projectLinkDataSet.add(arrayObject.getString("user_project_link"));
                     }
-                    adapter= new ProfileAcademicProjectsAdapter(projectTitleDataSet,projectDescriptionDataSet,projectLinkDataSet);
+                    adapter= new ProfileAcademicProjectsAdapter(getActivity(),projectIdDataSet,projectTitleDataSet,projectLinkDataSet,projectDescriptionDataSet);
                     projectsRecyclerView.setAdapter(adapter);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -1177,6 +1181,465 @@ public class ProfileAcademicFragment extends Fragment {
                 ProfileAcademicAchievementsDescription=itemView.findViewById(R.id.profileAchievementsDescription);
                 profileAchievementsDeleteBtn=itemView.findViewById(R.id.profileAchievementsDeleteBtn);
                 profileAchievementsEditBtn=itemView.findViewById(R.id.profileAchievementsEditBtn);
+            }
+        }
+    }
+
+    public void editProjects(final String projectId, String projectTitle, String projectDescription,String projectLink){
+
+        LayoutInflater layoutInflater=getLayoutInflater();
+        View projectsAddLayout=layoutInflater.inflate(R.layout.dialog_edit_projects,null);
+
+        editProjectsDescription=projectsAddLayout.findViewById(R.id.editProjectDescription);
+        editProjectsLink=projectsAddLayout.findViewById(R.id.editProjectsLink);
+        editProjectsTitle=projectsAddLayout.findViewById(R.id.editProjectsTitle);
+
+        AlertDialog.Builder alertDialog=new AlertDialog.Builder(getActivity());
+        alertDialog.setView(projectsAddLayout);
+        alertDialog.setCancelable(false);
+
+        editProjectsTitle.setText(projectTitle);
+        editProjectsDescription.setText(projectDescription);
+        editProjectsLink.setText(projectLink);
+
+        alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getActivity(), "Cancel clicked", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        alertDialog.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                StringRequest stringRequest=new StringRequest(Request.Method.POST, urlUpdate, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject arrayObject=new JSONObject(response);
+                            status=arrayObject.getInt("status");
+                            if(status==200){
+                                projectIdDataSet.clear();
+                                projectTitleDataSet.clear();
+                                projectDescriptionDataSet.clear();
+                                projectLinkDataSet.clear();
+                                setProjects();
+                            }
+                            else{
+                                Toast.makeText(getActivity(), "Registration Failed", Toast.LENGTH_SHORT).show();
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+
+                    }
+                })
+                {
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        HashMap<String, String> headers = new HashMap<String, String>();
+                        headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                        return headers;
+                    }
+
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> params = new HashMap<String, String>();
+                        params.put("update_array[user_project_name]",editProjectsTitle.getText().toString());
+                        params.put("update_array[user_project_details]",editProjectsDescription.getText().toString());
+                        params.put("update_array[user_project_link]",editProjectsLink.getText().toString());
+                        params.put("key", "up_id");
+                        params.put("value", projectId);
+                        params.put("table","user_projects");
+                        return params;
+                    }
+                };
+                MySingleton.getmInstance(getContext()).addToRequestQueue(stringRequest);
+            }
+        });
+        AlertDialog alert=alertDialog.create();
+        alert.show();
+    }
+
+    public class ProfileAcademicProjectsAdapter extends RecyclerView.Adapter<ProfileAcademicProjectsAdapter.ProfileAcademicProjectsHolder> {
+
+        private Context context;
+        private ArrayList<String> projectIdDataSet,projectTitleDataSet,projectLinkDataSet,descriptionDataSet;
+
+        public ProfileAcademicProjectsAdapter(Context context, ArrayList<String> projectIdDataSet, ArrayList<String> projectTitleDataSet, ArrayList<String> projectLinkDataSet, ArrayList<String> descriptionDataSet) {
+            this.context = context;
+            this.projectIdDataSet = projectIdDataSet;
+            this.projectTitleDataSet = projectTitleDataSet;
+            this.projectLinkDataSet = projectLinkDataSet;
+            this.descriptionDataSet = descriptionDataSet;
+        }
+
+        @NonNull
+        @Override
+        public ProfileAcademicProjectsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_profile_academic_projects,parent,false);
+            ProfileAcademicProjectsHolder holder=new ProfileAcademicProjectsHolder(view);
+            return holder;
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull ProfileAcademicProjectsHolder holder, final int position) {
+            holder.ProfileAcademicProjectsTitle.setText(projectTitleDataSet.get(position));
+            holder.ProfileAcademicProjectsLink.setText(projectLinkDataSet.get(position));
+            holder.ProfileAcademicProjectsDescription.setText(descriptionDataSet.get(position));
+
+            holder.profileProjectsEditBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    editProjects(projectIdDataSet.get(position),projectTitleDataSet.get(position),projectDescriptionDataSet.get(position),projectLinkDataSet.get(position));
+                }
+            });
+        }
+
+        @Override
+        public int getItemCount() {
+            return projectTitleDataSet.size();
+        }
+
+        public class ProfileAcademicProjectsHolder extends RecyclerView.ViewHolder{
+
+            public TextView ProfileAcademicProjectsTitle,ProfileAcademicProjectsLink,ProfileAcademicProjectsDescription;
+
+            public ImageView profileProjectsEditBtn,profileProjectsDeleteBtn;
+
+            public ProfileAcademicProjectsHolder(View itemView) {
+                super(itemView);
+
+                ProfileAcademicProjectsTitle=itemView.findViewById(R.id.profileProjectTitle);
+                ProfileAcademicProjectsDescription=itemView.findViewById(R.id.profileDescription);
+                ProfileAcademicProjectsLink=itemView.findViewById(R.id.profileProjectLink);
+
+                profileProjectsEditBtn=itemView.findViewById(R.id.profileProjectsEditBtn);
+                profileProjectsDeleteBtn=itemView.findViewById(R.id.profileProjectsDeleteBtn);
+
+            }
+        }
+    }
+
+    public void editTraining(final String trainingId, String trainingCourse, String trainingDuration,String trainingDetails,String trainingCompany){
+        LayoutInflater layoutInflater=getLayoutInflater();
+        View trainingsAddLayout=layoutInflater.inflate(R.layout.dialog_edit_trainings,null);
+
+        editTrainingsCourse=trainingsAddLayout.findViewById(R.id.editTrainingsCourse);
+        editTrainingsDetails=trainingsAddLayout.findViewById(R.id.editTrainingsDetails);
+        editTrainingsDuration=trainingsAddLayout.findViewById(R.id.editTrainingsDuration);
+        editTrainingsCertifiedBy=trainingsAddLayout.findViewById(R.id.editTrainingsCertifiedBy);
+
+        AlertDialog.Builder alertDialog=new AlertDialog.Builder(getActivity());
+        alertDialog.setView(trainingsAddLayout);
+        alertDialog.setCancelable(false);
+
+
+        editTrainingsCourse.setText(trainingCourse);
+        editTrainingsDetails.setText(trainingDetails);
+        editTrainingsDuration.setText(trainingDuration);
+        editTrainingsCertifiedBy.setText(trainingCompany);
+
+        alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getActivity(), "Cancel clicked", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        alertDialog.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                StringRequest stringRequest=new StringRequest(Request.Method.POST, urlUpdate, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject arrayObject=new JSONObject(response);
+                            status=arrayObject.getInt("status");
+                            if(status==200){
+                                trainingIdDataSet.clear();
+                                courseDataSet.clear();
+                                durationDataSet.clear();
+                                certDataSet.clear();
+                                detailsDataSet.clear();
+                                setTrainings();
+                            }
+                            else{
+                                Toast.makeText(getActivity(), "Registration Failed", Toast.LENGTH_SHORT).show();
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+
+                    }
+                })
+                {
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        HashMap<String, String> headers = new HashMap<String, String>();
+                        headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                        return headers;
+                    }
+
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> params = new HashMap<String, String>();
+                        params.put("update_array[user_training_course]",editTrainingsCourse.getText().toString());
+                        params.put("update_array[user_training_company]",editTrainingsCertifiedBy.getText().toString());
+                        params.put("update_array[user_training_duration]",editTrainingsDuration.getText().toString());
+                        params.put("update_array[user_training_details]",editTrainingsDetails.getText().toString());
+                        params.put("key", "utd_id");
+                        params.put("value", trainingId);
+                        params.put("table","user_training_details");
+                        return params;
+                    }
+                };
+                MySingleton.getmInstance(getContext()).addToRequestQueue(stringRequest);
+            }
+        });
+        AlertDialog alert=alertDialog.create();
+        alert.show();
+    }
+
+    public class ProfileAcademicTrainingsAdapter extends RecyclerView.Adapter<ProfileAcademicTrainingsAdapter.ProfileAcademicTrainingsHolder> {
+
+        private Context context;
+        private ArrayList<String> idDataSet,courseDataSet,certifiedByDataSet,durationDataSet,detailsDataSet;
+
+        public ProfileAcademicTrainingsAdapter(Context context, ArrayList<String> idDataSet, ArrayList<String> courseDataSet, ArrayList<String> certifiedByDataSet, ArrayList<String> durationDataSet, ArrayList<String> detailsDataSet) {
+            this.context = context;
+            this.idDataSet = idDataSet;
+            this.courseDataSet = courseDataSet;
+            this.certifiedByDataSet = certifiedByDataSet;
+            this.durationDataSet = durationDataSet;
+            this.detailsDataSet = detailsDataSet;
+        }
+
+        @NonNull
+        @Override
+        public ProfileAcademicTrainingsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_profile_academic_trainings,parent,false);
+            ProfileAcademicTrainingsHolder holder=new ProfileAcademicTrainingsHolder(view);
+            return holder;
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull ProfileAcademicTrainingsHolder holder, final int position) {
+            holder.ProfileAcademicTrainingsCourse.setText(courseDataSet.get(position));
+            holder.ProfileAcademicTrainingsDetails.setText(detailsDataSet.get(position));
+            holder.ProfileAcademicTrainingsDuration.setText(durationDataSet.get(position));
+            holder.ProfileAcademicTrainingsCertifiedBy.setText(certifiedByDataSet.get(position));
+
+            holder.profileTrainingsEditBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    editTraining(idDataSet.get(position),courseDataSet.get(position),durationDataSet.get(position),detailsDataSet.get(position),certifiedByDataSet.get(position));
+                }
+            });
+        }
+
+        @Override
+        public int getItemCount() {
+            return courseDataSet.size();
+        }
+
+        public class ProfileAcademicTrainingsHolder extends RecyclerView.ViewHolder{
+
+            public TextView ProfileAcademicTrainingsCourse,ProfileAcademicTrainingsDuration,ProfileAcademicTrainingsDetails,
+                    ProfileAcademicTrainingsCertifiedBy;
+
+            public ImageView profileTrainingsEditBtn,profileTrainingsDeleteBtn;
+            public ProfileAcademicTrainingsHolder(View itemView) {
+                super(itemView);
+
+                ProfileAcademicTrainingsCourse=itemView.findViewById(R.id.profileTrainingCourse);
+                ProfileAcademicTrainingsDuration=itemView.findViewById(R.id.profileDuration);
+                ProfileAcademicTrainingsDetails=itemView.findViewById(R.id.profileDetails);
+                ProfileAcademicTrainingsCertifiedBy=itemView.findViewById(R.id.profileCertifiedBy);
+
+                profileTrainingsEditBtn=itemView.findViewById(R.id.profileTrainingsEditBtn);
+                profileTrainingsDeleteBtn=itemView.findViewById(R.id.profileTrainingsDeleteBtn);
+            }
+        }
+    }
+
+    public void editWorkExp(final String workExpId, final String workExpCompanyName, String workExpPosition, String workExpJobType, String workExpStartDate, String workExpLastDate, String workExpJobDescription){
+        LayoutInflater layoutInflater=getLayoutInflater();
+        View workExperienceAddLayout=layoutInflater.inflate(R.layout.dialog_edit_work_experience,null);
+
+        editWorkExperienceCompanyName=workExperienceAddLayout.findViewById(R.id.editWorkExperienceCompanyName);
+        editWorkExperiencePosition=workExperienceAddLayout.findViewById(R.id.editWorkExperiencePosition);
+        editWorkExperienceJobType=workExperienceAddLayout.findViewById(R.id.editWorkExperienceJobType);
+        editWorkExperienceStartDate=workExperienceAddLayout.findViewById(R.id.editWorkExperienceStartDate);
+        editWorkExperienceLastDate=workExperienceAddLayout.findViewById(R.id.editWorkExperienceLastDate);
+        editWorkExperienceJobDescription=workExperienceAddLayout.findViewById(R.id.editWorkExperienceJobDescription);
+
+        AlertDialog.Builder alertDialog=new AlertDialog.Builder(getActivity());
+        alertDialog.setView(workExperienceAddLayout);
+        alertDialog.setCancelable(false);
+
+        editWorkExperienceCompanyName.setText(workExpCompanyName);
+        editWorkExperiencePosition.setText(workExpPosition);
+        editWorkExperienceJobType.setText(workExpJobType);
+        editWorkExperienceStartDate.setText(workExpStartDate);
+        editWorkExperienceLastDate.setText(workExpLastDate);
+        editWorkExperienceJobDescription.setText(workExpJobDescription);
+
+        alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Toast.makeText(getActivity(), "Cancel clicked", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        alertDialog.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                StringRequest stringRequest=new StringRequest(Request.Method.POST, urlUpdate, new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONObject arrayObject=new JSONObject(response);
+                            status=arrayObject.getInt("status");
+                            if(status==200){
+                                workExpIdDataSet.clear();
+                                companyNameDataSet.clear();
+                                postionDataSet.clear();
+                                jobTypeDataSet.clear();
+                                startDateDataSet.clear();
+                                endDateDataSet.clear();
+                                jobDecriptionDataSet.clear();
+                                setWorkExp();
+                            }
+                            else{
+                                Toast.makeText(getActivity(), "Registration Failed", Toast.LENGTH_SHORT).show();
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+
+                    }
+                })
+                {
+                    @Override
+                    public Map<String, String> getHeaders() throws AuthFailureError {
+                        HashMap<String, String> headers = new HashMap<String, String>();
+                        headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                        return headers;
+                    }
+
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> params = new HashMap<String, String>();
+                        params.put("update_array[user_job_type]",editWorkExperienceJobType.getText().toString());
+                        params.put("update_array[user_company]",editWorkExperienceCompanyName.getText().toString());
+                        params.put("update_array[user_job_profile]",editWorkExperiencePosition.getText().toString());
+                        params.put("update_array[user_job_start_date]",editWorkExperienceStartDate.getText().toString());
+                        params.put("update_array[user_job_end_date]",editWorkExperienceLastDate.getText().toString());
+                        params.put("update_array[user_job_desc]",editWorkExperienceJobDescription.getText().toString());
+                        params.put("key", "ued_id");
+                        params.put("value",workExpId);
+                        params.put("table","user_employment_details");
+                        return params;
+                    }
+                };
+                MySingleton.getmInstance(getContext()).addToRequestQueue(stringRequest);
+            }
+        });
+        AlertDialog alert=alertDialog.create();
+        alert.show();
+    }
+
+    public class ProfileAcademicWorkExperienceAdapter extends RecyclerView.Adapter<ProfileAcademicWorkExperienceAdapter.ProfileAcademicWorkExperienceHolder> {
+
+        private Context context;
+        private ArrayList<String> idDataSet,companyNameDataSet,positionDataSet,jobTypeDataSet,startDateDataSet,lastDateDataSet, jobDescriptionDataSet;
+
+        public ProfileAcademicWorkExperienceAdapter(Context context, ArrayList<String> idDataSet, ArrayList<String> companyNameDataSet, ArrayList<String> positionDataSet, ArrayList<String> jobTypeDataSet, ArrayList<String> startDateDataSet, ArrayList<String> lastDateDataSet, ArrayList<String> jobDescriptionDataSet) {
+            this.context = context;
+            this.idDataSet = idDataSet;
+            this.companyNameDataSet = companyNameDataSet;
+            this.positionDataSet = positionDataSet;
+            this.jobTypeDataSet = jobTypeDataSet;
+            this.startDateDataSet = startDateDataSet;
+            this.lastDateDataSet = lastDateDataSet;
+            this.jobDescriptionDataSet = jobDescriptionDataSet;
+        }
+
+        @NonNull
+        @Override
+        public ProfileAcademicWorkExperienceHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_profile_academic_work_experience,parent,false);
+            ProfileAcademicWorkExperienceHolder holder=new ProfileAcademicWorkExperienceHolder(view);
+            return holder;
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull ProfileAcademicWorkExperienceHolder holder, final int position) {
+            holder.ProfileAcademicWorkExperienceCompanyName.setText(companyNameDataSet.get(position));
+            holder.ProfileAcademicWorkExperienceJobType.setText(jobTypeDataSet.get(position));
+            holder.ProfileAcademicWorkExperienceStartDate.setText(startDateDataSet.get(position));
+            holder.ProfileAcademicWorkExperienceLastDate.setText(lastDateDataSet.get(position));
+            holder.ProfileAcademicWorkExperiencePosition.setText(positionDataSet.get(position));
+            holder.ProfileAcademicWorkExperienceJobDescription.setText(jobDescriptionDataSet.get(position));
+
+            holder.profileWorkExperienceEditBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    editWorkExp(idDataSet.get(position),companyNameDataSet.get(position),positionDataSet.get(position),jobTypeDataSet.get(position),startDateDataSet.get(position),lastDateDataSet.get(position),jobDescriptionDataSet.get(position));
+                }
+            });
+        }
+
+        @Override
+        public int getItemCount() {
+            return companyNameDataSet.size();
+        }
+
+        public class ProfileAcademicWorkExperienceHolder extends RecyclerView.ViewHolder{
+
+            public TextView ProfileAcademicWorkExperienceCompanyName,ProfileAcademicWorkExperiencePosition,ProfileAcademicWorkExperienceJobType,
+                    ProfileAcademicWorkExperienceStartDate,
+                    ProfileAcademicWorkExperienceLastDate,ProfileAcademicWorkExperienceJobDescription;
+
+            public ImageView profileWorkExperienceEditBtn,profileWorkExperienceDeleteBtn;
+
+            public ProfileAcademicWorkExperienceHolder(View itemView) {
+                super(itemView);
+
+                ProfileAcademicWorkExperienceCompanyName=itemView.findViewById(R.id.profileCompanyName);
+                ProfileAcademicWorkExperiencePosition=itemView.findViewById(R.id.profilePosition);
+                ProfileAcademicWorkExperienceJobDescription=itemView.findViewById(R.id.profileJobDescription);
+                ProfileAcademicWorkExperienceJobType=itemView.findViewById(R.id.profileJobType);
+                ProfileAcademicWorkExperienceStartDate=itemView.findViewById(R.id.profileStartDate);
+                ProfileAcademicWorkExperienceLastDate=itemView.findViewById(R.id.profileLastDate);
+
+                profileWorkExperienceDeleteBtn=itemView.findViewById(R.id.profileWorkExperienceDeleteBtn);
+                profileWorkExperienceEditBtn=itemView.findViewById(R.id.profileWorkExperienceEditBtn);
             }
         }
     }
