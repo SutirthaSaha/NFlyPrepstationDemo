@@ -2,9 +2,10 @@ package in.nfly.dell.nflydemo.fragments;
 
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.DialogInterface;
-import android.media.Image;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,7 +20,6 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -41,12 +41,6 @@ import java.util.Map;
 import in.nfly.dell.nflydemo.MySingleton;
 import in.nfly.dell.nflydemo.R;
 import in.nfly.dell.nflydemo.User;
-import in.nfly.dell.nflydemo.activities.MainActivity;
-import in.nfly.dell.nflydemo.activities.SalaryCalculatorActivity;
-import in.nfly.dell.nflydemo.activities.singleActivities.PracticeTestActivity;
-import in.nfly.dell.nflydemo.adapters.LearnTipsAdapter;
-import in.nfly.dell.nflydemo.adapters.ProfilePersonalHobbiesAdapter;
-import in.nfly.dell.nflydemo.adapters.ProfilePersonalLanguagesAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -94,8 +88,11 @@ public class ProfilePersonalFragment extends Fragment {
             add("reading");
            }};
 
+    private ArrayList<String> languageTitleDataSet=new ArrayList<String>(){};
     private ArrayList<String> languageIdDataSet=new ArrayList<String>(){};
+    private ArrayList<String> hobbyTitleDataSet=new ArrayList<String>(){};
     private ArrayList<String> hobbyIdDataSet=new ArrayList<String>(){};
+
 
     public ProfilePersonalFragment() {
         // Required empty public constructor
@@ -243,6 +240,7 @@ public class ProfilePersonalFragment extends Fragment {
                 alertDialog.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        languageTitleDataSet.clear();
                         languageIdDataSet.clear();
                         addLanguages();
                     }
@@ -276,6 +274,7 @@ public class ProfilePersonalFragment extends Fragment {
                 alertDialog.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        hobbyTitleDataSet.clear();
                         hobbyIdDataSet.clear();
                         addHobbies();
                     }
@@ -758,9 +757,10 @@ public class ProfilePersonalFragment extends Fragment {
                     JSONArray parentArray=new JSONArray(response);
                     for(int i=0;i<parentArray.length();i++) {
                         arrayObject = parentArray.getJSONObject(i);
-                        hobbyIdDataSet.add(hobbyMap.get(arrayObject.getString("hobby_id")));
+                        hobbyIdDataSet.add(arrayObject.getString("uh_id"));
+                        hobbyTitleDataSet.add(hobbyMap.get(arrayObject.getString("hobby_id")));
                     }
-                    adapter= new ProfilePersonalHobbiesAdapter(hobbyIdDataSet);
+                    adapter= new ProfilePersonalHobbiesAdapter(getActivity(),hobbyIdDataSet,hobbyTitleDataSet);
                     profileHobbiesRecyclerView.setAdapter(adapter);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -856,9 +856,10 @@ public class ProfilePersonalFragment extends Fragment {
                     JSONArray parentArray=new JSONArray(response);
                     for(int i=0;i<parentArray.length();i++) {
                         arrayObject = parentArray.getJSONObject(i);
-                        languageIdDataSet.add(languageMap.get(arrayObject.getString("language_id")));
+                        languageIdDataSet.add(arrayObject.getString("ul_id"));
+                        languageTitleDataSet.add(languageMap.get(arrayObject.getString("language_id")));
                     }
-                    adapter= new ProfilePersonalLanguagesAdapter(languageIdDataSet);
+                    adapter= new ProfilePersonalLanguagesAdapter(getActivity(),languageIdDataSet,languageTitleDataSet);
                     profileLanguagesRecyclerView.setAdapter(adapter);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -889,5 +890,102 @@ public class ProfilePersonalFragment extends Fragment {
             }
         };
         MySingleton.getmInstance(getContext()).addToRequestQueue(stringRequest);
+    }
+
+    public class ProfilePersonalLanguagesAdapter extends RecyclerView.Adapter<ProfilePersonalLanguagesAdapter.ProfilePersonalLanguagesHolder> {
+
+        private Context context;
+        private ArrayList<String> idDataSet,titleDataSet;
+
+        public ProfilePersonalLanguagesAdapter(Context context, ArrayList<String> idDataSet, ArrayList<String> titleDataSet) {
+            this.context = context;
+            this.idDataSet = idDataSet;
+            this.titleDataSet = titleDataSet;
+        }
+
+        @NonNull
+        @Override
+        public ProfilePersonalLanguagesHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_profile_personal_language,parent,false);
+            ProfilePersonalLanguagesHolder holder=new ProfilePersonalLanguagesHolder(view);
+            return holder;
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull ProfilePersonalLanguagesHolder holder, final int position) {
+            holder.ProfilePersonalLanguagesTitle.setText(titleDataSet.get(position));
+            holder.profileLanguageDeleteBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(context, idDataSet.get(position), Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
+        @Override
+        public int getItemCount() {
+            return titleDataSet.size();
+        }
+
+        public class ProfilePersonalLanguagesHolder extends RecyclerView.ViewHolder{
+
+            public TextView ProfilePersonalLanguagesTitle;
+            public ImageView profileLanguageDeleteBtn;
+
+            public ProfilePersonalLanguagesHolder(View itemView) {
+                super(itemView);
+                ProfilePersonalLanguagesTitle=itemView.findViewById(R.id.profilePersonalLanguage);
+                profileLanguageDeleteBtn=itemView.findViewById(R.id.profileLanguageDeleteBtn);
+            }
+        }
+    }
+
+    public class ProfilePersonalHobbiesAdapter extends RecyclerView.Adapter<ProfilePersonalHobbiesAdapter.ProfilePersonalHobbiesHolder> {
+
+        private Context context;
+        private ArrayList<String> idDataSet,titleDataSet;
+
+        public ProfilePersonalHobbiesAdapter(Context context, ArrayList<String> idDataSet, ArrayList<String> titleDataSet) {
+            this.context = context;
+            this.idDataSet = idDataSet;
+            this.titleDataSet = titleDataSet;
+        }
+
+        @NonNull
+        @Override
+        public ProfilePersonalHobbiesHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_profile_personal_hobby,parent,false);
+            ProfilePersonalHobbiesHolder holder=new ProfilePersonalHobbiesHolder(view);
+            return holder;
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull ProfilePersonalHobbiesHolder holder, final int position) {
+            holder.ProfilePersonalHobbiesTitle.setText(titleDataSet.get(position));
+            holder.profileHobbyDeleteBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(context, idDataSet.get(position), Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
+        @Override
+        public int getItemCount() {
+            return titleDataSet.size();
+        }
+
+        public class ProfilePersonalHobbiesHolder extends RecyclerView.ViewHolder{
+
+            public TextView ProfilePersonalHobbiesTitle;
+            public ImageView profileHobbyDeleteBtn;
+
+            public ProfilePersonalHobbiesHolder(View itemView) {
+                super(itemView);
+
+                ProfilePersonalHobbiesTitle=itemView.findViewById(R.id.profilePersonalHobby);
+                profileHobbyDeleteBtn=itemView.findViewById(R.id.profileHobbyDeleteBtn);
+            }
+        }
     }
 }
