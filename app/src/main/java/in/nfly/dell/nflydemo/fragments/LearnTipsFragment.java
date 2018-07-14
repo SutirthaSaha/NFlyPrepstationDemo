@@ -25,6 +25,7 @@ import java.util.Map;
 
 import in.nfly.dell.nflydemo.MySingleton;
 import in.nfly.dell.nflydemo.R;
+import in.nfly.dell.nflydemo.adapters.HomeIconsAdapter;
 import in.nfly.dell.nflydemo.adapters.LearnInterviewAdapter;
 import in.nfly.dell.nflydemo.adapters.LearnTipsAdapter;
 
@@ -33,7 +34,7 @@ import in.nfly.dell.nflydemo.adapters.LearnTipsAdapter;
  */
 public class LearnTipsFragment extends Fragment {
 
-    private RecyclerView learnTipsRecyclerView;
+    private RecyclerView learnTipsRecyclerView,learnTipsBannerRecyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     //private ArrayList<String> titleDataSet=new ArrayList<String>(){{add("HR Questions");add("Software Tools");add("Eng. Topics");add("Company wise");add("Puzzles");add("Miscellaneous");}};
@@ -46,6 +47,19 @@ public class LearnTipsFragment extends Fragment {
     private ArrayList<String> idDataSet=new ArrayList<String>(){};
     private ArrayList<String> imageDataSet=new ArrayList<String>(){};
     private ArrayList<String> bgImageDataSet=new ArrayList<String>(){};
+
+    private ArrayList<Integer> bannerImageDataSet=new ArrayList<Integer>(){
+        {
+            add(R.drawable.colored_video);
+            add(R.drawable.colored_group);
+            add(R.drawable.colored_articles);}};
+
+    private ArrayList<String> bannerTitleDataSet=new ArrayList<String>(){
+        {
+            add("7 detailed courses");
+
+            add("100+ hours of video");
+            add("200+ videos");}};
 
     public LearnTipsFragment() {
         // Required empty public constructor
@@ -61,7 +75,19 @@ public class LearnTipsFragment extends Fragment {
         layoutManager=new GridLayoutManager(getContext(),2);
         learnTipsRecyclerView.setLayoutManager(layoutManager);
         setValues();
+        setBanner(v);
         return v;
+    }
+
+    private void setBanner(View view)
+    {
+        learnTipsBannerRecyclerView=view.findViewById(R.id.learnTipsBannerIconsRecyclerView);
+        layoutManager=new GridLayoutManager(getContext(),3);
+        learnTipsBannerRecyclerView.setLayoutManager(layoutManager);
+
+        adapter= new HomeIconsAdapter(bannerTitleDataSet,bannerImageDataSet);
+        learnTipsBannerRecyclerView.setAdapter(adapter);
+
     }
 
     private void setValues() {

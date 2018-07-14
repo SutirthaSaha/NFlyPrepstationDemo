@@ -26,6 +26,7 @@ import java.util.Map;
 
 import in.nfly.dell.nflydemo.MySingleton;
 import in.nfly.dell.nflydemo.R;
+import in.nfly.dell.nflydemo.adapters.HomeIconsAdapter;
 import in.nfly.dell.nflydemo.adapters.LearnGDAdapter;
 import in.nfly.dell.nflydemo.adapters.LearnInterviewAdapter;
 
@@ -34,7 +35,7 @@ import in.nfly.dell.nflydemo.adapters.LearnInterviewAdapter;
  */
 public class LearnGDFragment extends Fragment {
 
-    private RecyclerView learnGDRecyclerView;
+    private RecyclerView learnGDRecyclerView, learnGDBannerRecyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     //private ArrayList<String> titleDataSet=new ArrayList<String>(){{add("HR Questions");add("Software Tools");add("Eng. Topics");add("Company wise");add("Puzzles");add("Miscellaneous");}};
@@ -44,6 +45,18 @@ public class LearnGDFragment extends Fragment {
     private ArrayList<String> titleDataSet=new ArrayList<String>(){};
     private ArrayList<String> idDataSet=new ArrayList<String>(){};
     private ArrayList<String> imageDataSet=new ArrayList<String>(){};
+    private ArrayList<Integer> bannerImageDataSet=new ArrayList<Integer>(){
+        {
+            add(R.drawable.colored_video);
+            add(R.drawable.colored_group);
+            add(R.drawable.colored_articles);}};
+
+    private ArrayList<String> bannerTitleDataSet=new ArrayList<String>(){
+        {
+            add("7 detailed courses");
+
+            add("100+ hours of video");
+            add("200+ videos");}};
 
 
     public LearnGDFragment() {
@@ -60,7 +73,18 @@ public class LearnGDFragment extends Fragment {
         layoutManager=new GridLayoutManager(getContext(),2);
         learnGDRecyclerView.setLayoutManager(layoutManager);
         setValues();
+        setBanner(v);
         return v;
+    }
+    private void setBanner(View view)
+    {
+        learnGDBannerRecyclerView=view.findViewById(R.id.learnGDBannerIconsRecyclerView);
+        layoutManager=new GridLayoutManager(getContext(),3);
+        learnGDBannerRecyclerView.setLayoutManager(layoutManager);
+
+        adapter= new HomeIconsAdapter(bannerTitleDataSet,bannerImageDataSet);
+        learnGDBannerRecyclerView.setAdapter(adapter);
+
     }
 
     private void setValues() {

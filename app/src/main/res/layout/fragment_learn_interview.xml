@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -6,26 +8,87 @@
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.LearnInterviewFragment">
-
-    <TextView
-        android:layout_width="match_parent"
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    <LinearLayout android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Interview Topics"
-        android:textStyle="bold"
-        android:layout_marginLeft="10dp"
-        android:textSize="17sp"
-        android:textColor="#000"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginBottom="5dp"
-        app:fontFamily="@font/sanchez"
-        />
+        android:orientation="vertical"
+        xmlns:android="http://schemas.android.com/apk/res/android" >
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:src="@drawable/imagevideo"
+            android:layout_height="210dp"
+            android:id="@+id/learnInterviewImage"
+            android:scaleType="fitXY"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/learnInterviewImageTitle"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:foregroundGravity="center"
+            android:textColor="#fff"
+            android:text="Interviews"
+            android:gravity="center"
+            android:shadowColor="#000000"
+            android:shadowDx="1.5"
+            android:shadowDy="1.5"
+            android:shadowRadius="1.6"
+            android:layout_marginTop="25dp"/>
+
+    </RelativeLayout>
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:nestedScrollingEnabled="false"
+            android:backgroundTint="#dee0f9"
+            android:layout_marginBottom="5dp"
+
+            app:cardPreventCornerOverlap="false"
+            app:cardElevation="0dp">
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_marginBottom="5dp"
+                android:nestedScrollingEnabled="false"
+                android:layout_height="wrap_content"
+                android:id="@+id/learnInterviewBannerIconsRecyclerView">
+            </android.support.v7.widget.RecyclerView>
+        </android.support.v7.widget.CardView>
+
+        <!---
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Interview Topics"
+            android:textStyle="bold"
+            android:layout_marginLeft="10dp"
+            android:textSize="17sp"
+            android:textColor="#000"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="5dp"
+            app:fontFamily="@font/sanchez"
+            />
+            -->
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:nestedScrollingEnabled="false"
         android:id="@+id/learnInterviewRecyclerView"
         android:layout_margin="5dp"/>
+    </LinearLayout>
 
 
+    </android.support.v4.widget.NestedScrollView>
 </LinearLayout>

@@ -6,8 +6,65 @@
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.LearnGDFragment">
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical" android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-    <TextView
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/imagepaper"
+                    android:layout_height="210dp"
+                    android:id="@+id/learnGDImage"
+                    android:scaleType="fitXY"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/learnGDImageTitle"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:foregroundGravity="center"
+                    android:textColor="#fff"
+                    android:text="GD"
+                    android:gravity="center"
+                    android:shadowColor="#000000"
+                    android:shadowDx="1.5"
+                    android:shadowDy="1.5"
+                    android:shadowRadius="1.6"
+                    android:layout_marginTop="25dp"/>
+
+            </RelativeLayout>
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:nestedScrollingEnabled="false"
+                android:backgroundTint="#dee0f9"
+                android:layout_marginBottom="5dp"
+
+                app:cardPreventCornerOverlap="false"
+                app:cardElevation="0dp">
+                <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_marginBottom="5dp"
+                    android:nestedScrollingEnabled="false"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/learnGDBannerIconsRecyclerView">
+                </android.support.v7.widget.RecyclerView>
+            </android.support.v7.widget.CardView>
+
+    <!--<TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="GD Topics"
@@ -19,12 +76,16 @@
         android:layout_marginTop="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginBottom="5dp"/>
-
+-->
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:nestedScrollingEnabled="false"
         android:id="@+id/learnGDRecyclerView"
         android:layout_margin="5dp"/>
+        </LinearLayout>
+    </android.support.v4.widget.NestedScrollView>
+
 
 
 </LinearLayout>

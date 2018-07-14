@@ -3,6 +3,7 @@ package in.nfly.dell.nflydemo.fragments;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -26,6 +27,8 @@ import java.util.Map;
 
 import in.nfly.dell.nflydemo.MySingleton;
 import in.nfly.dell.nflydemo.R;
+import in.nfly.dell.nflydemo.activities.MainActivity;
+import in.nfly.dell.nflydemo.adapters.HomeIconsAdapter;
 import in.nfly.dell.nflydemo.adapters.LearnCourseAdapter;
 
 /**
@@ -33,7 +36,7 @@ import in.nfly.dell.nflydemo.adapters.LearnCourseAdapter;
  */
 public class LearnCourseFragment extends Fragment {
 
-    private RecyclerView learnCourseRecyclerView;
+    private RecyclerView learnCourseRecyclerView, LearnCourseBannerIconsRecyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     //private ArrayList<String> titleDataSet=new ArrayList<Str   private RecyclerView.Adapter adapter;
@@ -44,6 +47,20 @@ public class LearnCourseFragment extends Fragment {
     private ArrayList<String> titleDataSet=new ArrayList<String>(){};
     private ArrayList<String> imageDataSet=new ArrayList<String>(){};
     private ArrayList<String> idDataSet=new ArrayList<String>(){};
+
+
+    private ArrayList<Integer> bannerImageDataSet=new ArrayList<Integer>(){
+        {
+            add(R.drawable.colored_video);
+            add(R.drawable.colored_group);
+            add(R.drawable.colored_articles);}};
+
+    private ArrayList<String> bannerTitleDataSet=new ArrayList<String>(){
+        {
+            add("7 detailed courses");
+
+            add("100+ hours of video");
+            add("200+ videos");}};
 
     public LearnCourseFragment() {
         // Required empty public constructor
@@ -56,11 +73,23 @@ public class LearnCourseFragment extends Fragment {
         // Inflate the layout for this fragment
         View v= inflater.inflate(R.layout.fragment_learn_course, container, false);
         learnCourseRecyclerView=v.findViewById(R.id.learnCourseRecyclerView);
-        layoutManager=new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
+        layoutManager=new GridLayoutManager(getContext(),2);
         learnCourseRecyclerView.setLayoutManager(layoutManager);
         setValues();
+        setBanner(v);
         return v;
     }
+    private void setBanner(View view)
+    {
+        LearnCourseBannerIconsRecyclerView=view.findViewById(R.id.learnCourseBannerIconsRecyclerView);
+        layoutManager=new GridLayoutManager(getContext(),3);
+        LearnCourseBannerIconsRecyclerView.setLayoutManager(layoutManager);
+
+        adapter= new HomeIconsAdapter(bannerTitleDataSet,bannerImageDataSet);
+        LearnCourseBannerIconsRecyclerView.setAdapter(adapter);
+
+    }
+
 
     private void setValues() {
         StringRequest stringRequest=new StringRequest(Request.Method.POST, urlCourse, new Response.Listener<String>() {
