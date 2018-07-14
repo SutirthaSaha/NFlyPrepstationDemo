@@ -46,7 +46,7 @@ public class ProfilePersonalityFragment extends Fragment {
 
     private ArrayList<String> titleDataSet=new ArrayList<String>(){{add("Extroversion");add("Openness");add("Agreeableness");add("Conscientiousness");add("Neuroticism");}};
     private ArrayList<String> textDataSet=new ArrayList<String>(){{add("Extroversion is characterized by excitability, sociability, talkativeness, assertiveness, and high amounts of emotional expressiveness.\n" +
-            "People who are high in extraversion are outgoing and tend to gain energy in social situations. People who are low in extroversion (or introverted) tend to be more reserved and have to expend energy in social settings.");
+            "People who are high in extroversion are outgoing and tend to gain energy in social situations. People who are low in extroversion (or introverted) tend to be more reserved and have to expend energy in social settings.");
     add("This trait features characteristics such as imagination and insight, and those high in this trait also tend to have a broad range of interests. People who are high in this trait tend to be more adventurous and creative. People low in this trait are often much more traditional and may struggle with abstract thinking.");
     add("This personality dimension includes attributes such as trust, altruism, kindness, affection, and other prosocial behaviors. People who are high in agreeableness tend to be more cooperative while those low in this trait tend to be more competitive and even manipulative.");
     add("Standard features of this dimension include high levels of thoughtfulness, with good impulse control and goal-directed behaviors. Highly conscientiousness tend to be organized and mindful of details.");
@@ -55,7 +55,7 @@ public class ProfilePersonalityFragment extends Fragment {
     private ArrayList<String> progressDataSet=new ArrayList<String>(){};
 
     private String introText="The following graph reflects upon the personality of the candidate based on 5 different parameters.\n" +
-            "1. Extraversion\n" +
+            "1. Extroversion\n" +
             "2. Openness\n" +
             "3. Agreeableness\n" +
             "4. Neuroticism\n" +

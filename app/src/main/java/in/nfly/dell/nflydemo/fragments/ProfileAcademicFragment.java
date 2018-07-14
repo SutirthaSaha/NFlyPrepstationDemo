@@ -303,7 +303,7 @@ public class ProfileAcademicFragment extends Fragment {
                 View schoolEducationEditLayout=layoutInflater.inflate(R.layout.dialog_edit_school_education,null);
 
                 editSchoolEducationXIISchoolName=schoolEducationEditLayout.findViewById(R.id.editSchoolEducationXIISchoolName);
-                editSchoolEducationXIIBoard=schoolEducationEditLayout.findViewById(R.id.editSchoolEducationXBoard);
+                editSchoolEducationXIIBoard=schoolEducationEditLayout.findViewById(R.id.editSchoolEducationXIIBoard);
                 editSchoolEducationXIIStream=schoolEducationEditLayout.findViewById(R.id.editSchoolEducationXIIStream);
                 editSchoolEducationXIIPassingYear=schoolEducationEditLayout.findViewById(R.id.editSchoolEducationXIIPassingYear);
                 editSchoolEducationXIIPercentage=schoolEducationEditLayout.findViewById(R.id.editSchoolEducationXIIPercentage);
@@ -318,6 +318,11 @@ public class ProfileAcademicFragment extends Fragment {
                 editSchoolEducationXIIStream.setText(profileXIIStream.getText().toString());
                 editSchoolEducationXIIPassingYear.setText(profileXIIPassingyear.getText().toString());
                 editSchoolEducationXIIPercentage.setText(profileXIIPercentage.getText().toString());
+
+                editSchoolEducationXSchoolName.setText(profileXSchool.getText().toString());
+                editSchoolEducationXBoard.setText(profileXBoard.getText().toString());
+                editSchoolEducationXPassingYear.setText(profileXPassingyear.getText().toString());
+                editSchoolEducationXPercentage.setText(profileXPercentage.getText().toString());
 
                 AlertDialog.Builder alertDialog=new AlertDialog.Builder(getActivity());
                 alertDialog.setView(schoolEducationEditLayout);

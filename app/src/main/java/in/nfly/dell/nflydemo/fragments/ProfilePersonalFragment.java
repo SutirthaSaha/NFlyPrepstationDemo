@@ -65,12 +65,19 @@ public class ProfilePersonalFragment extends Fragment {
             editContactDetailsPhone, editContactDetailsAddress,
             editSocialProfilesFacebook,editSocialProfilesLinkedIn,editSocialProfilesTwitter,editSocialProfilesQuora;
 
+    private int status;
     private String urlPersonal="http://nfly.in/profileapi/personal_details";
     private String urlUpdate="http://nfly.in/gapi/update";
+    private String oneRow="http://nfly.in/gapi/load_rows_one";
+    private String allRows="http://nfly.in/gapi/load_all_rows";
+    private String urlInsert="http://nfly.in/gapi/insert";
 
+    private HashMap<String,String> languageMap=new HashMap<String,String>(){};
+    private HashMap<String,String> hobbyMap=new HashMap<String,String>(){};
+    
     private ImageView profileImage;
 
-    private ImageView basicDetailsEditBtn, coverLetterAddBtn, coverLetterEditBtn, hobbiesAddBtn, hobbiesEditBtn, languagesEditBtn,
+    private ImageView basicDetailsEditBtn, coverLetterEditBtn, hobbiesAddBtn,
     languagesAddBtn, contactDetailsEditBtn,socialProfilesEditBtn, editBasicDetailsDobCalenderBtn;
 
     private String user_id;
@@ -87,6 +94,8 @@ public class ProfilePersonalFragment extends Fragment {
             add("reading");
            }};
 
+    private ArrayList<String> languageIdDataSet=new ArrayList<String>(){};
+    private ArrayList<String> hobbyIdDataSet=new ArrayList<String>(){};
 
     public ProfilePersonalFragment() {
         // Required empty public constructor
@@ -120,17 +129,16 @@ public class ProfilePersonalFragment extends Fragment {
         profileLinkedIn=view.findViewById(R.id.profileLinkedIn);
         profileQuora=view.findViewById(R.id.profileQuora);
 
+        profileCoverLetter=view.findViewById(R.id.profileCoverLetter);
+
         profileEmail=view.findViewById(R.id.profileEmail);
         profilePhone=view.findViewById(R.id.profilePhone);
         profileAddress=view.findViewById(R.id.profileAddress);
 
         basicDetailsEditBtn=view.findViewById(R.id.basicDetailsEditBtn);
-        coverLetterAddBtn=view.findViewById(R.id.coverLetterAddBtn);
         coverLetterEditBtn=view.findViewById(R.id.coverLetterEditBtn);
         hobbiesAddBtn=view.findViewById(R.id.hobbiesAddBtn);
-        hobbiesEditBtn=view.findViewById(R.id.hobbiesEditBtn);
         languagesAddBtn=view.findViewById(R.id.languagesAddBtn);
-        languagesEditBtn=view.findViewById(R.id.languagesEditBtn);
         contactDetailsEditBtn=view.findViewById(R.id.contactDetailsEditBtn);
         socialProfilesEditBtn=view.findViewById(R.id.socialProfilesEditBtn);
 
@@ -212,39 +220,6 @@ public class ProfilePersonalFragment extends Fragment {
             }
         });
 
-        languagesEditBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                LayoutInflater layoutInflater=getLayoutInflater();
-                View languagesEditLayout=layoutInflater.inflate(R.layout.dialog_edit_languages,null);
-
-                editLanguages=languagesEditLayout.findViewById(R.id.editLanguages);
-
-                AlertDialog.Builder alertDialog=new AlertDialog.Builder(getActivity());
-                alertDialog.setView(languagesEditLayout);
-                alertDialog.setCancelable(false);
-
-                alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getActivity(), "Cancel clicked", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-                alertDialog.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        Toast.makeText(getActivity(), "Submit clicked", Toast.LENGTH_SHORT).show();
-                    }
-                });
-                AlertDialog alert=alertDialog.create();
-                alert.show();
-
-            }
-        });
-
         languagesAddBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -268,7 +243,8 @@ public class ProfilePersonalFragment extends Fragment {
                 alertDialog.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getActivity(), "Submit clicked", Toast.LENGTH_SHORT).show();
+                        languageIdDataSet.clear();
+                        addLanguages();
                     }
                 });
                 AlertDialog alert=alertDialog.create();
@@ -276,39 +252,6 @@ public class ProfilePersonalFragment extends Fragment {
 
             }
         });
-
-        hobbiesEditBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                LayoutInflater layoutInflater=getLayoutInflater();
-                View hobbiesEditLayout=layoutInflater.inflate(R.layout.dialog_edit_hobbies,null);
-
-                editHobbies=hobbiesEditLayout.findViewById(R.id.editHobbies);
-
-                AlertDialog.Builder alertDialog=new AlertDialog.Builder(getActivity());
-                alertDialog.setView(hobbiesEditLayout);
-                alertDialog.setCancelable(false);
-
-                alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getActivity(), "Cancel clicked", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-                alertDialog.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getActivity(), "Submit clicked", Toast.LENGTH_SHORT).show();
-                    }
-                });
-                AlertDialog alert=alertDialog.create();
-                alert.show();
-
-            }
-        });
-
 
         hobbiesAddBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -333,7 +276,8 @@ public class ProfilePersonalFragment extends Fragment {
                 alertDialog.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getActivity(), "Submit clicked", Toast.LENGTH_SHORT).show();
+                        hobbyIdDataSet.clear();
+                        addHobbies();
                     }
                 });
                 AlertDialog alert=alertDialog.create();
@@ -354,6 +298,7 @@ public class ProfilePersonalFragment extends Fragment {
                 alertDialog.setView(coverLetterEditLayout);
                 alertDialog.setCancelable(false);
 
+                editCoverLetter.setText(profileCoverLetter.getText().toString().trim());
                 alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 
                     @Override
@@ -366,10 +311,7 @@ public class ProfilePersonalFragment extends Fragment {
                 alertDialog.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getActivity(), "Submit clicked", Toast.LENGTH_SHORT).show();
-                        if(!editCoverLetter.getText().toString().isEmpty()){
-                            profileCoverLetter.setText(editCoverLetter.getText().toString());
-                        }
+                        editCoverLetter();
                     }
                 });
                 AlertDialog alert=alertDialog.create();
@@ -378,36 +320,6 @@ public class ProfilePersonalFragment extends Fragment {
             }
         });
 
-        coverLetterAddBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                LayoutInflater layoutInflater=getLayoutInflater();
-                View coverLetterAddLayout=layoutInflater.inflate(R.layout.dialog_edit_cover_letter,null);
-
-                editCoverLetter=coverLetterAddLayout.findViewById(R.id.editCoverLetter);
-
-                AlertDialog.Builder alertDialog=new AlertDialog.Builder(getActivity());
-                alertDialog.setView(coverLetterAddLayout);
-                alertDialog.setCancelable(false);
-
-                alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getActivity(), "Cancel clicked", Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-                alertDialog.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getActivity(), "Submit clicked", Toast.LENGTH_SHORT).show();
-                    }
-                });
-                AlertDialog alert=alertDialog.create();
-                alert.show();
-            }
-        });
 
         basicDetailsEditBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -434,7 +346,6 @@ public class ProfilePersonalFragment extends Fragment {
                     @Override
                     public void onDateSet(DatePicker view, int year, int monthOfYear,
                                           int dayOfMonth) {
-                        // TODO Auto-generated method stub
                         calendar.set(Calendar.YEAR, year);
                         calendar.set(Calendar.MONTH, monthOfYear);
                         calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
@@ -447,7 +358,6 @@ public class ProfilePersonalFragment extends Fragment {
 
                     @Override
                     public void onClick(View v) {
-                        // TODO Auto-generated method stub
                         new DatePickerDialog(getContext(), date, calendar
                                 .get(Calendar.YEAR), calendar.get(Calendar.MONTH),
                                 calendar.get(Calendar.DAY_OF_MONTH)).show();
@@ -487,6 +397,129 @@ public class ProfilePersonalFragment extends Fragment {
         return view;
     }
 
+    private void editCoverLetter() {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, urlUpdate, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                setValues();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("update_array[user_cover_letter]",editCoverLetter.getText().toString());
+                params.put("key", "user_id");
+                params.put("value", user_id);
+                params.put("table","user_additional_details");
+                return params;
+            }
+        };
+        MySingleton.getmInstance(getContext()).addToRequestQueue(stringRequest);
+    }
+
+    private void addHobbies() {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST,urlInsert, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject arrayObject=new JSONObject(response);
+                    status=arrayObject.getInt("status");
+                    if(status==200){
+                        setHobbies();
+                    }
+                    else{
+                        Toast.makeText(getActivity(), "Registration Failed", Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+
+            @Override
+            protected Map<String,String> getParams() throws AuthFailureError{
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("insert_array[user_id]", user_id);
+                params.put("insert_array[hobby_id]",editHobbies.getText().toString().trim());
+                params.put("table","user_hobby");
+                return params;
+            }
+        };
+        MySingleton.getmInstance(getActivity()).addToRequestQueue(stringRequest);
+    }
+
+    private void addLanguages() {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST,urlInsert, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject arrayObject=new JSONObject(response);
+                    status=arrayObject.getInt("status");
+                    if(status==200){
+                        setLanguages();
+                    }
+                    else{
+                        Toast.makeText(getActivity(), "Registration Failed", Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+
+            @Override
+            protected Map<String,String> getParams() throws AuthFailureError{
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("insert_array[user_id]", user_id);
+                params.put("insert_array[language_id]",editLanguages.getText().toString().trim());
+                params.put("table","user_language");
+                return params;
+            }
+        };
+        MySingleton.getmInstance(getActivity()).addToRequestQueue(stringRequest);
+    }
 
     private void editContactDetails() {
         StringRequest stringRequest=new StringRequest(Request.Method.POST, urlUpdate, new Response.Listener<String>() {
@@ -618,6 +651,9 @@ public class ProfilePersonalFragment extends Fragment {
                     JSONObject user_additional_details=jsonObject.getJSONObject("user_additional_details");
                     profileCurrentDesignation.setText(user_additional_details.getString("user_designation"));
                     profilePhone.setText(user_additional_details.getString("user_phone"));
+
+                    profileCoverLetter.setText(user_additional_details.getString("user_cover_letter"));
+
                     profileCurrentCity.setText(user_additional_details.getString("user_current_city"));
                     profileHomeTown.setText(user_additional_details.getString("user_city"));
                     profileGender.setText(user_additional_details.getString("user_gender"));
@@ -665,11 +701,97 @@ public class ProfilePersonalFragment extends Fragment {
         layoutManager=new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,false);
         profileHobbiesRecyclerView.setLayoutManager(layoutManager);
 
-        adapter= new ProfilePersonalHobbiesAdapter(dataSet);
-        profileHobbiesRecyclerView.setAdapter(adapter);
-
+        getHobbies();
     }
 
+    private void getHobbies(){
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, allRows, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                //Toast.makeText(getContext(), "Successful", Toast.LENGTH_SHORT).show();
+                try {
+                    JSONObject arrayObject;
+                    JSONArray parentArray=new JSONArray(response);
+                    for(int i=0;i<parentArray.length();i++) {
+                        arrayObject = parentArray.getJSONObject(i);
+                        hobbyMap.put(arrayObject.getString("hobby_id"),arrayObject.getString("hobby_name"));
+                    }
+                    setHobbies();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("key", "hobby_id");
+                params.put("order", "ASC");
+                params.put("table", "hobby");
+                return params;
+            }
+        };
+        MySingleton.getmInstance(getContext()).addToRequestQueue(stringRequest);
+    }
+
+    private void setHobbies(){
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, oneRow, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                //Toast.makeText(getContext(), "Successful", Toast.LENGTH_SHORT).show();
+                try {
+                    JSONObject arrayObject;
+                    JSONArray parentArray=new JSONArray(response);
+                    for(int i=0;i<parentArray.length();i++) {
+                        arrayObject = parentArray.getJSONObject(i);
+                        hobbyIdDataSet.add(hobbyMap.get(arrayObject.getString("hobby_id")));
+                    }
+                    adapter= new ProfilePersonalHobbiesAdapter(hobbyIdDataSet);
+                    profileHobbiesRecyclerView.setAdapter(adapter);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("key", "user_id");
+                params.put("value", user_id);
+                params.put("table", "user_hobby");
+                return params;
+            }
+        };
+        MySingleton.getmInstance(getContext()).addToRequestQueue(stringRequest);
+    }
 
     private void setLanguages(View view) {
 
@@ -677,7 +799,95 @@ public class ProfilePersonalFragment extends Fragment {
         layoutManager=new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,false);
         profileLanguagesRecyclerView.setLayoutManager(layoutManager);
 
-        adapter= new ProfilePersonalLanguagesAdapter(dataSet);
-        profileLanguagesRecyclerView.setAdapter(adapter);
+        getLanguages();
+    }
+
+    private void getLanguages(){
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, allRows, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                //Toast.makeText(getContext(), "Successful", Toast.LENGTH_SHORT).show();
+                try {
+                    JSONObject arrayObject;
+                    JSONArray parentArray=new JSONArray(response);
+                    for(int i=0;i<parentArray.length();i++) {
+                        arrayObject = parentArray.getJSONObject(i);
+                        languageMap.put(arrayObject.getString("language_id"),arrayObject.getString("language_name"));
+                    }
+                    setLanguages();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("key", "language_id");
+                params.put("order", "ASC");
+                params.put("table", "language");
+                return params;
+            }
+        };
+        MySingleton.getmInstance(getContext()).addToRequestQueue(stringRequest);
+    }
+
+    private void setLanguages(){
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, oneRow, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                //Toast.makeText(getContext(), "Successful", Toast.LENGTH_SHORT).show();
+                try {
+                    JSONObject arrayObject;
+                    JSONArray parentArray=new JSONArray(response);
+                    for(int i=0;i<parentArray.length();i++) {
+                        arrayObject = parentArray.getJSONObject(i);
+                        languageIdDataSet.add(languageMap.get(arrayObject.getString("language_id")));
+                    }
+                    adapter= new ProfilePersonalLanguagesAdapter(languageIdDataSet);
+                    profileLanguagesRecyclerView.setAdapter(adapter);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("key", "user_id");
+                params.put("value", user_id);
+                params.put("table", "user_language");
+                return params;
+            }
+        };
+        MySingleton.getmInstance(getContext()).addToRequestQueue(stringRequest);
     }
 }
