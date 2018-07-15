@@ -1,5 +1,6 @@
 package in.nfly.dell.nflydemo.activities;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -31,6 +32,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -49,6 +51,7 @@ import in.nfly.dell.nflydemo.adapters.HomeFeaturesIconsAdapter;
 import in.nfly.dell.nflydemo.adapters.HomeIconsAdapter;
 import in.nfly.dell.nflydemo.adapters.HomePrepHubAdapter;
 import in.nfly.dell.nflydemo.adapters.HomeSwipeAdapter;
+import in.nfly.dell.nflydemo.adapters.KnowledgeBaseCompanyWiseAdapter;
 import me.relex.circleindicator.CircleIndicator;
 
 public class MainActivity extends AppCompatActivity {
@@ -76,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private String userDetails="http://nfly.in/gapi/get_details_one";
+    private String urlLoadAllRows="http://nfly.in/gapi/load_all_rows";
     private String email;
     
     private int[] swipeImageDataSet= {R.drawable.imagevideo,R.drawable.imagepaper,R.drawable.imageresume};
@@ -111,16 +115,14 @@ public class MainActivity extends AppCompatActivity {
             add("2500+ happy users");
             add("100+ articles");}};
 
-    private ArrayList<Integer> companyImageDataSet=new ArrayList<Integer>(){
-        {add(R.drawable.imageresume);
-            add(R.drawable.imagepaper);
-            add(R.drawable.imageresume);}};
+    private ArrayList<String> companyImageDataSet=new ArrayList<String>(){};
+    private ArrayList<String> companyTitleDataSet=new ArrayList<String>(){};
 
-    private ArrayList<String> companyTitleDataSet=new ArrayList<String>(){
-        {add("ABC");
-            add("ABC");
-            add("ABC");}};
+    private ArrayList<String> careerImageDataSet=new ArrayList<String>(){};
+    private ArrayList<String> careerTitleDataSet=new ArrayList<String>(){};
 
+    private ArrayList<String> courseImageDataSet=new ArrayList<String>(){};
+    private ArrayList<String> courseTitleDataSet=new ArrayList<String>(){};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -133,7 +135,6 @@ public class MainActivity extends AppCompatActivity {
         setToolbar();
         drawerLayoutHome=findViewById(R.id.drawerLayoutHome);
 
-
         setToolbar();
         setNavigationDrawer();
         setViewPager();
@@ -144,8 +145,6 @@ public class MainActivity extends AppCompatActivity {
         setCompanyCards();
         setCareerCards();
         setCoursesCards();
-
-
     }
 
     private void setCoursesCards()
@@ -154,9 +153,52 @@ public class MainActivity extends AppCompatActivity {
         layoutManager=new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL,false);
         CoursesRecyclerView.setLayoutManager(layoutManager);
 
-        adapter= new HomeCompanyAdapter(companyTitleDataSet,companyImageDataSet);
-        CoursesRecyclerView.setAdapter(adapter);
+        setValuesCourses();
+    }
 
+    private void setValuesCourses(){
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, urlLoadAllRows, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                //Toast.makeText(getContext(), "Successful", Toast.LENGTH_SHORT).show();
+                try {
+                    JSONObject arrayObject;
+                    JSONArray parentArray=new JSONArray(response);
+                    for(int i=0;i<parentArray.length();i++){
+                        arrayObject=parentArray.getJSONObject(i);
+                        courseTitleDataSet.add(arrayObject.getString("nfly_course_name"));
+                        courseImageDataSet.add(arrayObject.getString("nfly_course_bg"));
+                    }
+                    adapter= new HomeCompanyAdapter(MainActivity.this,courseTitleDataSet,courseImageDataSet);
+                    CoursesRecyclerView.setAdapter(adapter);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(MainActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("key", "course_id");
+                params.put("order", "ASC");
+                params.put("table", "nfly_course");
+                return params;
+            }
+        };
+        MySingleton.getmInstance(MainActivity.this).addToRequestQueue(stringRequest);
     }
 
     private void setCareerCards()
@@ -164,20 +206,105 @@ public class MainActivity extends AppCompatActivity {
         CareerRecyclerView=findViewById(R.id.homeCareerRecyclerView);
         layoutManager=new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL,false);
         CareerRecyclerView.setLayoutManager(layoutManager);
+        setValuesCareer();
 
-        adapter= new HomeCareerAdapter(companyTitleDataSet,companyImageDataSet);
-        CareerRecyclerView.setAdapter(adapter);
+    }
+    private void setValuesCareer(){
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, urlLoadAllRows, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                //Toast.makeText(getContext(), "Successful", Toast.LENGTH_SHORT).show();
+                try {
+                    JSONObject arrayObject;
+                    JSONArray parentArray=new JSONArray(response);
+                    for(int i=0;i<parentArray.length();i++){
+                        arrayObject=parentArray.getJSONObject(i);
+                        careerTitleDataSet.add(arrayObject.getString("job_role"));
+                        careerImageDataSet.add("http://nfly.in/assets/images/job_role/"+arrayObject.getString("job_role_bg"));
+                    }
+                    adapter= new HomeCareerAdapter(MainActivity.this,careerTitleDataSet,careerImageDataSet);
+                    CareerRecyclerView.setAdapter(adapter);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(MainActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
 
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("key", "job_role_id");
+                params.put("order", "ASC");
+                params.put("table", "job_role");
+                return params;
+            }
+        };
+        MySingleton.getmInstance(MainActivity.this).addToRequestQueue(stringRequest);
     }
     private void setCompanyCards()
     {
         CompanyRecyclerView=findViewById(R.id.homeCompanyRecyclerView);
         layoutManager=new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL,false);
         CompanyRecyclerView.setLayoutManager(layoutManager);
+        setValuesCompany();
+    }
 
-        adapter= new HomeCompanyAdapter(companyTitleDataSet,companyImageDataSet);
-        CompanyRecyclerView.setAdapter(adapter);
+    private void setValuesCompany() {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, urlLoadAllRows, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                //Toast.makeText(getContext(), "Successful", Toast.LENGTH_SHORT).show();
+                try {
+                    JSONObject arrayObject;
+                    JSONArray parentArray=new JSONArray(response);
+                    for(int i=0;i<7;i++){
+                        arrayObject=parentArray.getJSONObject(i);
+                        companyTitleDataSet.add(arrayObject.getString("company_name"));
+                        companyImageDataSet.add("http://nfly.in/assets/images/company/"+arrayObject.getString("company_cover"));
+                    }
 
+                    adapter= new HomeCompanyAdapter(MainActivity.this,companyTitleDataSet,companyImageDataSet);
+                    CompanyRecyclerView.setAdapter(adapter);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(MainActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("key", "company_id");
+                params.put("order", "ASC");
+                params.put("table", "company");
+                return params;
+            }
+        };
+        MySingleton.getmInstance(MainActivity.this).addToRequestQueue(stringRequest);
     }
 
     private void setPractiseIcons()

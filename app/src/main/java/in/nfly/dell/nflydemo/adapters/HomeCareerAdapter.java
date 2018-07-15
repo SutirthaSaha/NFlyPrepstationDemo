@@ -1,5 +1,6 @@
 package in.nfly.dell.nflydemo.adapters;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,16 +9,19 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 import in.nfly.dell.nflydemo.R;
 
 public class HomeCareerAdapter extends RecyclerView.Adapter<HomeCareerAdapter.HomeCareerHolder> {
 
-    private ArrayList<String> titleDataSet;
-    private ArrayList<Integer> imageDataSet;
+    private Context context;
+    private ArrayList<String> titleDataSet,imageDataSet;
 
-    public HomeCareerAdapter(ArrayList<String> titleDataSet, ArrayList<Integer> imageDataSet) {
+    public HomeCareerAdapter(Context context, ArrayList<String> titleDataSet, ArrayList<String> imageDataSet) {
+        this.context = context;
         this.titleDataSet = titleDataSet;
         this.imageDataSet = imageDataSet;
     }
@@ -33,7 +37,7 @@ public class HomeCareerAdapter extends RecyclerView.Adapter<HomeCareerAdapter.Ho
     @Override
     public void onBindViewHolder(@NonNull HomeCareerHolder holder, int position) {
         holder.HomeCareerTitle.setText(titleDataSet.get(position));
-        holder.HomeCareerImage.setImageResource(imageDataSet.get(position));
+        Picasso.with(context).load(imageDataSet.get(position)).into(holder.HomeCareerImage);
     }
 
     @Override

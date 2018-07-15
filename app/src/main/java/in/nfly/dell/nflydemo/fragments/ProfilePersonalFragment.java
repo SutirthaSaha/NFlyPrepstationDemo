@@ -4,6 +4,7 @@ package in.nfly.dell.nflydemo.fragments;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -41,6 +42,8 @@ import java.util.Map;
 import in.nfly.dell.nflydemo.MySingleton;
 import in.nfly.dell.nflydemo.R;
 import in.nfly.dell.nflydemo.User;
+import in.nfly.dell.nflydemo.activities.LoginActivity;
+import in.nfly.dell.nflydemo.activities.MainActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -65,6 +68,11 @@ public class ProfilePersonalFragment extends Fragment {
     private String oneRow="http://nfly.in/gapi/load_rows_one";
     private String allRows="http://nfly.in/gapi/load_all_rows";
     private String urlInsert="http://nfly.in/gapi/insert";
+    private String urlDataExists="http://nfly.in/gapi/data_exists_one";
+    private String urlGetDetails="http://nfly.in/gapi/get_details_one";
+
+    private String hobby_id,hobby_name;
+    private String language_id,language_name;
 
     private HashMap<String,String> languageMap=new HashMap<String,String>(){};
     private HashMap<String,String> hobbyMap=new HashMap<String,String>(){};
@@ -242,7 +250,7 @@ public class ProfilePersonalFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int which) {
                         languageTitleDataSet.clear();
                         languageIdDataSet.clear();
-                        addLanguages();
+                        checkLanguageExists();
                     }
                 });
                 AlertDialog alert=alertDialog.create();
@@ -276,7 +284,7 @@ public class ProfilePersonalFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int which) {
                         hobbyTitleDataSet.clear();
                         hobbyIdDataSet.clear();
-                        addHobbies();
+                        checkHobbyExists();
                     }
                 });
                 AlertDialog alert=alertDialog.create();
@@ -396,6 +404,266 @@ public class ProfilePersonalFragment extends Fragment {
         return view;
     }
 
+    private void checkLanguageExists() {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST,urlDataExists, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject arrayObject=new JSONObject(response);
+                    status=arrayObject.getInt("status");
+                    if(status==200){
+                        getLanguageDetails();
+                    }
+                    else{
+                        Toast.makeText(getActivity(), "Check Again", Toast.LENGTH_SHORT).show();
+                        addToLanguageTable();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+                addToLanguageTable();
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+
+            @Override
+            protected Map<String,String> getParams() throws AuthFailureError{
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("key","language_name");
+                params.put("value",editLanguages.getText().toString());
+                params.put("table","language");
+                return params;
+            }
+        };
+        MySingleton.getmInstance(getActivity()).addToRequestQueue(stringRequest);
+    }
+
+    private void addToLanguageTable() {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST,urlInsert, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject arrayObject=new JSONObject(response);
+                    status=arrayObject.getInt("status");
+                    if(status==200){
+                        checkLanguageExists();
+                    }
+                    else{
+                        Toast.makeText(getActivity(), "Registration Failed", Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+
+            @Override
+            protected Map<String,String> getParams() throws AuthFailureError{
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("insert_array[language_name]",editLanguages.getText().toString());
+                params.put("table","language");
+                return params;
+            }
+        };
+        MySingleton.getmInstance(getActivity()).addToRequestQueue(stringRequest);
+    }
+
+    private void getLanguageDetails() {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST,urlGetDetails, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject arrayObject=new JSONObject(response);
+                    language_id=arrayObject.getString("language_id");
+                    addLanguages();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+
+            @Override
+            protected Map<String,String> getParams() throws AuthFailureError{
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("key","language_name");
+                params.put("value",editLanguages.getText().toString());
+                params.put("table","language");
+                return params;
+            }
+        };
+        MySingleton.getmInstance(getActivity()).addToRequestQueue(stringRequest);
+    }
+
+    private void checkHobbyExists() {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST,urlDataExists, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject arrayObject=new JSONObject(response);
+                    status=arrayObject.getInt("status");
+                    if(status==200){
+                        getHobbyDetails();
+                    }
+                    else{
+                        Toast.makeText(getActivity(), "Check Again", Toast.LENGTH_SHORT).show();
+                        addToHobbyTable();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+                addToHobbyTable();
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+
+            @Override
+            protected Map<String,String> getParams() throws AuthFailureError{
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("key","hobby_name");
+                params.put("value",editHobbies.getText().toString());
+                params.put("table","hobby");
+                return params;
+            }
+        };
+        MySingleton.getmInstance(getActivity()).addToRequestQueue(stringRequest);
+    }
+
+    private void addToHobbyTable() {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST,urlInsert, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject arrayObject=new JSONObject(response);
+                    status=arrayObject.getInt("status");
+                    if(status==200){
+                        checkHobbyExists();
+                    }
+                    else{
+                        Toast.makeText(getActivity(), "Registration Failed", Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+
+            @Override
+            protected Map<String,String> getParams() throws AuthFailureError{
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("insert_array[hobby_name]",editHobbies.getText().toString());
+                params.put("table","hobby");
+                return params;
+            }
+        };
+        MySingleton.getmInstance(getActivity()).addToRequestQueue(stringRequest);
+    }
+
+    private void getHobbyDetails() {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST,urlGetDetails, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject arrayObject=new JSONObject(response);
+                    hobby_id=arrayObject.getString("hobby_id");
+                    addHobbies();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+
+            @Override
+            protected Map<String,String> getParams() throws AuthFailureError{
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("key","hobby_name");
+                params.put("value",editHobbies.getText().toString());
+                params.put("table","hobby");
+                return params;
+            }
+        };
+        MySingleton.getmInstance(getActivity()).addToRequestQueue(stringRequest);
+    }
+
     private void editCoverLetter() {
         StringRequest stringRequest=new StringRequest(Request.Method.POST, urlUpdate, new Response.Listener<String>() {
             @Override
@@ -467,7 +735,7 @@ public class ProfilePersonalFragment extends Fragment {
             protected Map<String,String> getParams() throws AuthFailureError{
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("insert_array[user_id]", user_id);
-                params.put("insert_array[hobby_id]",editHobbies.getText().toString().trim());
+                params.put("insert_array[hobby_id]",hobby_id);
                 params.put("table","user_hobby");
                 return params;
             }
@@ -512,7 +780,7 @@ public class ProfilePersonalFragment extends Fragment {
             protected Map<String,String> getParams() throws AuthFailureError{
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("insert_array[user_id]", user_id);
-                params.put("insert_array[language_id]",editLanguages.getText().toString().trim());
+                params.put("insert_array[language_id]",language_id);
                 params.put("table","user_language");
                 return params;
             }
