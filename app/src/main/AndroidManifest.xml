@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.BLUETOOTH" />
 
     <application
         android:allowBackup="true"
@@ -51,7 +52,8 @@
         <activity android:name=".activities.SalaryCalculatorActivity" />
         <activity android:name=".activities.NoInternetActivity" />
         <activity android:name=".activities.singleActivities.ForgotPasswordActivity" />
-        <activity android:name=".activities.singleActivities.SplashScreenSliderActivity"></activity>
+        <activity android:name=".activities.singleActivities.SplashScreenSliderActivity" />
+        <activity android:name=".activities.singleActivities.ResumeViewActivity"></activity>
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package in.nfly.dell.nflydemo.activities;
+package in.nfly.dell.nflydemo;
 
 import java.security.AccessController;
 import java.security.Provider;

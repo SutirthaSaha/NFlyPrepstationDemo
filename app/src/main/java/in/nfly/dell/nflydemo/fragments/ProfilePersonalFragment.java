@@ -70,6 +70,7 @@ public class ProfilePersonalFragment extends Fragment {
     private String urlInsert="http://nfly.in/gapi/insert";
     private String urlDataExists="http://nfly.in/gapi/data_exists_one";
     private String urlGetDetails="http://nfly.in/gapi/get_details_one";
+    private String urlDelete="http://nfly.in/gapi/delete_with_one";
 
     private String hobby_id,hobby_name;
     private String language_id,language_name;
@@ -1185,7 +1186,8 @@ public class ProfilePersonalFragment extends Fragment {
             holder.profileLanguageDeleteBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(context, idDataSet.get(position), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(context, idDataSet.get(position), Toast.LENGTH_SHORT).show();
+                    deleteLanguage(idDataSet.get(position));
                 }
             });
         }
@@ -1206,6 +1208,56 @@ public class ProfilePersonalFragment extends Fragment {
                 profileLanguageDeleteBtn=itemView.findViewById(R.id.profileLanguageDeleteBtn);
             }
         }
+    }
+
+    private void deleteLanguage(final String ul_id) {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST,urlDelete, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject arrayObject=new JSONObject(response);
+                    //status=arrayObject.getInt("status");
+                    if(arrayObject.getString("status").equals("deleted")){
+                        languageIdDataSet.clear();
+                        languageTitleDataSet.clear();
+                        setLanguages();
+                        Toast.makeText(getActivity(), "Deletion done", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        Toast.makeText(getActivity(), "Check Again", Toast.LENGTH_SHORT).show();
+                        addToHobbyTable();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("key", "ul_id");
+                params.put("value", ul_id);
+                params.put("table", "user_language");
+                return params;
+            }
+        };
+        MySingleton.getmInstance(getContext()).addToRequestQueue(stringRequest);
     }
 
     public class ProfilePersonalHobbiesAdapter extends RecyclerView.Adapter<ProfilePersonalHobbiesAdapter.ProfilePersonalHobbiesHolder> {
@@ -1234,6 +1286,7 @@ public class ProfilePersonalFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     Toast.makeText(context, idDataSet.get(position), Toast.LENGTH_SHORT).show();
+                    deleteHobby(idDataSet.get(position));
                 }
             });
         }
@@ -1256,4 +1309,54 @@ public class ProfilePersonalFragment extends Fragment {
             }
         }
     }
+    private void deleteHobby(final String uh_id) {
+
+            StringRequest stringRequest=new StringRequest(Request.Method.POST,urlDelete, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    try {
+                        JSONObject arrayObject=new JSONObject(response);
+                        //status=arrayObject.getInt("status");
+                        if(arrayObject.getString("status").equals("deleted")){
+                            hobbyIdDataSet.clear();
+                            hobbyTitleDataSet.clear();
+                            setHobbies();
+                            Toast.makeText(getActivity(), "Deletion done", Toast.LENGTH_SHORT).show();
+                        }
+                        else{
+                            Toast.makeText(getActivity(), "Check Again", Toast.LENGTH_SHORT).show();
+                            addToHobbyTable();
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+
+                }
+            })
+            {
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    HashMap<String, String> headers = new HashMap<String, String>();
+                    headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                    return headers;
+                }
+
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put("key", "uh_id");
+                    params.put("value", uh_id);
+                    params.put("table", "user_hobby");
+                    return params;
+                }
+            };
+            MySingleton.getmInstance(getContext()).addToRequestQueue(stringRequest);
+        }
 }
