@@ -1,6 +1,4 @@
 package in.nfly.dell.nflydemo.fragments;
-
-
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

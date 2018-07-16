@@ -53,10 +53,13 @@ public class ProfileAcademicFragment extends Fragment {
     public RecyclerView achievementsRecyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
+
     private String urlAcademic="http://nfly.in/profileapi/academic_details";
     private String oneRow="http://nfly.in/gapi/load_rows_one";
     private String urlUpdate="http://nfly.in/gapi/update";
     private String urlInsert="http://nfly.in/gapi/insert";
+    private String urlDelete="http://nfly.in/gapi/delete_with_one";
+
     private String user_id;
     private int status;
     private String date;
@@ -895,6 +898,9 @@ public class ProfileAcademicFragment extends Fragment {
     }
 
     public void setAchievements() {
+        achievementIdDataSet.clear();
+        achievementNameDataSet.clear();
+        achievementDescriptionDataSet.clear();
         StringRequest stringRequest=new StringRequest(Request.Method.POST, oneRow, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -952,6 +958,13 @@ public class ProfileAcademicFragment extends Fragment {
 
     }
     public void setWorkExp() {
+        workExpIdDataSet.clear();
+        companyNameDataSet.clear();
+        postionDataSet.clear();
+        jobTypeDataSet.clear();
+        startDateDataSet.clear();
+        endDateDataSet.clear();
+        jobDecriptionDataSet.clear();
         StringRequest stringRequest=new StringRequest(Request.Method.POST, oneRow, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -1014,6 +1027,11 @@ public class ProfileAcademicFragment extends Fragment {
     }
 
     public void setTrainings() {
+        trainingIdDataSet.clear();
+        courseDataSet.clear();
+        durationDataSet.clear();
+        certDataSet.clear();
+        detailsDataSet.clear();
         StringRequest stringRequest=new StringRequest(Request.Method.POST, oneRow, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -1074,6 +1092,10 @@ public class ProfileAcademicFragment extends Fragment {
     }
 
     public void setProjects(){
+        projectIdDataSet.clear();
+        projectTitleDataSet.clear();
+        projectDescriptionDataSet.clear();
+        projectLinkDataSet.clear();
         StringRequest stringRequest=new StringRequest(Request.Method.POST, oneRow, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -1154,9 +1176,6 @@ public class ProfileAcademicFragment extends Fragment {
                             JSONObject arrayObject=new JSONObject(response);
                             status=arrayObject.getInt("status");
                             if(status==200){
-                                achievementIdDataSet.clear();
-                                achievementNameDataSet.clear();
-                                achievementDescriptionDataSet.clear();
                                 setAchievements();
                             }
                             else{
@@ -1230,6 +1249,12 @@ public class ProfileAcademicFragment extends Fragment {
                     editAchievements(idDataSet.get(position),nameDataSet.get(position),descriptionDataSet.get(position));
                 }
             });
+            holder.profileAchievementsDeleteBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    deleteAchievements(idDataSet.get(position));
+                }
+            });
         }
 
         @Override
@@ -1250,6 +1275,53 @@ public class ProfileAcademicFragment extends Fragment {
                 profileAchievementsEditBtn=itemView.findViewById(R.id.profileAchievementsEditBtn);
             }
         }
+    }
+
+    private void deleteAchievements(final String ua_id) {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST,urlDelete, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject arrayObject=new JSONObject(response);
+                    //status=arrayObject.getInt("status");
+                    if(arrayObject.getString("status").equals("deleted")){
+                        setAchievements();
+                        Toast.makeText(getActivity(), "Deletion done", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        Toast.makeText(getActivity(), "Check Again", Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("key", "ua_id");
+                params.put("value", ua_id);
+                params.put("table", "user_accolades");
+                return params;
+            }
+        };
+        MySingleton.getmInstance(getContext()).addToRequestQueue(stringRequest);
     }
 
     public void editProjects(final String projectId, String projectTitle, String projectDescription,String projectLink){
@@ -1288,10 +1360,6 @@ public class ProfileAcademicFragment extends Fragment {
                             JSONObject arrayObject=new JSONObject(response);
                             status=arrayObject.getInt("status");
                             if(status==200){
-                                projectIdDataSet.clear();
-                                projectTitleDataSet.clear();
-                                projectDescriptionDataSet.clear();
-                                projectLinkDataSet.clear();
                                 setProjects();
                             }
                             else{
@@ -1369,6 +1437,12 @@ public class ProfileAcademicFragment extends Fragment {
                     editProjects(projectIdDataSet.get(position),projectTitleDataSet.get(position),projectDescriptionDataSet.get(position),projectLinkDataSet.get(position));
                 }
             });
+            holder.profileProjectsDeleteBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    deleteProject(projectIdDataSet.get(position));
+                }
+            });
         }
 
         @Override
@@ -1394,6 +1468,53 @@ public class ProfileAcademicFragment extends Fragment {
 
             }
         }
+    }
+
+    private void deleteProject(final String up_id) {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST,urlDelete, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject arrayObject=new JSONObject(response);
+                    //status=arrayObject.getInt("status");
+                    if(arrayObject.getString("status").equals("deleted")){
+                        setProjects();
+                        Toast.makeText(getActivity(), "Deletion done", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        Toast.makeText(getActivity(), "Check Again", Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("key", "up_id");
+                params.put("value", up_id);
+                params.put("table", "user_projects");
+                return params;
+            }
+        };
+        MySingleton.getmInstance(getContext()).addToRequestQueue(stringRequest);
     }
 
     public void editTraining(final String trainingId, String trainingCourse, String trainingDuration,String trainingDetails,String trainingCompany){
@@ -1434,11 +1555,6 @@ public class ProfileAcademicFragment extends Fragment {
                             JSONObject arrayObject=new JSONObject(response);
                             status=arrayObject.getInt("status");
                             if(status==200){
-                                trainingIdDataSet.clear();
-                                courseDataSet.clear();
-                                durationDataSet.clear();
-                                certDataSet.clear();
-                                detailsDataSet.clear();
                                 setTrainings();
                             }
                             else{
@@ -1519,6 +1635,13 @@ public class ProfileAcademicFragment extends Fragment {
                     editTraining(idDataSet.get(position),courseDataSet.get(position),durationDataSet.get(position),detailsDataSet.get(position),certifiedByDataSet.get(position));
                 }
             });
+
+            holder.profileTrainingsDeleteBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    deleteTraining(idDataSet.get(position));
+                }
+            });
         }
 
         @Override
@@ -1545,6 +1668,54 @@ public class ProfileAcademicFragment extends Fragment {
             }
         }
     }
+
+    private void deleteTraining(final String utd_id) {
+            StringRequest stringRequest=new StringRequest(Request.Method.POST,urlDelete, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    try {
+                        JSONObject arrayObject=new JSONObject(response);
+                        //status=arrayObject.getInt("status");
+                        if(arrayObject.getString("status").equals("deleted")){
+                            setTrainings();
+                            Toast.makeText(getActivity(), "Deletion done", Toast.LENGTH_SHORT).show();
+                        }
+                        else{
+                            Toast.makeText(getActivity(), "Check Again", Toast.LENGTH_SHORT).show();
+                        }
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+
+                }
+            })
+            {
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    HashMap<String, String> headers = new HashMap<String, String>();
+                    headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                    return headers;
+                }
+
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put("key", "utd_id");
+                    params.put("value", utd_id);
+                    params.put("table", "user_training_details");
+                    return params;
+                }
+            };
+            MySingleton.getmInstance(getContext()).addToRequestQueue(stringRequest);
+    }
+
     private void updateLabel(EditText edittext, Calendar calendar) {
         String Format = "yy/MM/dd"; //In which you need put here
         SimpleDateFormat sdf = new SimpleDateFormat(Format, Locale.UK);
@@ -1593,13 +1764,6 @@ public class ProfileAcademicFragment extends Fragment {
                             JSONObject arrayObject=new JSONObject(response);
                             status=arrayObject.getInt("status");
                             if(status==200){
-                                workExpIdDataSet.clear();
-                                companyNameDataSet.clear();
-                                postionDataSet.clear();
-                                jobTypeDataSet.clear();
-                                startDateDataSet.clear();
-                                endDateDataSet.clear();
-                                jobDecriptionDataSet.clear();
                                 setWorkExp();
                             }
                             else{
@@ -1686,6 +1850,12 @@ public class ProfileAcademicFragment extends Fragment {
                     editWorkExp(idDataSet.get(position),companyNameDataSet.get(position),positionDataSet.get(position),jobTypeDataSet.get(position),startDateDataSet.get(position),lastDateDataSet.get(position),jobDescriptionDataSet.get(position));
                 }
             });
+            holder.profileWorkExperienceDeleteBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    deleteWorkExp(idDataSet.get(position));
+                }
+            });
         }
 
         @Override
@@ -1715,5 +1885,52 @@ public class ProfileAcademicFragment extends Fragment {
                 profileWorkExperienceEditBtn=itemView.findViewById(R.id.profileWorkExperienceEditBtn);
             }
         }
+    }
+
+    private void deleteWorkExp(final String ued_id) {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST,urlDelete, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject arrayObject=new JSONObject(response);
+                    //status=arrayObject.getInt("status");
+                    if(arrayObject.getString("status").equals("deleted")){
+                        setWorkExp();
+                        Toast.makeText(getActivity(), "Deletion done", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        Toast.makeText(getActivity(), "Check Again", Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("key", "ued_id");
+                params.put("value", ued_id);
+                params.put("table", "user_employment_details");
+                return params;
+            }
+        };
+        MySingleton.getmInstance(getContext()).addToRequestQueue(stringRequest);
     }
 }
