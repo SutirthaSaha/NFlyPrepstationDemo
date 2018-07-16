@@ -6,8 +6,8 @@
     android:layout_margin="15dp">
 
             <ImageView
-                android:layout_width="45dp"
-                android:layout_height="45dp"
+                android:layout_width="55dp"
+                android:layout_height="55dp"
                 android:src="@drawable/salary_calc_dialog"
                 android:layout_margin="5dp"
                 android:layout_gravity="center"/>
@@ -15,7 +15,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="toast"
-                android:textSize="16sp"
+                android:gravity="center"
+                android:textSize="17sp"
                 android:textColor="#002"
                 android:lineSpacingMultiplier="1.2"
                 android:id="@+id/salaryCalcToastText"

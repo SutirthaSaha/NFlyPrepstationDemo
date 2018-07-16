@@ -58,27 +58,28 @@
                         android:id="@+id/homeBannerIconsRecyclerView">
                     </android.support.v7.widget.RecyclerView>
                 </android.support.v7.widget.CardView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:textColor="#000"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    android:text="Features"/>
                 <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:cardPreventCornerOverlap="false"
                     app:cardElevation="2dp"
-                    android:layout_marginTop="7dp"
-                    >
+                    android:layout_marginTop="7dp">
                     <LinearLayout
                         android:layout_marginTop="10dp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:paddingBottom="10dp">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="#000"
-                            android:layout_marginLeft="10dp"
-                            android:textSize="17sp"
-                            android:textStyle="bold"
-                            android:text="Features"/>
+
                         <android.support.v7.widget.RecyclerView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"

@@ -17,15 +17,16 @@ import in.nfly.dell.nflydemo.R;
 
 public class HomeSwipeAdapter extends PagerAdapter{
     private int[] image_resources;
-    private String[] title_resources;
+    private String[] title_resources,subtitle_resources;
     private Context context;
     private LayoutInflater layoutInflater;
 
-    public HomeSwipeAdapter(Context context, int[] image_resources,String[] title_resources )
+    public HomeSwipeAdapter(Context context, int[] image_resources,String[] title_resources,String[] subtitle_resources )
     {
         this.context=context;
         this.image_resources=image_resources;
         this.title_resources=title_resources;
+        this.subtitle_resources=subtitle_resources;
 
     }
     @Override
@@ -44,9 +45,12 @@ public class HomeSwipeAdapter extends PagerAdapter{
         View item_view= layoutInflater.inflate(R.layout.layout_home_swipe,container,false);
         ImageView imageView=item_view.findViewById(R.id.homeSwipeImage);
         TextView textView=item_view.findViewById(R.id.homeSwipeTitle);
+        TextView subtitleTextView=item_view.findViewById(R.id.homeSwipeSubtitle);
         //imageView.setImageResource(image_resources[position]);
         Picasso.with(context).load(image_resources[position]).into(imageView);
+
         textView.setText(title_resources[position]);
+        subtitleTextView.setText(subtitle_resources[position]);
         container.addView(item_view);
         return item_view;
     }

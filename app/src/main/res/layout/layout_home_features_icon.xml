@@ -2,7 +2,9 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="wrap_content"
+    android:id="@+id/homeFeaturesIconsLayout"
     android:layout_height="wrap_content"
+    android:layout_marginBottom="20dp"
     >
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical" android:layout_width="wrap_content"
@@ -12,15 +14,15 @@
         android:layout_marginTop="7dp">
 
         <ImageView
-            android:layout_width="28dp"
-            android:layout_height="28dp"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
             android:src="@drawable/courses"
             android:layout_centerHorizontal="true"
             android:id="@+id/homeFeaturesIconImage" />
         <TextView
             android:layout_width="85dp"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
+            android:textSize="12sp"
             android:textColor="@color/colorPrimaryDark"
             android:layout_marginTop="5dp"
             android:layout_centerVertical="true"

@@ -82,8 +82,9 @@ public class MainActivity extends AppCompatActivity {
     private String urlLoadAllRows="http://nfly.in/gapi/load_all_rows";
     private String email;
     
-    private int[] swipeImageDataSet= {R.drawable.imagevideo,R.drawable.imagepaper,R.drawable.imageresume};
-    private String[] swipeTitleDataSet={"Video Courses","Placement Papers","Resume Builder"};
+    private int[] swipeImageDataSet= {R.drawable.home_swipe_video,R.drawable.imagepaper,R.drawable.home_swipe_res};
+    private String[] swipeTitleDataSet={"Nfly Prepstation","Video Courses","Mock Tests"};
+    private String[] swipeSubtitleDataSet={"Everything you needed for campus placements!","More than 200 videos on 7 different courses","50+ tests across 15 diverse topics"};
 
 
     private ArrayList<Integer> featureImageDataSet=new ArrayList<Integer>(){
@@ -101,6 +102,21 @@ public class MainActivity extends AppCompatActivity {
             add("Placement Papers");
             add("Preparation Hub");
             add("Resume Builder");}};
+    private ArrayList<Integer> prepHubImageDataSet=new ArrayList<Integer>(){
+        {
+            add(R.drawable.coloredtest);
+            add(R.drawable.colored_company);
+            add(R.drawable.colored_placementpapers);
+            add(R.drawable.colored_prep);
+            add(R.drawable.colorresume);}};
+    private ArrayList<String> prepHubTitleDataSet=new ArrayList<String>(){
+        {add("Video Courses");
+            add("Interviews");
+            add("Group Discussions");
+            add("Placement Papers");
+            add("Tips");
+           }};
+
 
 
     private ArrayList<Integer> bannerImageDataSet=new ArrayList<Integer>(){
@@ -323,7 +339,7 @@ public class MainActivity extends AppCompatActivity {
         layoutManager=new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL,false);
         PrepHubIconsRecyclerView.setLayoutManager(layoutManager);
 
-        adapter= new HomePrepHubAdapter(featureTitleDataSet,featureImageDataSet);
+        adapter= new HomePrepHubAdapter(prepHubTitleDataSet,prepHubImageDataSet);
         PrepHubIconsRecyclerView.setAdapter(adapter);
 
     }
@@ -334,7 +350,7 @@ public class MainActivity extends AppCompatActivity {
         layoutManager=new GridLayoutManager(MainActivity.this,3);
         HomeFeatureIconsRecyclerView.setLayoutManager(layoutManager);
 
-        adapter= new HomeFeaturesIconsAdapter(featureTitleDataSet,featureImageDataSet);
+        adapter= new HomeFeaturesIconsAdapter(MainActivity.this,featureTitleDataSet,featureImageDataSet);
         HomeFeatureIconsRecyclerView.setAdapter(adapter);
     }
 
@@ -352,7 +368,7 @@ public class MainActivity extends AppCompatActivity {
     private void setViewPager()
     {
         viewPager=findViewById(R.id.homeViewPager);
-        swipeAdapter= new HomeSwipeAdapter(this,swipeImageDataSet,swipeTitleDataSet);
+        swipeAdapter= new HomeSwipeAdapter(this,swipeImageDataSet,swipeTitleDataSet,swipeSubtitleDataSet);
         viewPager.setAdapter(swipeAdapter);
         CircleIndicator indicator = findViewById(R.id.homeSliderIndicator);
         indicator.setViewPager(viewPager);

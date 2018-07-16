@@ -921,9 +921,9 @@ public class ProfilePersonalFragment extends Fragment {
 
                     profileCoverLetter.setText(user_additional_details.getString("user_cover_letter"));
 
-                    profileCurrentCity.setText(user_additional_details.getString("user_current_city"));
+                    profileCurrentCity.setText(user_additional_details.getString("user_current_city")+"/");
                     profileHomeTown.setText(user_additional_details.getString("user_city"));
-                    profileGender.setText(user_additional_details.getString("user_gender"));
+                    profileGender.setText("("+user_additional_details.getString("user_gender")+")");
                     profileDob.setText(user_additional_details.getString("user_dob"));
                     profileAddress.setText(user_additional_details.getString("user_address"));
 

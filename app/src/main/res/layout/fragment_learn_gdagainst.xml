@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="5dp"
             android:textColor="#000"
-            android:textSize="15sp"
+            android:textSize="17sp"
             android:lineSpacingMultiplier="1.3"
             android:fontFamily="@font/roboto"
             android:id="@+id/gdAgainstTextView"

@@ -11,14 +11,19 @@
         android:layout_height="wrap_content"
         android:id="@+id/homeSwipeImage"
         android:scaleType="fitXY"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true">
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/homeSwipeTitle"
-        android:textSize="20sp"
+        android:textSize="23sp"
         android:textStyle="bold"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
         android:foregroundGravity="center"
         android:textColor="#fff"
         android:text="Title"
@@ -27,6 +32,26 @@
         android:shadowDx="1.5"
         android:shadowDy="1.5"
         android:shadowRadius="1.6"
-        android:layout_marginTop="25dp"/>
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/homeSwipeSubtitle"
+        android:layout_below="@+id/homeSwipeTitle"
+        android:textSize="17sp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:foregroundGravity="center"
+        android:textColor="#fff"
+        android:text="Title"
+        android:gravity="center"
+        android:shadowColor="#000000"
+        android:shadowDx="1.5"
+        android:shadowDy="1.5"
+        android:shadowRadius="1.6"
+        android:layout_marginTop="2dp"/>
+    </LinearLayout>
+
+
 
 </RelativeLayout>

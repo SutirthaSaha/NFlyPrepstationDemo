@@ -1,12 +1,16 @@
 package in.nfly.dell.nflydemo.adapters;
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -14,10 +18,12 @@ import in.nfly.dell.nflydemo.R;
 
 public class HomeFeaturesIconsAdapter extends RecyclerView.Adapter<HomeFeaturesIconsAdapter.HomeFeaturesIconsHolder> {
 
+    private Context context;
     private ArrayList<String> titleDataSet;
     private ArrayList<Integer> imageDataSet;
 
-    public HomeFeaturesIconsAdapter(ArrayList<String> titleDataSet, ArrayList<Integer> imageDataSet) {
+    public HomeFeaturesIconsAdapter(Context context, ArrayList<String> titleDataSet, ArrayList<Integer> imageDataSet) {
+        this.context = context;
         this.titleDataSet = titleDataSet;
         this.imageDataSet = imageDataSet;
     }
@@ -31,9 +37,15 @@ public class HomeFeaturesIconsAdapter extends RecyclerView.Adapter<HomeFeaturesI
     }
 
     @Override
-    public void onBindViewHolder(@NonNull HomeFeaturesIconsHolder holder, int position) {
+    public void onBindViewHolder(@NonNull HomeFeaturesIconsHolder holder, final int position) {
         holder.HomeFeaturesIconsTitle.setText(titleDataSet.get(position));
         holder.HomeFeaturesIconsImage.setImageResource(imageDataSet.get(position));
+        holder.homeFeaturesIconsLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
     }
 
     @Override
@@ -44,10 +56,12 @@ public class HomeFeaturesIconsAdapter extends RecyclerView.Adapter<HomeFeaturesI
     public class HomeFeaturesIconsHolder extends RecyclerView.ViewHolder{
 
         public TextView HomeFeaturesIconsTitle;
+        public LinearLayout homeFeaturesIconsLayout;
         public ImageView HomeFeaturesIconsImage;
         public HomeFeaturesIconsHolder(View itemView) {
             super(itemView);
 
+            homeFeaturesIconsLayout=itemView.findViewById(R.id.homeFeaturesIconsLayout);
             HomeFeaturesIconsTitle=itemView.findViewById(R.id.homeFeaturesIconTitle);
             HomeFeaturesIconsImage=itemView.findViewById(R.id.homeFeaturesIconImage);
         }
