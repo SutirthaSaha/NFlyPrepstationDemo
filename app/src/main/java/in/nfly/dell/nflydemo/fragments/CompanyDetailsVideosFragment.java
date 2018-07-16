@@ -77,7 +77,7 @@ public class CompanyDetailsVideosFragment extends Fragment {
                     JSONArray parentArray=new JSONArray(response);
                     for(int i=0;i<parentArray.length();i++){
                         arrayObject=parentArray.getJSONObject(i);
-                        titleDataSet.add((i+1)+" . "+arrayObject.getString("video_title"));
+                        titleDataSet.add((i+1)+".  "+arrayObject.getString("video_title"));
                         urlDataSet.add(arrayObject.getString("video_url"));
                     }
                     ArrayAdapter<String> adapter=new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1,titleDataSet);

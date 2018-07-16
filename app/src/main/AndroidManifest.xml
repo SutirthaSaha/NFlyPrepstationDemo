@@ -49,7 +49,7 @@
         <activity android:name=".activities.singleActivities.LearnPapersDisplayActivity" />
         <activity android:name=".activities.SalaryCalculatorActivity" />
         <activity android:name=".activities.NoInternetActivity" />
-        <activity android:name=".activities.singleActivities.ForgotPassword" />
+        <activity android:name=".activities.singleActivities.ForgotPasswordActivity" />
         <activity android:name=".activities.singleActivities.SplashScreenSliderActivity"></activity>
     </application>
 

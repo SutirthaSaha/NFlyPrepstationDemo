@@ -88,7 +88,7 @@ public class CourseStudyActivity extends YouTubeBaseActivity implements YouTubeP
                     JSONArray parentArray=new JSONArray(response);
                     for(int i=0;i<parentArray.length();i++){
                         arrayObject=parentArray.getJSONObject(i);
-                        titleDataSet.add((i+1)+" . "+arrayObject.getString("nfly_video_name"));
+                        titleDataSet.add((i+1)+".  "+arrayObject.getString("nfly_video_name"));
                         urlDataSet.add(arrayObject.getString("nfly_app_url"));
                     }
                     if (courseYoutubePlayer != null) {

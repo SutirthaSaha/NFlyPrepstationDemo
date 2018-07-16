@@ -2,7 +2,6 @@ package in.nfly.dell.nflydemo.activities;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -28,7 +27,7 @@ import java.util.Map;
 import in.nfly.dell.nflydemo.MySingleton;
 import in.nfly.dell.nflydemo.R;
 import in.nfly.dell.nflydemo.User;
-import in.nfly.dell.nflydemo.activities.singleActivities.ForgotPassword;
+import in.nfly.dell.nflydemo.activities.singleActivities.ForgotPasswordActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -57,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
         loginForgotPasswordText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent= new Intent(LoginActivity.this,ForgotPassword.class);
+                Intent intent= new Intent(LoginActivity.this,ForgotPasswordActivity.class);
                 startActivity(intent);
             }
         });

@@ -75,7 +75,7 @@ public class JobRoleVideosFragment extends Fragment {
                     JSONArray parentArray=new JSONArray(response);
                     for(int i=0;i<parentArray.length();i++){
                         arrayObject=parentArray.getJSONObject(i);
-                        titleDataSet.add((i+1)+" . "+arrayObject.getString("video_name"));
+                        titleDataSet.add((i+1)+".  "+arrayObject.getString("video_name"));
                         urlDataSet.add(arrayObject.getString("video_iframe"));
                     }
                     ArrayAdapter<String> adapter=new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1,titleDataSet);
