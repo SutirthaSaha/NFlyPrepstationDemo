@@ -15,9 +15,9 @@ import in.nfly.dell.nflydemo.adapters.SplashScreenSwipeAdapter;
 import me.relex.circleindicator.CircleIndicator;
 
 public class SplashScreenSliderActivity extends AppCompatActivity {
-    private int[] swipeImageDataSet= {R.drawable.presentation,R.drawable.splash_test,R.drawable.splash_resume};
-    private String[] swipeTitleDataSet={"Video Courses","Placement Papers","Resume Builder"};
-    private String[] swipeSubtitleDataSet={"Watch videos to learn etc etc","Solve mock tests blahblah this and that","Build your own resume with no effort"};
+    private int[] swipeImageDataSet= {R.drawable.cv,R.drawable.presentation,R.drawable.exam};
+    private String[] swipeTitleDataSet={"Resume Builder","Video Courses","Mock Tests"};
+    private String[] swipeSubtitleDataSet={"Build your own resume with no effort","Watch videos to learn etc etc","Solve mock tests blahblah this and that"};
 
     private static int currentPage = 0;
     private static int NUM_PAGES;
@@ -30,9 +30,7 @@ public class SplashScreenSliderActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen_slider);
 
-        View someView = findViewById(R.id.splashScreenViewPager);
-        View root = someView.getRootView();
-        root.setBackgroundColor(Color.parseColor("#ff6961"));
+
         setViewPager();
     }
     private void setViewPager()
@@ -50,24 +48,7 @@ public class SplashScreenSliderActivity extends AppCompatActivity {
             public void run() {
                 if(currentPage==NUM_PAGES){
 
-                    View someView = findViewById(R.id.splashScreenViewPager);
-                    View root = someView.getRootView();
-                    root.setBackgroundColor(Color.parseColor("#ff6961"));
                     currentPage=0;
-                }
-                else if (currentPage==1)
-                {
-
-                    View someView = findViewById(R.id.splashScreenViewPager);
-                    View root = someView.getRootView();
-                    root.setBackgroundColor(Color.parseColor("#ffb347"));
-                }
-                else if(currentPage==2)
-                {
-
-                    View someView = findViewById(R.id.splashScreenViewPager);
-                    View root = someView.getRootView();
-                    root.setBackgroundColor(Color.parseColor("#aec6cf"));
                 }
                 viewPager.setCurrentItem(currentPage++, true);
             }

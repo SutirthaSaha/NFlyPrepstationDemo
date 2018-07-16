@@ -10,6 +10,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
+
 import in.nfly.dell.nflydemo.R;
 
 public class HomeSwipeAdapter extends PagerAdapter{
@@ -41,7 +44,8 @@ public class HomeSwipeAdapter extends PagerAdapter{
         View item_view= layoutInflater.inflate(R.layout.layout_home_swipe,container,false);
         ImageView imageView=item_view.findViewById(R.id.homeSwipeImage);
         TextView textView=item_view.findViewById(R.id.homeSwipeTitle);
-        imageView.setImageResource(image_resources[position]);
+        //imageView.setImageResource(image_resources[position]);
+        Picasso.with(context).load(image_resources[position]).into(imageView);
         textView.setText(title_resources[position]);
         container.addView(item_view);
         return item_view;

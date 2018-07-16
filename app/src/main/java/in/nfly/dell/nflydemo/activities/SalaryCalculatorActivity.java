@@ -1,5 +1,6 @@
 package in.nfly.dell.nflydemo.activities;
 
+import android.app.Dialog;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.v7.app.AlertDialog;
@@ -10,7 +11,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
-import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -131,20 +132,46 @@ public class SalaryCalculatorActivity extends AppCompatActivity {
                         min = jsonObject.getString("salary_min_excep");
                         max = jsonObject.getString("salary_max_excep");
                     }
+                    TextView toastText;
+
+                   /* LayoutInflater inflater = getLayoutInflater();
+                    View layout = inflater.inflate(R.layout.layout_salary_calculator_dialog,
+                            (ViewGroup) findViewById(R.id.salaryCalcToastLayout));
+                    toastText=layout.findViewById(R.id.salaryCalcToastText);
+                    toastText.setText("The tentative range of in-hand salary is:\n" +
+                            min+" - "+max+"K Rs./month");
+
+
+                    Toast toast = new Toast(getApplicationContext());
+                    toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
+                    toast.setDuration(Toast.LENGTH_LONG);
+                    toast.setView(layout);
+                    toast.show();
+                    */
 
                     AlertDialog.Builder builder;
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                        builder = new AlertDialog.Builder(SalaryCalculatorActivity.this, android.R.style.Theme_Material_Dialog_Alert);
+                        builder = new AlertDialog.Builder(SalaryCalculatorActivity.this, android.R.style.Theme_Material_Dialog);
                     } else {
                         builder = new AlertDialog.Builder(SalaryCalculatorActivity.this);
                     }
 
-                    builder.setCancelable(true);
+
+                    final Dialog dialog = new Dialog(SalaryCalculatorActivity.this);
+                    dialog.setContentView(R.layout.layout_salary_calculator_dialog);
+                    TextView salaryCalcToastText = dialog.findViewById(R.id.salaryCalcToastText);
+                    // if button is clicked, close the custom dialog
+                    salaryCalcToastText.setText("The tentative range of in-hand salary is: " +
+                            min+" - "+max+" K Rs./month");
+                    dialog.show();
+
+                   /* builder.setCancelable(true);
                     builder.setMessage("The tentative range of in-hand salary is:\n" +
-                            min+" - "+max+" Rs./month");
+                            min+" - "+max+" K Rs./month");
 
                     AlertDialog alert=builder.create();
-                    alert.show();
+                    alert.show(); */
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

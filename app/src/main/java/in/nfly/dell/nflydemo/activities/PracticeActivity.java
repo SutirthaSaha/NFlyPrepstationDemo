@@ -62,7 +62,7 @@ public class PracticeActivity extends AppCompatActivity {
 
         BottomNavigationView navigation =findViewById(R.id.practiceBottomNavigation);
         BottomNavigationViewHelper.removeShiftMode(navigation);
-        loadFragment(new PracticeTestSeriesFragment());
+        loadFragment(new PracticeCompanyWiseFragment());
         navigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);
 
         drawerLayoutPractice=findViewById(R.id.drawerLayoutPractice);
