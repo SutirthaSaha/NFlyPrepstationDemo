@@ -1,6 +1,7 @@
 package in.nfly.dell.nflydemo.fragments;
 
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -1252,7 +1253,30 @@ public class ProfileAcademicFragment extends Fragment {
             holder.profileAchievementsDeleteBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    deleteAchievements(idDataSet.get(position));
+                    AlertDialog.Builder alert = new AlertDialog.Builder(
+                            getActivity());
+                    alert.setTitle("Alert!!");
+                    alert.setMessage("Are you sure to delete record");
+                    alert.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //do your work here
+                            deleteAchievements(idDataSet.get(position));
+                            dialog.dismiss();
+
+                        }
+                    });
+                    alert.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            dialog.dismiss();
+                        }
+                    });
+
+                    alert.show();
                 }
             });
         }
@@ -1440,7 +1464,31 @@ public class ProfileAcademicFragment extends Fragment {
             holder.profileProjectsDeleteBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    deleteProject(projectIdDataSet.get(position));
+                    AlertDialog.Builder alert = new AlertDialog.Builder(
+                            getActivity());
+                    alert.setTitle("Alert!!");
+                    alert.setMessage("Are you sure to delete record");
+                    alert.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //do your work here
+                            deleteProject(projectIdDataSet.get(position));
+                            dialog.dismiss();
+
+                        }
+                    });
+                    alert.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            dialog.dismiss();
+                        }
+                    });
+
+                    alert.show();
+
                 }
             });
         }
@@ -1639,7 +1687,31 @@ public class ProfileAcademicFragment extends Fragment {
             holder.profileTrainingsDeleteBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    deleteTraining(idDataSet.get(position));
+                    AlertDialog.Builder alert = new AlertDialog.Builder(
+                            getActivity());
+                    alert.setTitle("Alert!!");
+                    alert.setMessage("Are you sure to delete record");
+                    alert.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //do your work here
+                            deleteTraining(idDataSet.get(position));
+                            dialog.dismiss();
+
+                        }
+                    });
+                    alert.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            dialog.dismiss();
+                        }
+                    });
+
+                    alert.show();
+
                 }
             });
         }
@@ -1853,7 +1925,30 @@ public class ProfileAcademicFragment extends Fragment {
             holder.profileWorkExperienceDeleteBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    deleteWorkExp(idDataSet.get(position));
+                    AlertDialog.Builder alert = new AlertDialog.Builder(
+                            getActivity());
+                    alert.setTitle("Alert!!");
+                    alert.setMessage("Are you sure to delete record");
+                    alert.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //do your work here
+                            deleteWorkExp(idDataSet.get(position));
+                            dialog.dismiss();
+
+                        }
+                    });
+                    alert.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            dialog.dismiss();
+                        }
+                    });
+
+                    alert.show();
                 }
             });
         }
