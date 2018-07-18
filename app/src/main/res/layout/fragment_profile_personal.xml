@@ -20,7 +20,7 @@
         android:layout_height="200dp"
         android:elevation="3dp"
         android:layout_margin="5dp"
-        android:background="@color/colorAccent"
+        android:background="@drawable/gradient_salary_calculator"
         android:orientation="vertical"
         android:gravity="center">
         <android.support.v7.widget.CardView
@@ -60,20 +60,24 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
                     android:orientation="horizontal">
+
                     <TextView
+                        android:id="@+id/profileFullName"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="5dp"
                         android:layout_weight="1"
                         android:text="Name"
-                        android:textColor="#000"
-                        android:textStyle="bold"
-                        android:id="@+id/profileFullName"
-                        android:layout_gravity="center_vertical"
+                        android:layout_marginBottom="5dp"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                         />
+                        android:textColor="#000"
+                        android:textSize="22sp"
+                        android:textStyle="bold" />
                     <ImageView
                         android:layout_width="20dp"
-                        android:layout_height="20dp"
+                        android:layout_height="23dp"
                         android:src="@drawable/pencil"
                         android:layout_marginTop="10dp"
                         android:layout_marginRight="10dp"
@@ -108,7 +112,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                   >
+                    android:layout_marginLeft="5dp"
+
+                    >
                   <!--  <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -121,16 +127,14 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textSize="15sp"
-                        android:text="Current Designation: "
+                        android:textColor="#000"
+                        android:text="Current Designation "
                         android:id="@+id/profileCurrentDesignation"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="15sp"
-                        android:text="Gender: "
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:text="Gender "
+                        android:textColor="#000"
                         android:id="@+id/profileGender"/>
                 </LinearLayout>
                 <LinearLayout
@@ -166,17 +170,20 @@
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         />-->
                     <TextView
+                        android:id="@+id/profileDob"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Date of Birth: "
-                        android:textSize="15sp"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:id="@+id/profileDob"/>
+                        android:layout_height="match_parent"
+                        android:text="Date of Birth "
+                        android:layout_marginLeft="5dp"
+                        android:textColor="#000"
+                         />
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_marginLeft="5dp"
+                    >
                     <!--
                     <TextView
                         android:layout_width="wrap_content"
@@ -191,16 +198,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="5dp"
-                        android:text="Current City: "
-                        android:textSize="15sp"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:text="Current City "
+                        android:textColor="#000"
                         android:id="@+id/profileCurrentCity"/>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="HomeTown: "
-                        android:textSize="15sp"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:text="HomeTown "
+                        android:textColor="#000"
                         android:id="@+id/profileHomeTown"/>
                 </LinearLayout>
                 <LinearLayout
@@ -225,7 +230,7 @@
                     android:background="@color/cardview_shadow_start_color"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
-                    android:layout_height="2dp"/>
+                    android:layout_height="1dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -240,6 +245,7 @@
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:text="Cover Letter "
+                        android:textSize="19dp"
                         android:textStyle="bold"
                         android:textColor="@color/colorAccent"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
@@ -257,6 +263,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
+                    android:textColor="#000"
+                    android:text="cover letter"
+                    android:lineSpacingMultiplier="1.3"
                     android:id="@+id/profileCoverLetter">
                 </TextView>
 
@@ -267,7 +276,7 @@
                     android:background="@color/cardview_shadow_start_color"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
-                    android:layout_height="2dp"/>
+                    android:layout_height="1dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -282,6 +291,7 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:text="Hobbies "
+                    android:textSize="19sp"
                     android:textColor="@color/colorAccent"
                     android:textStyle="bold"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
@@ -311,7 +321,7 @@
                     android:background="@color/cardview_shadow_start_color"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
-                    android:layout_height="2dp"/>
+                    android:layout_height="1dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -324,6 +334,7 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_weight="1"
+                    android:textSize="19sp"
                     android:layout_height="wrap_content"
                     android:text="Languages "
                     android:textColor="@color/colorAccent"
@@ -356,127 +367,151 @@
                 android:background="@color/cardview_shadow_start_color"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:layout_height="2dp"/>
+                android:layout_height="1dp"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
-                    android:layout_height="wrap_content"
-                    android:text="Social Profiles"
-                    android:textColor="@color/colorAccent"
-                    android:textStyle="bold"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                    android:layout_margin="5dp"/>
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/pencil"
-                    android:id="@+id/socialProfilesEditBtn"
-                    android:layout_margin="10dp"
-                    android:tint="@color/colorAccent"/>
-            </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_margin="10dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Facebook: "
-                        android:textStyle="bold"
-                        android:textColor="#000"
-                        android:textSize="13sp"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        />
-                    <TextView
+                    android:orientation="vertical">
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1"
+                            android:text="Social Profiles"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                            android:textColor="@color/colorAccent"
+                            android:textSize="19sp"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:id="@+id/socialProfilesEditBtn"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_margin="10dp"
+                            android:src="@drawable/pencil"
+                            android:tint="@color/colorAccent" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Facebook "
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="#000"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/profileFacebook"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
                         android:text="Facebook "
-                        android:textSize="13sp"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:id="@+id/profileFacebook"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_margin="10dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textSize="13sp"
-                        android:text="LinkedIn: "
-                        android:textColor="#000"
-                        android:textStyle="bold"
-                        />
-                    <TextView
+                        android:textSize="13sp" />
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textSize="13sp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="LinkedIn"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="#000"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+
+                    </LinearLayout>
+                    <TextView
+                        android:id="@+id/profileLinkedIn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:text="LinkedIn "
-                        android:id="@+id/profileLinkedIn"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_margin="10dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="13sp"
-                        android:text="Twitter: "
-                        android:textColor="#000"
-                        android:textStyle="bold"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-                    <TextView
+                        android:layout_marginLeft="10dp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textSize="13sp" />
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textSize="13sp"
-                        android:text="Twitter "
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:id="@+id/profileTwitter"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_margin="10dp">
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Twitter "
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="#000"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+
+                    </LinearLayout>
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:id="@+id/profileTwitter"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Quora: "
-                        android:textStyle="bold"
-                        android:textColor="#000"
-                        android:textSize="13sp"
+                        android:text="Twitter "
+                        android:layout_marginLeft="10dp"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        />
+                        android:textSize="13sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="10dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Quora "
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textColor="#000"
+                            android:textSize="15sp"
+                            android:textStyle="bold" />
+
+
+                    </LinearLayout>
                     <TextView
+                        android:id="@+id/profileQuora"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Quora "
-                        android:textSize="13sp"
+                        android:layout_marginLeft="10dp"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:id="@+id/profileQuora"/>
+                        android:textSize="13sp" />
                 </LinearLayout>
-            </LinearLayout>
                 <View
                     android:layout_width="match_parent"
                     android:background="@color/cardview_shadow_start_color"
                     android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
-                    android:layout_height="2dp"/>
+                    android:layout_height="1dp"/>
 
 
 
@@ -493,6 +528,7 @@
                     android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:text="Contact Details"
+                    android:textSize="19sp"
                     android:textColor="@color/colorAccent"
                     android:textStyle="bold"
                     android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
@@ -509,63 +545,75 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_margin="10dp">
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Email: "
+                        android:text="Email "
+                        android:textColor="#000"
                         android:textStyle="bold"
-                        android:textSize="13sp"
+                        android:textSize="15sp"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+                </LinearLayout>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Email "
+                        android:layout_marginLeft="10dp"
                         android:textSize="13sp"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:id="@+id/profileEmail"/>
-                </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_margin="10dp">
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textSize="13sp"
-                        android:text="Phone: "
+                        android:textSize="15sp"
+                        android:textColor="#000"
+                        android:text="Phone "
                         android:textStyle="bold"
                          />
+
+                </LinearLayout>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:textSize="13sp"
+                        android:layout_marginLeft="10dp"
                         android:text="Phone "
                         android:id="@+id/profilePhone"/>
-                </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_margin="10dp">
+                    android:layout_marginTop="10dp"
+                    android:layout_marginLeft="10dp">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="13sp"
-                        android:text="Address: "
+                        android:textSize="15sp"
+                        android:textColor="#000"
+                        android:text="Address"
                         android:textStyle="bold"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+                </LinearLayout>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textSize="13sp"
                         android:text="Address "
+                        android:layout_marginLeft="10dp"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                         android:id="@+id/profileAddress"/>
-                </LinearLayout>
             </LinearLayout>
             </LinearLayout>
         </android.support.v7.widget.CardView>

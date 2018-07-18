@@ -7,43 +7,47 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_margin="10dp">
+        android:layout_marginLeft="5dp">
         <LinearLayout
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_gravity="bottom"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-        <TextView
+        <!--<TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Company Name: "
             android:textStyle="bold"
-            android:textSize="13sp"
+            android:textSize="15sp"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Company Name "
-            android:textSize="13sp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:id="@+id/profileCompanyName"/>
+            />-->
+            <TextView
+                android:id="@+id/profileCompanyName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Company Name "
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="#000"
+                android:textSize="17sp"
+                android:textStyle="bold" />
         </LinearLayout>
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:src="@drawable/pencil"
-            android:layout_margin="10dp"
-            android:tint="@color/colorAccent"
+            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp"
+            android:tint="#909090"
             android:id="@+id/profileWorkExperienceEditBtn"
             />
         <ImageView
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:src="@drawable/dustbin"
-            android:layout_margin="10dp"
-            android:tint="@color/colorAccent"
+            android:layout_marginRight="10dp"
+            android:layout_marginEnd="10dp"
+            android:tint="#909090"
             android:id="@+id/profileWorkExperienceDeleteBtn"
             />
     </LinearLayout>
@@ -51,86 +55,84 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_margin="10dp">
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp">
+       <!-- <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textSize="15sp"
+            android:text="Position: "
+            android:textStyle="bold"
+            />-->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textSize="13sp"
-            android:text="Position: "
-            android:textStyle="bold"
-            />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textSize="13sp"
-            android:text="Position: "
+            android:textSize="15sp"
+            android:text="Position "
             android:id="@+id/profilePosition"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_margin="10dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="13sp"
-            android:text="Job Type: "
-            android:textStyle="bold"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="13sp"
+            android:textSize="15sp"
             android:text="Job Type: "
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:id="@+id/profileJobType"/>
     </LinearLayout>
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+      <!--  <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:text="Job Type: "
+            android:textStyle="bold"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            />-->
+
+    </LinearLayout>
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_margin="10dp">
-        <TextView
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp">
+       <!-- <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Start Date: "
             android:textStyle="bold"
-            android:textSize="13sp"
+            android:textSize="15sp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            />-->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Start Date "
+            android:textSize="15sp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:id="@+id/profileStartDate"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text=" - "
+            android:textSize="15sp"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Start Date: "
-            android:textSize="13sp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:id="@+id/profileStartDate"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_margin="10dp">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Last Date: "
-            android:textStyle="bold"
-            android:textSize="13sp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Last Date: "
-            android:textSize="13sp"
+            android:text="Last Date "
+            android:textSize="15sp"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:id="@+id/profileLastDate"/>
     </LinearLayout>
-    <LinearLayout
+   <!-- <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -138,21 +140,36 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="Last Date: "
+            android:textStyle="bold"
+            android:textSize="15sp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+    </LinearLayout>-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp">
+       <!-- <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="Job Description: "
             android:textStyle="bold"
-            android:textSize="13sp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+            android:textSize="15sp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />-->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Job Description: "
-            android:textSize="13sp"
+            android:textSize="15sp"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:id="@+id/profileJobDescription"/>
     </LinearLayout>
     <View
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="10dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="5dp"
         android:background="@color/cardview_shadow_start_color"/>
 </LinearLayout>

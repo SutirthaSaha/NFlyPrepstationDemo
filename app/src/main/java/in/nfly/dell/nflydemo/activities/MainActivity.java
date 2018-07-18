@@ -104,7 +104,7 @@ public class MainActivity extends AppCompatActivity {
             add("Resume Builder");}};
     private ArrayList<Integer> prepHubImageDataSet=new ArrayList<Integer>(){
         {
-            add(R.drawable.coloredtest);
+            add(R.drawable.presentation);
             add(R.drawable.colored_company);
             add(R.drawable.colored_placementpapers);
             add(R.drawable.colored_prep);
@@ -116,6 +116,18 @@ public class MainActivity extends AppCompatActivity {
             add("Placement Papers");
             add("Tips");
            }};
+    private ArrayList<Integer> practiceImageDataSet=new ArrayList<Integer>(){
+        {
+            add(R.drawable.colored_company);
+            add(R.drawable.colored_placementpapers);
+            add(R.drawable.colored_prep);
+            add(R.drawable.exam);}};
+    private ArrayList<String> practiceTitleDataSet=new ArrayList<String>(){
+        {add("Company Wise");
+            add("Topic Wise");
+            add("Exam Wise");
+            add("Test Series");
+        }};
 
 
 
@@ -329,7 +341,7 @@ public class MainActivity extends AppCompatActivity {
         layoutManager=new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL,false);
         PractiseRecyclerView.setLayoutManager(layoutManager);
 
-        adapter= new HomePrepHubAdapter(featureTitleDataSet,featureImageDataSet);
+        adapter= new HomePrepHubAdapter(practiceTitleDataSet,practiceImageDataSet);
         PractiseRecyclerView.setAdapter(adapter);
     }
 
