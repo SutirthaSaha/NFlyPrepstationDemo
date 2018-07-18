@@ -117,6 +117,10 @@ public class DashboardActivity extends AppCompatActivity {
                     intent=new Intent(DashboardActivity.this,ProfileActivity.class);
                     startActivity(intent);
                 }
+                if (item.getTitle().equals("Help")){
+                    intent=new Intent(DashboardActivity.this,HelpActivity.class);
+                    startActivity(intent);
+                }
                 if(item.getTitle().equals("Sign Out")){
                     User user=new User(DashboardActivity.this);
                     user.logOut();

@@ -37,15 +37,13 @@ public class LearnPapersDisplayActivity extends AppCompatActivity {
                 finish();
             }
         });
-        WebView webView = (WebView) findViewById(R.id.learnPapersDisplayWebView);
+        WebView webView =findViewById(R.id.learnPapersDisplayWebView);
 
         webView.getSettings().setJavaScriptEnabled(true);
 
-        webView.loadUrl("http://docs.google.com/gview?embedded=true&url="+"http://nfly.in/assets/images/company/"+paper_name
-        );
+        webView.loadUrl("http://docs.google.com/gview?embedded=true&url="+"http://nfly.in/assets/images/company/"+paper_name);
         webView.setWebChromeClient(new WebChromeClient() {
             private ProgressDialog mProgress;
-
             @Override
             public void onProgressChanged(WebView view, int progress) {
                 if (mProgress == null) {

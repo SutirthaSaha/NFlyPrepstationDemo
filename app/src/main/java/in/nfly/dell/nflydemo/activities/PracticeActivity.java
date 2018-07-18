@@ -115,6 +115,10 @@ public class PracticeActivity extends AppCompatActivity {
                     intent=new Intent(PracticeActivity.this,SalaryCalculatorActivity.class);
                     startActivity(intent);
                 }
+                if (item.getTitle().equals("Help")){
+                    intent=new Intent(PracticeActivity.this,HelpActivity.class);
+                    startActivity(intent);
+                }
                 if (item.getTitle().equals("Feedback")){
                     intent=new Intent(PracticeActivity.this,FeedBackActivity.class);
                     startActivity(intent);

@@ -53,7 +53,8 @@
         <activity android:name=".activities.NoInternetActivity" />
         <activity android:name=".activities.singleActivities.ForgotPasswordActivity" />
         <activity android:name=".activities.singleActivities.SplashScreenSliderActivity" />
-        <activity android:name=".activities.singleActivities.ResumeViewActivity"></activity>
+        <activity android:name=".activities.singleActivities.ResumeViewActivity" />
+        <activity android:name=".activities.HelpActivity"></activity>
     </application>
 
 </manifest>

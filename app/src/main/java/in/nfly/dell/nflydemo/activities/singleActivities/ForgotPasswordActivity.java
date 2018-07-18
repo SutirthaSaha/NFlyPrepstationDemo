@@ -68,13 +68,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                 try {
                     JSONObject arrayObject=new JSONObject(response);
                     key=arrayObject.getString("key");
-                    body="Password reset request.</p><p><a href="+"http://nfly.in/landing/set_new_password/"+key+">Click here</a> to reset your password+</p>";
-                    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
-                        body=(Html.fromHtml(body,Html.FROM_HTML_MODE_COMPACT)).toString();
-                    }
-                    else{
-                        body=(Html.fromHtml(body)).toString();
-                    }
+                    body="Password reset request.\n\nClick the link below to reset your password\n\n"+"http://nfly.in/landing/set_new_password/"+key;
                     Toast.makeText(ForgotPasswordActivity.this, key, Toast.LENGTH_SHORT).show();
                     new Thread(new Runnable() {
 

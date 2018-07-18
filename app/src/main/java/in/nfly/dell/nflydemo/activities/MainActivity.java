@@ -129,8 +129,6 @@ public class MainActivity extends AppCompatActivity {
             add("Test Series");
         }};
 
-
-
     private ArrayList<Integer> bannerImageDataSet=new ArrayList<Integer>(){
         {
         add(R.drawable.colored_video);
@@ -143,12 +141,15 @@ public class MainActivity extends AppCompatActivity {
             add("2500+ happy users");
             add("100+ articles");}};
 
+    private ArrayList<String> companyIdDataSet=new ArrayList<String>(){};
     private ArrayList<String> companyImageDataSet=new ArrayList<String>(){};
     private ArrayList<String> companyTitleDataSet=new ArrayList<String>(){};
 
+    private ArrayList<String> careerIdDataSet=new ArrayList<String>(){};
     private ArrayList<String> careerImageDataSet=new ArrayList<String>(){};
     private ArrayList<String> careerTitleDataSet=new ArrayList<String>(){};
 
+    private ArrayList<String> courseIdDataSet=new ArrayList<String>(){};
     private ArrayList<String> courseImageDataSet=new ArrayList<String>(){};
     private ArrayList<String> courseTitleDataSet=new ArrayList<String>(){};
 
@@ -196,8 +197,9 @@ public class MainActivity extends AppCompatActivity {
                         arrayObject=parentArray.getJSONObject(i);
                         courseTitleDataSet.add(arrayObject.getString("nfly_course_name"));
                         courseImageDataSet.add(arrayObject.getString("nfly_course_bg"));
+                        courseIdDataSet.add(arrayObject.getString("nfly_course_id"));
                     }
-                    adapter= new HomeCompanyAdapter(MainActivity.this,courseTitleDataSet,courseImageDataSet);
+                    adapter= new HomeCompanyAdapter(MainActivity.this,courseIdDataSet,courseTitleDataSet,courseImageDataSet);
                     CoursesRecyclerView.setAdapter(adapter);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -247,10 +249,11 @@ public class MainActivity extends AppCompatActivity {
                     JSONArray parentArray=new JSONArray(response);
                     for(int i=0;i<parentArray.length();i++){
                         arrayObject=parentArray.getJSONObject(i);
+                        careerIdDataSet.add(arrayObject.getString("job_role_id"));
                         careerTitleDataSet.add(arrayObject.getString("job_role"));
                         careerImageDataSet.add("http://nfly.in/assets/images/job_role/"+arrayObject.getString("job_role_bg"));
                     }
-                    adapter= new HomeCareerAdapter(MainActivity.this,careerTitleDataSet,careerImageDataSet);
+                    adapter= new HomeCareerAdapter(MainActivity.this,careerIdDataSet,careerTitleDataSet,careerImageDataSet);
                     CareerRecyclerView.setAdapter(adapter);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -299,11 +302,12 @@ public class MainActivity extends AppCompatActivity {
                     JSONArray parentArray=new JSONArray(response);
                     for(int i=0;i<7;i++){
                         arrayObject=parentArray.getJSONObject(i);
+                        companyIdDataSet.add(arrayObject.getString("company_id"));
                         companyTitleDataSet.add(arrayObject.getString("company_name"));
                         companyImageDataSet.add("http://nfly.in/assets/images/company/"+arrayObject.getString("company_cover"));
                     }
 
-                    adapter= new HomeCompanyAdapter(MainActivity.this,companyTitleDataSet,companyImageDataSet);
+                    adapter= new HomeCompanyAdapter(MainActivity.this,companyIdDataSet,companyTitleDataSet,companyImageDataSet);
                     CompanyRecyclerView.setAdapter(adapter);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -468,6 +472,10 @@ public class MainActivity extends AppCompatActivity {
                 }
                 if (item.getTitle().equals("Feedback")){
                     intent=new Intent(MainActivity.this,FeedBackActivity.class);
+                    startActivity(intent);
+                }
+                if (item.getTitle().equals("Help")){
+                    intent=new Intent(MainActivity.this,HelpActivity.class);
                     startActivity(intent);
                 }
                 if(item.getTitle().equals("Sign Out")){

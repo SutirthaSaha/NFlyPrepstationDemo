@@ -135,6 +135,10 @@ public class LearnActivity extends AppCompatActivity {
                     intent=new Intent(LearnActivity.this,FeedBackActivity.class);
                     startActivity(intent);
                 }
+                if (item.getTitle().equals("Help")){
+                    intent=new Intent(LearnActivity.this,HelpActivity.class);
+                    startActivity(intent);
+                }
                 if(item.getTitle().equals("Sign Out")){
                     User user=new User(LearnActivity.this);
                     user.logOut();

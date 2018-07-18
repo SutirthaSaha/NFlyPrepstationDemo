@@ -57,6 +57,11 @@
             android:checkable="true"
             />
         <item
+            android:id="@+id/help"
+            android:title="Help"
+            android:checkable="true"
+            />
+        <item
             android:id="@+id/signout"
             android:title="Sign Out"
             android:checkable="true"
