@@ -14,11 +14,12 @@ import in.nfly.dell.nflydemo.R;
 
 public class HomePrepHubAdapter extends RecyclerView.Adapter<HomePrepHubAdapter.HomePrepHubHolder> {
 
-    private ArrayList<String> titleDataSet;
+    private ArrayList<String> titleDataSet,subtitleDataSet;
     private ArrayList<Integer> imageDataSet;
 
-    public HomePrepHubAdapter(ArrayList<String> titleDataSet, ArrayList<Integer> imageDataSet) {
+    public HomePrepHubAdapter(ArrayList<String> titleDataSet,ArrayList<String> subtitleDataSet, ArrayList<Integer> imageDataSet) {
         this.titleDataSet = titleDataSet;
+        this.subtitleDataSet=subtitleDataSet;
         this.imageDataSet = imageDataSet;
     }
 
@@ -34,6 +35,7 @@ public class HomePrepHubAdapter extends RecyclerView.Adapter<HomePrepHubAdapter.
     public void onBindViewHolder(@NonNull HomePrepHubHolder holder, int position) {
         holder.HomePrepHubTitle.setText(titleDataSet.get(position));
         holder.HomePrepHubImage.setImageResource(imageDataSet.get(position));
+        holder.HomePrepHubSubTitle.setText(subtitleDataSet.get(position));
     }
 
     @Override
@@ -43,12 +45,13 @@ public class HomePrepHubAdapter extends RecyclerView.Adapter<HomePrepHubAdapter.
 
     public class HomePrepHubHolder extends RecyclerView.ViewHolder{
 
-        public TextView HomePrepHubTitle;
+        public TextView HomePrepHubTitle, HomePrepHubSubTitle;
         public ImageView HomePrepHubImage;
         public HomePrepHubHolder(View itemView) {
             super(itemView);
 
             HomePrepHubTitle=itemView.findViewById(R.id.home_prephub_text);
+            HomePrepHubSubTitle=itemView.findViewById(R.id.home_prephub_sub_text);
             HomePrepHubImage=itemView.findViewById(R.id.home_prephub_image);
         }
     }

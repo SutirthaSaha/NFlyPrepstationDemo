@@ -196,6 +196,27 @@
                         android:layout_marginLeft="5dp"
                         android:id="@+id/homeCareerRecyclerView"/>
                 </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:layout_marginTop="5dp"
+                        android:layout_marginLeft="7dp"
+                        android:textSize="17sp"
+                        android:layout_marginBottom="7dp"
+                        android:text="Testimonials"
+                        android:textColor="#000"/>
+                    <android.support.v7.widget.RecyclerView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginLeft="5dp"
+                        android:id="@+id/homeTestimonialsRecyclerView"/>
+                </LinearLayout>
             </LinearLayout>
         </android.support.v4.widget.NestedScrollView>
     </LinearLayout>

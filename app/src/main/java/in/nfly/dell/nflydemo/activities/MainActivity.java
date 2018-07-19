@@ -51,6 +51,7 @@ import in.nfly.dell.nflydemo.adapters.HomeFeaturesIconsAdapter;
 import in.nfly.dell.nflydemo.adapters.HomeIconsAdapter;
 import in.nfly.dell.nflydemo.adapters.HomePrepHubAdapter;
 import in.nfly.dell.nflydemo.adapters.HomeSwipeAdapter;
+import in.nfly.dell.nflydemo.adapters.HomeTestimonialsAdapter;
 import in.nfly.dell.nflydemo.adapters.KnowledgeBaseCompanyWiseAdapter;
 import me.relex.circleindicator.CircleIndicator;
 
@@ -69,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView CoursesRecyclerView;
     private RecyclerView CompanyRecyclerView;;
     private RecyclerView PractiseRecyclerView;
-    private RecyclerView PrepHubIconsRecyclerView;
+    private RecyclerView PrepHubIconsRecyclerView, TestimonialsRecyclerView;
 
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -105,10 +106,10 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<Integer> prepHubImageDataSet=new ArrayList<Integer>(){
         {
             add(R.drawable.presentation);
-            add(R.drawable.colored_company);
-            add(R.drawable.colored_placementpapers);
-            add(R.drawable.colored_prep);
-            add(R.drawable.colorresume);}};
+            add(R.drawable.meeting);
+            add(R.drawable.reunion);
+            add(R.drawable.planning);
+            add(R.drawable.tipps);}};
     private ArrayList<String> prepHubTitleDataSet=new ArrayList<String>(){
         {add("Video Courses");
             add("Interviews");
@@ -116,6 +117,13 @@ public class MainActivity extends AppCompatActivity {
             add("Placement Papers");
             add("Tips");
            }};
+    private ArrayList<String> prepHubSubTitleDataSet=new ArrayList<String>(){
+        {add("7 courses");
+            add("500+ questions");
+            add("100+ topics");
+            add("50+ companies");
+            add("10 topics");
+        }};
     private ArrayList<Integer> practiceImageDataSet=new ArrayList<Integer>(){
         {
             add(R.drawable.colored_company);
@@ -128,6 +136,31 @@ public class MainActivity extends AppCompatActivity {
             add("Exam Wise");
             add("Test Series");
         }};
+    private ArrayList<String> practiceSubTitleDataSet=new ArrayList<String>(){
+        {add("50+ companies");
+            add("3 tests");
+            add("10+ subjects");
+            add("Coming soon");
+        }};
+    private ArrayList<String> testimonialTextDataSet=new ArrayList<String>(){
+        {  add("I'm from a private college that too not very reputed. Hence it was very hard for me to get proper opportunites to get jobs especially on campus." +
+                "Nfly has been a saviour by providing a platform which binds everything that we need to prepare for jobs, from the technical learning aspects to the grooming.");
+            add("Nfly made everything so much simpler." +
+                " The tests helped me understand what I need to read up to appear for the interviews"
+                );
+            add("I have been following the video courses to understand the various courses. The topics were very well explained" +
+                    "and i had no trouble learning something new that too from home while i have so much trouble learning similar things at college.");
+            add("I needed a place to know more about the various companies and the criteria that I needed to fulfil to be a suitable candidate " +
+                    "for jobs. Nfly was the perfect place to look for all of those all in the same place");
+
+        }};
+    private ArrayList<String> testimonialNameDataSet=new ArrayList<String>(){
+        {add("-Sambarta Goswami");
+            add("-Torsha Dutta");
+            add("-Riya Ghosh");
+            add("-Shashank Reddy");
+        }};
+
 
     private ArrayList<Integer> bannerImageDataSet=new ArrayList<Integer>(){
         {
@@ -174,6 +207,7 @@ public class MainActivity extends AppCompatActivity {
         setCompanyCards();
         setCareerCards();
         setCoursesCards();
+        setTestomialCards();
     }
 
     private void setCoursesCards()
@@ -230,6 +264,15 @@ public class MainActivity extends AppCompatActivity {
         };
         MySingleton.getmInstance(MainActivity.this).addToRequestQueue(stringRequest);
     }
+    private void setTestomialCards()
+    {
+        TestimonialsRecyclerView=findViewById(R.id.homeTestimonialsRecyclerView);
+        layoutManager=new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL,false);
+        TestimonialsRecyclerView.setLayoutManager(layoutManager);
+        adapter= new HomeTestimonialsAdapter(testimonialTextDataSet,testimonialNameDataSet);
+        TestimonialsRecyclerView.setAdapter(adapter);
+
+    }
 
     private void setCareerCards()
     {
@@ -239,6 +282,7 @@ public class MainActivity extends AppCompatActivity {
         setValuesCareer();
 
     }
+
     private void setValuesCareer(){
         StringRequest stringRequest=new StringRequest(Request.Method.POST, urlLoadAllRows, new Response.Listener<String>() {
             @Override
@@ -253,6 +297,9 @@ public class MainActivity extends AppCompatActivity {
                         careerTitleDataSet.add(arrayObject.getString("job_role"));
                         careerImageDataSet.add("http://nfly.in/assets/images/job_role/"+arrayObject.getString("job_role_bg"));
                     }
+                    careerIdDataSet.add("8");
+                    careerTitleDataSet.add("View All");
+                    careerImageDataSet.add("https://cdn.pixabay.com/photo/2014/04/02/10/55/plus-304947_960_720.png");
                     adapter= new HomeCareerAdapter(MainActivity.this,careerIdDataSet,careerTitleDataSet,careerImageDataSet);
                     CareerRecyclerView.setAdapter(adapter);
                 } catch (JSONException e) {
@@ -306,6 +353,9 @@ public class MainActivity extends AppCompatActivity {
                         companyTitleDataSet.add(arrayObject.getString("company_name"));
                         companyImageDataSet.add("http://nfly.in/assets/images/company/"+arrayObject.getString("company_cover"));
                     }
+                    companyIdDataSet.add("8");
+                    companyTitleDataSet.add("View All");
+                    companyImageDataSet.add("https://cdn2.iconfinder.com/data/icons/perfect-flat-icons-2/512/Create_with_plus_mail_layer_add_vector_stock.png");
 
                     adapter= new HomeCompanyAdapter(MainActivity.this,companyIdDataSet,companyTitleDataSet,companyImageDataSet);
                     CompanyRecyclerView.setAdapter(adapter);
@@ -345,7 +395,7 @@ public class MainActivity extends AppCompatActivity {
         layoutManager=new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL,false);
         PractiseRecyclerView.setLayoutManager(layoutManager);
 
-        adapter= new HomePrepHubAdapter(practiceTitleDataSet,practiceImageDataSet);
+        adapter= new HomePrepHubAdapter(practiceTitleDataSet,practiceSubTitleDataSet,practiceImageDataSet);
         PractiseRecyclerView.setAdapter(adapter);
     }
 
@@ -355,7 +405,7 @@ public class MainActivity extends AppCompatActivity {
         layoutManager=new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL,false);
         PrepHubIconsRecyclerView.setLayoutManager(layoutManager);
 
-        adapter= new HomePrepHubAdapter(prepHubTitleDataSet,prepHubImageDataSet);
+        adapter= new HomePrepHubAdapter(prepHubTitleDataSet,prepHubSubTitleDataSet,prepHubImageDataSet);
         PrepHubIconsRecyclerView.setAdapter(adapter);
 
     }
