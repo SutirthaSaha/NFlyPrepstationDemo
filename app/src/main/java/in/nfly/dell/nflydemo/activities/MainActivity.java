@@ -47,6 +47,7 @@ import in.nfly.dell.nflydemo.R;
 import in.nfly.dell.nflydemo.User;
 import in.nfly.dell.nflydemo.adapters.HomeCareerAdapter;
 import in.nfly.dell.nflydemo.adapters.HomeCompanyAdapter;
+import in.nfly.dell.nflydemo.adapters.HomeCourseAdapter;
 import in.nfly.dell.nflydemo.adapters.HomeFeaturesIconsAdapter;
 import in.nfly.dell.nflydemo.adapters.HomeIconsAdapter;
 import in.nfly.dell.nflydemo.adapters.HomePrepHubAdapter;
@@ -233,7 +234,7 @@ public class MainActivity extends AppCompatActivity {
                         courseImageDataSet.add(arrayObject.getString("nfly_course_bg"));
                         courseIdDataSet.add(arrayObject.getString("nfly_course_id"));
                     }
-                    adapter= new HomeCompanyAdapter(MainActivity.this,courseIdDataSet,courseTitleDataSet,courseImageDataSet);
+                    adapter= new HomeCourseAdapter(MainActivity.this,courseIdDataSet,courseTitleDataSet,courseImageDataSet);
                     CoursesRecyclerView.setAdapter(adapter);
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -426,7 +427,7 @@ public class MainActivity extends AppCompatActivity {
         layoutManager=new GridLayoutManager(MainActivity.this,3);
         HomeBannerIconsRecyclerView.setLayoutManager(layoutManager);
 
-        adapter= new HomeIconsAdapter(bannerTitleDataSet,bannerImageDataSet);
+        adapter= new HomeIconsAdapter(MainActivity.this ,bannerTitleDataSet,bannerImageDataSet);
         HomeBannerIconsRecyclerView.setAdapter(adapter);
 
     }

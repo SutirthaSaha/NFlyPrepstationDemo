@@ -328,7 +328,6 @@ public class ProfilePersonalFragment extends Fragment {
             }
         });
 
-
         basicDetailsEditBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

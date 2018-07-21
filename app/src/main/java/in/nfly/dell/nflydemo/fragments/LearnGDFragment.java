@@ -82,7 +82,7 @@ public class LearnGDFragment extends Fragment {
         layoutManager=new GridLayoutManager(getContext(),3);
         learnGDBannerRecyclerView.setLayoutManager(layoutManager);
 
-        adapter= new HomeIconsAdapter(bannerTitleDataSet,bannerImageDataSet);
+        adapter= new HomeIconsAdapter(getContext(),bannerTitleDataSet,bannerImageDataSet);
         learnGDBannerRecyclerView.setAdapter(adapter);
 
     }

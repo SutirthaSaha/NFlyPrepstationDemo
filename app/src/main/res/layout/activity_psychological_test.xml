@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activities.singleActivities.PsychologicalTestActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:id="@+id/psychologicalTestToolbar"></android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:paddingTop="20dp"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorPrimary"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textStyle="bold"
+            android:text="What is your name?"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:id="@+id/psyTestQuestion"/>
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/psyTestOptions">
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Option one"
+                android:id="@+id/psyTestOption1"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Option two"
+                android:id="@+id/psyTestOption2"/>
+
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Option three"
+                android:id="@+id/psyTestOption3"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Option four"
+                android:id="@+id/psyTestOption4"/>
+        </RadioGroup>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="Previous"
+                android:visibility="gone"
+                android:layout_margin="10dp"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:background="@color/colorAccent"
+                android:textColor="#fff"
+                android:id="@+id/practiceTestPreviousBtn"
+                android:onClick="onPsyTestPreviousBtnClick"/>
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.5"
+                android:text="Next"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp"
+                android:visibility="visible"
+                android:layout_margin="10dp"
+                android:background="@color/colorAccent"
+                android:textColor="#fff"
+                android:id="@+id/practiceTestNextBtn"
+                android:onClick="onPsyTestNextBtnClick"/>
+        </LinearLayout>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Submit"
+            android:visibility="gone"
+            android:layout_margin="10dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:background="@color/colorAccent"
+            android:textColor="#fff"
+            android:id="@+id/practiceTestSubmitBtn"
+            android:onClick="onPsyTestSubmitBtnClick"/>
+    </LinearLayout>
+
+</LinearLayout>

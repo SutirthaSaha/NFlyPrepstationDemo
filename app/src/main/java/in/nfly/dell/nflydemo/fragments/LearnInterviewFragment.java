@@ -67,7 +67,6 @@ public class LearnInterviewFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        int id=R.drawable.ic_computer_white;
         View v= inflater.inflate(R.layout.fragment_learn_interview, container, false);
         learnInterviewRecyclerView=v.findViewById(R.id.learnInterviewRecyclerView);
         layoutManager=new GridLayoutManager(getContext(),2);
@@ -82,7 +81,7 @@ public class LearnInterviewFragment extends Fragment {
         layoutManager=new GridLayoutManager(getContext(),3);
         learnInterviewBannerRecyclerView.setLayoutManager(layoutManager);
 
-        adapter= new HomeIconsAdapter(bannerTitleDataSet,bannerImageDataSet);
+        adapter= new HomeIconsAdapter(getContext(),bannerTitleDataSet,bannerImageDataSet);
         learnInterviewBannerRecyclerView.setAdapter(adapter);
 
     }

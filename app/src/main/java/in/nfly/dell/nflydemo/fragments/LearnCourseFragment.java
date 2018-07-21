@@ -85,7 +85,7 @@ public class LearnCourseFragment extends Fragment {
         layoutManager=new GridLayoutManager(getContext(),3);
         LearnCourseBannerIconsRecyclerView.setLayoutManager(layoutManager);
 
-        adapter= new HomeIconsAdapter(bannerTitleDataSet,bannerImageDataSet);
+        adapter= new HomeIconsAdapter(getContext(),bannerTitleDataSet,bannerImageDataSet);
         LearnCourseBannerIconsRecyclerView.setAdapter(adapter);
 
     }

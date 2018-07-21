@@ -28,6 +28,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -48,6 +50,10 @@ public class CourseStudyActivity extends YouTubeBaseActivity implements YouTubeP
     private ListView courseStudyVideoList;
     private ArrayList<String> titleDataSet=new ArrayList<String>(){};
     private ArrayList<String> urlDataSet=new ArrayList<String>(){};
+    private ArrayList<Integer> idDataSet=new ArrayList<Integer>(){};
+
+    private HashMap<Integer,String> idTitleMap=new HashMap<>();
+    private HashMap<Integer,String> idUrlMap=new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,9 +94,18 @@ public class CourseStudyActivity extends YouTubeBaseActivity implements YouTubeP
                     JSONArray parentArray=new JSONArray(response);
                     for(int i=0;i<parentArray.length();i++){
                         arrayObject=parentArray.getJSONObject(i);
-                        titleDataSet.add((i+1)+".  "+arrayObject.getString("nfly_video_name"));
-                        urlDataSet.add(arrayObject.getString("nfly_app_url"));
+                        idDataSet.add(Integer.parseInt(arrayObject.getString("nfly_video_id")));
+                        idTitleMap.put(Integer.parseInt(arrayObject.getString("nfly_video_id")),arrayObject.getString("nfly_video_name"));
+                        idUrlMap.put(Integer.parseInt(arrayObject.getString("nfly_video_id")),arrayObject.getString("nfly_app_url"));
+                        //titleDataSet.add((i+1)+".  "+arrayObject.getString("nfly_video_name"));
+                        //urlDataSet.add(arrayObject.getString("nfly_app_url"));
                     }
+                    Collections.sort(idDataSet);
+                    for(int i=0;i<idDataSet.size();i++){
+                        titleDataSet.add((i+1)+".  "+idTitleMap.get(idDataSet.get(i)));
+                        urlDataSet.add(idUrlMap.get(idDataSet.get(i)));
+                    }
+
                     if (courseYoutubePlayer != null) {
                         courseYoutubePlayer.release();
                     }

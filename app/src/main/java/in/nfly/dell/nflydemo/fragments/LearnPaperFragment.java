@@ -86,7 +86,7 @@ public class LearnPaperFragment extends Fragment {
         layoutManager=new GridLayoutManager(getContext(),3);
         learnPapersBannerRecyclerView.setLayoutManager(layoutManager);
 
-        adapter= new HomeIconsAdapter(bannerTitleDataSet,bannerImageDataSet);
+        adapter= new HomeIconsAdapter(getContext(),bannerTitleDataSet,bannerImageDataSet);
         learnPapersBannerRecyclerView.setAdapter(adapter);
 
     }
