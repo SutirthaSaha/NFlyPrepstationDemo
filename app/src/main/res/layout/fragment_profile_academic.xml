@@ -3,251 +3,292 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".fragments.ProfileAcademicFragment">
 
     <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="15dp">
-            <LinearLayout
+
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="17dp"
-                android:layout_marginLeft="17dp"
-                android:layout_marginTop="10dp"
-                android:orientation="vertical">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Work Experience"
-                        android:textSize="20sp"
-                        android:textColor="@color/colorAccent"
-                        android:textStyle="bold"
-                        android:layout_gravity="center_vertical"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                        android:layout_margin="5dp" />
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/add"
-                        android:layout_margin="10dp"
-                        android:tint="@color/colorAccent"
-                        android:id="@+id/workExperienceAddBtn"
-                        />
-                </LinearLayout>
-                <android.support.v7.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:nestedScrollingEnabled="false"
-                    android:id="@+id/profileAcademicWorkExperienceRecyclerView"/>
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="5dp"
-                    android:background="@color/cardview_shadow_start_color"/>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_weight="1"
-                        android:layout_height="wrap_content"
-                        android:text="College Education"
-                        android:textStyle="bold"
-                        android:textSize="20sp"
-                        android:textColor="@color/colorAccent"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                        android:layout_margin="5dp"/>
-
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/pencil"
-                        android:id="@+id/collegeEducationEditBtn"
-                        android:layout_margin="10dp"
-                        android:tint="@color/colorAccent"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_margin="10dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="College: "
-                        android:textStyle="bold"
-                        android:textSize="13sp"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        />
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="College "
-                        android:textSize="13sp"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:id="@+id/profileCollege"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_margin="10dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textSize="13sp"
-                        android:text="Course: "
-                        android:textStyle="bold"
-                        />
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:textSize="13sp"
-                        android:text="course"
-                        android:id="@+id/profileCourse"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_margin="10dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="13sp"
-                        android:text="Branch: "
-                        android:textStyle="bold"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="13sp"
-                        android:text="Branch "
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:id="@+id/profileBranch"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_margin="10dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Class Of: "
-                        android:textStyle="bold"
-                        android:textSize="13sp"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        />
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="Class of"
-                        android:textSize="13sp"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:id="@+id/profileClassOf"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_margin="10dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="CGPA: "
-                        android:textStyle="bold"
-                        android:textSize="13sp"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        />
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="CGPA "
-                        android:textSize="13sp"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                        android:id="@+id/profileCGPA"/>
-                </LinearLayout>
-            </LinearLayout>
-
+                android:layout_margin="15dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="17dp"
+                    android:layout_marginRight="17dp"
+                    android:layout_marginTop="10dp"
                     android:orientation="vertical">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
+
                         <TextView
                             android:layout_width="0dp"
-                            android:layout_weight="1"
                             android:layout_height="wrap_content"
-                            android:text="School Education"
-                            android:textStyle="bold"
+                            android:layout_gravity="center_vertical"
+                            android:layout_margin="5dp"
+                            android:layout_weight="1"
+                            android:text="Work Experience"
                             android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                            android:layout_margin="5dp"/>
+                            android:textColor="@color/colorAccent"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
                         <ImageView
+                            android:id="@+id/workExperienceAddBtn"
                             android:layout_width="20dp"
                             android:layout_height="20dp"
-                            android:src="@drawable/pencil"
-                            android:id="@+id/schoolEducationEditBtn"
                             android:layout_margin="10dp"
-                            android:tint="@color/colorAccent"/>
+                            android:src="@drawable/add"
+                            android:tint="@color/colorAccent" />
                     </LinearLayout>
-                    <TextView
+                    <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"
+                    android:id="@+id/profileAcademicWorkExperienceRecyclerView"/>ach
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginTop="20dp"
+                        android:background="@color/cardview_shadow_start_color" />
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="5dp"
+                            android:text="Education"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                            android:textColor="@color/colorAccent"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="10dp"
+                                android:layout_weight="1"
+                                android:text="College"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                                android:textColor="#000"
+                                android:textSize="17sp"
+                                android:textStyle="bold" />
+
+                            <ImageView
+                                android:id="@+id/collegeEducationEditBtn"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_marginRight="10dp"
+                                android:src="@drawable/pencil"
+                                android:tint="@color/colorAccent" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:orientation="horizontal">
+                            <!-- <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="College: "
+                        android:textStyle="bold"
+                        android:textSize="15sp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        />-->
+                            <TextView
+                                android:id="@+id/profileCollege"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="College "
+                                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                android:textSize="15sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:orientation="horizontal">
+                            <!--   <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textSize="15sp"
+                        android:text="Course: "
+                        android:textStyle="bold"
+                        />-->
+                            <TextView
+                                android:id="@+id/profileCourse"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="course"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                android:textSize="15sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:orientation="vertical">
+                            <!-- <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="15sp"
+                        android:text="Branch: "
+                        android:textStyle="bold"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />-->
+                            <TextView
+                                android:id="@+id/profileBranch"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Branch "
+                                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                android:textSize="15sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:orientation="horizontal">
+                            <!--  <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Class Of: "
+                        android:textStyle="bold"
+                        android:textSize="15sp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        />-->
+                            <TextView
+                                android:id="@+id/profileClassOf"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Class of"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                android:textSize="15sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:orientation="horizontal">
+                            <!--<TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="CGPA: "
+                        android:textStyle="bold"
+                        android:textSize="15sp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        />-->
+                            <TextView
+                                android:id="@+id/profileCGPA"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="CGPA "
+                                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                android:textSize="15sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="10dp"
+                                android:layout_weight="1"
+                                android:text="XII ( Senior Secondary)"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                                android:textSize="17sp"
+                                android:textStyle="bold" />
+
+                            <ImageView
+                                android:id="@+id/schoolEducationEditBtn"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_marginRight="10dp"
+                                android:src="@drawable/pencil"
+                                android:tint="@color/colorAccent" />
+                        </LinearLayout>
+                        <!-- <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
                         android:text="Class XII Details:"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"/>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_margin="10dp">
-                        <TextView
+                        android:layout_marginBottom="10dp"/>-->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:orientation="horizontal">
+                            <!-- <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="School: "
                             android:textStyle="bold"
-                            android:textSize="13sp"
+                            android:textSize="15sp"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            />
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="School "
-                            android:textSize="13sp"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:id="@+id/profileXIISchool"/>
-                    </LinearLayout>
-                    <LinearLayout
+                            />-->
+                            <TextView
+                                android:id="@+id/profileXIISchool"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="School "
+                                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                android:textSize="15sp" />
+
+                            <TextView
+                                android:id="@+id/profileXIIBoard"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Board"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                android:textSize="15sp" />
+                        </LinearLayout>
+                        <!-- <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
@@ -256,110 +297,124 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:textSize="13sp"
+                            android:textSize="15sp"
                             android:text="Board: "
                             android:textStyle="bold"
                             />
+
+                    </LinearLayout>-->
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Stream: "
+                                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                android:textSize="15sp" />
+
+                            <TextView
+                                android:id="@+id/profileXIIStream"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Stream "
+                                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                android:textSize="15sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Passing Year: "
+                                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                android:textSize="15sp" />
+
+                            <TextView
+                                android:id="@+id/profileXIIPassingYear"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="passing year"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                android:textSize="15sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Percentage: "
+                                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                android:textSize="15sp" />
+
+                            <TextView
+                                android:id="@+id/profileXIIPercentage"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Percentage "
+                                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                android:textSize="15sp" />
+                        </LinearLayout>
+
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:textSize="13sp"
-                            android:text="Board"
-                            android:id="@+id/profileXIIBoard"/>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_margin="10dp">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="13sp"
-                            android:text="Stream: "
-                            android:textStyle="bold"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-                        <TextView
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="10dp"
+                            android:text="X (Secondary)"
+                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
+                            android:textColor="#000"
+                            android:textSize="17sp"
+                            android:textStyle="bold" />
+
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="13sp"
-                            android:text="Stream "
-                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:id="@+id/profileXIIStream"/>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_margin="10dp">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Passing Year: "
-                            android:textStyle="bold"
-                            android:textSize="13sp"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            />
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="passing year"
-                            android:textSize="13sp"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:id="@+id/profileXIIPassingYear"/>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_margin="10dp">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Percentage: "
-                            android:textStyle="bold"
-                            android:textSize="13sp"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            />
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Percentage "
-                            android:textSize="13sp"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:id="@+id/profileXIIPercentage"/>
-                    </LinearLayout>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
-                        android:text="Class X Details:"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"/>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_margin="10dp">
-                        <TextView
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:orientation="horizontal">
+                            <!--  <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="School: "
                             android:textStyle="bold"
-                            android:textSize="13sp"
+                            android:textSize="15sp"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            />
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="School "
-                            android:textSize="13sp"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:id="@+id/profileXSchool"/>
-                    </LinearLayout>
-                    <LinearLayout
+                            />-->
+                            <TextView
+                                android:id="@+id/profileXSchool"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="School "
+                                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                android:textSize="15sp" />
+
+                            <TextView
+                                android:id="@+id/profileXBoard"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Board"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                android:textSize="15sp" />
+                        </LinearLayout>
+                        <!--  <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
@@ -368,273 +423,356 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:textSize="13sp"
+                            android:textSize="15sp"
                             android:text="Board: "
                             android:textStyle="bold"
                             />
-                        <TextView
+
+                    </LinearLayout>-->
+
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:textSize="13sp"
-                            android:text="Board"
-                            android:id="@+id/profileXBoard"/>
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Passing Year: "
+                                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                android:textSize="15sp" />
+
+                            <TextView
+                                android:id="@+id/profileXPassingYear"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="passing year"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                android:textSize="15sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Percentage: "
+                                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                android:textSize="15sp" />
+
+                            <TextView
+                                android:id="@+id/profileXPercentage"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Percentage "
+                                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                android:textSize="15sp" />
+                        </LinearLayout>
                     </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="20dp"
+                        android:background="@color/cardview_shadow_start_color" />
+
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_margin="10dp">
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1"
+                                android:text="Trainings and Certifications"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                                android:textSize="20sp"
+                                android:textColor="@color/colorAccent"
+                                android:textStyle="bold" />
+
+                            <ImageView
+                                android:id="@+id/trainingsAddBtn"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_margin="10dp"
+                                android:src="@drawable/add"
+                                android:tint="@color/colorAccent" />
+                        </LinearLayout>
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/profileAcademicTrainingsRecyclerView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:nestedScrollingEnabled="false" />
+                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="20dp"
+                        android:background="@color/cardview_shadow_start_color" />
+
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_marginTop="5dp">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_margin="5dp"
+                                android:textSize="20sp"
+                                android:textColor="@color/colorAccent"
+                                android:layout_weight="1"
+                                android:text="Projects"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                                android:textStyle="bold" />
+
+                            <ImageView
+                                android:id="@+id/projectsAddBtn"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_margin="10dp"
+                                android:src="@drawable/add"
+                                android:tint="@color/colorAccent" />
+                        </LinearLayout>
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/profileAcademicProjectsRecyclerView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:nestedScrollingEnabled="false" />
+                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="20dp"
+                        android:background="@color/cardview_shadow_start_color" />
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1"
+                                android:text="Achievements"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                                android:textStyle="bold"
+                                android:textSize="20sp"
+                                android:textColor="@color/colorAccent"/>
+
+                            <ImageView
+                                android:id="@+id/achievementsAddBtn"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_margin="10dp"
+                                android:src="@drawable/add"
+                                android:tint="@color/colorAccent" />
+                        </LinearLayout>
+
+                        <android.support.v7.widget.RecyclerView
+                            android:id="@+id/profileAcademicAchievementsRecyclerView"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:nestedScrollingEnabled="false" />
+                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginTop="20dp"
+                        android:background="@color/cardview_shadow_start_color" />
+
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_margin="5dp"
+                                android:layout_weight="1"
+                                android:textColor="@color/colorAccent"
+                                android:textSize="20sp"
+                                android:text="Work Sample"
+                                android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+                                android:textStyle="bold" />
+
+                            <ImageView
+                                android:id="@+id/workSampleEditBtn"
+                                android:layout_width="20dp"
+                                android:layout_height="20dp"
+                                android:layout_margin="10dp"
+                                android:src="@drawable/pencil"
+                                android:tint="@color/colorAccent" />
+                        </LinearLayout>
                         <TextView
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Passing Year: "
-                            android:textStyle="bold"
-                            android:textSize="13sp"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            />
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="passing year"
-                            android:textSize="13sp"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:id="@+id/profileXPassingYear"/>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_margin="10dp">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Percentage: "
-                            android:textStyle="bold"
-                            android:textSize="13sp"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            />
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="Percentage "
-                            android:textSize="13sp"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:id="@+id/profileXPercentage"/>
-                    </LinearLayout>
-                </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="Trainings and Certifications"
-                        android:textStyle="bold"
-                        android:layout_gravity="center_vertical"
-                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                        android:layout_margin="5dp" />
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:src="@drawable/add"
-                        android:layout_margin="10dp"
-                        android:tint="@color/colorAccent"
-                        android:id="@+id/trainingsAddBtn"
-                        />
-                </LinearLayout>
-                <android.support.v7.widget.RecyclerView
-                    android:layout_width="match_parent"
-                    android:nestedScrollingEnabled="false"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/profileAcademicTrainingsRecyclerView"/>
-            </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="Projects"
-                            android:textStyle="bold"
-                            android:layout_gravity="center_vertical"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                            android:layout_margin="5dp" />
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:src="@drawable/add"
-                            android:layout_margin="10dp"
-                            android:tint="@color/colorAccent"
-                            android:id="@+id/projectsAddBtn"
-                            />
-                    </LinearLayout>
-                    <android.support.v7.widget.RecyclerView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:nestedScrollingEnabled="false"
-                        android:id="@+id/profileAcademicProjectsRecyclerView"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:text="Achievements"
-                            android:textStyle="bold"
-                            android:layout_gravity="center_vertical"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                            android:layout_margin="5dp" />
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:src="@drawable/add"
-                            android:layout_margin="10dp"
-                            android:tint="@color/colorAccent"
-                            android:id="@+id/achievementsAddBtn"
-                            />
-                    </LinearLayout>
-                    <android.support.v7.widget.RecyclerView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:nestedScrollingEnabled="false"
-                        android:id="@+id/profileAcademicAchievementsRecyclerView"/>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-                        <TextView
-                            android:layout_width="0dp"
-                            android:layout_weight="1"
-                            android:layout_height="wrap_content"
-                            android:text="Work Sample"
-                            android:textStyle="bold"
-                            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
-                            android:layout_margin="5dp"/>
-                        <ImageView
-                            android:layout_width="20dp"
-                            android:layout_height="20dp"
-                            android:src="@drawable/pencil"
-                            android:id="@+id/workSampleEditBtn"
-                            android:layout_margin="10dp"
-                            android:tint="@color/colorAccent"/>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_margin="10dp">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="GitHub: "
-                            android:textStyle="bold"
-                            android:textSize="13sp"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            />
-                        <TextView
-                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="GitHub "
-                            android:textSize="13sp"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:id="@+id/profileGitHub"/>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_margin="10dp">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:textSize="13sp"
-                            android:text="Play Store: "
                             android:textStyle="bold"
+                            android:textColor="#000"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textSize="15sp"
                             />
-                        <TextView
+
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:textSize="13sp"
-                            android:text="Play Store"
-                            android:id="@+id/profilePlayStore"/>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_margin="10dp">
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:orientation="horizontal">
+
+
+
+                            <TextView
+                                android:id="@+id/profileGitHub"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="GitHub "
+                                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                android:textSize="15sp" />
+                        </LinearLayout>
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textSize="13sp"
-                            android:text="Behance: "
+                            android:text="Play Store "
                             android:textStyle="bold"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-                        <TextView
+                            android:textColor="#000"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textSize="15sp"
+                            />
+
+
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="13sp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:orientation="horizontal">
+
+
+                            <TextView
+                                android:id="@+id/profilePlayStore"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Play Store"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                android:textSize="15sp" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:text="Behance "
+                            android:textStyle="bold"
+                            android:textColor="#000"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:id="@+id/profileBehance"/>
-                    </LinearLayout>
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:layout_margin="10dp">
+                            android:textSize="15sp"
+                            />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:orientation="horizontal">
+
+
+                            <TextView
+                                android:id="@+id/profileBehance"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Behance "
+                                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                android:textSize="15sp" />
+                        </LinearLayout>
+
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Blog Link: "
+                            android:text="Blog Link "
                             android:textStyle="bold"
-                            android:textSize="13sp"
+                            android:textColor="#000"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                            android:textSize="15sp"
                             />
-                        <TextView
+
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Blog Link"
-                            android:textSize="13sp"
-                            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                            android:id="@+id/profileBlogLink"/>
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginBottom="20dp"
+                            android:orientation="horizontal">
+
+
+                            <TextView
+                                android:id="@+id/profileBlogLink"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Blog Link"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                                android:textSize="15sp" />
+                        </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
-            </LinearLayout>
-            </android.support.v7.widget.CardView>
 
+            </android.support.v7.widget.CardView>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 

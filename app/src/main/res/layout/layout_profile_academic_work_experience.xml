@@ -38,7 +38,7 @@
             android:src="@drawable/pencil"
             android:layout_marginRight="10dp"
             android:layout_marginEnd="10dp"
-            android:tint="#909090"
+            android:tint="@color/colorAccent"
             android:id="@+id/profileWorkExperienceEditBtn"
             />
         <ImageView
@@ -47,7 +47,7 @@
             android:src="@drawable/dustbin"
             android:layout_marginRight="10dp"
             android:layout_marginEnd="10dp"
-            android:tint="#909090"
+            android:tint="@color/colorAccent"
             android:id="@+id/profileWorkExperienceDeleteBtn"
             />
     </LinearLayout>
