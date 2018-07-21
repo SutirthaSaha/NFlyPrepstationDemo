@@ -5,14 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activities.singleActivities.PsychologicalTestActivity">
+    tools:context=".activities.singleActivities.PersonalityTestActivity">
 
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        android:id="@+id/psychologicalTestToolbar"></android.support.v7.widget.Toolbar>
+        android:id="@+id/personalityTestToolbar"></android.support.v7.widget.Toolbar>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -29,33 +29,33 @@
             android:text="What is your name?"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
-            android:id="@+id/psyTestQuestion"/>
+            android:id="@+id/personalityTestQuestion"/>
         <RadioGroup
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/psyTestOptions">
+            android:id="@+id/personalityTestOptions">
 
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Option one"
-                android:id="@+id/psyTestOption1"/>
+                android:id="@+id/personalityTestOption1"/>
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Option two"
-                android:id="@+id/psyTestOption2"/>
+                android:id="@+id/personalityTestOption2"/>
 
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Option three"
-                android:id="@+id/psyTestOption3"/>
+                android:id="@+id/personalityTestOption3"/>
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Option four"
-                android:id="@+id/psyTestOption4"/>
+                android:id="@+id/personalityTestOption4"/>
         </RadioGroup>
         <LinearLayout
             android:layout_width="match_parent"
@@ -72,8 +72,8 @@
                 android:paddingBottom="15dp"
                 android:background="@color/colorAccent"
                 android:textColor="#fff"
-                android:id="@+id/practiceTestPreviousBtn"
-                android:onClick="onPsyTestPreviousBtnClick"/>
+                android:id="@+id/personalityTestPreviousBtn"
+                android:onClick="onPersonalityTestPreviousBtnClick"/>
             <Button
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -85,8 +85,8 @@
                 android:layout_margin="10dp"
                 android:background="@color/colorAccent"
                 android:textColor="#fff"
-                android:id="@+id/practiceTestNextBtn"
-                android:onClick="onPsyTestNextBtnClick"/>
+                android:id="@+id/personalityTestNextBtn"
+                android:onClick="onPersonalityTestNextBtnClick"/>
         </LinearLayout>
         <Button
             android:layout_width="match_parent"
@@ -98,8 +98,8 @@
             android:paddingBottom="15dp"
             android:background="@color/colorAccent"
             android:textColor="#fff"
-            android:id="@+id/practiceTestSubmitBtn"
-            android:onClick="onPsyTestSubmitBtnClick"/>
+            android:id="@+id/personalityTestSubmitBtn"
+            android:onClick="onPersonalityTestSubmitBtnClick"/>
     </LinearLayout>
 
 </LinearLayout>

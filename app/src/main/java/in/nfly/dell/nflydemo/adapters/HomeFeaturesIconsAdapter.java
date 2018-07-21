@@ -12,6 +12,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 import in.nfly.dell.nflydemo.R;
@@ -39,7 +41,8 @@ public class HomeFeaturesIconsAdapter extends RecyclerView.Adapter<HomeFeaturesI
     @Override
     public void onBindViewHolder(@NonNull HomeFeaturesIconsHolder holder, final int position) {
         holder.HomeFeaturesIconsTitle.setText(titleDataSet.get(position));
-        holder.HomeFeaturesIconsImage.setImageResource(imageDataSet.get(position));
+        Picasso.with(context).load(imageDataSet.get(position)).into(holder.HomeFeaturesIconsImage);
+        //holder.HomeFeaturesIconsImage.setImageResource(imageDataSet.get(position));
         holder.homeFeaturesIconsLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

@@ -1,6 +1,7 @@
 package in.nfly.dell.nflydemo.fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +30,7 @@ import java.util.Map;
 import in.nfly.dell.nflydemo.MySingleton;
 import in.nfly.dell.nflydemo.R;
 import in.nfly.dell.nflydemo.User;
+import in.nfly.dell.nflydemo.activities.singleActivities.PersonalityTestActivity;
 import in.nfly.dell.nflydemo.adapters.ProfilePersonalityAdapter;
 
 /**
@@ -53,6 +56,7 @@ public class ProfilePersonalityFragment extends Fragment {
     add("Neuroticism is a trait characterized by sadness, moodiness, and emotional instability. Individuals who are high in this trait tend to experience mood swings, anxiety, irritability and sadness. Those low in this trait tend to be more stable and emotionally resilient.");
     }};
     private ArrayList<String> progressDataSet=new ArrayList<String>(){};
+    private ImageView personalityEditBtn;
 
     private String introText="The following graph reflects upon the personality of the candidate based on 5 different parameters.\n" +
             "1. Extroversion\n" +
@@ -76,6 +80,7 @@ public class ProfilePersonalityFragment extends Fragment {
         View view= inflater.inflate(R.layout.fragment_profile_personality, container, false);
         profilePersonalityText=view.findViewById(R.id.profilePersonalityText);
         profilePersonalityRecyclerView=view.findViewById(R.id.profilePersonalityRecyclerView);
+        personalityEditBtn=view.findViewById(R.id.personalityEditBtn);
 
         User user=new User(getActivity());
         user_id=user.getUser_id();
@@ -83,8 +88,14 @@ public class ProfilePersonalityFragment extends Fragment {
         profilePersonalityText.setText(introText);
         layoutManager=new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
         profilePersonalityRecyclerView.setLayoutManager(layoutManager);
-
         setValues();
+        personalityEditBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getContext(), PersonalityTestActivity.class);
+                startActivity(intent);
+            }
+        });
         return view;
     }
 

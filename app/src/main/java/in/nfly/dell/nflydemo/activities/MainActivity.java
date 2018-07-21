@@ -50,6 +50,7 @@ import in.nfly.dell.nflydemo.adapters.HomeCompanyAdapter;
 import in.nfly.dell.nflydemo.adapters.HomeCourseAdapter;
 import in.nfly.dell.nflydemo.adapters.HomeFeaturesIconsAdapter;
 import in.nfly.dell.nflydemo.adapters.HomeIconsAdapter;
+import in.nfly.dell.nflydemo.adapters.HomePracticeAdapter;
 import in.nfly.dell.nflydemo.adapters.HomePrepHubAdapter;
 import in.nfly.dell.nflydemo.adapters.HomeSwipeAdapter;
 import in.nfly.dell.nflydemo.adapters.HomeTestimonialsAdapter;
@@ -111,6 +112,14 @@ public class MainActivity extends AppCompatActivity {
             add(R.drawable.reunion);
             add(R.drawable.planning);
             add(R.drawable.tipps);}};
+    private ArrayList<Integer> prepHubIdDataSet=new ArrayList<Integer>(){
+        {   add(R.id.learn_navigation_course);
+            add(R.id.learn_navigation_interview);
+            add(R.id.learn_navigation_gd);
+            add(R.id.learn_navigation_papers);
+            add(R.id.learn_navigation_tips);
+        }
+    };
     private ArrayList<String> prepHubTitleDataSet=new ArrayList<String>(){
         {add("Video Courses");
             add("Interviews");
@@ -125,6 +134,14 @@ public class MainActivity extends AppCompatActivity {
             add("50+ companies");
             add("10 topics");
         }};
+    private ArrayList<Integer> practiceIdDataSet=new ArrayList<Integer>(){
+        {
+            add(R.id.practice_navigation_company_wise);
+            add(R.id.practice_navigation_topic_wise);
+            add(R.id.practice_navigation_exam_wise);
+            add(R.id.practice_navigation_test_series);
+        }
+    };
     private ArrayList<Integer> practiceImageDataSet=new ArrayList<Integer>(){
         {
             add(R.drawable.colored_company);
@@ -396,7 +413,7 @@ public class MainActivity extends AppCompatActivity {
         layoutManager=new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL,false);
         PractiseRecyclerView.setLayoutManager(layoutManager);
 
-        adapter= new HomePrepHubAdapter(practiceTitleDataSet,practiceSubTitleDataSet,practiceImageDataSet);
+        adapter= new HomePracticeAdapter(MainActivity.this,practiceTitleDataSet,practiceSubTitleDataSet,practiceImageDataSet,practiceIdDataSet);
         PractiseRecyclerView.setAdapter(adapter);
     }
 
@@ -406,7 +423,7 @@ public class MainActivity extends AppCompatActivity {
         layoutManager=new LinearLayoutManager(MainActivity.this, LinearLayoutManager.HORIZONTAL,false);
         PrepHubIconsRecyclerView.setLayoutManager(layoutManager);
 
-        adapter= new HomePrepHubAdapter(prepHubTitleDataSet,prepHubSubTitleDataSet,prepHubImageDataSet);
+        adapter= new HomePrepHubAdapter(MainActivity.this,prepHubTitleDataSet,prepHubSubTitleDataSet,prepHubImageDataSet,prepHubIdDataSet);
         PrepHubIconsRecyclerView.setAdapter(adapter);
 
     }

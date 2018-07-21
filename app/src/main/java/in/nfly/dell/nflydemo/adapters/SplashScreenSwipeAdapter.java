@@ -10,6 +10,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
+
 import in.nfly.dell.nflydemo.R;
 
 public class SplashScreenSwipeAdapter extends PagerAdapter{
@@ -43,7 +46,8 @@ public class SplashScreenSwipeAdapter extends PagerAdapter{
         ImageView SplashScreenSwipeImage=item_view.findViewById(R.id.SplashScreenSwipeImage);
         TextView SplashScreenSwipeTitle=item_view.findViewById(R.id.SplashScreenSwipeTitle);
         TextView SplashScreenSwipeSubtitle=item_view.findViewById(R.id.SplashScreenSwipeSubtitle);
-        SplashScreenSwipeImage.setImageResource(image_resources[position]);
+        //SplashScreenSwipeImage.setImageResource(image_resources[position]);
+        Picasso.with(context).load(image_resources[position]).into(SplashScreenSwipeImage);
         SplashScreenSwipeTitle.setText(title_resources[position]);
         SplashScreenSwipeSubtitle.setText(subtitle_resources[position]);
         container.addView(item_view);

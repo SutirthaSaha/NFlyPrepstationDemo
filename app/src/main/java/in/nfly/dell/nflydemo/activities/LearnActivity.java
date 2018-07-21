@@ -67,7 +67,8 @@ public class LearnActivity extends AppCompatActivity {
         BottomNavigationView navigation =findViewById(R.id.learnBottomNavigation);
         BottomNavigationViewHelper.removeShiftMode(navigation);
 
-        loadFragment(new LearnCourseFragment());
+        Intent intent=getIntent();
+        onNavigationItemSelected(intent.getIntExtra("fragment_id",R.id.learn_navigation_course));
         navigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);
 
         drawerLayoutLearn=findViewById(R.id.drawerLayoutLearn);
@@ -149,6 +150,32 @@ public class LearnActivity extends AppCompatActivity {
                 return true;
             }
         });
+    }
+
+    public boolean onNavigationItemSelected(int id){
+        Fragment fragment=null;
+        switch (id) {
+            case R.id.learn_navigation_course:
+                fragment=new LearnCourseFragment();
+                return loadFragment(fragment);
+
+            case R.id.learn_navigation_interview:
+                fragment=new LearnInterviewFragment();
+                return loadFragment(fragment);
+
+            case R.id.learn_navigation_gd:
+                fragment=new LearnGDFragment();
+                return loadFragment(fragment);
+
+            case R.id.learn_navigation_papers:
+                fragment=new LearnPaperFragment();
+                return loadFragment(fragment);
+
+            case R.id.learn_navigation_tips:
+                fragment=new LearnTipsFragment();
+                return loadFragment(fragment);
+        }
+        return false;
     }
 
     private void setToolbar() {

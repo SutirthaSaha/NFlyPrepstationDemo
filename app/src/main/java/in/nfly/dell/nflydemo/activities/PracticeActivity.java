@@ -62,13 +62,17 @@ public class PracticeActivity extends AppCompatActivity {
 
         BottomNavigationView navigation =findViewById(R.id.practiceBottomNavigation);
         BottomNavigationViewHelper.removeShiftMode(navigation);
-        loadFragment(new PracticeCompanyWiseFragment());
+
+        Intent intent=getIntent();
+        onNavigationItemSelected(intent.getIntExtra("fragment_id",R.id.practice_navigation_company_wise));
+
         navigation.setOnNavigationItemSelectedListener(onNavigationItemSelectedListener);
 
         drawerLayoutPractice=findViewById(R.id.drawerLayoutPractice);
         setToolbar();
         setNavigationDrawer();
     }
+
     private void setNavigationDrawer() {
         final NavigationView navigationView;
         navigationView = findViewById(R.id.navigationViewPractice);
@@ -148,6 +152,28 @@ public class PracticeActivity extends AppCompatActivity {
         }
         else{
             Toast.makeText(this, "Null Frag", Toast.LENGTH_SHORT).show();
+        }
+        return false;
+    }
+
+    public boolean onNavigationItemSelected(int id){
+        Fragment fragment=null;
+        switch (id) {
+            case R.id.practice_navigation_test_series:
+                fragment=new PracticeTestSeriesFragment();
+                return loadFragment(fragment);
+
+            case R.id.practice_navigation_company_wise:
+                fragment=new PracticeCompanyWiseFragment();
+                return loadFragment(fragment);
+
+            case R.id.practice_navigation_topic_wise:
+                fragment=new PracticeTopicWiseFragment();
+                return loadFragment(fragment);
+
+            case R.id.practice_navigation_exam_wise:
+                fragment=new PracticeExamWiseFragment();
+                return loadFragment(fragment);
         }
         return false;
     }

@@ -7,7 +7,7 @@
     android:padding="10dp"
     android:layout_marginRight="7dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/courseDetailCard"
+    android:id="@+id/homePrepHubCardView"
     app:cardElevation="5dp"
     android:paddingBottom="5dp">
     <LinearLayout

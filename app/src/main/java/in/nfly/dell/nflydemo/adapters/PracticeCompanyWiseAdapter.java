@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 import in.nfly.dell.nflydemo.R;
@@ -43,7 +45,8 @@ public class PracticeCompanyWiseAdapter extends RecyclerView.Adapter<PracticeCom
         //Picasso.with(context).load(imageDataSet.get(position)).into(holder.practiceCompanyWiseCardImage);
         //holder.practiceCompanyWiseCardImage.setImageResource(Integer.parseInt(imageDataSet.get(position)));
         //holder.practiceCompanyWiseCardNumber.setText("Papers "+numberDataSet.get(position));
-        holder.practiceCompanyWiseCardImage.setImageResource(Integer.parseInt(Integer.toString(R.drawable.ic_computer_black)));
+        Picasso.with(context).load(R.drawable.ic_computer_black).into(holder.practiceCompanyWiseCardImage);
+        //holder.practiceCompanyWiseCardImage.setImageResource(Integer.parseInt(Integer.toString(R.drawable.ic_computer_black)));
         holder.practiceCompanyWiseCardNumber.setText("Papers : "+"4");
         holder.practiceCompanywiseCardView.setOnClickListener(new View.OnClickListener() {
             @Override

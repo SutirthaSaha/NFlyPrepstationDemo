@@ -1,6 +1,7 @@
 package in.nfly.dell.nflydemo.adapters;
 
 
+import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,16 +10,20 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 import in.nfly.dell.nflydemo.R;
 
 public class JobRoleStatsAdapter extends RecyclerView.Adapter<JobRoleStatsAdapter.JobRoleStatsHolder> {
 
+    private Context context;
     private ArrayList<String> titleDataSet;
     private ArrayList<Integer> imageDataSet;
 
-    public JobRoleStatsAdapter(ArrayList<String> titleDataSet, ArrayList<Integer> imageDataSet) {
+    public JobRoleStatsAdapter(Context context, ArrayList<String> titleDataSet, ArrayList<Integer> imageDataSet) {
+        this.context = context;
         this.titleDataSet = titleDataSet;
         this.imageDataSet = imageDataSet;
     }
@@ -34,7 +39,8 @@ public class JobRoleStatsAdapter extends RecyclerView.Adapter<JobRoleStatsAdapte
     @Override
     public void onBindViewHolder(@NonNull JobRoleStatsHolder holder, int position) {
         holder.JobRoleStatsTitle.setText(titleDataSet.get(position));
-        holder.JobRoleStatsImage.setImageResource(imageDataSet.get(position));
+        Picasso.with(context).load(imageDataSet.get(position)).into(holder.JobRoleStatsImage);
+        //holder.JobRoleStatsImage.setImageResource(imageDataSet.get(position));
     }
 
     @Override

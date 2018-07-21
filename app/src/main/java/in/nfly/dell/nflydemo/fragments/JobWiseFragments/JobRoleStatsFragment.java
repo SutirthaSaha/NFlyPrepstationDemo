@@ -99,7 +99,7 @@ public class JobRoleStatsFragment extends Fragment {
         layoutManager=new GridLayoutManager(getContext(),4);
         jobRoleStatsRecyclerView.setLayoutManager(layoutManager);
 
-        adapter= new JobRoleStatsAdapter(jobRoleStatsTitleDataSet,jobRoleStatsImageDataSet);
+        adapter= new JobRoleStatsAdapter(getActivity(),jobRoleStatsTitleDataSet,jobRoleStatsImageDataSet);
         jobRoleStatsRecyclerView.setAdapter(adapter);
 
     }
