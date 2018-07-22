@@ -51,6 +51,7 @@ public class PracticePaperDetailsAdapter extends RecyclerView.Adapter<PracticePa
                 Intent intent=new Intent(context, PracticeTestActivity.class);
                 intent.putExtra("test_id",idDataSet.get(position));
                 intent.putExtra("test_name",titleDataSet.get(position));
+                intent.putExtra("test_duration",durationDataSet.get(position));
                 context.startActivity(intent);
             }
         });

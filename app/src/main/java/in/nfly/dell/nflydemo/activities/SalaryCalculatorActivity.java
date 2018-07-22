@@ -7,6 +7,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -117,22 +118,23 @@ public class SalaryCalculatorActivity extends AppCompatActivity {
     }
 
     private void checkSalary() {
-        StringRequest stringRequest=new StringRequest(Request.Method.POST, urlSalaryCheck, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Toast.makeText(SalaryCalculatorActivity.this, response, Toast.LENGTH_SHORT).show();
-                try {
-                    JSONObject jsonObject=new JSONObject(response);
-                    status=Integer.parseInt(jsonObject.getString("status"));
-                    if(status==200) {
-                        min = jsonObject.getString("salary_min");
-                        max = jsonObject.getString("salary_max");
-                    }
-                    else if(status==201){
-                        min = jsonObject.getString("salary_min_excep");
-                        max = jsonObject.getString("salary_max_excep");
-                    }
-                    TextView toastText;
+        if(!salaryCalcCTCEditText.getText().toString().isEmpty() && !salaryCalcCompanyAutoText.getText().toString().isEmpty()) {
+
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, urlSalaryCheck, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    Toast.makeText(SalaryCalculatorActivity.this, response, Toast.LENGTH_SHORT).show();
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        status = Integer.parseInt(jsonObject.getString("status"));
+                        if (status == 200) {
+                            min = jsonObject.getString("salary_min");
+                            max = jsonObject.getString("salary_max");
+                        } else if (status == 201) {
+                            min = jsonObject.getString("salary_min_excep");
+                            max = jsonObject.getString("salary_max_excep");
+                        }
+                        TextView toastText;
 
                    /* LayoutInflater inflater = getLayoutInflater();
                     View layout = inflater.inflate(R.layout.layout_salary_calculator_dialog,
@@ -149,21 +151,21 @@ public class SalaryCalculatorActivity extends AppCompatActivity {
                     toast.show();
                     */
 
-                    AlertDialog.Builder builder;
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                        builder = new AlertDialog.Builder(SalaryCalculatorActivity.this, android.R.style.Theme_Material_Dialog);
-                    } else {
-                        builder = new AlertDialog.Builder(SalaryCalculatorActivity.this);
-                    }
+                        AlertDialog.Builder builder;
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                            builder = new AlertDialog.Builder(SalaryCalculatorActivity.this, android.R.style.Theme_Material_Dialog);
+                        } else {
+                            builder = new AlertDialog.Builder(SalaryCalculatorActivity.this);
+                        }
 
 
-                    final Dialog dialog = new Dialog(SalaryCalculatorActivity.this);
-                    dialog.setContentView(R.layout.layout_salary_calculator_dialog);
-                    TextView salaryCalcToastText = dialog.findViewById(R.id.salaryCalcToastText);
-                    // if button is clicked, close the custom dialog
-                    salaryCalcToastText.setText("The tentative range of in-hand salary is: " +
-                            min+" - "+max+" K Rs./month");
-                    dialog.show();
+                        final Dialog dialog = new Dialog(SalaryCalculatorActivity.this);
+                        dialog.setContentView(R.layout.layout_salary_calculator_dialog);
+                        TextView salaryCalcToastText = dialog.findViewById(R.id.salaryCalcToastText);
+                        // if button is clicked, close the custom dialog
+                        salaryCalcToastText.setText("The tentative range of in-hand salary is: " +
+                                min + " - " + max + " K Rs./month");
+                        dialog.show();
 
                    /* builder.setCancelable(true);
                     builder.setMessage("The tentative range of in-hand salary is:\n" +
@@ -172,34 +174,37 @@ public class SalaryCalculatorActivity extends AppCompatActivity {
                     AlertDialog alert=builder.create();
                     alert.show(); */
 
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(SalaryCalculatorActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(SalaryCalculatorActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
 
-            }
-        })
-        {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> headers = new HashMap<String, String>();
-                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
-                return headers;
-            }
+                }
+            }) {
+                @Override
+                public Map<String, String> getHeaders() throws AuthFailureError {
+                    HashMap<String, String> headers = new HashMap<String, String>();
+                    headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                    return headers;
+                }
 
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("company_name", company_name);
-                params.put("ctc", ctc);
-                return params;
-            }
-        };
-        MySingleton.getmInstance(SalaryCalculatorActivity.this).addToRequestQueue(stringRequest);
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put("company_name", company_name);
+                    params.put("ctc", ctc);
+                    return params;
+                }
+            };
+            MySingleton.getmInstance(SalaryCalculatorActivity.this).addToRequestQueue(stringRequest);
+        }
+        else{
+            Toast.makeText(this, "Enter the required fields", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void setToolbar() {

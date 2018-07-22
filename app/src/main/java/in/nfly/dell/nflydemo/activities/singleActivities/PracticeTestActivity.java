@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -30,18 +31,22 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import in.nfly.dell.nflydemo.MySingleton;
 import in.nfly.dell.nflydemo.R;
 import in.nfly.dell.nflydemo.User;
 import in.nfly.dell.nflydemo.activities.OnBoardRegisterActivity;
+import in.nfly.dell.nflydemo.activities.PracticeActivity;
 import in.nfly.dell.nflydemo.activities.RegisterActivity;
 import in.nfly.dell.nflydemo.adapters.PracticePaperDetailsAdapter;
+
+import static android.media.MediaExtractor.MetricsConstants.FORMAT;
 
 public class PracticeTestActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
-    private String test_id,test_name;
+    private String test_id,test_name,test_duration;
     private String user_id;
     private Integer status;
     private String urlUserGivenTest="http://nfly.in/gapi/data_exists_two";
@@ -69,10 +74,13 @@ public class PracticeTestActivity extends AppCompatActivity {
     private RadioGroup practiceTestOptions;
     private RadioButton selectRadioBtn;
     private Button practiceTestPreviousBtn,practiceTestNextBtn,practiceTestSubmitBtn;
+    private TextView practiceCountdownTimerText;
 
     private int optionIdSelected;
     private int user_score,max_score;
     private String date;
+    private static final String FORMAT = "%02d:%02d";
+    int seconds , minutes;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,6 +89,7 @@ public class PracticeTestActivity extends AppCompatActivity {
         Intent intent=getIntent();
         test_id=intent.getStringExtra("test_id");
         test_name=intent.getStringExtra("test_name");
+        test_duration=intent.getStringExtra("test_duration");
 
         User user=new User(PracticeTestActivity.this);
         user_id=user.getUser_id();
@@ -92,6 +101,44 @@ public class PracticeTestActivity extends AppCompatActivity {
                 finish();
             }
         });
+        practiceCountdownTimerText=findViewById(R.id.practiceCountdownTimerText);
+        new CountDownTimer(Integer.parseInt(test_duration)*60*1000, 1000) { // adjust the milli seconds here
+
+            public void onTick(long millisUntilFinished) {
+
+                practiceCountdownTimerText.setText(""+String.format(FORMAT,
+                        TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished) - TimeUnit.HOURS.toMinutes(
+                                TimeUnit.MILLISECONDS.toHours(millisUntilFinished)),
+                        TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) - TimeUnit.MINUTES.toSeconds(
+                                TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))));
+            }
+
+            public void onFinish() {
+                practiceCountdownTimerText.setText("done!");
+                saveUserOption();
+                Toast.makeText(PracticeTestActivity.this, Integer.toString(userOptions[count]), Toast.LENGTH_SHORT).show();
+
+                for(int i=0;i<answerDataSet.size();i++){
+                    if(userOptions[i]==Integer.parseInt(answerDataSet.get(i))){
+                        user_score=user_score+3;
+                    }
+                }
+                Toast.makeText(PracticeTestActivity.this, user_score+"/"+max_score, Toast.LENGTH_SHORT).show();
+                //updateTestTable();
+                practiceTestNextBtn.setVisibility(View.INVISIBLE);
+                practiceTestPreviousBtn.setVisibility(View.INVISIBLE);
+                practiceTestSubmitBtn.setVisibility(View.INVISIBLE);
+                for(int i=0;i<quesIdDataSet.size();i++){
+                    int marks=0;
+                    if(userOptions[i]==Integer.parseInt(answerDataSet.get(i))){
+                        marks=3;
+                    }
+                    insertResponse(quesIdDataSet.get(i),i,marks);
+                }
+                insertAttempt();
+            }
+        }.start();
+
 
         checkUserGivenTest();
 
