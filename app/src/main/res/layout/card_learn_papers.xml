@@ -33,7 +33,6 @@
             android:layout_marginRight="5dp"
             android:layout_marginTop="7dp"
             android:text="Title"
-
             android:textColor="#fff"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -44,15 +43,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginBottom="5dp"
-            android:layout_marginRight="5dp"
-            android:layout_marginLeft="5dp"
             app:fontFamily="@font/roboto"
             android:gravity="center"
             android:text="Tests:"
+            android:visibility="invisible"
             android:textColor="#fff"
             android:textSize="15sp"
             android:textStyle="normal" />
+        <!--
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginLeft="5dp"-->
     </LinearLayout>
     </LinearLayout>
 

@@ -17,6 +17,7 @@ import java.util.ArrayList;
 
 import in.nfly.dell.nflydemo.R;
 import in.nfly.dell.nflydemo.activities.CompanyWiseDetailsActivity;
+import in.nfly.dell.nflydemo.activities.KnowledgeBaseActivity;
 
 public class HomeCompanyAdapter extends RecyclerView.Adapter<HomeCompanyAdapter.HomeCompanyHolder> {
 
@@ -47,10 +48,17 @@ public class HomeCompanyAdapter extends RecyclerView.Adapter<HomeCompanyAdapter.
         holder.HomeCompanyCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(context, CompanyWiseDetailsActivity.class);
-                intent.putExtra("company_id",idDataSet.get(position));
-                intent.putExtra("company_name",titleDataSet.get(position));
-                context.startActivity(intent);
+                if(position!=(titleDataSet.size()-1)){
+                    Intent intent=new Intent(context, CompanyWiseDetailsActivity.class);
+                    intent.putExtra("company_id",idDataSet.get(position));
+                    intent.putExtra("company_name",titleDataSet.get(position));
+                    context.startActivity(intent);
+                }
+                else{
+                    Intent intent=new Intent(context, KnowledgeBaseActivity.class);
+                    intent.putExtra("fragment_no",0);
+                    context.startActivity(intent);
+                }
             }
         });
     }

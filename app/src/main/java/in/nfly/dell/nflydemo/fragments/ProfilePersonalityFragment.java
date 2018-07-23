@@ -99,6 +99,12 @@ public class ProfilePersonalityFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        setValues();
+    }
+
     private void setValues() {
         StringRequest stringRequest=new StringRequest(Request.Method.POST, urlPersonality, new Response.Listener<String>() {
             @Override

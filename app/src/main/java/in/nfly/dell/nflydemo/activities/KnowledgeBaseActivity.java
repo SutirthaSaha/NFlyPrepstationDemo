@@ -28,7 +28,6 @@ public class KnowledgeBaseActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private DrawerLayout drawerLayoutKnowledgeBase;
     private TextView headerTitle;
-
     private TabLayout tabLayoutKnowledgeBase;
     private ViewPager viewPagerKnowledgeBase;
     private ViewPagerAdapter viewPagerAdapter;
@@ -48,6 +47,9 @@ public class KnowledgeBaseActivity extends AppCompatActivity {
 
         viewPagerKnowledgeBase.setAdapter(viewPagerAdapter);
         tabLayoutKnowledgeBase.setupWithViewPager(viewPagerKnowledgeBase);
+
+        Intent intent=getIntent();
+        viewPagerKnowledgeBase.setCurrentItem(intent.getIntExtra("fragment_no",0));
 
         setToolbar();
         setNavigationDrawer();

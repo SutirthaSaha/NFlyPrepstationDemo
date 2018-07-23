@@ -56,6 +56,11 @@
                 android:layout_height="wrap_content"
                 android:text="Option four"
                 android:id="@+id/personalityTestOption4"/>
+            <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Option four"
+                android:id="@+id/personalityTestOption5"/>
         </RadioGroup>
         <LinearLayout
             android:layout_width="match_parent"

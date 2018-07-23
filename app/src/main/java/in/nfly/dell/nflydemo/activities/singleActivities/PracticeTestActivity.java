@@ -385,7 +385,7 @@ public class PracticeTestActivity extends AppCompatActivity {
                 userPrevOption=R.id.practiceTestOption3;
                 break;
             case 4:
-                userPrevOption=R.id.practiceTestOption3;;
+                userPrevOption=R.id.practiceTestOption4;
                 break;
         }
 

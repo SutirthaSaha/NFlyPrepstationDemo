@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import in.nfly.dell.nflydemo.R;
 import in.nfly.dell.nflydemo.activities.CourseStudyActivity;
 import in.nfly.dell.nflydemo.activities.JobRoleWiseDetailsActivity;
+import in.nfly.dell.nflydemo.activities.KnowledgeBaseActivity;
 
 public class HomeCareerAdapter extends RecyclerView.Adapter<HomeCareerAdapter.HomeCareerHolder> {
 
@@ -48,10 +49,17 @@ public class HomeCareerAdapter extends RecyclerView.Adapter<HomeCareerAdapter.Ho
             @Override
             public void onClick(View v) {
                 Toast.makeText(context, idDataSet.get(position), Toast.LENGTH_SHORT).show();
-                Intent intent=new Intent(context, JobRoleWiseDetailsActivity.class);
-                intent.putExtra("job_role_id",idDataSet.get(position));
-                intent.putExtra("job_role_name",titleDataSet.get(position));
-                context.startActivity(intent);
+                if((position!=titleDataSet.size()-1)){
+                    Intent intent=new Intent(context, JobRoleWiseDetailsActivity.class);
+                    intent.putExtra("job_role_id",idDataSet.get(position));
+                    intent.putExtra("job_role_name",titleDataSet.get(position));
+                    context.startActivity(intent);
+                }
+                else{
+                    Intent intent=new Intent(context, KnowledgeBaseActivity.class);
+                    intent.putExtra("fragment_no",1);
+                    context.startActivity(intent);
+                }
             }
         });
     }

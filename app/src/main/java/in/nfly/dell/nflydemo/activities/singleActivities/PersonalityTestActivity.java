@@ -11,10 +11,25 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Locale;
+import java.util.Map;
+
+import in.nfly.dell.nflydemo.MySingleton;
 import in.nfly.dell.nflydemo.R;
+import in.nfly.dell.nflydemo.User;
 
 public class PersonalityTestActivity extends AppCompatActivity {
 
@@ -26,14 +41,25 @@ public class PersonalityTestActivity extends AppCompatActivity {
     private int[] userOptions;
     private int count=0;
     private TextView personalityTestQuestion;
-    private RadioButton personalityTestOption1,personalityTestOption2,personalityTestOption3,personalityTestOption4;
+    private RadioButton personalityTestOption1,personalityTestOption2,personalityTestOption3,personalityTestOption4,personalityTestOption5;
     private RadioGroup personalityTestOptions;
     private RadioButton selectRadioBtn;
     private Button personalityTestPreviousBtn,personalityTestNextBtn,personalityTestSubmitBtn;
 
-    private int optionIdSelected;
+    private String urlInsertAttempt="http://nfly.in/gapi/insert";
+
+    private int optionIdSelected,status;
+    private String user_id;
     private int user_score,max_score;
     private String date;
+    private int user_extra_score,user_agree_score,user_con_score,user_neuro_score,user_open_score;
+
+    private ArrayList<Integer> ExtraAnsDataSet=new ArrayList<Integer>(){};
+    private ArrayList<Integer> AgreeAnsDataSet=new ArrayList<Integer>(){};
+    private ArrayList<Integer> ConAnsDataSet=new ArrayList<Integer>(){};
+    private ArrayList<Integer> NeuroAnsDataSet=new ArrayList<Integer>(){};
+    private ArrayList<Integer> OpenAnsDataSet=new ArrayList<Integer>(){};
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,12 +69,16 @@ public class PersonalityTestActivity extends AppCompatActivity {
         personalityTestOption2=findViewById(R.id.personalityTestOption2);
         personalityTestOption3=findViewById(R.id.personalityTestOption3);
         personalityTestOption4=findViewById(R.id.personalityTestOption4);
+        personalityTestOption5=findViewById(R.id.personalityTestOption5);
+
         personalityTestOptions=findViewById(R.id.personalityTestOptions);
         personalityTestPreviousBtn=findViewById(R.id.personalityTestPreviousBtn);
         personalityTestNextBtn=findViewById(R.id.personalityTestNextBtn);
         personalityTestSubmitBtn=findViewById(R.id.personalityTestSubmitBtn);
         personalityTestSubmitBtn.setEnabled(false);
 
+        User user=new User(PersonalityTestActivity.this);
+        user_id=user.getUser_id();
         questionDataSet.add("1. I see myself as someone who is talkative.");
         questionDataSet.add("2. I tend to find fault in others.");
         questionDataSet.add("3. I do a thorough job.");
@@ -113,12 +143,18 @@ public class PersonalityTestActivity extends AppCompatActivity {
         personalityTestOption2.setText(questionOptionsSet.get(questionDataSet.get(0)).get(1));
         personalityTestOption3.setText(questionOptionsSet.get(questionDataSet.get(0)).get(2));
         personalityTestOption4.setText(questionOptionsSet.get(questionDataSet.get(0)).get(3));
+        personalityTestOption5.setText(questionOptionsSet.get(questionDataSet.get(0)).get(4));
 
         userOptions = new int[questionDataSet.size()];
         for (int i = 0; i < questionDataSet.size(); i++) {
             userOptions[i] = 0;
         }
 
+        user_agree_score=0;
+        user_con_score=0;
+        user_extra_score=0;
+        user_neuro_score=0;
+        user_open_score=0;
         setToolbar();
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -150,6 +186,9 @@ public class PersonalityTestActivity extends AppCompatActivity {
             case R.id.personalityTestOption4:
                 userOptions[count]=4;
                 break;
+            case R.id.personalityTestOption5:
+                userOptions[count]=4;
+                break;
             case -1:
                 userOptions[count]=0;
         }
@@ -178,6 +217,7 @@ public class PersonalityTestActivity extends AppCompatActivity {
         personalityTestOption2.setText(questionOptionsSet.get(questionDataSet.get(count)).get(1));
         personalityTestOption3.setText(questionOptionsSet.get(questionDataSet.get(count)).get(2));
         personalityTestOption4.setText(questionOptionsSet.get(questionDataSet.get(count)).get(3));
+        personalityTestOption5.setText(questionOptionsSet.get(questionDataSet.get(count)).get(4));
     }
 
     private void showUserOption(int count) {
@@ -195,7 +235,10 @@ public class PersonalityTestActivity extends AppCompatActivity {
                 userPrevOption=R.id.personalityTestOption3;
                 break;
             case 4:
-                userPrevOption=R.id.personalityTestOption3;;
+                userPrevOption=R.id.personalityTestOption4;
+                break;
+            case 5:
+                userPrevOption=R.id.personalityTestOption5;
                 break;
         }
 
@@ -226,12 +269,78 @@ public class PersonalityTestActivity extends AppCompatActivity {
         personalityTestOption2.setText(questionOptionsSet.get(questionDataSet.get(count)).get(1));
         personalityTestOption3.setText(questionOptionsSet.get(questionDataSet.get(count)).get(2));
         personalityTestOption4.setText(questionOptionsSet.get(questionDataSet.get(count)).get(3));
+        personalityTestOption5.setText(questionOptionsSet.get(questionDataSet.get(count)).get(4));
+
     }
 
     public void onPersonalityTestSubmitBtnClick(View view) {
         saveUserOption();
         Toast.makeText(this, "Submit", Toast.LENGTH_SHORT).show();
-        finish();
+
+        ExtraAnsDataSet.add(userOptions[0]);
+        ExtraAnsDataSet.add(userOptions[5]);
+        ExtraAnsDataSet.add(userOptions[10]);
+        ExtraAnsDataSet.add(userOptions[15]);
+        ExtraAnsDataSet.add(userOptions[20]);
+        ExtraAnsDataSet.add(userOptions[25]);
+        ExtraAnsDataSet.add(userOptions[30]);
+        ExtraAnsDataSet.add(userOptions[35]);
+
+        AgreeAnsDataSet.add(userOptions[1]);
+        AgreeAnsDataSet.add(userOptions[6]);
+        AgreeAnsDataSet.add(userOptions[11]);
+        AgreeAnsDataSet.add(userOptions[16]);
+        AgreeAnsDataSet.add(userOptions[21]);
+        AgreeAnsDataSet.add(userOptions[26]);
+        AgreeAnsDataSet.add(userOptions[31]);
+        AgreeAnsDataSet.add(userOptions[36]);
+        AgreeAnsDataSet.add(userOptions[41]);
+
+        ConAnsDataSet.add(userOptions[2]);
+        ConAnsDataSet.add(userOptions[7]);
+        ConAnsDataSet.add(userOptions[12]);
+        ConAnsDataSet.add(userOptions[17]);
+        ConAnsDataSet.add(userOptions[22]);
+        ConAnsDataSet.add(userOptions[27]);
+        ConAnsDataSet.add(userOptions[32]);
+        ConAnsDataSet.add(userOptions[37]);
+        ConAnsDataSet.add(userOptions[42]);
+
+        NeuroAnsDataSet.add(userOptions[3]);
+        NeuroAnsDataSet.add(userOptions[8]);
+        NeuroAnsDataSet.add(userOptions[13]);
+        NeuroAnsDataSet.add(userOptions[18]);
+        NeuroAnsDataSet.add(userOptions[23]);
+        NeuroAnsDataSet.add(userOptions[28]);
+        NeuroAnsDataSet.add(userOptions[33]);
+        NeuroAnsDataSet.add(userOptions[38]);
+
+        OpenAnsDataSet.add(userOptions[4]);
+        OpenAnsDataSet.add(userOptions[9]);
+        OpenAnsDataSet.add(userOptions[14]);
+        OpenAnsDataSet.add(userOptions[19]);
+        OpenAnsDataSet.add(userOptions[24]);
+        OpenAnsDataSet.add(userOptions[29]);
+        OpenAnsDataSet.add(userOptions[34]);
+        OpenAnsDataSet.add(userOptions[39]);
+        OpenAnsDataSet.add(userOptions[40]);
+        OpenAnsDataSet.add(userOptions[43]);
+        /*
+        user_extra_score=sum(ExtraAnsDataSet);
+        user_con_score=sum(ConAnsDataSet);
+        user_neuro_score=sum(NeuroAnsDataSet);
+        user_open_score=sum(OpenAnsDataSet);
+        user_agree_score=sum(AgreeAnsDataSet);
+        */
+        user_extra_score=((sum(ExtraAnsDataSet)-8)*100)/32;
+        user_con_score=((sum(ConAnsDataSet)-9)*100)/36;
+        user_neuro_score=((sum(NeuroAnsDataSet)-8)*100)/32;
+        user_open_score=((sum(OpenAnsDataSet)-10)*100)/40;
+        user_agree_score=((sum(AgreeAnsDataSet)-9)*100)/36;
+
+        Toast.makeText(this, "Extra Score:"+user_extra_score+"\nCon Score:"+user_con_score+"\nNeuro Score:"+user_neuro_score+"\nAgree Score:"+user_agree_score+"\nOpen Score:"+user_open_score, Toast.LENGTH_LONG).show();
+        insertAttempt();
+
         /*
         Toast.makeText(this, Integer.toString(userOptions[count]), Toast.LENGTH_SHORT).show();
 
@@ -250,5 +359,65 @@ public class PersonalityTestActivity extends AppCompatActivity {
             //insertResponse(quesIdDataSet.get(i),i,marks);
         }
         //insertAttempt();*/
+    }
+    private int sum(ArrayList<Integer> al)
+    {
+        int value = 0;
+        for(int i : al)
+        {
+            value += i;
+        }
+        return value;
+    }
+    private void insertAttempt() {
+
+        date = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+        StringRequest stringRequest=new StringRequest(Request.Method.POST,urlInsertAttempt, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject arrayObject=new JSONObject(response);
+                    status=arrayObject.getInt("status");
+                    if(status==200){
+                        finish();
+                    }
+                    else{
+                        Toast.makeText(PersonalityTestActivity.this, "Insertion Failed", Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(PersonalityTestActivity.this, "Error", Toast.LENGTH_SHORT).show();
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+
+            @Override
+            protected Map<String,String> getParams() throws AuthFailureError{
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("insert_array[user_id]", user_id);
+                params.put("insert_array[extraversion]",Integer.toString(user_extra_score));
+                params.put("insert_array[openness]",Integer.toString(user_open_score));
+                params.put("insert_array[agreeableness]",Integer.toString(user_agree_score));
+                params.put("insert_array[conscientiousness]",Integer.toString(user_con_score));
+                params.put("insert_array[neuroticism]",Integer.toString(user_neuro_score));
+
+                params.put("table","user_big5");
+                return params;
+            }
+        };
+        MySingleton.getmInstance(PersonalityTestActivity.this).addToRequestQueue(stringRequest);
     }
 }
