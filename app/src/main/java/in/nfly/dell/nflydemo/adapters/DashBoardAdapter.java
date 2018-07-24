@@ -45,7 +45,7 @@ public class DashBoardAdapter extends RecyclerView.Adapter<DashBoardAdapter.Dash
         holder.DashboardDate.setText(dateDataSet.get(position));
         holder.DashboardProgressBar.setMax(totalMarksDataSet.get(position));
         holder.DashboardProgressBar.setSecondaryProgress(50);
-      //  holder.DashboardProgressBar.setSecondaryProgress(actualMarksDataSet.get(position));
+        holder.DashboardProgressBar.setSecondaryProgress(actualMarksDataSet.get(position));
     }
 
     @Override

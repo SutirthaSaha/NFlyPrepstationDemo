@@ -155,7 +155,7 @@ public class DashboardActivity extends AppCompatActivity {
                         dateDataSet.add(arrayObject.getString("date"));
                         marksDataSet.add(arrayObject.getString("score")+"/"+Integer.parseInt(arrayObject.getString("test_num_questions"))*3);
                         totalMarksDataSet.add(arrayObject.getInt("test_num_questions")*3);
-                       //actualMarksDataSet.add(Integer.parseInt(arrayObject.getString(arrayObject.getString("score"))));
+                        actualMarksDataSet.add(Integer.parseInt(arrayObject.getString("score")));
 
                     }
                     adapter=new DashBoardAdapter(DashboardActivity.this,titleDataSet,marksDataSet,dateDataSet,totalMarksDataSet,actualMarksDataSet);
