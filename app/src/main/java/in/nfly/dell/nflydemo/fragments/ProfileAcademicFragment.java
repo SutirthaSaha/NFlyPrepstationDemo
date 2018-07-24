@@ -60,6 +60,8 @@ public class ProfileAcademicFragment extends Fragment {
     private String urlUpdate="http://nfly.in/gapi/update";
     private String urlInsert="http://nfly.in/gapi/insert";
     private String urlDelete="http://nfly.in/gapi/delete_with_one";
+    private String urlDataExists="http://nfly.in/gapi/data_exists_one";
+
 
     private String user_id;
     private int status;
@@ -162,7 +164,7 @@ public class ProfileAcademicFragment extends Fragment {
         setProjects(view);
         setAchievements(view);
 
-        setValues();
+        checkSchoolDetails();
         workExperienceAddBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -499,6 +501,190 @@ public class ProfileAcademicFragment extends Fragment {
             }
         });
         return view;
+    }
+
+    private void checkSchoolDetails() {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST,urlDataExists, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject arrayObject=new JSONObject(response);
+                    status=arrayObject.getInt("status");
+                    if(status==200){
+                        checkWorkSampleDetails();
+                    }
+                    else{
+                        Toast.makeText(getActivity(), "Check Again", Toast.LENGTH_SHORT).show();
+                        insertSchoolDetails();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity(), "Error Exists", Toast.LENGTH_SHORT).show();
+                insertSchoolDetails();
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+
+            @Override
+            protected Map<String,String> getParams() throws AuthFailureError{
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("key","user_id");
+                params.put("value",user_id);
+                params.put("table","user_school_details");
+                return params;
+            }
+        };
+        MySingleton.getmInstance(getActivity()).addToRequestQueue(stringRequest);
+    }
+
+    private void insertSchoolDetails() {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST,urlInsert, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject arrayObject=new JSONObject(response);
+                    status=arrayObject.getInt("status");
+                    if(status==200){
+
+                        checkWorkSampleDetails();
+                    }
+                    else{
+                        Toast.makeText(getActivity(), "Registration Failed", Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+
+            @Override
+            protected Map<String,String> getParams() throws AuthFailureError{
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("insert_array[user_id]", user_id);
+                params.put("table","user_school_details");
+                return params;
+            }
+        };
+        MySingleton.getmInstance(getActivity()).addToRequestQueue(stringRequest);
+    }
+
+    private void checkWorkSampleDetails() {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST,urlDataExists, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject arrayObject=new JSONObject(response);
+                    status=arrayObject.getInt("status");
+                    if(status==200){
+                        setValues();
+                    }
+                    else{
+                        Toast.makeText(getActivity(), "Check Again", Toast.LENGTH_SHORT).show();
+                        insertWorkSampleDetails();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity(), "Error Exists", Toast.LENGTH_SHORT).show();
+                insertWorkSampleDetails();
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+
+            @Override
+            protected Map<String,String> getParams() throws AuthFailureError{
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("key","user_id");
+                params.put("value",user_id);
+                params.put("table","user_work_sample");
+                return params;
+            }
+        };
+        MySingleton.getmInstance(getActivity()).addToRequestQueue(stringRequest);
+    }
+
+    private void insertWorkSampleDetails() {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST,urlInsert, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject arrayObject=new JSONObject(response);
+                    status=arrayObject.getInt("status");
+                    if(status==200){
+
+                        checkWorkSampleDetails();
+                    }
+                    else{
+                        Toast.makeText(getActivity(), "Registration Failed", Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+
+            @Override
+            protected Map<String,String> getParams() throws AuthFailureError{
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("insert_array[user_id]", user_id);
+                params.put("table","user_work_sample");
+                return params;
+            }
+        };
+        MySingleton.getmInstance(getActivity()).addToRequestQueue(stringRequest);
     }
 
     private void addProjects() {

@@ -44,6 +44,7 @@ import in.nfly.dell.nflydemo.R;
 import in.nfly.dell.nflydemo.User;
 import in.nfly.dell.nflydemo.activities.LoginActivity;
 import in.nfly.dell.nflydemo.activities.MainActivity;
+import in.nfly.dell.nflydemo.activities.OnBoardRegisterActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -149,7 +150,7 @@ public class ProfilePersonalFragment extends Fragment {
         contactDetailsEditBtn=view.findViewById(R.id.contactDetailsEditBtn);
         socialProfilesEditBtn=view.findViewById(R.id.socialProfilesEditBtn);
 
-        setValues();
+        checkUserAdditionalDetails();
         socialProfilesEditBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -419,6 +420,190 @@ public class ProfilePersonalFragment extends Fragment {
         setLanguages(view);
 
         return view;
+    }
+
+    private void checkUserAdditionalDetails() {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST,urlDataExists, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject arrayObject=new JSONObject(response);
+                    status=arrayObject.getInt("status");
+                    if(status==200){
+                        checkSocialDetails();
+                    }
+                    else{
+                        Toast.makeText(getActivity(), "Check Again", Toast.LENGTH_SHORT).show();
+                        insertAdditionalDetails();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity(), "Error Exists", Toast.LENGTH_SHORT).show();
+                insertAdditionalDetails();
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+
+            @Override
+            protected Map<String,String> getParams() throws AuthFailureError{
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("key","user_id");
+                params.put("value",user_id);
+                params.put("table","user_additional_details");
+                return params;
+            }
+        };
+        MySingleton.getmInstance(getActivity()).addToRequestQueue(stringRequest);
+    }
+
+    private void checkSocialDetails() {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST,urlDataExists, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject arrayObject=new JSONObject(response);
+                    status=arrayObject.getInt("status");
+                    if(status==200){
+                        setValues();
+                    }
+                    else{
+                        Toast.makeText(getActivity(), "Check Again", Toast.LENGTH_SHORT).show();
+                        insertSocialDetails();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity(), "Error Exists", Toast.LENGTH_SHORT).show();
+                insertSocialDetails();
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+
+            @Override
+            protected Map<String,String> getParams() throws AuthFailureError{
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("key","user_id");
+                params.put("value",user_id);
+                params.put("table","user_social_profile");
+                return params;
+            }
+        };
+        MySingleton.getmInstance(getActivity()).addToRequestQueue(stringRequest);
+    }
+
+    private void insertSocialDetails() {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST,urlInsert, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject arrayObject=new JSONObject(response);
+                    status=arrayObject.getInt("status");
+                    if(status==200){
+
+                        checkSocialDetails();
+                    }
+                    else{
+                        Toast.makeText(getActivity(), "Registration Failed", Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+
+            @Override
+            protected Map<String,String> getParams() throws AuthFailureError{
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("insert_array[user_id]", user_id);
+                params.put("table","user_social_profile");
+                return params;
+            }
+        };
+        MySingleton.getmInstance(getActivity()).addToRequestQueue(stringRequest);
+    }
+
+    private void insertAdditionalDetails() {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST,urlInsert, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject arrayObject=new JSONObject(response);
+                    status=arrayObject.getInt("status");
+                    if(status==200){
+
+                        checkSocialDetails();
+                    }
+                    else{
+                        Toast.makeText(getActivity(), "Registration Failed", Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+
+            @Override
+            protected Map<String,String> getParams() throws AuthFailureError{
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("insert_array[user_id]", user_id);
+                params.put("table","user_additional_details");
+                return params;
+            }
+        };
+        MySingleton.getmInstance(getActivity()).addToRequestQueue(stringRequest);
     }
 
     private void checkLanguageExists() {
@@ -1290,7 +1475,30 @@ public class ProfilePersonalFragment extends Fragment {
                 @Override
                 public void onClick(View v) {
                     //Toast.makeText(context, idDataSet.get(position), Toast.LENGTH_SHORT).show();
-                    deleteLanguage(idDataSet.get(position));
+                    AlertDialog.Builder alert = new AlertDialog.Builder(
+                            getActivity());
+                    alert.setTitle("Alert!!");
+                    alert.setMessage("Are you sure to delete record");
+                    alert.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //do your work here
+                            deleteLanguage(idDataSet.get(position));
+                            dialog.dismiss();
+
+                        }
+                    });
+                    alert.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            dialog.dismiss();
+                        }
+                    });
+
+                    alert.show();
                 }
             });
         }
@@ -1388,8 +1596,31 @@ public class ProfilePersonalFragment extends Fragment {
             holder.profileHobbyDeleteBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(context, idDataSet.get(position), Toast.LENGTH_SHORT).show();
-                    deleteHobby(idDataSet.get(position));
+                    //Toast.makeText(context, idDataSet.get(position), Toast.LENGTH_SHORT).show();
+                    AlertDialog.Builder alert = new AlertDialog.Builder(
+                            getActivity());
+                    alert.setTitle("Alert!!");
+                    alert.setMessage("Are you sure to delete record");
+                    alert.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //do your work here
+                            deleteHobby(idDataSet.get(position));
+                            dialog.dismiss();
+
+                        }
+                    });
+                    alert.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            dialog.dismiss();
+                        }
+                    });
+
+                    alert.show();
                 }
             });
         }
