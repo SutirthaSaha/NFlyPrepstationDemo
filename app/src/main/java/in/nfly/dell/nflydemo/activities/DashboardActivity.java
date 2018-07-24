@@ -45,6 +45,10 @@ public class DashboardActivity extends AppCompatActivity {
     private ArrayList<String> marksDataSet=new ArrayList<String>(){};
     private ArrayList<String> titleDataSet=new ArrayList<String>(){};
     private ArrayList<String> dateDataSet=new ArrayList<String>(){};
+    private ArrayList<Integer> totalMarksDataSet=new ArrayList<Integer>(){};
+    private ArrayList<Integer> actualMarksDataSet=new ArrayList<Integer>(){};
+
+
 
     private RecyclerView dashboardRecyclerView;
     private RecyclerView.Adapter adapter;
@@ -150,8 +154,11 @@ public class DashboardActivity extends AppCompatActivity {
                         titleDataSet.add(arrayObject.getString("test_name"));
                         dateDataSet.add(arrayObject.getString("date"));
                         marksDataSet.add(arrayObject.getString("score")+"/"+Integer.parseInt(arrayObject.getString("test_num_questions"))*3);
+                        totalMarksDataSet.add(arrayObject.getInt("test_num_questions")*3);
+                       //actualMarksDataSet.add(Integer.parseInt(arrayObject.getString(arrayObject.getString("score"))));
+
                     }
-                    adapter=new DashBoardAdapter(DashboardActivity.this,titleDataSet,marksDataSet,dateDataSet);
+                    adapter=new DashBoardAdapter(DashboardActivity.this,titleDataSet,marksDataSet,dateDataSet,totalMarksDataSet,actualMarksDataSet);
                     dashboardRecyclerView.setAdapter(adapter);
                 } catch (JSONException e) {
                     e.printStackTrace();

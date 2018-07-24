@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -17,11 +18,15 @@ public class DashBoardAdapter extends RecyclerView.Adapter<DashBoardAdapter.Dash
 
     private Context context;
     private ArrayList<String> titleDataSet,marksDataSet,dateDataSet;
+    private ArrayList<Integer> totalMarksDataSet, actualMarksDataSet;
 
-    public DashBoardAdapter(Context context, ArrayList<String> titleDataSet, ArrayList<String> marksDataSet, ArrayList<String> dateDataSet) {
+    public DashBoardAdapter(Context context, ArrayList<String> titleDataSet, ArrayList<String> marksDataSet, ArrayList<String> dateDataSet,ArrayList<Integer> totalMarksDataSet,ArrayList<Integer> actualMarksDataSet) {
         this.context = context;
         this.titleDataSet = titleDataSet;
         this.marksDataSet = marksDataSet;
+        this.totalMarksDataSet=totalMarksDataSet;
+        this.actualMarksDataSet=actualMarksDataSet;
+
         this.dateDataSet = dateDataSet;
     }
 
@@ -38,6 +43,9 @@ public class DashBoardAdapter extends RecyclerView.Adapter<DashBoardAdapter.Dash
         holder.DashboardTitle.setText(titleDataSet.get(position));
         holder.DashboardMarks.setText(marksDataSet.get(position));
         holder.DashboardDate.setText(dateDataSet.get(position));
+        holder.DashboardProgressBar.setMax(totalMarksDataSet.get(position));
+        holder.DashboardProgressBar.setSecondaryProgress(50);
+      //  holder.DashboardProgressBar.setSecondaryProgress(actualMarksDataSet.get(position));
     }
 
     @Override
@@ -48,12 +56,15 @@ public class DashBoardAdapter extends RecyclerView.Adapter<DashBoardAdapter.Dash
     public class DashBoardHolder extends RecyclerView.ViewHolder{
 
         public TextView DashboardTitle, DashboardMarks,DashboardDate;
+        public ProgressBar DashboardProgressBar;
         public DashBoardHolder(View itemView) {
             super(itemView);
 
             DashboardDate=itemView.findViewById(R.id.dashboardDate);
             DashboardTitle=itemView.findViewById(R.id.dashboardText);
             DashboardMarks=itemView.findViewById(R.id.dashboardMarks);
+            DashboardProgressBar=itemView.findViewById(R.id.dashboardProgress);
+
         }
     }
 }
