@@ -167,7 +167,6 @@ public class RegisterActivity extends AppCompatActivity {
                         editor.putString("email",email);
                         editor.putString("fname",fname);
                         editor.apply();
-
                         Intent intent=new Intent(RegisterActivity.this,OnBoardRegisterActivity.class);
                         intent.putExtra("email",email);
                         startActivity(intent);

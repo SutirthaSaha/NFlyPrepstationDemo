@@ -206,12 +206,13 @@ public class OnBoardRegisterActivity extends AppCompatActivity {
                     JSONObject arrayObject=new JSONObject(response);
                     status=arrayObject.getInt("status");
                     if(status==200){
+                        //Toast.makeText(OnBoardRegisterActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
 
-                        Toast.makeText(OnBoardRegisterActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
-
+                        insertAdditionalDetails();
+                        /*
                         Intent intent=new Intent(OnBoardRegisterActivity.this,MainActivity.class);
                         intent.putExtra("email",email);
-                        startActivity(intent);
+                        startActivity(intent);*/
                     }
                     else{
                         Toast.makeText(OnBoardRegisterActivity.this, "Registration Failed", Toast.LENGTH_SHORT).show();
@@ -251,4 +252,198 @@ public class OnBoardRegisterActivity extends AppCompatActivity {
         MySingleton.getmInstance(OnBoardRegisterActivity.this).addToRequestQueue(stringRequest);
     }
 
+    private void insertAdditionalDetails() {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST,urlRegister, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject arrayObject=new JSONObject(response);
+                    status=arrayObject.getInt("status");
+                    if(status==200){
+
+                        insertSocialDetails();
+                        /*
+                        Intent intent=new Intent(OnBoardRegisterActivity.this,MainActivity.class);
+                        intent.putExtra("email",email);
+                        startActivity(intent);*/
+                    }
+                    else{
+                        Toast.makeText(OnBoardRegisterActivity.this, "Registration Failed", Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(OnBoardRegisterActivity.this, "Error", Toast.LENGTH_SHORT).show();
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+
+            @Override
+            protected Map<String,String> getParams() throws AuthFailureError{
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("insert_array[user_id]", user_id);
+                params.put("table","user_additional_details");
+                return params;
+            }
+        };
+        MySingleton.getmInstance(OnBoardRegisterActivity.this).addToRequestQueue(stringRequest);
+    }
+    private void insertSocialDetails() {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST,urlRegister, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject arrayObject=new JSONObject(response);
+                    status=arrayObject.getInt("status");
+                    if(status==200){
+
+                        insertSchoolDetails();
+                        /*
+                        Intent intent=new Intent(OnBoardRegisterActivity.this,MainActivity.class);
+                        intent.putExtra("email",email);
+                        startActivity(intent);*/
+                    }
+                    else{
+                        Toast.makeText(OnBoardRegisterActivity.this, "Registration Failed", Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(OnBoardRegisterActivity.this, "Error", Toast.LENGTH_SHORT).show();
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+
+            @Override
+            protected Map<String,String> getParams() throws AuthFailureError{
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("insert_array[user_id]", user_id);
+                params.put("table","user_social_profile");
+                return params;
+            }
+        };
+        MySingleton.getmInstance(OnBoardRegisterActivity.this).addToRequestQueue(stringRequest);
+    }
+
+    private void insertSchoolDetails() {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST,urlRegister, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject arrayObject=new JSONObject(response);
+                    status=arrayObject.getInt("status");
+                    if(status==200){
+
+                        insertWorkSample();
+                        /*
+                        Intent intent=new Intent(OnBoardRegisterActivity.this,MainActivity.class);
+                        intent.putExtra("email",email);
+                        startActivity(intent);*/
+                    }
+                    else{
+                        Toast.makeText(OnBoardRegisterActivity.this, "Registration Failed", Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(OnBoardRegisterActivity.this, "Error", Toast.LENGTH_SHORT).show();
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+
+            @Override
+            protected Map<String,String> getParams() throws AuthFailureError{
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("insert_array[user_id]", user_id);
+                params.put("table","user_school_details");
+                return params;
+            }
+        };
+        MySingleton.getmInstance(OnBoardRegisterActivity.this).addToRequestQueue(stringRequest);
+    }
+
+    private void insertWorkSample() {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST,urlRegister, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject arrayObject=new JSONObject(response);
+                    status=arrayObject.getInt("status");
+                    if(status==200){
+
+                        Toast.makeText(OnBoardRegisterActivity.this, "Registration Successful", Toast.LENGTH_SHORT).show();
+
+                        Intent intent=new Intent(OnBoardRegisterActivity.this,MainActivity.class);
+                        intent.putExtra("email",email);
+                        startActivity(intent);
+                    }
+                    else{
+                        Toast.makeText(OnBoardRegisterActivity.this, "Registration Failed", Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(OnBoardRegisterActivity.this, "Error", Toast.LENGTH_SHORT).show();
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+
+            @Override
+            protected Map<String,String> getParams() throws AuthFailureError{
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("insert_array[user_id]", user_id);
+                params.put("table","user_work_sample");
+                return params;
+            }
+        };
+        MySingleton.getmInstance(OnBoardRegisterActivity.this).addToRequestQueue(stringRequest);
+    }
 }

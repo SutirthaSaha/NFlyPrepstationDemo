@@ -84,6 +84,7 @@ public class ProfilePersonalFragment extends Fragment {
     languagesAddBtn, contactDetailsEditBtn,socialProfilesEditBtn, editBasicDetailsDobCalenderBtn;
 
     private String user_id;
+    private int basicCount=0;
 
     private RecyclerView profileHobbiesRecyclerView;
     private RecyclerView profileLanguagesRecyclerView;
@@ -160,10 +161,15 @@ public class ProfilePersonalFragment extends Fragment {
                 editSocialProfilesQuora=contactDetailsEditLayout.findViewById(R.id.editSocialProfilesQuora);
                 editSocialProfilesTwitter=contactDetailsEditLayout.findViewById(R.id.editSocialProfilesTwitter);
 
-                editSocialProfilesFacebook.setText(profileFacebook.getText().toString());
-                editSocialProfilesLinkedIn.setText(profileLinkedIn.getText().toString());
-                editSocialProfilesTwitter.setText(profileTwitter.getText().toString());
-                editSocialProfilesQuora.setText(profileQuora.getText().toString());
+                if(!profileFacebook.getText().toString().equals("Not Provided")) {
+                    editSocialProfilesFacebook.setText(profileFacebook.getText().toString());
+                }
+                if(!profileLinkedIn.getText().toString().equals("Not Provided"))
+                    editSocialProfilesLinkedIn.setText(profileLinkedIn.getText().toString());
+                if(!profileTwitter.getText().toString().equals("Not Provided"))
+                    editSocialProfilesTwitter.setText(profileTwitter.getText().toString());
+                if(!profileQuora.getText().toString().equals("Not Provided"))
+                    editSocialProfilesQuora.setText(profileQuora.getText().toString());
 
                 AlertDialog.Builder alertDialog=new AlertDialog.Builder(getActivity());
                 alertDialog.setView(contactDetailsEditLayout);
@@ -199,8 +205,12 @@ public class ProfilePersonalFragment extends Fragment {
                 editContactDetailsAddress=contactDetailsEditLayout.findViewById(R.id.editContactDetailsAddress);
                 editContactDetailsPhone=contactDetailsEditLayout.findViewById(R.id.editContactDetailsPhone);
 
-                editContactDetailsAddress.setText(profileAddress.getText().toString());
-                editContactDetailsPhone.setText(profilePhone.getText().toString());
+                if(!profileAddress.getText().toString().equals("Not Provided")) {
+                    editContactDetailsAddress.setText(profileAddress.getText().toString());
+                }
+                if(!profilePhone.getText().toString().equals("Not Provided")) {
+                    editContactDetailsPhone.setText(profilePhone.getText().toString());
+                }
 
                 AlertDialog.Builder alertDialog=new AlertDialog.Builder(getActivity());
                 alertDialog.setView(contactDetailsEditLayout);
@@ -306,7 +316,12 @@ public class ProfilePersonalFragment extends Fragment {
                 alertDialog.setView(coverLetterEditLayout);
                 alertDialog.setCancelable(false);
 
-                editCoverLetter.setText(profileCoverLetter.getText().toString().trim());
+                if(profileCoverLetter.getText().toString().trim().equals("You have not added any cover letter")){
+                    editCoverLetter.setText("");
+                }
+                else {
+                    editCoverLetter.setText(profileCoverLetter.getText().toString().trim());
+                }
                 alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
 
                     @Override
@@ -342,7 +357,9 @@ public class ProfilePersonalFragment extends Fragment {
                 editBasicDetailsDobCalenderBtn=basicDetailsEditLayout.findViewById(R.id.editBasicDetailsDobIcon);
 
                 editBasicDetailsCurrentDesignation.setText(profileCurrentDesignation.getText().toString());
-                editBasicDetailsDob.setText(profileDob.getText().toString());
+                if(!profileDob.getText().toString().equals("You have not added any basic details")) {
+                    editBasicDetailsDob.setText(profileDob.getText().toString());
+                }
                 editBasicDetailsCurrentCity.setText(profileCurrentCity.getText().toString());
                 editBasicDetailsHomeTown.setText(profileHomeTown.getText().toString());
                 editBasicDetailsGender.setPrompt(profileGender.getText().toString());
@@ -427,7 +444,7 @@ public class ProfilePersonalFragment extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Error Exists", Toast.LENGTH_SHORT).show();
                 addToLanguageTable();
             }
         })
@@ -473,7 +490,7 @@ public class ProfilePersonalFragment extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Error Add to Table", Toast.LENGTH_SHORT).show();
             }
         })
         {
@@ -511,7 +528,7 @@ public class ProfilePersonalFragment extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Error Get Language Details", Toast.LENGTH_SHORT).show();
             }
         })
         {
@@ -765,7 +782,7 @@ public class ProfilePersonalFragment extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Error Add Language", Toast.LENGTH_SHORT).show();
             }
         })
         {
@@ -850,10 +867,10 @@ public class ProfilePersonalFragment extends Fragment {
                 params.put("update_array[user_fb]",editSocialProfilesFacebook.getText().toString());
                 params.put("update_array[user_tw]",editSocialProfilesTwitter.getText().toString());
                 params.put("update_array[user_ln]",editSocialProfilesLinkedIn.getText().toString());
-                params.put("update_array[user_qo]",editSocialProfilesQuora.getText().toString());
+                params.put("update_array[user_qr]",editSocialProfilesQuora.getText().toString());
                 params.put("key", "user_id");
                 params.put("value", user_id);
-                params.put("table","user_additional_details");
+                params.put("table","user_social_profile");
                 return params;
             }
         };
@@ -904,6 +921,7 @@ public class ProfilePersonalFragment extends Fragment {
     }
 
     private void setValues() {
+        basicCount=0;
         StringRequest stringRequest=new StringRequest(Request.Method.POST, urlPersonal, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -915,23 +933,101 @@ public class ProfilePersonalFragment extends Fragment {
                     profileFullName.setText(user.getString("fname")+" "+user.getString("lname"));
                     profileEmail.setText(user.getString("email"));
 
-                    JSONObject user_additional_details=jsonObject.getJSONObject("user_additional_details");
-                    profileCurrentDesignation.setText(user_additional_details.getString("user_designation"));
-                    profilePhone.setText(user_additional_details.getString("user_phone"));
-
-                    profileCoverLetter.setText(user_additional_details.getString("user_cover_letter"));
-
-                    profileCurrentCity.setText(user_additional_details.getString("user_current_city")+"/");
-                    profileHomeTown.setText(user_additional_details.getString("user_city"));
-                    profileGender.setText("("+user_additional_details.getString("user_gender")+")");
-                    profileDob.setText(user_additional_details.getString("user_dob"));
-                    profileAddress.setText(user_additional_details.getString("user_address"));
 
                     JSONObject user_social_profile=jsonObject.getJSONObject("user_social_profile");
-                    profileFacebook.setText(user_social_profile.getString("user_fb"));
-                    profileLinkedIn.setText(user_social_profile.getString("user_ln"));
-                    profileTwitter.setText(user_social_profile.getString("user_tw"));
-                    profileQuora.setText(user_social_profile.getString("user_qr"));
+                    if(user_social_profile.getString("user_fb").isEmpty()){
+                        profileFacebook.setText("Not Provided");
+                    }
+                    else{
+                        profileFacebook.setText(user_social_profile.getString("user_fb"));
+                    }
+
+                    if(user_social_profile.getString("user_ln").isEmpty()){
+                        profileLinkedIn.setText("Not Provided");
+                    }
+                    else{
+                        profileLinkedIn.setText(user_social_profile.getString("user_ln"));
+                    }
+
+                    if(user_social_profile.getString("user_tw").isEmpty()){
+                        profileTwitter.setText("Not Provided");
+                    }
+                    else{
+                        profileTwitter.setText(user_social_profile.getString("user_tw"));
+                    }
+
+                    if(user_social_profile.getString("user_qr").isEmpty()){
+                        profileQuora.setText("Not Provided");
+                    }
+                    else{
+                        profileQuora.setText(user_social_profile.getString("user_qr"));
+                    }
+
+                    JSONObject user_additional_details=jsonObject.getJSONObject("user_additional_details");
+
+                    if(user_additional_details.getString("user_designation").isEmpty()){
+                        profileCurrentDesignation.setText("");
+                        basicCount++;
+                    }
+                    else{
+                        profileCurrentDesignation.setText(user_additional_details.getString("user_designation"));
+                    }
+
+                    if(user_additional_details.getString("user_phone").isEmpty()){
+                        profilePhone.setText("Not Provided");
+                    }
+                    else{
+                        profilePhone.setText(user_additional_details.getString("user_phone"));
+                    }
+
+                    if(user_additional_details.getString("user_cover_letter").isEmpty()) {
+                        profileCoverLetter.setText("You have not added any cover letter");
+                    }
+                    else{
+                        profileCoverLetter.setText(user_additional_details.getString("user_cover_letter"));
+                    }
+
+                    if(user_additional_details.getString("user_current_city").isEmpty()){
+                        profileCurrentCity.setText("");
+                        basicCount++;
+                    }
+                    else{
+                        profileCurrentCity.setText(user_additional_details.getString("user_current_city")+"/");
+                    }
+
+                    if(user_additional_details.getString("user_city").isEmpty()){
+                        profileHomeTown.setText("");
+                        basicCount++;
+                    }
+                    else{
+                        profileHomeTown.setText(user_additional_details.getString("user_city"));
+                    }
+
+                    if(user_additional_details.getString("user_gender").isEmpty()){
+                        profileGender.setText("");
+                        basicCount++;
+                    }
+                    else{
+                        profileGender.setText("("+user_additional_details.getString("user_gender")+")");
+                    }
+                    if(user_additional_details.getString("user_dob").isEmpty() || user_additional_details.getString("user_dob").equals("0000-00-00")){
+                        profileDob.setText("");
+                        basicCount++;
+                    }
+                    else{
+                        profileDob.setText(user_additional_details.getString("user_dob"));
+                    }
+
+                    if(user_additional_details.getString("user_address").isEmpty()){
+                        profileAddress.setText("Not Provided");
+                    }
+                    else{
+                        profileAddress.setText(user_additional_details.getString("user_address"));
+                    }
+
+                    if(basicCount==5){
+                        profileDob.setText("You have not added any basic details");
+                    }
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -1019,10 +1115,14 @@ public class ProfilePersonalFragment extends Fragment {
         StringRequest stringRequest=new StringRequest(Request.Method.POST, oneRow, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                profileHobbiesTextDialog.setVisibility(View.INVISIBLE);
                 //Toast.makeText(getContext(), "Successful", Toast.LENGTH_SHORT).show();
                 try {
                     JSONObject arrayObject;
                     JSONArray parentArray=new JSONArray(response);
+                    if(parentArray.length()==0){
+                        profileHobbiesTextDialog.setVisibility(View.VISIBLE);
+                    }
                     for(int i=0;i<parentArray.length();i++) {
                         arrayObject = parentArray.getJSONObject(i);
                         hobbyIdDataSet.add(arrayObject.getString("uh_id"));
@@ -1032,6 +1132,7 @@ public class ProfilePersonalFragment extends Fragment {
                     profileHobbiesRecyclerView.setAdapter(adapter);
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    profileHobbiesTextDialog.setVisibility(View.VISIBLE);
                 }
             }
         }, new Response.ErrorListener() {
@@ -1091,7 +1192,6 @@ public class ProfilePersonalFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
-
             }
         })
         {
@@ -1118,10 +1218,14 @@ public class ProfilePersonalFragment extends Fragment {
         StringRequest stringRequest=new StringRequest(Request.Method.POST, oneRow, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
+                profileLanguagesTextDialog.setVisibility(View.INVISIBLE);
                 //Toast.makeText(getContext(), "Successful", Toast.LENGTH_SHORT).show();
                 try {
                     JSONObject arrayObject;
                     JSONArray parentArray=new JSONArray(response);
+                    if(parentArray.length()==0){
+                        profileLanguagesTextDialog.setVisibility(View.VISIBLE);
+                    }
                     for(int i=0;i<parentArray.length();i++) {
                         arrayObject = parentArray.getJSONObject(i);
                         languageIdDataSet.add(arrayObject.getString("ul_id"));
@@ -1137,7 +1241,7 @@ public class ProfilePersonalFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
-
+                profileLanguagesTextDialog.setVisibility(View.VISIBLE);
             }
         })
         {
