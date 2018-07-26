@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#fff"
     tools:context=".fragments.PracticeTestSeriesFragment">
     <RelativeLayout
         android:layout_width="match_parent"
@@ -13,15 +14,18 @@
             android:layout_width="300dp"
             android:layout_height="300dp"
             android:layout_centerInParent="true"
-            android:src="@drawable/coming_soooon" />
+            android:src="@drawable/cooking"
+            android:id="@+id/s"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text=""
+            android:layout_below="@+id/s"
+            android:layout_centerHorizontal="true"
+            android:text="Still cooking, coming soon!"
             android:textSize="18sp"
-            android:layout_centerInParent="true"
-            android:textColor="#fff"
+            android:textColor="@color/colorPrimaryDark"
+            android:fontFamily="@font/sanchez"
             android:textStyle="bold"
             android:gravity="center"/>
     </RelativeLayout>

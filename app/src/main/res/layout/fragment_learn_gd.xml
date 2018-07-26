@@ -29,13 +29,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/learnGDImageTitle"
-                    android:textSize="20sp"
+                    android:textSize="23sp"
                     android:textStyle="bold"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
                     android:foregroundGravity="center"
                     android:textColor="#fff"
-                    android:text="GD"
+                    android:text="Group Discussion"
                     android:gravity="center"
                     android:shadowColor="#000000"
                     android:shadowDx="1.5"
@@ -52,16 +52,75 @@
                 android:nestedScrollingEnabled="false"
                 android:backgroundTint="#dee0f9"
                 android:layout_marginBottom="5dp"
-
                 app:cardPreventCornerOverlap="false"
                 app:cardElevation="0dp">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+                <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:orientation="vertical"
+                    android:layout_width="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_marginTop="7dp">
+
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/topics"
+                    android:layout_centerHorizontal="true"
+                    android:id="@+id/learnGDIconImage" />
+                <TextView
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:textColor="#000"
+                    android:layout_marginTop="5dp"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center"
+                    android:id="@+id/learnGDIconTitle"
+                    android:layout_below="@+id/learnGDIconImage"
+                    android:text="More than 100 topics"/>
+                </RelativeLayout>
+                    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:layout_marginTop="7dp">
+
+                        <ImageView
+                            android:layout_width="28dp"
+                            android:layout_height="28dp"
+                            android:src="@drawable/spread"
+                            android:layout_centerHorizontal="true"
+                            android:id="@+id/learnGDIconImage2" />
+                        <TextView
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:textSize="14sp"
+                            android:textColor="#000"
+                            android:layout_marginTop="5dp"
+                            android:layout_centerVertical="true"
+                            android:layout_centerHorizontal="true"
+                            android:gravity="center"
+                            android:id="@+id/learnGDIconTitle2"
+                            android:layout_below="@+id/learnGDIconImage2"
+                            android:text="Spread across 500+ domains"/>
+                    </RelativeLayout>
+                <!--
                 <android.support.v7.widget.RecyclerView
                     android:layout_width="match_parent"
                     android:layout_marginBottom="5dp"
                     android:nestedScrollingEnabled="false"
                     android:layout_height="wrap_content"
                     android:id="@+id/learnGDBannerIconsRecyclerView">
-                </android.support.v7.widget.RecyclerView>
+                </android.support.v7.widget.RecyclerView>-->
+                </LinearLayout>
             </android.support.v7.widget.CardView>
 
     <!--<TextView

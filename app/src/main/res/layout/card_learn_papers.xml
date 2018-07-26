@@ -16,7 +16,7 @@
             android:layout_width="match_parent"
             android:layout_height="140sp"
             android:scaleType="fitXY"
-            android:src="@drawable/imageresume" />
+            android:src="@drawable/imagepaper" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

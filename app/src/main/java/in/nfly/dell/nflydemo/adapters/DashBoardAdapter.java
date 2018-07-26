@@ -1,6 +1,9 @@
 package in.nfly.dell.nflydemo.adapters;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -46,6 +49,7 @@ public class DashBoardAdapter extends RecyclerView.Adapter<DashBoardAdapter.Dash
         holder.DashboardProgressBar.setMax(totalMarksDataSet.get(position));
         holder.DashboardProgressBar.setSecondaryProgress(50);
         holder.DashboardProgressBar.setSecondaryProgress(actualMarksDataSet.get(position));
+
     }
 
     @Override

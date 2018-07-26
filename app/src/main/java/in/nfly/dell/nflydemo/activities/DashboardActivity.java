@@ -27,8 +27,13 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import in.nfly.dell.nflydemo.MySingleton;
@@ -152,7 +157,24 @@ public class DashboardActivity extends AppCompatActivity {
                     for(int i=0;i<parentArray.length();i++){
                         arrayObject=parentArray.getJSONObject(i);
                         titleDataSet.add(arrayObject.getString("test_name"));
-                        dateDataSet.add(arrayObject.getString("date"));
+                        //dateDataSet.add(arrayObject.getString("date"));
+
+
+                        //String s="2018-09-20";
+
+                        DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+                        try {
+                            // Convert String to Date in java
+                            Date today = sdf.parse(arrayObject.getString("date"));
+                            DateFormat sdf1 = new SimpleDateFormat("dd MMM yy", Locale.UK);
+                            //textView.setText(sdf1.format(today));
+                            dateDataSet.add(sdf1.format(today));
+
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+
                         marksDataSet.add(arrayObject.getString("score")+"/"+Integer.parseInt(arrayObject.getString("test_num_questions"))*3);
                         totalMarksDataSet.add(arrayObject.getInt("test_num_questions")*3);
                         actualMarksDataSet.add(Integer.parseInt(arrayObject.getString("score")));

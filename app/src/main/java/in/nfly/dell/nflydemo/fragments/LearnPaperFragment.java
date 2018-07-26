@@ -10,6 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -17,6 +18,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -40,6 +42,8 @@ public class LearnPaperFragment extends Fragment {
     private RecyclerView learnPapersRecyclerView,learnPapersBannerRecyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
+    private ImageView learnPaperimage;
+
     //private ArrayList<String> titleDataSet=new ArrayList<String>(){{add("HR Questions");add("Software Tools");add("Eng. Topics");add("Company wise");add("Puzzles");add("Miscellaneous");}};
     //private ArrayList<String> imageDataSet=new ArrayList<String>(){{add(Integer.toString(R.drawable.ic_computer_black));add(Integer.toString(R.drawable.ic_computer_black));add(Integer.toString(R.drawable.ic_computer_black));add(Integer.toString(R.drawable.ic_computer_black));add(Integer.toString(R.drawable.ic_computer_black));add(Integer.toString(R.drawable.ic_computer_black));}};
     //private ArrayList<String> numberDataSet=new ArrayList<String>(){{add(Integer.toString(4));add(Integer.toString(4));add(Integer.toString(4));add(Integer.toString(4));add(Integer.toString(4));add(Integer.toString(4));}};
@@ -47,15 +51,15 @@ public class LearnPaperFragment extends Fragment {
     private String urlPapers="http://nfly.in/gapi/load_all_rows";
     private ArrayList<Integer> bannerImageDataSet=new ArrayList<Integer>(){
         {
-            add(R.drawable.colored_video);
-            add(R.drawable.colored_group);
-            add(R.drawable.colored_articles);}};
+            add(R.drawable.colored_company);
+            add(R.drawable.coloredtest);
+            add(R.drawable.idea);}};
 
     private ArrayList<String> bannerTitleDataSet=new ArrayList<String>(){
         {
-            add("7 detailed courses");
-            add("100+ hours of video");
-            add("200+ videos");}};
+            add("50+ companies");
+            add("200+ papers");
+            add("Technical and Non Technical");}};
 
     private ArrayList<String> titleDataSet=new ArrayList<String>(){};
     private ArrayList<String> imageDataSet=new ArrayList<String>(){};
@@ -76,6 +80,8 @@ public class LearnPaperFragment extends Fragment {
         learnPapersRecyclerView=v.findViewById(R.id.learnPapersRecyclerView);
         layoutManager=new GridLayoutManager(getContext(),2);
         learnPapersRecyclerView.setLayoutManager(layoutManager);
+        learnPaperimage=v.findViewById(R.id.learnPaperImage);
+        Picasso.with(getContext()).load("https://avante.biz/wp-content/uploads/Material-Wallpaper/Material-Wallpaper-004.jpg").into(learnPaperimage);
         setValues();
         setBanner(v);
         return v;

@@ -28,7 +28,7 @@
             android:layout_marginBottom="5dp"
             android:id="@+id/tipsDetailsImage"
             android:scaleType="fitXY"
-            android:src="@drawable/imageresume"/>
+            android:src="@drawable/imagepaper"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -59,6 +59,7 @@
         <item
             android:id="@+id/help"
             android:title="Help"
+            android:icon="@drawable/help"
             android:checkable="true"
             />
         <item

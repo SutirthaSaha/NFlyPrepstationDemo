@@ -38,7 +38,8 @@ public class PracticeExamWiseFragment extends Fragment {
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<String> titleDataSet=new ArrayList<String>(){};
-    private ArrayList<String> imageDataSet=new ArrayList<String>(){{add(Integer.toString(R.drawable.ic_computer_black));add(Integer.toString(R.drawable.ic_computer_black));add(Integer.toString(R.drawable.ic_computer_black));}};
+    private ArrayList<String> imageDataSet=new ArrayList<String>(){};
+   // private ArrayList<String> imageDataSet=new ArrayList<String>(){{add(Integer.toString(R.drawable.ic_computer_black));add(Integer.toString(R.drawable.ic_computer_black));add(Integer.toString(R.drawable.ic_computer_black));}};
     private ArrayList<String> numberDataSet=new ArrayList<String>(){{add(Integer.toString(4));add(Integer.toString(4));add(Integer.toString(4));}};
     private ArrayList<String> idDataSet=new ArrayList<String>(){};
 
@@ -79,6 +80,8 @@ public class PracticeExamWiseFragment extends Fragment {
                         titleDataSet.add(arrayObject.getString("subtopic_name"));
                         numberDataSet.add(Integer.toString(5));
                         idDataSet.add(arrayObject.getString("subtopic_id"));
+                        imageDataSet.add("http://nfly.in/assets/images/company/"+arrayObject.getString("subtopic_bg"));
+
                     }
                     adapter=new PracticeCompanyWiseAdapter(titleDataSet,imageDataSet,numberDataSet,idDataSet,getContext());
                     practiceExamWiseRecyclerView.setAdapter(adapter);

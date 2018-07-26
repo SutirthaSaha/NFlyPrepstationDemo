@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -16,6 +17,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,6 +41,7 @@ public class LearnCourseFragment extends Fragment {
     private RecyclerView learnCourseRecyclerView, LearnCourseBannerIconsRecyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
+    private ImageView learnCourseImage;
     //private ArrayList<String> titleDataSet=new ArrayList<Str   private RecyclerView.Adapter adapter;
     //    private RecyclerView.LayoutManager layoutManager;ing>(){{add("HR Questions");add("Software Tools");add("Eng. Topics");add("Company wise");add("Puzzles");add("Miscellaneous");}};
     //private ArrayList<String> imageDataSet=new ArrayList<String>(){{add(Integer.toString(R.drawable.ic_computer_black));add(Integer.toString(R.drawable.ic_computer_black));add(Integer.toString(R.drawable.ic_computer_black));add(Integer.toString(R.drawable.ic_computer_black));add(Integer.toString(R.drawable.ic_computer_black));add(Integer.toString(R.drawable.ic_computer_black));}};
@@ -52,13 +55,12 @@ public class LearnCourseFragment extends Fragment {
     private ArrayList<Integer> bannerImageDataSet=new ArrayList<Integer>(){
         {
             add(R.drawable.colored_video);
-            add(R.drawable.colored_group);
-            add(R.drawable.colored_articles);}};
+            add(R.drawable.hourglass);
+            add(R.drawable.presentation);}};
 
     private ArrayList<String> bannerTitleDataSet=new ArrayList<String>(){
         {
             add("7 detailed courses");
-
             add("100+ hours of video");
             add("200+ videos");}};
 
@@ -72,9 +74,12 @@ public class LearnCourseFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v= inflater.inflate(R.layout.fragment_learn_course, container, false);
+        learnCourseImage=v.findViewById(R.id.learnCourseImage);
         learnCourseRecyclerView=v.findViewById(R.id.learnCourseRecyclerView);
         layoutManager=new GridLayoutManager(getContext(),2);
         learnCourseRecyclerView.setLayoutManager(layoutManager);
+
+        Picasso.with(getContext()).load("https://newevolutiondesigns.com/images/freebies/google-material-design-wallpaper-2.jpg").into(learnCourseImage);
         setValues();
         setBanner(v);
         return v;

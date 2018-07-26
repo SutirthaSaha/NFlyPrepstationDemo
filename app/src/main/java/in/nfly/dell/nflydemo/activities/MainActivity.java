@@ -176,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
         {add("-Sambarta Goswami");
             add("-Torsha Dutta");
             add("-Riya Ghosh");
-            add("-Shashank Reddy");
+            add("-Shantanu Banik");
         }};
 
 
@@ -317,7 +317,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     careerIdDataSet.add("8");
                     careerTitleDataSet.add("View All");
-                    careerImageDataSet.add("https://cdn.pixabay.com/photo/2014/04/02/10/55/plus-304947_960_720.png");
+                    careerImageDataSet.add("none");
                     adapter= new HomeCareerAdapter(MainActivity.this,careerIdDataSet,careerTitleDataSet,careerImageDataSet);
                     CareerRecyclerView.setAdapter(adapter);
                 } catch (JSONException e) {
@@ -373,7 +373,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     companyIdDataSet.add("8");
                     companyTitleDataSet.add("View All");
-                    companyImageDataSet.add("https://cdn2.iconfinder.com/data/icons/perfect-flat-icons-2/512/Create_with_plus_mail_layer_add_vector_stock.png");
+                    companyImageDataSet.add("none");
 
                     adapter= new HomeCompanyAdapter(MainActivity.this,companyIdDataSet,companyTitleDataSet,companyImageDataSet);
                     CompanyRecyclerView.setAdapter(adapter);

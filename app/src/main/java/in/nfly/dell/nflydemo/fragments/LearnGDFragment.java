@@ -1,13 +1,16 @@
 package in.nfly.dell.nflydemo.fragments;
 
 
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -15,6 +18,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -26,18 +30,17 @@ import java.util.Map;
 
 import in.nfly.dell.nflydemo.MySingleton;
 import in.nfly.dell.nflydemo.R;
-import in.nfly.dell.nflydemo.adapters.HomeIconsAdapter;
 import in.nfly.dell.nflydemo.adapters.LearnGDAdapter;
-import in.nfly.dell.nflydemo.adapters.LearnInterviewAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class LearnGDFragment extends Fragment {
 
-    private RecyclerView learnGDRecyclerView, learnGDBannerRecyclerView;
+    private RecyclerView learnGDRecyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
+    private ImageView learnGDimage;
     //private ArrayList<String> titleDataSet=new ArrayList<String>(){{add("HR Questions");add("Software Tools");add("Eng. Topics");add("Company wise");add("Puzzles");add("Miscellaneous");}};
     //private ArrayList<String> imageDataSet=new ArrayList<String>(){{add(Integer.toString(R.drawable.ic_computer_white));add(Integer.toString(R.drawable.ic_computer_white));add(Integer.toString(R.drawable.ic_computer_white));add(Integer.toString(R.drawable.ic_computer_white));add(Integer.toString(R.drawable.ic_computer_white));add(Integer.toString(R.drawable.ic_computer_white));}};
 
@@ -45,20 +48,6 @@ public class LearnGDFragment extends Fragment {
     private ArrayList<String> titleDataSet=new ArrayList<String>(){};
     private ArrayList<String> idDataSet=new ArrayList<String>(){};
     private ArrayList<String> imageDataSet=new ArrayList<String>(){};
-    private ArrayList<Integer> bannerImageDataSet=new ArrayList<Integer>(){
-        {
-            add(R.drawable.colored_video);
-            add(R.drawable.colored_group);
-            add(R.drawable.colored_articles);}};
-
-    private ArrayList<String> bannerTitleDataSet=new ArrayList<String>(){
-        {
-            add("7 detailed courses");
-
-            add("100+ hours of video");
-            add("200+ videos");}};
-
-
     public LearnGDFragment() {
         // Required empty public constructor
     }
@@ -72,19 +61,12 @@ public class LearnGDFragment extends Fragment {
         learnGDRecyclerView=v.findViewById(R.id.learnGDRecyclerView);
         layoutManager=new GridLayoutManager(getContext(),2);
         learnGDRecyclerView.setLayoutManager(layoutManager);
+        learnGDimage=v.findViewById(R.id.learnGDImage);
+        Picasso.with(getContext()).load("https://www.vactualpapers.com/web/wallpapers/colorful-material-design-qhd-wallpaper-19/3500x3500.png").into(learnGDimage);
+
         setValues();
-        setBanner(v);
+       // setBanner(v);
         return v;
-    }
-    private void setBanner(View view)
-    {
-        learnGDBannerRecyclerView=view.findViewById(R.id.learnGDBannerIconsRecyclerView);
-        layoutManager=new GridLayoutManager(getContext(),3);
-        learnGDBannerRecyclerView.setLayoutManager(layoutManager);
-
-        adapter= new HomeIconsAdapter(getContext(),bannerTitleDataSet,bannerImageDataSet);
-        learnGDBannerRecyclerView.setAdapter(adapter);
-
     }
 
     private void setValues() {
