@@ -2356,12 +2356,3 @@ public class ProfileAcademicFragment extends Fragment {
 
 
 
-
-
-
-
-
-
-
-
-
