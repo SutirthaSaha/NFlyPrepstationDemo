@@ -4,24 +4,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
     android:background="@color/colorPrimary"
     tools:context=".activities.singleActivities.SplashScreenSliderActivity">
-    <RelativeLayout
+    <android.support.v4.view.ViewPager
+        android:id="@+id/splashScreenViewPager"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <android.support.v4.view.ViewPager
-            android:id="@+id/splashScreenViewPager"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="0dp">
-        </android.support.v4.view.ViewPager>
-        <me.relex.circleindicator.CircleIndicator
-            android:id="@+id/splashScreenSliderIndicator"
-            android:layout_width="match_parent"
-            android:layout_height="48dp"
-            app:ci_drawable="@drawable/slider_indicator_shape"
-            android:layout_marginBottom="10dp"
-            android:layout_alignBottom="@+id/splashScreenViewPager" />
-    </RelativeLayout>
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+    </android.support.v4.view.ViewPager>
+
+    <me.relex.circleindicator.CircleIndicator
+        android:id="@+id/splashScreenSliderIndicator"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        app:ci_drawable="@drawable/slider_indicator_shape"
+        android:layout_above="@id/toLogin"
+        android:layout_marginBottom="10dp"
+        android:layout_alignBottom="@+id/splashScreenViewPager" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Log in to continue"
+        android:layout_margin="15dp"
+        android:id="@+id/toLogin"
+        android:textColor="#fff"
+        android:enabled="false"
+        android:layout_alignParentBottom="true"
+        android:visibility="invisible"
+        android:backgroundTint="@color/colorAccent"
+        android:background="@drawable/button_shape_color"/>
+
 
 </LinearLayout>
