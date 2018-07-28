@@ -81,7 +81,7 @@ public class ProfileActivity extends AppCompatActivity {
         tabLayoutProfile.setupWithViewPager(viewPagerProfile);
     }
 
-    private void setValues() {
+    public void setValues() {
             StringRequest stringRequest=new StringRequest(Request.Method.POST, urlPersonal, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {

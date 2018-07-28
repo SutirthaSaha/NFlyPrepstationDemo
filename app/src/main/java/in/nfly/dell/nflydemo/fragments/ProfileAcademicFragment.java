@@ -42,6 +42,7 @@ import java.util.Map;
 import in.nfly.dell.nflydemo.MySingleton;
 import in.nfly.dell.nflydemo.R;
 import in.nfly.dell.nflydemo.User;
+import in.nfly.dell.nflydemo.activities.ProfileActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -61,9 +62,9 @@ public class ProfileAcademicFragment extends Fragment {
     private String urlInsert="http://nfly.in/gapi/insert";
     private String urlDelete="http://nfly.in/gapi/delete_with_one";
     private String urlDataExists="http://nfly.in/gapi/data_exists_one";
+    private String urlGetCPoints="http://nfly.in/gapi/get_cpoints";
 
-
-    private String user_id;
+    private String user_id,cpoints;
     private int status;
     private int xcount=0,xiicount=0;
     private String date;
@@ -209,6 +210,7 @@ public class ProfileAcademicFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int which) {
                         workExperienceRecyclerView.removeAllViewsInLayout();
                         addWorkExperience();
+                        getCPoints();
                     }
                 });
                 AlertDialog alert=alertDialog.create();
@@ -306,6 +308,7 @@ public class ProfileAcademicFragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         editCollegeEducation();
+                        getCPoints();
                     }
                 });
                 AlertDialog alert=alertDialog.create();
@@ -368,7 +371,7 @@ public class ProfileAcademicFragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         editSchoolEducation();
-
+                        getCPoints();
                     }
                 });
                 AlertDialog alert=alertDialog.create();
@@ -404,6 +407,7 @@ public class ProfileAcademicFragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         addTrainings();
+                        getCPoints();
                     }
                 });
                 AlertDialog alert=alertDialog.create();
@@ -439,6 +443,7 @@ public class ProfileAcademicFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int which) {
                         projectsRecyclerView.removeAllViewsInLayout();
                         addProjects();
+                        getCPoints();
                     }
                 });
                 AlertDialog alert=alertDialog.create();
@@ -473,7 +478,7 @@ public class ProfileAcademicFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int which) {
                         achievementsRecyclerView.removeAllViewsInLayout();
                         addAchievements();
-
+                        getCPoints();
                     }
                 });
                 AlertDialog alert=alertDialog.create();
@@ -522,7 +527,7 @@ public class ProfileAcademicFragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         editWorkSample();
-
+                        getCPoints();
                     }
                 });
                 AlertDialog alert=alertDialog.create();
@@ -532,6 +537,80 @@ public class ProfileAcademicFragment extends Fragment {
         });
         return view;
     }
+
+    private void getCPoints() {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST,urlGetCPoints, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject arrayObject=new JSONObject(response);
+                    cpoints=arrayObject.getString("cpoints");
+                    updateCPoints();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity(), "Error Exists", Toast.LENGTH_SHORT).show();
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+
+            @Override
+            protected Map<String,String> getParams() throws AuthFailureError{
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("key","user_id");
+                params.put("value",user_id);
+                return params;
+            }
+        };
+        MySingleton.getmInstance(getActivity()).addToRequestQueue(stringRequest);
+    }
+
+    private void updateCPoints() {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, urlUpdate, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Toast.makeText(getContext(), "C Points updated", Toast.LENGTH_SHORT).show();
+                ((ProfileActivity)getActivity()).setValues();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("update_array[cpoints]",cpoints);
+                params.put("key", "user_id");
+                params.put("value", user_id);
+                params.put("table","user");
+                return params;
+            }
+        };
+        MySingleton.getmInstance(getContext()).addToRequestQueue(stringRequest);
+    }
+
 
     private void checkSchoolDetails() {
         StringRequest stringRequest=new StringRequest(Request.Method.POST,urlDataExists, new Response.Listener<String>() {

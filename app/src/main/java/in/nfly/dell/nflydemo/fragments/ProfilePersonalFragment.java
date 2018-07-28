@@ -45,6 +45,7 @@ import in.nfly.dell.nflydemo.User;
 import in.nfly.dell.nflydemo.activities.LoginActivity;
 import in.nfly.dell.nflydemo.activities.MainActivity;
 import in.nfly.dell.nflydemo.activities.OnBoardRegisterActivity;
+import in.nfly.dell.nflydemo.activities.ProfileActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -72,7 +73,9 @@ public class ProfilePersonalFragment extends Fragment {
     private String urlDataExists="http://nfly.in/gapi/data_exists_one";
     private String urlGetDetails="http://nfly.in/gapi/get_details_one";
     private String urlDelete="http://nfly.in/gapi/delete_with_one";
+    private String urlGetCPoints="http://nfly.in/gapi/get_cpoints";
 
+    private String cpoints;
     private String hobby_id,hobby_name;
     private String language_id,language_name;
 
@@ -188,7 +191,7 @@ public class ProfilePersonalFragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         editSocialDetails();
-
+                        getCPoints();
                     }
                 });
                 AlertDialog alert=alertDialog.create();
@@ -229,6 +232,7 @@ public class ProfilePersonalFragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         editContactDetails();
+                        getCPoints();
                     }
                 });
                 AlertDialog alert=alertDialog.create();
@@ -263,6 +267,7 @@ public class ProfilePersonalFragment extends Fragment {
                         languageTitleDataSet.clear();
                         languageIdDataSet.clear();
                         checkLanguageExists();
+                        getCPoints();
                     }
                 });
                 AlertDialog alert=alertDialog.create();
@@ -297,6 +302,7 @@ public class ProfilePersonalFragment extends Fragment {
                         hobbyTitleDataSet.clear();
                         hobbyIdDataSet.clear();
                         checkHobbyExists();
+                        getCPoints();
                     }
                 });
                 AlertDialog alert=alertDialog.create();
@@ -336,6 +342,7 @@ public class ProfilePersonalFragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         editCoverLetter();
+                        getCPoints();
                     }
                 });
                 AlertDialog alert=alertDialog.create();
@@ -409,6 +416,7 @@ public class ProfilePersonalFragment extends Fragment {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         editBasicDetails();
+                        getCPoints();
                     }
                 });
 
@@ -420,6 +428,79 @@ public class ProfilePersonalFragment extends Fragment {
         setLanguages(view);
 
         return view;
+    }
+
+    private void getCPoints() {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST,urlGetCPoints, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject arrayObject=new JSONObject(response);
+                    cpoints=arrayObject.getString("cpoints");
+                    updateCPoints();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity(), "Error Exists", Toast.LENGTH_SHORT).show();
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+
+            @Override
+            protected Map<String,String> getParams() throws AuthFailureError{
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("key","user_id");
+                params.put("value",user_id);
+                return params;
+            }
+        };
+        MySingleton.getmInstance(getActivity()).addToRequestQueue(stringRequest);
+    }
+
+    private void updateCPoints() {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, urlUpdate, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Toast.makeText(getContext(), "C Points updated", Toast.LENGTH_SHORT).show();
+                ((ProfileActivity)getActivity()).setValues();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("update_array[cpoints]",cpoints);
+                params.put("key", "user_id");
+                params.put("value", user_id);
+                params.put("table","user");
+                return params;
+            }
+        };
+        MySingleton.getmInstance(getContext()).addToRequestQueue(stringRequest);
     }
 
     private void checkUserAdditionalDetails() {

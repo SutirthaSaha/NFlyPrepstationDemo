@@ -30,6 +30,7 @@ import java.util.Map;
 import in.nfly.dell.nflydemo.MySingleton;
 import in.nfly.dell.nflydemo.R;
 import in.nfly.dell.nflydemo.User;
+import in.nfly.dell.nflydemo.activities.ProfileActivity;
 import in.nfly.dell.nflydemo.activities.singleActivities.PersonalityTestActivity;
 import in.nfly.dell.nflydemo.adapters.ProfilePersonalityAdapter;
 
@@ -46,6 +47,10 @@ public class ProfilePersonalityFragment extends Fragment {
 
     private String user_id;
     private String urlPersonality="http://nfly.in/profileapi/personality";
+    private String urlGetCPoints="http://nfly.in/gapi/get_cpoints";
+    private String urlUpdate="http://nfly.in/gapi/update";
+
+    private String cpoints;
 
     private ArrayList<String> titleDataSet=new ArrayList<String>(){{add("Extraversion");add("Openness");add("Agreeableness");add("Conscientiousness");add("Neuroticism");}};
     private ArrayList<String> textDataSet=new ArrayList<String>(){{add("Extraversion is characterized by excitability, sociability, talkativeness, assertiveness, and high amounts of emotional expressiveness.\n" +
@@ -89,6 +94,7 @@ public class ProfilePersonalityFragment extends Fragment {
         layoutManager=new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
         profilePersonalityRecyclerView.setLayoutManager(layoutManager);
         setValues();
+        getCPoints();
         personalityEditBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,6 +111,80 @@ public class ProfilePersonalityFragment extends Fragment {
         setValues();
     }
 */
+
+    private void getCPoints() {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST,urlGetCPoints, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject arrayObject=new JSONObject(response);
+                    cpoints=arrayObject.getString("cpoints");
+                    updateCPoints();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity(), "Error Exists", Toast.LENGTH_SHORT).show();
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+
+            @Override
+            protected Map<String,String> getParams() throws AuthFailureError{
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("key","user_id");
+                params.put("value",user_id);
+                return params;
+            }
+        };
+        MySingleton.getmInstance(getActivity()).addToRequestQueue(stringRequest);
+    }
+
+    private void updateCPoints() {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, urlUpdate, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                Toast.makeText(getContext(), "C Points updated", Toast.LENGTH_SHORT).show();
+                ((ProfileActivity)getActivity()).setValues();
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("update_array[cpoints]",cpoints);
+                params.put("key", "user_id");
+                params.put("value", user_id);
+                params.put("table","user");
+                return params;
+            }
+        };
+        MySingleton.getmInstance(getContext()).addToRequestQueue(stringRequest);
+    }
+
     private void setValues() {
         progressDataSet.clear();
         StringRequest stringRequest=new StringRequest(Request.Method.POST, urlPersonality, new Response.Listener<String>() {

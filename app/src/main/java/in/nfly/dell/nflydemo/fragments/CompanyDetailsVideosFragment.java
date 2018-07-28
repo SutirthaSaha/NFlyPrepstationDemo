@@ -4,6 +4,7 @@ package in.nfly.dell.nflydemo.fragments;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +20,9 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.google.android.youtube.player.YouTubeInitializationResult;
+import com.google.android.youtube.player.YouTubePlayer;
+import com.google.android.youtube.player.YouTubePlayerSupportFragment;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -29,6 +33,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import in.nfly.dell.nflydemo.MySingleton;
+import in.nfly.dell.nflydemo.PlayerConfig;
 import in.nfly.dell.nflydemo.R;
 
 /**
@@ -36,15 +41,17 @@ import in.nfly.dell.nflydemo.R;
  */
 public class CompanyDetailsVideosFragment extends Fragment {
 
-    public String company_id,company_name;
+    public String company_id,company_name,video_url;
     private String urlCompany="http://nfly.in/gapi/load_rows_one";
 
-    private TextView companyDetailsVideoView;
+    //private TextView companyDetailsVideoView;
     private ListView companyDetailsVideoList;
 
     private ArrayList<String> titleDataSet=new ArrayList<String>(){};
     private ArrayList<String> urlDataSet=new ArrayList<String>(){};
 
+    private YouTubePlayerSupportFragment youTubePlayerSupportFragment;
+    private YouTubePlayer YPlayer;
     public CompanyDetailsVideosFragment() {
         // Required empty public constructor
     }
@@ -62,7 +69,7 @@ public class CompanyDetailsVideosFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v= inflater.inflate(R.layout.fragment_company_details_videos, container, false);
-        companyDetailsVideoView=v.findViewById(R.id.companyDetailsVideoView);
+        //companyDetailsVideoView=v.findViewById(R.id.companyDetailsVideoView);
         companyDetailsVideoList=v.findViewById(R.id.companyDetailsVideoList);
         setValues();
         return v;
@@ -82,10 +89,62 @@ public class CompanyDetailsVideosFragment extends Fragment {
                     }
                     ArrayAdapter<String> adapter=new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1,titleDataSet);
                     companyDetailsVideoList.setAdapter(adapter);
+                    video_url=urlDataSet.get(0);
+                    youTubePlayerSupportFragment = YouTubePlayerSupportFragment.newInstance();
+
+                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                    transaction.replace(R.id.companyDetailsVideoView, youTubePlayerSupportFragment);
+                    transaction.commit();
+                    youTubePlayerSupportFragment.initialize(PlayerConfig.API_KEY, new YouTubePlayer.OnInitializedListener() {
+
+                        @Override
+                        public void onInitializationSuccess(YouTubePlayer.Provider arg0, YouTubePlayer youTubePlayer, boolean b) {
+                            if (!b) {
+                                YPlayer = youTubePlayer;
+                                YPlayer.setFullscreen(false);
+                                YPlayer.loadVideo("NMwE93GQcKs");
+                                YPlayer.setShowFullscreenButton(false);
+                                //YPlayer.loadVideo(video_url);
+                                YPlayer.play();
+                            }
+                        }
+
+                        @Override
+                        public void onInitializationFailure(YouTubePlayer.Provider arg0, YouTubeInitializationResult arg1) {
+                            // TODO Auto-generated method stub
+
+                        }
+                    });
                     companyDetailsVideoList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            companyDetailsVideoView.setText(urlDataSet.get(position));
+                            //companyDetailsVideoView.setText(urlDataSet.get(position));
+                            video_url=urlDataSet.get(position);
+                            youTubePlayerSupportFragment = YouTubePlayerSupportFragment.newInstance();
+
+                            FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                            transaction.replace(R.id.companyDetailsVideoView, youTubePlayerSupportFragment);
+                            transaction.commit();
+                            youTubePlayerSupportFragment.initialize(PlayerConfig.API_KEY, new YouTubePlayer.OnInitializedListener() {
+
+                                @Override
+                                public void onInitializationSuccess(YouTubePlayer.Provider arg0, YouTubePlayer youTubePlayer, boolean b) {
+                                    if (!b) {
+                                        YPlayer = youTubePlayer;
+                                        YPlayer.setFullscreen(false);
+                                        YPlayer.loadVideo("X930_IyhGfo");
+                                        YPlayer.setShowFullscreenButton(false);
+                                        //YPlayer.loadVideo(video_url);
+                                        YPlayer.play();
+                                    }
+                                }
+
+                                @Override
+                                public void onInitializationFailure(YouTubePlayer.Provider arg0, YouTubeInitializationResult arg1) {
+                                    // TODO Auto-generated method stub
+
+                                }
+                            });
                         }
                     });
                 } catch (JSONException e) {
