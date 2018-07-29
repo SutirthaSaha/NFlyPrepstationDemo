@@ -16,9 +16,15 @@
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:id="@+id/practicePaperDetailsRecyclerView"
         android:layout_margin="5dp"></android.support.v7.widget.RecyclerView>
 
-
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="There are no tests added yet"
+        android:id="@+id/practiceNoTestText"
+        android:visibility="invisible"/>
 </LinearLayout>

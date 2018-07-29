@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -37,6 +38,7 @@ public class PracticePaperDetailsActivity extends AppCompatActivity {
     private RecyclerView practicePaperDetailsRecyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.Adapter adapter;
+    private TextView practiceNoTestText;
 
     private ArrayList<String> titleDataSet=new ArrayList<String>(){};
     private ArrayList<String> idDataSet=new ArrayList<String>(){};
@@ -54,6 +56,7 @@ public class PracticePaperDetailsActivity extends AppCompatActivity {
         subtopic_name=intent.getStringExtra("subtopic_name");
 
         setToolbar();
+        practiceNoTestText=findViewById(R.id.practiceNoTestText);
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,6 +83,9 @@ public class PracticePaperDetailsActivity extends AppCompatActivity {
                 try {
                     JSONObject arrayObject;
                     JSONArray parentArray=new JSONArray(response);
+                    if(parentArray.length()==0){
+                        practiceNoTestText.setVisibility(View.VISIBLE);
+                    }
                     for(int i=0;i<parentArray.length();i++){
                         arrayObject=parentArray.getJSONObject(i);
 
@@ -92,6 +98,7 @@ public class PracticePaperDetailsActivity extends AppCompatActivity {
                     practicePaperDetailsRecyclerView.setAdapter(adapter);
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    practiceNoTestText.setVisibility(View.VISIBLE);
                 }
             }
         }, new Response.ErrorListener() {
