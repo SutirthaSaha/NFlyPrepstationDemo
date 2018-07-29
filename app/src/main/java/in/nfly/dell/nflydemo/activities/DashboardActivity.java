@@ -52,6 +52,9 @@ public class DashboardActivity extends AppCompatActivity {
     private ArrayList<String> dateDataSet=new ArrayList<String>(){};
     private ArrayList<Integer> totalMarksDataSet=new ArrayList<Integer>(){};
     private ArrayList<Integer> actualMarksDataSet=new ArrayList<Integer>(){};
+    
+    private int numberOfTests=0;
+    private float percentage=0,totalFullMarks=0,totalRecievedMarks=0;
 
 
 
