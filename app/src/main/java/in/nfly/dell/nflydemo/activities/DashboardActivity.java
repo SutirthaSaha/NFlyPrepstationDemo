@@ -14,6 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +23,7 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,13 +48,14 @@ public class DashboardActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayoutDashboard;
     private Toolbar toolbar;
-    private TextView headerTitle;
+    private TextView headerTitle, numberOfTestsTextView,percentageTextView;
+    private ImageView dashboardImage;
     private ArrayList<String> marksDataSet=new ArrayList<String>(){};
     private ArrayList<String> titleDataSet=new ArrayList<String>(){};
     private ArrayList<String> dateDataSet=new ArrayList<String>(){};
     private ArrayList<Integer> totalMarksDataSet=new ArrayList<Integer>(){};
     private ArrayList<Integer> actualMarksDataSet=new ArrayList<Integer>(){};
-    
+
     private int numberOfTests=0;
     private float percentage=0,totalFullMarks=0,totalRecievedMarks=0;
 
@@ -75,6 +78,11 @@ public class DashboardActivity extends AppCompatActivity {
 
         User user=new User(DashboardActivity.this);
         user_id=user.getUser_id();
+        dashboardImage=findViewById(R.id.dashboardImage);
+        Picasso.with(this).load("http://www.vactualpapers.com/web/wallpapers/material-design-hd-wallpaper-no-0769/1920x1920.png").into(dashboardImage);
+        numberOfTestsTextView=findViewById(R.id.numberOfTests);
+        percentageTextView=findViewById(R.id.percentage);
+
 
         layoutManager=new LinearLayoutManager(DashboardActivity.this, LinearLayoutManager.VERTICAL,false);
         dashboardRecyclerView.setLayoutManager(layoutManager);
@@ -181,8 +189,16 @@ public class DashboardActivity extends AppCompatActivity {
                         marksDataSet.add(arrayObject.getString("score")+"/"+Integer.parseInt(arrayObject.getString("test_num_questions"))*3);
                         totalMarksDataSet.add(arrayObject.getInt("test_num_questions")*3);
                         actualMarksDataSet.add(Integer.parseInt(arrayObject.getString("score")));
+                        numberOfTests=numberOfTests+1;
+                        totalFullMarks=totalFullMarks+(arrayObject.getInt("test_num_questions")*3);
+                        totalRecievedMarks=totalRecievedMarks+(Integer.parseInt(arrayObject.getString("score")));
 
                     }
+                    percentage=totalRecievedMarks/totalFullMarks*100;
+                    numberOfTestsTextView.setText(String.valueOf(numberOfTests));
+                    percentageTextView.setText(String.valueOf(String.format("%.02f",percentage)+"%"));
+                    adapter=new DashBoardAdapter(DashboardActivity.this,titleDataSet,marksDataSet,dateDataSet,totalMarksDataSet,actualMarksDataSet);
+                    dashboardRecyclerView.setAdapter(adapter);
                     adapter=new DashBoardAdapter(DashboardActivity.this,titleDataSet,marksDataSet,dateDataSet,totalMarksDataSet,actualMarksDataSet);
                     dashboardRecyclerView.setAdapter(adapter);
                 } catch (JSONException e) {

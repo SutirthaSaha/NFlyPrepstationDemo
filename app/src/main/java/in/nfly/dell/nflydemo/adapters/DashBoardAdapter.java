@@ -13,6 +13,8 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.github.lzyzsd.circleprogress.DonutProgress;
+
 import java.util.ArrayList;
 
 import in.nfly.dell.nflydemo.R;
@@ -47,8 +49,7 @@ public class DashBoardAdapter extends RecyclerView.Adapter<DashBoardAdapter.Dash
         holder.DashboardMarks.setText(marksDataSet.get(position));
         holder.DashboardDate.setText(dateDataSet.get(position));
         holder.DashboardProgressBar.setMax(totalMarksDataSet.get(position));
-        holder.DashboardProgressBar.setSecondaryProgress(50);
-        holder.DashboardProgressBar.setSecondaryProgress(actualMarksDataSet.get(position));
+        holder.DashboardProgressBar.setProgress(actualMarksDataSet.get(position));
 
     }
 
@@ -60,7 +61,7 @@ public class DashBoardAdapter extends RecyclerView.Adapter<DashBoardAdapter.Dash
     public class DashBoardHolder extends RecyclerView.ViewHolder{
 
         public TextView DashboardTitle, DashboardMarks,DashboardDate;
-        public ProgressBar DashboardProgressBar;
+        public DonutProgress DashboardProgressBar;
         public DashBoardHolder(View itemView) {
             super(itemView);
 
