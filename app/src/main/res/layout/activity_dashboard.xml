@@ -35,7 +35,7 @@
                 android:layout_centerHorizontal="true"
                 android:layout_centerVertical="true"
                 android:src="@drawable/imagepaper"
-                android:layout_height="190dp"
+                android:layout_height="191dp"
                 android:background="@drawable/gradient_salary_calculator"
                 android:id="@+id/dashboardImage"
                 android:scaleType="fitXY"/>
