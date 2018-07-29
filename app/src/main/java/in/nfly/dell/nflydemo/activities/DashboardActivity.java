@@ -46,7 +46,7 @@ public class DashboardActivity extends AppCompatActivity {
 
     private DrawerLayout drawerLayoutDashboard;
     private Toolbar toolbar;
-    private TextView headerTitle;
+    private TextView headerTitle,dashBoardNoTestText;
     private ArrayList<String> marksDataSet=new ArrayList<String>(){};
     private ArrayList<String> titleDataSet=new ArrayList<String>(){};
     private ArrayList<String> dateDataSet=new ArrayList<String>(){};
@@ -69,6 +69,7 @@ public class DashboardActivity extends AppCompatActivity {
         setToolbar();
         setNavigationDrawer();
         dashboardRecyclerView=findViewById(R.id.dashboardRecyclerView);
+        dashBoardNoTestText=findViewById(R.id.dashboardNoTestText);
 
         User user=new User(DashboardActivity.this);
         user_id=user.getUser_id();
@@ -154,6 +155,7 @@ public class DashboardActivity extends AppCompatActivity {
                 try {
                     JSONObject arrayObject;
                     JSONArray parentArray=new JSONArray(response);
+
                     for(int i=0;i<parentArray.length();i++){
                         arrayObject=parentArray.getJSONObject(i);
                         titleDataSet.add(arrayObject.getString("test_name"));
@@ -173,6 +175,7 @@ public class DashboardActivity extends AppCompatActivity {
 
                         } catch (ParseException e) {
                             e.printStackTrace();
+                            dashBoardNoTestText.setVisibility(View.VISIBLE);
                         }
 
                         marksDataSet.add(arrayObject.getString("score")+"/"+Integer.parseInt(arrayObject.getString("test_num_questions"))*3);
@@ -184,6 +187,7 @@ public class DashboardActivity extends AppCompatActivity {
                     dashboardRecyclerView.setAdapter(adapter);
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    dashBoardNoTestText.setVisibility(View.VISIBLE);
                 }
             }
         }, new Response.ErrorListener() {
