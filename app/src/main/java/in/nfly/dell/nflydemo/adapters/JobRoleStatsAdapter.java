@@ -19,12 +19,13 @@ import in.nfly.dell.nflydemo.R;
 public class JobRoleStatsAdapter extends RecyclerView.Adapter<JobRoleStatsAdapter.JobRoleStatsHolder> {
 
     private Context context;
-    private ArrayList<String> titleDataSet;
+    private ArrayList<String> titleDataSet,subTitleDataSet;
     private ArrayList<Integer> imageDataSet;
 
-    public JobRoleStatsAdapter(Context context, ArrayList<String> titleDataSet, ArrayList<Integer> imageDataSet) {
+    public JobRoleStatsAdapter(Context context, ArrayList<String> titleDataSet, ArrayList<String> subTitleDataSet, ArrayList<Integer> imageDataSet) {
         this.context = context;
         this.titleDataSet = titleDataSet;
+        this.subTitleDataSet = subTitleDataSet;
         this.imageDataSet = imageDataSet;
     }
 
@@ -41,6 +42,7 @@ public class JobRoleStatsAdapter extends RecyclerView.Adapter<JobRoleStatsAdapte
         holder.JobRoleStatsTitle.setText(titleDataSet.get(position));
         Picasso.with(context).load(imageDataSet.get(position)).into(holder.JobRoleStatsImage);
         //holder.JobRoleStatsImage.setImageResource(imageDataSet.get(position));
+        holder.JobRoleStatsSubTitle.setText(subTitleDataSet.get(position));
     }
 
     @Override
@@ -50,12 +52,13 @@ public class JobRoleStatsAdapter extends RecyclerView.Adapter<JobRoleStatsAdapte
 
     public class JobRoleStatsHolder extends RecyclerView.ViewHolder{
 
-        public TextView JobRoleStatsTitle;
+        public TextView JobRoleStatsTitle,JobRoleStatsSubTitle;
         public ImageView JobRoleStatsImage;
         public JobRoleStatsHolder(View itemView) {
             super(itemView);
 
             JobRoleStatsTitle=itemView.findViewById(R.id.jobRoleStatsIconsTitle);
+            JobRoleStatsSubTitle=itemView.findViewById(R.id.jobRoleStatsIconsSubTitle);
             JobRoleStatsImage=itemView.findViewById(R.id.jobRoleStatsIconsImage);
         }
     }

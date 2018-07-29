@@ -51,7 +51,19 @@ public class LearnInterviewQAMediumFragment extends Fragment {
         fragment.subtopic_name=subtopic_name;
         return fragment;
     }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        System.gc();
+        Runtime.getRuntime().gc();
+    }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        System.gc();
+        Runtime.getRuntime().gc();
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {

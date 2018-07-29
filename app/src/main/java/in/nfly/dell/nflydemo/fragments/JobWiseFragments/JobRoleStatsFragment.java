@@ -38,10 +38,12 @@ public class JobRoleStatsFragment extends Fragment {
     private TextView jobRoleStatsJobMarketText, jobRoleStatsSalaryScoreText,jobRoleStatsWorkLifeText,jobRoleStatsFutureScoreText;
 
     private String salary_score,job_market_score,future_score,work_life_bal_score;
+    private String salary_lrange,salary_urange,salary_top25,salary_median,salary_bottom25;
     private RecyclerView jobRoleStatsRecyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
 
+    private ArrayList<String> subtitleDataSet=new ArrayList<String>(){};
     private ArrayList<Integer> jobRoleStatsImageDataSet=new ArrayList<Integer>(){
         {
             add(R.drawable.colorvideo);
@@ -85,8 +87,13 @@ public class JobRoleStatsFragment extends Fragment {
         jobRoleStatsWorkLifeText=v.findViewById(R.id.jobRoleStatsWorkLifeText);
         jobRoleStatsFutureScoreText=v.findViewById(R.id.jobRoleStatsFutureScoreText);
 
-
-
+        /*
+                "salary_lrange": "2",
+        "salary_urange": "23",
+        "salary_top25": "7",
+        "salary_median": "4",
+        "salary_bottom25": "2",
+         */
         setCards(v);
 
         setValues();
@@ -98,9 +105,6 @@ public class JobRoleStatsFragment extends Fragment {
         jobRoleStatsRecyclerView= v.findViewById(R.id.jobRoleStatsRecyclerView);
         layoutManager=new GridLayoutManager(getContext(),4);
         jobRoleStatsRecyclerView.setLayoutManager(layoutManager);
-
-        adapter= new JobRoleStatsAdapter(getActivity(),jobRoleStatsTitleDataSet,jobRoleStatsImageDataSet);
-        jobRoleStatsRecyclerView.setAdapter(adapter);
 
     }
 
@@ -119,6 +123,21 @@ public class JobRoleStatsFragment extends Fragment {
                     future_score=jsonObject.getString("future_score");
                     work_life_bal_score=jsonObject.getString("work_life_bal_score");
 
+                    salary_lrange=jsonObject.getString("salary_lrange");
+                    salary_urange=jsonObject.getString("salary_urange");
+                    salary_bottom25=jsonObject.getString("salary_bottom25");
+                    salary_median=jsonObject.getString("salary_median");
+                    salary_top25=jsonObject.getString("salary_top25");
+
+                    subtitleDataSet.add(jsonObject.getString("salary_score"));
+                    subtitleDataSet.add(jsonObject.getString("unemployment_rate"));
+                    subtitleDataSet.add(jsonObject.getString("num_jobs"));
+                    subtitleDataSet.add(jsonObject.getString("job_market_score"));
+                    subtitleDataSet.add(jsonObject.getString("future_score"));
+                    subtitleDataSet.add(jsonObject.getString("work_life_bal_score"));
+                    subtitleDataSet.add(jsonObject.getString("stress_at_work"));
+                    subtitleDataSet.add(jsonObject.getString("flexibility"));
+
                     String value=job_market_score;
                     /*
                     String value="\n\nSalary Score: "+jsonObject.getString("salary_score")
@@ -131,6 +150,8 @@ public class JobRoleStatsFragment extends Fragment {
                     jobRoleStatsSalaryScoreText.setText(salary_score+"/10");
                     jobRoleStatsWorkLifeText.setText(work_life_bal_score+"/10");
 
+                    adapter= new JobRoleStatsAdapter(getActivity(),jobRoleStatsTitleDataSet,subtitleDataSet,jobRoleStatsImageDataSet);
+                    jobRoleStatsRecyclerView.setAdapter(adapter);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

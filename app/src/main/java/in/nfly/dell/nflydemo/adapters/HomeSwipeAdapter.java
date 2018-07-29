@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 
 import in.nfly.dell.nflydemo.R;
@@ -48,7 +49,7 @@ public class HomeSwipeAdapter extends PagerAdapter{
         TextView subtitleTextView=item_view.findViewById(R.id.homeSwipeSubtitle);
         //imageView.setImageResource(image_resources[position]);
         Picasso.with(context).load(image_resources[position]).into(imageView);
-
+        //Glide.with(context).load(image_resources[position]).into(imageView);
         textView.setText(title_resources[position]);
         subtitleTextView.setText(subtitle_resources[position]);
         container.addView(item_view);

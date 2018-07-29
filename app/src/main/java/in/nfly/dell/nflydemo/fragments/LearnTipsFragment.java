@@ -73,6 +73,19 @@ public class LearnTipsFragment extends Fragment {
         return v;
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        System.gc();
+        Runtime.getRuntime().gc();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        System.gc();
+        Runtime.getRuntime().gc();
+    }
 
     private void setValues() {
         StringRequest stringRequest=new StringRequest(Request.Method.POST, urlTips, new Response.Listener<String>() {

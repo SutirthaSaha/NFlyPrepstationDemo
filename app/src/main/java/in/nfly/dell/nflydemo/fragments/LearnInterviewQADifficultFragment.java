@@ -65,7 +65,19 @@ public class LearnInterviewQADifficultFragment extends Fragment {
         setValues();
         return view;
     }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        System.gc();
+        Runtime.getRuntime().gc();
+    }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        System.gc();
+        Runtime.getRuntime().gc();
+    }
     private void setValues() {
         StringRequest stringRequest=new StringRequest(Request.Method.POST, urlInterviewQuestions, new Response.Listener<String>() {
             @Override

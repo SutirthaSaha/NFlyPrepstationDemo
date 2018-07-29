@@ -73,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView CompanyRecyclerView;;
     private RecyclerView PractiseRecyclerView;
     private RecyclerView PrepHubIconsRecyclerView, TestimonialsRecyclerView;
+    private ProgressDialog progressDialog;
 
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
@@ -214,7 +215,10 @@ public class MainActivity extends AppCompatActivity {
         getUserDetails(email);
         setToolbar();
         drawerLayoutHome=findViewById(R.id.drawerLayoutHome);
-
+        progressDialog=new ProgressDialog(MainActivity.this);
+        progressDialog.setTitle("Loading...");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
         setToolbar();
         setNavigationDrawer();
         setViewPager();
@@ -375,6 +379,7 @@ public class MainActivity extends AppCompatActivity {
                     companyTitleDataSet.add("View All");
                     companyImageDataSet.add("none");
 
+                    progressDialog.cancel();
                     adapter= new HomeCompanyAdapter(MainActivity.this,companyIdDataSet,companyTitleDataSet,companyImageDataSet);
                     CompanyRecyclerView.setAdapter(adapter);
                 } catch (JSONException e) {
@@ -493,6 +498,14 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        finish();
+        System.gc();
+        Runtime.getRuntime().gc();
+    }
+
     private void setNavigationDrawer() {
         final NavigationView navigationView;
         navigationView = findViewById(R.id.navigationViewHome);
@@ -513,10 +526,12 @@ public class MainActivity extends AppCompatActivity {
                 if (item.getTitle().equals("Home")){
                     intent=new Intent(MainActivity.this,MainActivity.class);
                     startActivity(intent);
+                    finish();
                 }
                 if (item.getTitle().equals("Dashboard")){
                     intent=new Intent(MainActivity.this,DashboardActivity.class);
                     startActivity(intent);
+                    finish();
                 }
                 if (item.getTitle().equals("Profile")){
                     intent=new Intent(MainActivity.this,ProfileActivity.class);
@@ -525,14 +540,17 @@ public class MainActivity extends AppCompatActivity {
                 if (item.getTitle().equals("Learn")){
                     intent=new Intent(MainActivity.this,LearnActivity.class);
                     startActivity(intent);
+                    finish();
                 }
                 if(item.getTitle().equals("Practice")){
                     intent=new Intent(MainActivity.this,PracticeActivity.class);
                     startActivity(intent);
+                    finish();
                 }
                 if (item.getTitle().equals("Knowledge Base")){
                     intent=new Intent(MainActivity.this,KnowledgeBaseActivity.class);
                     startActivity(intent);
+                    finish();
                 }
                 if (item.getTitle().equals("Salary Calculator")){
                     intent=new Intent(MainActivity.this,SalaryCalculatorActivity.class);

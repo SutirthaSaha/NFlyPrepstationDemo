@@ -44,5 +44,18 @@ public class LearnGDAgainstFragment extends Fragment {
         }
         return view;
     }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        System.gc();
+        Runtime.getRuntime().gc();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        System.gc();
+        Runtime.getRuntime().gc();
+    }
 
 }

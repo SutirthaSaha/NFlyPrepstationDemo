@@ -118,7 +118,6 @@ public class KnowledgeBaseActivity extends AppCompatActivity {
             }
         });
     }
-
     private void setToolbar() {
         toolbar=findViewById(R.id.knowledgeBaseToolbar);
         toolbar.setTitle("Knowledge Base");

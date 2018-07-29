@@ -68,6 +68,19 @@ public class LearnGDFragment extends Fragment {
        // setBanner(v);
         return v;
     }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        System.gc();
+        Runtime.getRuntime().gc();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        System.gc();
+        Runtime.getRuntime().gc();
+    }
 
     private void setValues() {
         StringRequest stringRequest=new StringRequest(Request.Method.POST, urlGD, new Response.Listener<String>() {
