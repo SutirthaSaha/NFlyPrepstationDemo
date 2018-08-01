@@ -93,6 +93,7 @@
                 android:id="@+id/dashboardProgress"
                 android:layout_width="90dp"
                 android:layout_height="90dp"
+                app:donut_circle_starting_degree="270"
                 app:donut_unfinished_stroke_width="4dp"
                 app:donut_finished_color="@color/colorAccent"
                 app:donut_finished_stroke_width="4dp"
