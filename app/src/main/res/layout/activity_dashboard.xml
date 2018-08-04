@@ -116,7 +116,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Marks \nscored:"
+                        android:text="Average \nmarks:"
                         android:textSize="15sp"
                         android:textColor="#fff"/>
                     <TextView
@@ -142,8 +142,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
+            android:layout_marginTop="25dp"
             android:text="You have given no tests"
             android:id="@+id/dashboardNoTestText"
+            android:textSize="17sp"
             android:visibility="invisible"/>
     </LinearLayout>
         </android.support.v4.widget.NestedScrollView>

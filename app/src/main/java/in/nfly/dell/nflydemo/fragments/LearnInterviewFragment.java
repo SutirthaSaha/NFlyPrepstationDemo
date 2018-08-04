@@ -86,7 +86,7 @@ public class LearnInterviewFragment extends Fragment {
         layoutManager=new GridLayoutManager(getContext(),2);
         learnInterviewRecyclerView.setLayoutManager(layoutManager);
         learnInterviewImage=v.findViewById(R.id.learnInterviewImage);
-        Picasso.with(getContext()).load("https://images2.alphacoders.com/559/559116.png").into(learnInterviewImage);
+        //Picasso.with(getContext()).load("https://images2.alphacoders.com/559/559116.png").into(learnInterviewImage);
 
 
         setValues();

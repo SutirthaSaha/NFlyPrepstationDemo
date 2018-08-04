@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -58,7 +59,7 @@ public class CompanyPaperDetailsAdapter extends RecyclerView.Adapter<CompanyPape
 
     public class CompanyPaperDetailsHolder extends RecyclerView.ViewHolder{
 
-        public CardView CompanyPaperDetailsCardView;
+        public LinearLayout CompanyPaperDetailsCardView;
         public TextView CompanyPaperDetailsCardText;
         public CompanyPaperDetailsHolder(View itemView) {
             super(itemView);

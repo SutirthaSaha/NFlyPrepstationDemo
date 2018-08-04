@@ -20,9 +20,10 @@
         android:padding="0sp">
 
         <ImageView
-            android:layout_width="130sp"
-            android:layout_height="130sp"
+            android:layout_width="65sp"
+            android:layout_height="80sp"
             android:scaleType="fitXY"
+            android:layout_gravity="center_vertical"
             android:id="@+id/practiceCompanyWiseCardImage"
             android:src="@color/cardview_dark_background"
             android:layout_alignParentLeft="true"/>
@@ -53,6 +54,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Tests: "
+                android:visibility="gone"
                 android:textSize="15sp"
                 android:textColor="#000"
                 android:fontFamily="@font/roboto"

@@ -47,7 +47,7 @@ public class PracticeCompanyWiseAdapter extends RecyclerView.Adapter<PracticeCom
         //holder.practiceCompanyWiseCardNumber.setText("Papers "+numberDataSet.get(position));
         //Picasso.with(context).load(R.drawable.ic_computer_black).into(holder.practiceCompanyWiseCardImage);
         //holder.practiceCompanyWiseCardImage.setImageResource(Integer.parseInt(Integer.toString(R.drawable.ic_computer_black)));
-        holder.practiceCompanyWiseCardNumber.setText("Papers : "+"4");
+        //holder.practiceCompanyWiseCardNumber.setText("Papers : "+"4");
         holder.practiceCompanywiseCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

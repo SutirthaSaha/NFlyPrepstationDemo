@@ -81,7 +81,7 @@ public class LearnPaperFragment extends Fragment {
         layoutManager=new GridLayoutManager(getContext(),2);
         learnPapersRecyclerView.setLayoutManager(layoutManager);
         learnPaperimage=v.findViewById(R.id.learnPaperImage);
-        Picasso.with(getContext()).load("https://avante.biz/wp-content/uploads/Material-Wallpaper/Material-Wallpaper-004.jpg").into(learnPaperimage);
+       // Picasso.with(getContext()).load("https://avante.biz/wp-content/uploads/Material-Wallpaper/Material-Wallpaper-004.jpg").into(learnPaperimage);
         setValues();
         setBanner(v);
         return v;

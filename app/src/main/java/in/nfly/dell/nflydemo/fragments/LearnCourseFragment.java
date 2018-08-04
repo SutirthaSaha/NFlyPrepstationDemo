@@ -92,7 +92,7 @@ public class LearnCourseFragment extends Fragment {
         layoutManager=new GridLayoutManager(getContext(),2);
         learnCourseRecyclerView.setLayoutManager(layoutManager);
 
-        Picasso.with(getContext()).load("https://newevolutiondesigns.com/images/freebies/google-material-design-wallpaper-2.jpg").into(learnCourseImage);
+        //Picasso.with(getContext()).load("https://newevolutiondesigns.com/images/freebies/google-material-design-wallpaper-2.jpg").into(learnCourseImage);
         setValues();
         setBanner(v);
         return v;

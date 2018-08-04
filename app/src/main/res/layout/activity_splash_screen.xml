@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,7 +9,48 @@
     android:orientation="vertical"
     android:background="@drawable/gradient_login"
     android:paddingBottom="20dp"
+    android:gravity="center"
     tools:context=".activities.SplashScreenActivity">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="35sp"
+        android:shadowDy="0"
+        android:shadowDx="0"
+        android:shadowColor="#fff"
+        android:shadowRadius="50"
+        android:textStyle="bold"
+        android:textColor="#fff"
+        android:text="NFLY"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:shadowDy="0"
+        android:shadowDx="0"
+        android:shadowColor="#fff"
+        android:shadowRadius="50"
+        android:background="#fff"
+        android:layout_marginLeft="100dp"
+        android:layout_marginRight="100dp"
+        android:layout_marginTop="10dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:shadowDy="0"
+        android:shadowDx="0"
+        android:shadowColor="#fff"
+        android:shadowRadius="50"
+        android:layout_marginTop="5dp"
+        android:layout_gravity="center"
+        android:textColor="#fff"
+        android:layout_marginBottom="25dp"
+        android:text="The Placement App"/>
+
+
+
+    <!--
     <ImageView
         android:layout_width="120dp"
         android:layout_height="120dp"
@@ -15,6 +58,6 @@
         android:layout_centerHorizontal="true"
         android:id="@+id/splashScreenImage"
         android:src="@drawable/logo"/>
+-->
 
-
-</RelativeLayout>
+</LinearLayout>

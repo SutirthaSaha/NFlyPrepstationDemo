@@ -162,15 +162,16 @@ public class MainActivity extends AppCompatActivity {
             add("Coming soon");
         }};
     private ArrayList<String> testimonialTextDataSet=new ArrayList<String>(){
-        {  add("I'm from a private college that too not very reputed. Hence it was very hard for me to get proper opportunites to get jobs especially on campus." +
-                "Nfly has been a saviour by providing a platform which binds everything that we need to prepare for jobs, from the technical learning aspects to the grooming.");
+        {
+            add("I needed a place to know more about the various criterion that I needed to fulfill to be a suitable candidate " +
+                    "for jobs. Nfly was the perfect place to look for all of those all in the same place.");
+            add("Nfly has been a saviour by providing a platform which binds everything that we need to prepare for jobs, from the technical learning aspects to the grooming.");
             add("Nfly made everything so much simpler." +
                 " The tests helped me understand what I need to read up to appear for the interviews"
                 );
             add("I have been following the video courses to understand the various courses. The topics were very well explained" +
-                    "and i had no trouble learning something new that too from home while i have so much trouble learning similar things at college.");
-            add("I needed a place to know more about the various companies and the criteria that I needed to fulfil to be a suitable candidate " +
-                    "for jobs. Nfly was the perfect place to look for all of those all in the same place");
+                    "and I had no trouble learning something new that too from home.");
+
 
         }};
     private ArrayList<String> testimonialNameDataSet=new ArrayList<String>(){

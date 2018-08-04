@@ -4,6 +4,7 @@ package in.nfly.dell.nflydemo.fragments;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -57,7 +58,7 @@ public class PracticeExamWiseFragment extends Fragment {
         // Inflate the layout for this fragment
         View v= inflater.inflate(R.layout.fragment_practice_exam_wise, container, false);
         practiceExamWiseRecyclerView=v.findViewById(R.id.practiceExamWiseRecyclerView);
-        layoutManager=new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
+        layoutManager=new GridLayoutManager(getContext(),2);
         practiceExamWiseRecyclerView.setLayoutManager(layoutManager);
         setValues();
         return v;

@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
-            android:src="@drawable/imagepaper"
+            android:src="@drawable/gradient_login"
             android:layout_height="210dp"
             android:id="@+id/learnInterviewImage"
             android:scaleType="fitXY"/>

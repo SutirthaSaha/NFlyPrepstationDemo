@@ -62,7 +62,7 @@ public class LearnGDFragment extends Fragment {
         layoutManager=new GridLayoutManager(getContext(),2);
         learnGDRecyclerView.setLayoutManager(layoutManager);
         learnGDimage=v.findViewById(R.id.learnGDImage);
-        Picasso.with(getContext()).load("https://www.vactualpapers.com/web/wallpapers/colorful-material-design-qhd-wallpaper-19/3500x3500.png").into(learnGDimage);
+        //Picasso.with(getContext()).load("https://www.vactualpapers.com/web/wallpapers/colorful-material-design-qhd-wallpaper-19/3500x3500.png").into(learnGDimage);
 
         setValues();
        // setBanner(v);
