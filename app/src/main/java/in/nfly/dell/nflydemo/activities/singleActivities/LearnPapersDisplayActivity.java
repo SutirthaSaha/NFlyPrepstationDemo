@@ -37,6 +37,7 @@ public class LearnPapersDisplayActivity extends AppCompatActivity {
                 finish();
             }
         });
+        /*
         WebView webView =findViewById(R.id.learnPapersDisplayWebView);
 
         webView.getSettings().setJavaScriptEnabled(true);
@@ -57,7 +58,7 @@ public class LearnPapersDisplayActivity extends AppCompatActivity {
                 }
             }
         });
-
+        */
 
     }
 

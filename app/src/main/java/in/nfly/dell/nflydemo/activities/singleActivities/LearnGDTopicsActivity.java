@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -41,7 +42,7 @@ public class LearnGDTopicsActivity extends AppCompatActivity {
     private RecyclerView gdTopicsRecyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.Adapter adapter;
-
+    private LinearLayout noGdTopics;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +62,7 @@ public class LearnGDTopicsActivity extends AppCompatActivity {
         });
 
         gdTopicsRecyclerView=findViewById(R.id.gdTopicsRecyclerView);
+        noGdTopics=findViewById(R.id.noGdTopics);
         layoutManager=new LinearLayoutManager(LearnGDTopicsActivity.this,LinearLayoutManager.VERTICAL,false);
         gdTopicsRecyclerView.setLayoutManager(layoutManager);
         setValues();
@@ -80,6 +82,13 @@ public class LearnGDTopicsActivity extends AppCompatActivity {
                 try {
                     JSONObject arrayObject;
                     JSONArray parentArray=new JSONArray(response);
+                    if(parentArray.length()==0){
+                        noGdTopics.setVisibility(View.VISIBLE);
+                        gdTopicsRecyclerView.setVisibility(View.INVISIBLE);
+                    }else{
+                        noGdTopics.setVisibility(View.INVISIBLE);
+                        gdTopicsRecyclerView.setVisibility(View.VISIBLE);
+                    }
                     for(int i=0;i<parentArray.length();i++){
                         arrayObject=parentArray.getJSONObject(i);
                         titleDataSet.add(arrayObject.getString("topic_name"));
@@ -90,6 +99,8 @@ public class LearnGDTopicsActivity extends AppCompatActivity {
                     gdTopicsRecyclerView.setAdapter(adapter);
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    noGdTopics.setVisibility(View.INVISIBLE);
+                    gdTopicsRecyclerView.setVisibility(View.VISIBLE);
                 }
             }
         }, new Response.ErrorListener() {

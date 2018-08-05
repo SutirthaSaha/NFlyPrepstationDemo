@@ -35,7 +35,12 @@ public class InterviewQuestionsAdapter extends RecyclerView.Adapter<InterviewQue
     @Override
     public void onBindViewHolder(@NonNull InterviewQuestionsHolder holder, int position) {
         holder.InterviewQuestionsCardQuestionText.setText(questionDataSet.get(position));
-        holder.InterviewQuestionsCardAnswerText.setText(answerDataSet.get(position));
+        if(answerDataSet.get(position).isEmpty()) {
+            holder.InterviewQuestionsCardAnswerText.setText("No Answer Found");
+        }
+        else{
+            holder.InterviewQuestionsCardAnswerText.setText(answerDataSet.get(position));
+        }
     }
 
     @Override

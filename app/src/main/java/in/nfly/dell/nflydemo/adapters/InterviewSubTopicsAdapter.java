@@ -41,7 +41,7 @@ public class InterviewSubTopicsAdapter extends RecyclerView.Adapter<InterviewSub
         holder.InterviewSubTopicsLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, idDataSet.get(position), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, idDataSet.get(position), Toast.LENGTH_SHORT).show();
                 Intent intent=new Intent(context, LearnInterviewQAActivity.class);
                 intent.putExtra("subtopic_id",idDataSet.get(position));
                 intent.putExtra("subtopic_name",titleDataSet.get(position));

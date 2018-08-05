@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -44,6 +45,7 @@ public class LearnInterviewQAEasyFragment extends Fragment {
     private RecyclerView easyInterviewQuestionsRecyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
+    private LinearLayout noEasyQuestions;
 
     public LearnInterviewQAEasyFragment() {
         // Required empty public constructor
@@ -61,6 +63,8 @@ public class LearnInterviewQAEasyFragment extends Fragment {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_learn_interview_qa_easy, container, false);
         easyInterviewQuestionsRecyclerView=view.findViewById(R.id.easyInterviewQuestionsRecyclerView);
+        noEasyQuestions=view.findViewById(R.id.noEasyQuestions);
+
         layoutManager=new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
         easyInterviewQuestionsRecyclerView.setLayoutManager(layoutManager);
         setValues();
@@ -79,6 +83,14 @@ public class LearnInterviewQAEasyFragment extends Fragment {
                 try {
                     JSONObject arrayObject;
                     JSONArray parentArray=new JSONArray(response);
+                    if(parentArray.length()==0){
+                        noEasyQuestions.setVisibility(View.VISIBLE);
+                        easyInterviewQuestionsRecyclerView.setVisibility(View.INVISIBLE);
+                    }
+                    else{
+                        noEasyQuestions.setVisibility(View.INVISIBLE);
+                        easyInterviewQuestionsRecyclerView.setVisibility(View.VISIBLE);
+                    }
                     for(int i=0;i<parentArray.length();i++){
                         arrayObject=parentArray.getJSONObject(i);
                         question_level=arrayObject.getString("question_level");
@@ -92,6 +104,8 @@ public class LearnInterviewQAEasyFragment extends Fragment {
 
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    noEasyQuestions.setVisibility(View.VISIBLE);
+                    easyInterviewQuestionsRecyclerView.setVisibility(View.INVISIBLE);
                 }
             }
         }, new Response.ErrorListener() {

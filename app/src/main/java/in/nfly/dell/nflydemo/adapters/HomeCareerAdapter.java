@@ -48,7 +48,7 @@ public class HomeCareerAdapter extends RecyclerView.Adapter<HomeCareerAdapter.Ho
         holder.HomeCareerCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, idDataSet.get(position), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, idDataSet.get(position), Toast.LENGTH_SHORT).show();
                 if((position!=titleDataSet.size()-1)){
                     Intent intent=new Intent(context, JobRoleWiseDetailsActivity.class);
                     intent.putExtra("job_role_id",idDataSet.get(position));

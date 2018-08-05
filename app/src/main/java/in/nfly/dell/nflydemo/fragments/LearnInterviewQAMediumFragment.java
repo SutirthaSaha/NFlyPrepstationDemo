@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -41,7 +42,7 @@ public class LearnInterviewQAMediumFragment extends Fragment {
     private RecyclerView mediumInterviewQuestionsRecyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
-
+    private LinearLayout noMediumQuestions;
     public LearnInterviewQAMediumFragment() {
 
     }
@@ -65,9 +66,10 @@ public class LearnInterviewQAMediumFragment extends Fragment {
         View view= inflater.inflate(R.layout.fragment_learn_interview_qa_medium, container, false);
 
         mediumInterviewQuestionsRecyclerView=view.findViewById(R.id.mediumInterviewQuestionsRecyclerView);
+        noMediumQuestions=view.findViewById(R.id.noMediumQuestions);
+
         layoutManager=new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
         mediumInterviewQuestionsRecyclerView.setLayoutManager(layoutManager);
-
         setValues();
         return view;
     }
@@ -79,6 +81,14 @@ public class LearnInterviewQAMediumFragment extends Fragment {
                 try {
                     JSONObject arrayObject;
                     JSONArray parentArray=new JSONArray(response);
+                    if(parentArray.length()==0){
+                        noMediumQuestions.setVisibility(View.VISIBLE);
+                        mediumInterviewQuestionsRecyclerView.setVisibility(View.INVISIBLE);
+                    }
+                    else{
+                        noMediumQuestions.setVisibility(View.INVISIBLE);
+                        mediumInterviewQuestionsRecyclerView.setVisibility(View.VISIBLE);
+                    }
                     for(int i=0;i<parentArray.length();i++){
                         arrayObject=parentArray.getJSONObject(i);
                         question_level=arrayObject.getString("question_level");
@@ -92,6 +102,8 @@ public class LearnInterviewQAMediumFragment extends Fragment {
 
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    noMediumQuestions.setVisibility(View.VISIBLE);
+                    mediumInterviewQuestionsRecyclerView.setVisibility(View.INVISIBLE);
                 }
             }
         }, new Response.ErrorListener() {

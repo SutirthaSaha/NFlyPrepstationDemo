@@ -2,6 +2,7 @@ package in.nfly.dell.nflydemo.adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -43,13 +44,20 @@ public class CompanyPaperDetailsAdapter extends RecyclerView.Adapter<CompanyPape
         holder.CompanyPaperDetailsCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://nfly.in/assets/images/company/"+nameDataSet.get(position)));
+                context.startActivity(browserIntent);
+            }
+        });
+        /*holder.CompanyPaperDetailsCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 Intent intent= new Intent(context,LearnPapersDisplayActivity.class);
                 intent.putExtra("paper_name",nameDataSet.get(position));
                 intent.putExtra("paper_id",idDataSet.get(position));
                 intent.putExtra("paper_text",textDataSet.get(position));
                 context.startActivity(intent);
             }
-        });
+        });*/
     }
 
     @Override

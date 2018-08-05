@@ -47,7 +47,7 @@ public class KnowledgeBaseJobWiseAdapter extends RecyclerView.Adapter<KnowledgeB
         holder.knowBaseJobWiseCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, idDataSet.get(position), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, idDataSet.get(position), Toast.LENGTH_SHORT).show();
                 Intent intent=new Intent(context, JobRoleWiseDetailsActivity.class);
                 intent.putExtra("job_role_id",idDataSet.get(position));
                 intent.putExtra("job_role_name",titleDataSet.get(position));
