@@ -15,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import in.nfly.dell.nflydemo.R;
+import in.nfly.dell.nflydemo.User;
+import in.nfly.dell.nflydemo.activities.singleActivities.SplashScreenSliderActivity;
 
 public class SplashScreenActivity extends AppCompatActivity {
     ImageView splashScreenImageView;
@@ -26,8 +28,6 @@ public class SplashScreenActivity extends AppCompatActivity {
         //splashScreenImageView=findViewById(R.id.splashScreenImage);
         //splashScreenImageView.setImageBitmap(highlightImage(BitmapFactory.decodeResource(getResources(), R.drawable.logo)));
 
-
-
         Thread myThread = new Thread()
         {
             @Override
@@ -36,9 +36,17 @@ public class SplashScreenActivity extends AppCompatActivity {
                 try {
                     sleep(3000);
                     if(checkInternetConnection()) {
-                        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
-                        startActivity(intent);
-                        finish();
+                        User user=new User(SplashScreenActivity.this);
+                        if(user.getEmail().isEmpty()){
+                            Intent intent=new Intent(SplashScreenActivity.this,SplashScreenSliderActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
+                        else{
+                            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+                            startActivity(intent);
+                            finish();
+                        }
                     }
                     else{
                         Intent intent = new Intent(getApplicationContext(), NoInternetActivity.class);

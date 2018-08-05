@@ -71,7 +71,7 @@ public class RegisterActivity extends AppCompatActivity {
         //passwordConfirmRegister=findViewById(R.id.passwordConfirmRegister);
 
         date = new SimpleDateFormat("yyyy/MM/dd", Locale.getDefault()).format(new Date());
-        Toast.makeText(this, date, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, date, Toast.LENGTH_SHORT).show();
         registerBtn=findViewById(R.id.registerBtn);
         registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -163,9 +163,9 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void registerUser() {
-        Toast.makeText(this, "Am Here", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Am Here", Toast.LENGTH_SHORT).show();
         for(int i=0;i<regData.length;i++){
-            Toast.makeText(this, regData[i], Toast.LENGTH_SHORT).show();
+            //Toast.makeText(this, regData[i], Toast.LENGTH_SHORT).show();
 
         }
         StringRequest stringRequest=new StringRequest(Request.Method.POST,urlRegister, new Response.Listener<String>() {
