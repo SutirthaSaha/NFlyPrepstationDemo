@@ -89,16 +89,12 @@ public class LearnPaperFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        System.gc();
-        Runtime.getRuntime().gc();
+        learnPapersRecyclerView.setAdapter(null);
+        learnPaperimage.setImageDrawable(null);
+        learnPapersBannerRecyclerView.setAdapter(null);
+
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        System.gc();
-        Runtime.getRuntime().gc();
-    }
     private void setBanner(View view)
     {
         learnPapersBannerRecyclerView=view.findViewById(R.id.learnPapersBannerIconsRecyclerView);

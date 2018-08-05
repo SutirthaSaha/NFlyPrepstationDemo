@@ -93,7 +93,7 @@ public class OnBoardRegisterActivity extends AppCompatActivity {
         StringRequest stringRequest=new StringRequest(Request.Method.POST, urlCollege, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(OnBoardRegisterActivity.this, "Successful", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(OnBoardRegisterActivity.this, "Successful", Toast.LENGTH_SHORT).show();
                 try {
                     JSONObject arrayObject;
                     JSONArray parentArray=new JSONArray(response);
@@ -155,7 +155,7 @@ public class OnBoardRegisterActivity extends AppCompatActivity {
                     editor.apply();
 
                     User user=new User(OnBoardRegisterActivity.this);
-                    Toast.makeText(OnBoardRegisterActivity.this,user.getEmail()+"\n"+user.getFname()+"\n"+user.getUser_id(), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(OnBoardRegisterActivity.this,user.getEmail()+"\n"+user.getFname()+"\n"+user.getUser_id(), Toast.LENGTH_SHORT).show();
 
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -193,7 +193,7 @@ public class OnBoardRegisterActivity extends AppCompatActivity {
         branch=branchRegister.getSelectedItem().toString().trim();
         passing_year=passingYearRegister.getSelectedItem().toString().trim();
 
-        Toast.makeText(this, user_id+"\n"+college+"\n"+course+"\n"+branch+"\n"+passing_year, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, user_id+"\n"+college+"\n"+course+"\n"+branch+"\n"+passing_year, Toast.LENGTH_SHORT).show();
         onBoardUser();
     }
 

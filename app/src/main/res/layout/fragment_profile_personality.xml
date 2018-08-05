@@ -1,58 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".fragments.ProfilePersonalityFragment">
 
-    <android.support.v4.widget.NestedScrollView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        >
-        <LinearLayout
+        android:layout_height="match_parent"
+        android:visibility="invisible"
+        android:id="@+id/testTaken"
+        android:orientation="vertical">
+        <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            >
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="0dp"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:textStyle="bold"
-                    android:layout_gravity="center_vertical"
-                    android:layout_margin="10dp"
-                    android:text="Personality Analysis"
-                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/pencil"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginRight="10dp"
-                    android:tint="@color/colorAccent"
-                    android:id="@+id/personalityEditBtn"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textStyle="bold"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="10dp"
+                        android:text="Personality Analysis"
+                        android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"/>
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/pencil"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="10dp"
+                        android:tint="@color/colorAccent"
+                        android:id="@+id/personalityEditBtn"
+                        />
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/profilePersonalityText"
+                    android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
+                    android:layout_margin="10dp"/>
+
+                <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/profilePersonalityRecyclerView"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:nestedScrollingEnabled="false"
                     />
             </LinearLayout>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/profilePersonalityText"
-                android:textAppearance="@style/Base.TextAppearance.AppCompat.Small"
-                android:layout_margin="10dp"/>
-
-            <android.support.v7.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:id="@+id/profilePersonalityRecyclerView"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
-                android:nestedScrollingEnabled="false"
-                />
-        </LinearLayout>
-    </android.support.v4.widget.NestedScrollView>
-</LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/testNotTaken"
+        android:visibility="invisible"
+        android:gravity="center">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_margin="5dp"
+            android:textColor="#000"
+            android:textSize="17sp"
+            android:lineSpacingMultiplier="1.3"
+            android:fontFamily="@font/roboto"
+            android:text="To get your personality record take your personality test"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+            android:layout_margin="15dp"
+            android:text="Take Test"
+            android:textColor="#fff"
+            android:id="@+id/personalityTakeTestBtn"/>
+    </LinearLayout>
+</RelativeLayout>

@@ -69,7 +69,7 @@ public class KnowledgeBaseActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Toast.makeText(KnowledgeBaseActivity.this,item.getTitle(),Toast.LENGTH_LONG).show();
+                //Toast.makeText(KnowledgeBaseActivity.this,item.getTitle(),Toast.LENGTH_LONG).show();
                 Intent intent;
                 if (item.getTitle().equals("Home")){
                     intent=new Intent(KnowledgeBaseActivity.this,MainActivity.class);
@@ -112,6 +112,8 @@ public class KnowledgeBaseActivity extends AppCompatActivity {
                     user.logOut();
                     intent=new Intent(KnowledgeBaseActivity.this,LoginActivity.class);
                     startActivity(intent);
+                    finish();
+
                 }
                 drawerLayoutKnowledgeBase.closeDrawer(GravityCompat.START);
                 return true;

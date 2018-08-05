@@ -28,6 +28,7 @@ import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
@@ -78,9 +79,10 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
 
-    private static int currentPage = 0;
-    private static int NUM_PAGES;
+    private int currentPage = 0;
+    private int NUM_PAGES;
 
+    private Timer swipeTimer;
 
     private String userDetails="http://nfly.in/gapi/get_details_one";
     private String urlLoadAllRows="http://nfly.in/gapi/load_all_rows";
@@ -474,7 +476,7 @@ public class MainActivity extends AppCompatActivity {
                 viewPager.setCurrentItem(currentPage++, true);
             }
         };
-        Timer swipeTimer = new Timer();
+        swipeTimer = new Timer();
         swipeTimer.schedule(new TimerTask() {
 
             @Override
@@ -502,9 +504,56 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        finish();
-        System.gc();
-        Runtime.getRuntime().gc();
+
+        MySingleton.release();
+        if(swipeTimer!=null){
+            swipeTimer.cancel();
+        }
+
+        HomeBannerIconsRecyclerView.setAdapter(null);
+        HomeFeatureIconsRecyclerView.setAdapter(null);
+        CareerRecyclerView.setAdapter(null);
+        CoursesRecyclerView.setAdapter(null);
+        CompanyRecyclerView.setAdapter(null);
+        PractiseRecyclerView.setAdapter(null);
+        PrepHubIconsRecyclerView.setAdapter(null);
+        TestimonialsRecyclerView.setAdapter(null);
+
+        featureImageDataSet=new ArrayList<Integer>(){};
+        featureTitleDataSet=new ArrayList<String>(){};
+        prepHubImageDataSet=new ArrayList<Integer>(){};
+        prepHubIdDataSet=new ArrayList<Integer>(){};
+        prepHubTitleDataSet=new ArrayList<String>(){};
+        prepHubSubTitleDataSet=new ArrayList<String>(){};
+        practiceIdDataSet=new ArrayList<Integer>(){};
+        practiceImageDataSet=new ArrayList<Integer>(){};
+        practiceTitleDataSet=new ArrayList<String>(){};
+        practiceSubTitleDataSet=new ArrayList<String>(){};
+        testimonialTextDataSet=new ArrayList<String>(){};
+        testimonialNameDataSet=new ArrayList<String>(){};
+
+
+        bannerImageDataSet=new ArrayList<Integer>(){};
+
+        bannerTitleDataSet=new ArrayList<String>(){};
+
+        companyIdDataSet=new ArrayList<String>(){};
+        companyImageDataSet=new ArrayList<String>(){};
+        companyTitleDataSet=new ArrayList<String>(){};
+
+        careerIdDataSet=new ArrayList<String>(){};
+        careerImageDataSet=new ArrayList<String>(){};
+        careerTitleDataSet=new ArrayList<String>(){};
+
+        courseIdDataSet=new ArrayList<String>(){};
+        courseImageDataSet=new ArrayList<String>(){};
+        courseTitleDataSet=new ArrayList<String>(){};
+        MySingleton.getmInstance(MainActivity.this).getRequestQueue().cancelAll(new RequestQueue.RequestFilter() {
+            @Override
+            public boolean apply(Request<?> request) {
+                return true;
+            }
+        });
     }
 
     private void setNavigationDrawer() {
@@ -522,7 +571,7 @@ public class MainActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Toast.makeText(MainActivity.this,item.getTitle(),Toast.LENGTH_LONG).show();
+                //Toast.makeText(MainActivity.this,item.getTitle(),Toast.LENGTH_LONG).show();
                 Intent intent;
                 if (item.getTitle().equals("Home")){
                     intent=new Intent(MainActivity.this,MainActivity.class);
@@ -570,6 +619,7 @@ public class MainActivity extends AppCompatActivity {
                     user.logOut();
                     intent=new Intent(MainActivity.this,LoginActivity.class);
                     startActivity(intent);
+                    finish();
                 }
                 drawerLayoutHome.closeDrawer(GravityCompat.START);
                 return true;
@@ -602,7 +652,7 @@ public class MainActivity extends AppCompatActivity {
                     editor.apply();
 
                     User user=new User(MainActivity.this);
-                    Toast.makeText(MainActivity.this,user.getEmail()+"\n"+user.getFname()+"\n"+user.getUser_id(), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(MainActivity.this,user.getEmail()+"\n"+user.getFname()+"\n"+user.getUser_id(), Toast.LENGTH_SHORT).show();
 
 
                 } catch (JSONException e) {
@@ -632,6 +682,7 @@ public class MainActivity extends AppCompatActivity {
                 return params;
             }
         };
+
         MySingleton.getmInstance(MainActivity.this).addToRequestQueue(stringRequest);
     }
 }

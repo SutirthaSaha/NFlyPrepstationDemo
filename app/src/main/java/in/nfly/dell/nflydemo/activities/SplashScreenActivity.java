@@ -81,7 +81,7 @@ public class SplashScreenActivity extends AppCompatActivity {
     }
 
     private boolean checkInternetConnection() {
-        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager cm = (ConnectivityManager) this.getApplicationContext().getSystemService(Context.CONNECTIVITY_SERVICE);
         // test for connection
         if (cm.getActiveNetworkInfo() != null
                 && cm.getActiveNetworkInfo().isAvailable()

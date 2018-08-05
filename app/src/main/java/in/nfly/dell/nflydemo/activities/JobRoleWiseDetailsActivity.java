@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import in.nfly.dell.nflydemo.MySingleton;
 import in.nfly.dell.nflydemo.fragments.JobWiseFragments.JobRoleCareerAdviseFragment;
 import in.nfly.dell.nflydemo.fragments.JobWiseFragments.JobRoleCareerPathFragment;
 import in.nfly.dell.nflydemo.fragments.JobWiseFragments.JobRoleFAQsFragment;
@@ -67,5 +68,11 @@ public class JobRoleWiseDetailsActivity extends AppCompatActivity {
         toolbar.setTitle(job_role_name);
         toolbar.setTitleTextColor(Color.WHITE);
         toolbar.setNavigationIcon(R.drawable.arrow_left);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        MySingleton.release();
     }
 }

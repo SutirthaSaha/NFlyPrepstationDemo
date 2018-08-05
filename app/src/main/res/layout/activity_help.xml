@@ -22,7 +22,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:textAppearance="@style/Base.TextAppearance.AppCompat.Large"
+            android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
             android:id="@+id/helpTextView"/>
     </LinearLayout>
 </LinearLayout>

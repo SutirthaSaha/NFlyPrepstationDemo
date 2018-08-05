@@ -66,16 +66,11 @@ public class LearnInterviewFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        System.gc();
-        Runtime.getRuntime().gc();
+        learnInterviewRecyclerView.setAdapter(null);
+        learnInterviewBannerRecyclerView.setAdapter(null);
+        learnInterviewImage.setImageDrawable(null);
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        System.gc();
-        Runtime.getRuntime().gc();
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

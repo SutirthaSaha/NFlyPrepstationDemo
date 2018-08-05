@@ -68,7 +68,7 @@ public class SalaryCalculatorActivity extends AppCompatActivity {
         StringRequest stringRequest=new StringRequest(Request.Method.POST, urlCompany, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(SalaryCalculatorActivity.this, "Successful", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(SalaryCalculatorActivity.this, "Successful", Toast.LENGTH_SHORT).show();
                 try {
                     JSONObject arrayObject;
                     JSONArray parentArray=new JSONArray(response);
@@ -123,7 +123,7 @@ public class SalaryCalculatorActivity extends AppCompatActivity {
             StringRequest stringRequest = new StringRequest(Request.Method.POST, urlSalaryCheck, new Response.Listener<String>() {
                 @Override
                 public void onResponse(String response) {
-                    Toast.makeText(SalaryCalculatorActivity.this, response, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(SalaryCalculatorActivity.this, response, Toast.LENGTH_SHORT).show();
                     try {
                         JSONObject jsonObject = new JSONObject(response);
                         status = Integer.parseInt(jsonObject.getString("status"));
@@ -166,14 +166,12 @@ public class SalaryCalculatorActivity extends AppCompatActivity {
                         salaryCalcToastText.setText("The tentative range of in-hand salary is: " +
                                 min + " - " + max + " K Rs./month");
                         dialog.show();
-
                    /* builder.setCancelable(true);
                     builder.setMessage("The tentative range of in-hand salary is:\n" +
                             min+" - "+max+" K Rs./month");
 
                     AlertDialog alert=builder.create();
                     alert.show(); */
-
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

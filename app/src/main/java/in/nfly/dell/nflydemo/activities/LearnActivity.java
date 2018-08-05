@@ -102,7 +102,7 @@ public class LearnActivity extends AppCompatActivity {
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Toast.makeText(LearnActivity.this,item.getTitle(),Toast.LENGTH_LONG).show();
+                //Toast.makeText(LearnActivity.this,item.getTitle(),Toast.LENGTH_LONG).show();
                 Intent intent;
                 if (item.getTitle().equals("Home")){
                     intent=new Intent(LearnActivity.this,MainActivity.class);
@@ -145,6 +145,7 @@ public class LearnActivity extends AppCompatActivity {
                     user.logOut();
                     intent=new Intent(LearnActivity.this,LoginActivity.class);
                     startActivity(intent);
+                    finish();
                 }
                 drawerLayoutLearn.closeDrawer(GravityCompat.START);
                 return true;

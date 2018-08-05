@@ -1,7 +1,9 @@
 package in.nfly.dell.nflydemo.activities.singleActivities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Html;
@@ -36,12 +38,12 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     private EditText forgotPasswordEmail;
     private String urlForget="http://nfly.in/profileapi/forgot_password";
 
+    private Button okButton;
     private String key,body;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_forgot_password);
-
         forgotPasswordCancelBtn=findViewById(R.id.forgotPasswordCancelBtn);
         forgotPasswordSubmitBtn=findViewById(R.id.forgotPasswordSubmitBtn);
         forgotPasswordEmail=findViewById(R.id.forgotPasswordEmail);
@@ -69,7 +71,25 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                     JSONObject arrayObject=new JSONObject(response);
                     key=arrayObject.getString("key");
                     body="Password reset request.\n\nClick the link below to reset your password\n\n"+"http://nfly.in/landing/set_new_password/"+key;
-                    Toast.makeText(ForgotPasswordActivity.this, key, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(ForgotPasswordActivity.this, key, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(ForgotPasswordActivity.this, "A mail has been sent to your email-id to reset your password", Toast.LENGTH_SHORT).show();
+
+                    AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(ForgotPasswordActivity.this);
+                    dlgAlert.setMessage("A mail has been sent,follow the instructions to change your password.");
+                    dlgAlert.setTitle("Message..");
+                    dlgAlert.setPositiveButton("OK", null);
+                    dlgAlert.setCancelable(true);
+                    dlgAlert.create().show();
+
+                    dlgAlert.setPositiveButton("Ok",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int which) {
+                                    Toast.makeText(getParent(), "Hello", Toast.LENGTH_SHORT).show();
+                                    Intent intent=new Intent(ForgotPasswordActivity.this,LoginActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            });
                     new Thread(new Runnable() {
 
                         @Override
@@ -80,19 +100,14 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                                         "jona1234");
                                 sender.sendMail("Nfly Password Reset Request" , body,
                                         "sutirocks@gmail.com", user_email);
-                                Toast.makeText(ForgotPasswordActivity.this, "A mail has been sent to your email-id to reset your password", Toast.LENGTH_SHORT).show();
                             } catch (Exception e) {
                                 Log.e("SendMail", e.getMessage(), e);
                             }
                         }
-
                     }).start();
-                    Intent intent=new Intent(ForgotPasswordActivity.this, LoginActivity.class);
-                    startActivity(intent);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
             }
         }, new Response.ErrorListener() {
             @Override

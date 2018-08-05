@@ -9,7 +9,7 @@ import com.android.volley.toolbox.Volley;
 public class MySingleton {
     private static MySingleton mInstance;
     private RequestQueue requestQueue;
-    private static Context mCtx;
+    private Context mCtx;
 
     private MySingleton(Context context){
         mCtx=context;
@@ -30,5 +30,15 @@ public class MySingleton {
     }
     public void addToRequestQueue(Request request){
         requestQueue.add(request);
+    }
+
+    public static void release(){
+        if(mInstance!=null){
+            mInstance.releaseContext();
+            mInstance=null;
+        }
+    }
+    private void releaseContext(){
+        mCtx=null;
     }
 }

@@ -38,7 +38,6 @@ import in.nfly.dell.nflydemo.adapters.CompDetailsInterviewExpAdapter;
 public class CompanyDetailsInterviewExpFragment extends Fragment {
 
     public String company_id,company_name;
-
     private String urlCompany="http://nfly.in/gapi/load_rows_one";
 
     private RecyclerView companyDetailsInterviewExpRecyclerView;

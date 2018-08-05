@@ -10,7 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Adapter;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,12 +46,13 @@ public class ProfilePersonalityFragment extends Fragment {
     private RecyclerView profilePersonalityRecyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.Adapter adapter;
-
+    private LinearLayout testTaken,testNotTaken;
     private String user_id;
     private String urlPersonality="http://nfly.in/profileapi/personality";
     private String urlGetCPoints="http://nfly.in/gapi/get_cpoints";
     private String urlUpdate="http://nfly.in/gapi/update";
 
+    private Button personalityTakeTestBtn;
     private String cpoints;
 
     private ArrayList<String> titleDataSet=new ArrayList<String>(){{add("Extraversion");add("Openness");add("Agreeableness");add("Conscientiousness");add("Neuroticism");}};
@@ -86,6 +89,9 @@ public class ProfilePersonalityFragment extends Fragment {
         profilePersonalityText=view.findViewById(R.id.profilePersonalityText);
         profilePersonalityRecyclerView=view.findViewById(R.id.profilePersonalityRecyclerView);
         personalityEditBtn=view.findViewById(R.id.personalityEditBtn);
+        testTaken=view.findViewById(R.id.testTaken);
+        testNotTaken=view.findViewById(R.id.testNotTaken);
+        personalityTakeTestBtn=view.findViewById(R.id.personalityTakeTestBtn);
 
         User user=new User(getActivity());
         user_id=user.getUser_id();
@@ -96,6 +102,13 @@ public class ProfilePersonalityFragment extends Fragment {
         setValues();
         getCPoints();
         personalityEditBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getContext(), PersonalityTestActivity.class);
+                startActivity(intent);
+            }
+        });
+        personalityTakeTestBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(getContext(), PersonalityTestActivity.class);
@@ -190,10 +203,10 @@ public class ProfilePersonalityFragment extends Fragment {
         StringRequest stringRequest=new StringRequest(Request.Method.POST, urlPersonality, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-
                 try {
                     JSONObject jsonObject=new JSONObject(response);
-
+                    testTaken.setVisibility(View.VISIBLE);
+                    testNotTaken.setVisibility(View.INVISIBLE);
                     progressDataSet.add(jsonObject.getString("extraversion"));
                     progressDataSet.add(jsonObject.getString("openness"));
                     progressDataSet.add(jsonObject.getString("agreeableness"));
@@ -202,6 +215,8 @@ public class ProfilePersonalityFragment extends Fragment {
 
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    testNotTaken.setVisibility(View.VISIBLE);
+                    testTaken.setVisibility(View.INVISIBLE);
                 }
 
                 adapter=new ProfilePersonalityAdapter(titleDataSet,textDataSet,progressDataSet,getActivity());
@@ -211,7 +226,8 @@ public class ProfilePersonalityFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
-
+                testNotTaken.setVisibility(View.VISIBLE);
+                testTaken.setVisibility(View.INVISIBLE);
             }
         })
         {

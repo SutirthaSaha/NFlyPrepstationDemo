@@ -148,6 +148,8 @@ public class DashboardActivity extends AppCompatActivity {
                     user.logOut();
                     intent=new Intent(DashboardActivity.this,LoginActivity.class);
                     startActivity(intent);
+                    finish();
+
                 }
                 drawerLayoutDashboard.closeDrawer(GravityCompat.START);
                 return true;
@@ -172,8 +174,6 @@ public class DashboardActivity extends AppCompatActivity {
                         arrayObject=parentArray.getJSONObject(i);
                         titleDataSet.add(arrayObject.getString("test_name"));
                         //dateDataSet.add(arrayObject.getString("date"));
-
-
                         //String s="2018-09-20";
 
                         DateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");

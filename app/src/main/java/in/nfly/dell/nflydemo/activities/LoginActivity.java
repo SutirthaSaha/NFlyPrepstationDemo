@@ -1,7 +1,9 @@
 package in.nfly.dell.nflydemo.activities;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -63,6 +65,12 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        System.exit(0);
+    }
+
     public void loginBtnClick(View view) {
         final String email = emailId.getText().toString().trim();
         final String password = passWord.getText().toString().trim();
@@ -92,18 +100,30 @@ public class LoginActivity extends AppCompatActivity {
                         loginBtn.setEnabled(true);
                         progressDialog.cancel();
                     }
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(LoginActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(LoginActivity.this, "Error", Toast.LENGTH_SHORT).show();
                 loginBtn.setEnabled(true);
                 progressDialog.cancel();
+                AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(LoginActivity.this);
+
+                dlgAlert.setMessage("wrong password or username");
+                dlgAlert.setTitle("Error Message...");
+                dlgAlert.setPositiveButton("OK", null);
+                dlgAlert.setCancelable(true);
+                dlgAlert.create().show();
+
+                dlgAlert.setPositiveButton("Ok",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
             }
         })
         {

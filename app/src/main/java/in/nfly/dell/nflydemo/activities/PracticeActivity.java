@@ -132,6 +132,7 @@ public class PracticeActivity extends AppCompatActivity {
                     user.logOut();
                     intent=new Intent(PracticeActivity.this,LoginActivity.class);
                     startActivity(intent);
+                    finish();
                 }
                 drawerLayoutPractice.closeDrawer(GravityCompat.START);
                 return true;

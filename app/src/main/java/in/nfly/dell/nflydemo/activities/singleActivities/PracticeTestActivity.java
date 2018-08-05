@@ -1,10 +1,12 @@
 package in.nfly.dell.nflydemo.activities.singleActivities;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.CountDownTimer;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -36,6 +38,7 @@ import java.util.concurrent.TimeUnit;
 import in.nfly.dell.nflydemo.MySingleton;
 import in.nfly.dell.nflydemo.R;
 import in.nfly.dell.nflydemo.User;
+import in.nfly.dell.nflydemo.activities.LoginActivity;
 import in.nfly.dell.nflydemo.activities.OnBoardRegisterActivity;
 import in.nfly.dell.nflydemo.activities.PracticeActivity;
 import in.nfly.dell.nflydemo.activities.RegisterActivity;
@@ -116,14 +119,28 @@ public class PracticeTestActivity extends AppCompatActivity {
             public void onFinish() {
                 practiceCountdownTimerText.setText("done!");
                 saveUserOption();
-                Toast.makeText(PracticeTestActivity.this, Integer.toString(userOptions[count]), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(PracticeTestActivity.this, Integer.toString(userOptions[count]), Toast.LENGTH_SHORT).show();
 
                 for(int i=0;i<answerDataSet.size();i++){
                     if(userOptions[i]==Integer.parseInt(answerDataSet.get(i))){
                         user_score=user_score+3;
                     }
                 }
-                Toast.makeText(PracticeTestActivity.this, user_score+"/"+max_score, Toast.LENGTH_SHORT).show();
+                AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(PracticeTestActivity.this);
+
+                dlgAlert.setMessage(user_score+"/"+max_score);
+                dlgAlert.setTitle("Your Score...");
+                dlgAlert.setPositiveButton("OK", null);
+                dlgAlert.setCancelable(true);
+                dlgAlert.create().show();
+
+                dlgAlert.setPositiveButton("Ok",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
+                //Toast.makeText(PracticeTestActivity.this, user_score+"/"+max_score, Toast.LENGTH_SHORT).show();
                 //updateTestTable();
                 practiceTestNextBtn.setVisibility(View.INVISIBLE);
                 practiceTestPreviousBtn.setVisibility(View.INVISIBLE);

@@ -10,6 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Toast;
 
+import in.nfly.dell.nflydemo.MySingleton;
 import in.nfly.dell.nflydemo.R;
 import in.nfly.dell.nflydemo.fragments.CompanyDetailsCompanyIntroFragment;
 import in.nfly.dell.nflydemo.adapters.ViewPagerAdapter;
@@ -35,7 +36,7 @@ public class CompanyWiseDetailsActivity extends AppCompatActivity {
         Intent intent=getIntent();
         company_id=intent.getStringExtra("company_id");
         company_name=intent.getStringExtra("company_name");
-        Toast.makeText(this, company_id, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, company_id, Toast.LENGTH_SHORT).show();
         setToolbar();
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,5 +66,9 @@ public class CompanyWiseDetailsActivity extends AppCompatActivity {
         toolbar.setNavigationIcon(R.drawable.arrow_left);
     }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        MySingleton.release();
+    }
 }

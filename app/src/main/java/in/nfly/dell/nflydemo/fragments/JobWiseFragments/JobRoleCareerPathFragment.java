@@ -60,7 +60,7 @@ public class JobRoleCareerPathFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v= inflater.inflate(R.layout.fragment_job_role_career_path, container, false);
-        Toast.makeText(getContext(), job_role_id+job_role_name, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getContext(), job_role_id+job_role_name, Toast.LENGTH_SHORT).show();
         jobRoleCareerPathRecyclerView=v.findViewById(R.id.jobRoleCareerPathRecyclerView);
         layoutManager=new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
         jobRoleCareerPathRecyclerView.setLayoutManager(layoutManager);

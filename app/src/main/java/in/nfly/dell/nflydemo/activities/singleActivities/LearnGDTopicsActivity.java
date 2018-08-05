@@ -50,7 +50,7 @@ public class LearnGDTopicsActivity extends AppCompatActivity {
         Intent intent=getIntent();
         section_id=intent.getStringExtra("section_id");
         section_name=intent.getStringExtra("section_name");
-        Toast.makeText(this, section_id+" "+section_name, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, section_id+" "+section_name, Toast.LENGTH_SHORT).show();
 
         setToolbar();
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {

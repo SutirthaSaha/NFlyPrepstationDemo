@@ -19,7 +19,12 @@ public class HelpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_help);
 
         helpTextView=findViewById(R.id.helpTextView);
-        helpTextView.setText("Help");
+        helpTextView.setText("Contact with Us\n" +
+                "Phone: 8420166148\n" +
+                "Email-Id: support@nfly.in\n" +
+                "Address\n" +
+                "E 2/4, Netguru Building, Salt Lake Sector-V, Kolkata, West Bengal\n" +
+                "\n");
         setToolbar();
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

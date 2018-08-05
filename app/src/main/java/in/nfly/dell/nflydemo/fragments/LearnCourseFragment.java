@@ -71,15 +71,8 @@ public class LearnCourseFragment extends Fragment {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        System.gc();
-        Runtime.getRuntime().gc();
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        System.gc();
-        Runtime.getRuntime().gc();
+        learnCourseImage.setImageDrawable(null);
+        learnCourseRecyclerView.setAdapter(null);
     }
 
     @Override

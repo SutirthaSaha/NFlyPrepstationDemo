@@ -54,7 +54,7 @@ public class CompanyDetailsCompanyIntroFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v= inflater.inflate(R.layout.fragment_company_details_company_intro, container, false);
-        Toast.makeText(getContext(), company_id+company_name, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(getContext(), company_id+company_name, Toast.LENGTH_SHORT).show();
         companyDetailsCompanyIntroText=v.findViewById(R.id.companyDetailsCompanyIntroText);
         setValues();
         return v;

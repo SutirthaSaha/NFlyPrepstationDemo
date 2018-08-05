@@ -1,9 +1,11 @@
 package in.nfly.dell.nflydemo.activities;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.design.widget.TextInputLayout;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -103,6 +105,20 @@ public class RegisterActivity extends AppCompatActivity {
                             status = jsonObject.getInt("status");
                             if (status == 200) {
                                 registerBtn.setText("Register");
+                                AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(RegisterActivity.this);
+
+                                dlgAlert.setMessage("User already exists..");
+                                dlgAlert.setTitle("Error Message...");
+                                dlgAlert.setPositiveButton("OK", null);
+                                dlgAlert.setCancelable(true);
+                                dlgAlert.create().show();
+
+                                dlgAlert.setPositiveButton("Ok",
+                                        new DialogInterface.OnClickListener() {
+                                            public void onClick(DialogInterface dialog, int which) {
+
+                                            }
+                                        });
                             } else {
                                 registerUser();
                             }

@@ -62,7 +62,7 @@ public class CourseStudyActivity extends YouTubeBaseActivity implements YouTubeP
         Intent intent=getIntent();
         course_id=intent.getStringExtra("course_id");
         course_name=intent.getStringExtra("course_name");
-        Toast.makeText(this, course_id+"\n"+course_name, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, course_id+"\n"+course_name, Toast.LENGTH_SHORT).show();
 
         courseStudyVideoView=findViewById(R.id.courseStudyVideoView);
         courseStudyVideoList=findViewById(R.id.courseStudyVideoList);
@@ -83,6 +83,13 @@ public class CourseStudyActivity extends YouTubeBaseActivity implements YouTubeP
         toolbar.setTitle(course_name);
         toolbar.setTitleTextColor(Color.WHITE);
         toolbar.setNavigationIcon(R.drawable.arrow_left);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        MySingleton.release();
+        courseStudyVideoList.setAdapter(null);
     }
 
     private void setValues() {

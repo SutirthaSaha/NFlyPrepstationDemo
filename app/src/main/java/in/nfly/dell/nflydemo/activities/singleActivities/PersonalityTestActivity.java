@@ -338,7 +338,7 @@ public class PersonalityTestActivity extends AppCompatActivity {
         user_open_score=((sum(OpenAnsDataSet)-10)*100)/40;
         user_agree_score=((sum(AgreeAnsDataSet)-9)*100)/36;
 
-        Toast.makeText(this, "Extra Score:"+user_extra_score+"\nCon Score:"+user_con_score+"\nNeuro Score:"+user_neuro_score+"\nAgree Score:"+user_agree_score+"\nOpen Score:"+user_open_score, Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, "Extra Score:"+user_extra_score+"\nCon Score:"+user_con_score+"\nNeuro Score:"+user_neuro_score+"\nAgree Score:"+user_agree_score+"\nOpen Score:"+user_open_score, Toast.LENGTH_LONG).show();
         insertAttempt();
 
         /*
