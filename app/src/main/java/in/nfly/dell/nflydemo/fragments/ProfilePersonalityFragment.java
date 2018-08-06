@@ -106,6 +106,7 @@ public class ProfilePersonalityFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent=new Intent(getContext(), PersonalityTestActivity.class);
                 startActivity(intent);
+                getActivity().finish();
             }
         });
         personalityTakeTestBtn.setOnClickListener(new View.OnClickListener() {
@@ -113,6 +114,7 @@ public class ProfilePersonalityFragment extends Fragment {
             public void onClick(View v) {
                 Intent intent=new Intent(getContext(), PersonalityTestActivity.class);
                 startActivity(intent);
+                getActivity().finish();
             }
         });
         return view;

@@ -432,6 +432,14 @@ public class ProfilePersonalFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        profileHobbiesRecyclerView.setAdapter(null);
+        profileLanguagesRecyclerView.setAdapter(null);
+        MySingleton.release();
+    }
+
     private void getCPoints() {
         StringRequest stringRequest=new StringRequest(Request.Method.POST,urlGetCPoints, new Response.Listener<String>() {
             @Override
@@ -712,7 +720,7 @@ public class ProfilePersonalFragment extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getActivity(), "Error Exists", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), "Error Exists", Toast.LENGTH_SHORT).show();
                 addToLanguageTable();
             }
         })
@@ -842,7 +850,7 @@ public class ProfilePersonalFragment extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
                 addToHobbyTable();
             }
         })

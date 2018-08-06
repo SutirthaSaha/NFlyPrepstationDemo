@@ -587,6 +587,15 @@ public class ProfileAcademicFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        workExperienceRecyclerView.setAdapter(null);
+        projectsRecyclerView.setAdapter(null);
+        skillsRecyclerView.setAdapter(null);
+        trainingsRecyclerView.setAdapter(null);
+    }
+
     private void checkSkillExists() {
         StringRequest stringRequest=new StringRequest(Request.Method.POST,urlDataExists, new Response.Listener<String>() {
             @Override
