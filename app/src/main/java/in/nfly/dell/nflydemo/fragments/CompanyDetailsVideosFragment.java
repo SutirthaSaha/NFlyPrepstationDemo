@@ -1,6 +1,5 @@
 package in.nfly.dell.nflydemo.fragments;
 
-
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -36,9 +35,6 @@ import in.nfly.dell.nflydemo.MySingleton;
 import in.nfly.dell.nflydemo.PlayerConfig;
 import in.nfly.dell.nflydemo.R;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class CompanyDetailsVideosFragment extends Fragment {
 
     public String company_id,company_name,video_url;
@@ -85,7 +81,7 @@ public class CompanyDetailsVideosFragment extends Fragment {
                     for(int i=0;i<parentArray.length();i++){
                         arrayObject=parentArray.getJSONObject(i);
                         titleDataSet.add((i+1)+".  "+arrayObject.getString("video_title"));
-                        urlDataSet.add(arrayObject.getString("video_url"));
+                        urlDataSet.add(arrayObject.getString("app_video_url"));
                     }
                     ArrayAdapter<String> adapter=new ArrayAdapter<String>(getContext(),android.R.layout.simple_list_item_1,titleDataSet);
                     companyDetailsVideoList.setAdapter(adapter);
@@ -102,7 +98,7 @@ public class CompanyDetailsVideosFragment extends Fragment {
                             if (!b) {
                                 YPlayer = youTubePlayer;
                                 YPlayer.setFullscreen(false);
-                                YPlayer.loadVideo("xa775K4qROI");
+                                YPlayer.loadVideo(video_url);
                                 YPlayer.setShowFullscreenButton(false);
                                 //YPlayer.loadVideo(video_url);
                                 YPlayer.play();
@@ -132,7 +128,7 @@ public class CompanyDetailsVideosFragment extends Fragment {
                                     if (!b) {
                                         YPlayer = youTubePlayer;
                                         YPlayer.setFullscreen(false);
-                                        YPlayer.loadVideo("X930_IyhGfo");
+                                        YPlayer.loadVideo(video_url);
                                         YPlayer.setShowFullscreenButton(false);
                                         //YPlayer.loadVideo(video_url);
                                         YPlayer.play();

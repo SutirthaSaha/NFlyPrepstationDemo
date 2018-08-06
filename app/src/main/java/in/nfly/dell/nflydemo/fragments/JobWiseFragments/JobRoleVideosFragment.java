@@ -34,9 +34,6 @@ import in.nfly.dell.nflydemo.MySingleton;
 import in.nfly.dell.nflydemo.PlayerConfig;
 import in.nfly.dell.nflydemo.R;
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class JobRoleVideosFragment extends Fragment {
 
     private String job_role_id,job_role_name,video_url;
@@ -87,7 +84,7 @@ public class JobRoleVideosFragment extends Fragment {
                     for(int i=0;i<parentArray.length();i++){
                         arrayObject=parentArray.getJSONObject(i);
                         titleDataSet.add((i+1)+".  "+arrayObject.getString("video_name"));
-                        urlDataSet.add(arrayObject.getString("video_iframe"));
+                        urlDataSet.add(arrayObject.getString("app_url"));
                     }
                     video_url=urlDataSet.get(0);
                     youTubePlayerSupportFragment = YouTubePlayerSupportFragment.newInstance();
@@ -102,7 +99,7 @@ public class JobRoleVideosFragment extends Fragment {
                             if (!b) {
                                 YPlayer = youTubePlayer;
                                 YPlayer.setFullscreen(false);
-                                YPlayer.loadVideo("xa775K4qROI");
+                                YPlayer.loadVideo(video_url);
                                 YPlayer.setShowFullscreenButton(false);
                                 //YPlayer.loadVideo(video_url);
                                 YPlayer.play();
@@ -133,8 +130,8 @@ public class JobRoleVideosFragment extends Fragment {
                                 public void onInitializationSuccess(YouTubePlayer.Provider arg0, YouTubePlayer youTubePlayer, boolean b) {
                                     if (!b) {
                                         YPlayer = youTubePlayer;
-                                        YPlayer.setFullscreen(false);
-                                        YPlayer.loadVideo("X930_IyhGfo");
+                                        YPlayer.setShowFullscreenButton(false);
+                                        YPlayer.loadVideo(video_url);
                                         //YPlayer.loadVideo(video_url);
                                         YPlayer.play();
                                     }
