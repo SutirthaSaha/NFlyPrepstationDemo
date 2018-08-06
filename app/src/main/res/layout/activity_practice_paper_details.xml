@@ -26,5 +26,10 @@
         android:gravity="center"
         android:text="There are no tests added yet"
         android:id="@+id/practiceNoTestText"
+        android:layout_margin="5dp"
+        android:textColor="#000"
+        android:textSize="17sp"
+        android:lineSpacingMultiplier="1.3"
+        android:fontFamily="@font/roboto"
         android:visibility="invisible"/>
 </LinearLayout>
