@@ -96,10 +96,10 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                         public void run() {
                             try {
                                 user_email=forgotPasswordEmail.getText().toString().trim();
-                                GMailSender sender = new GMailSender("sutirocks@gmail.com",
-                                        "jona1234");
+                                GMailSender sender = new GMailSender("support@nfly.in",
+                                        "911Pentagon");
                                 sender.sendMail("Nfly Password Reset Request" , body,
-                                        "sutirocks@gmail.com", user_email);
+                                        "support@nfly.in", user_email);
                             } catch (Exception e) {
                                 Log.e("SendMail", e.getMessage(), e);
                             }
