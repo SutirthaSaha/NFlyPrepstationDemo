@@ -16,6 +16,7 @@ import java.util.ArrayList;
 
 import in.nfly.dell.nflydemo.R;
 import in.nfly.dell.nflydemo.activities.singleActivities.PracticeTestActivity;
+import in.nfly.dell.nflydemo.activities.singleActivities.PracticeTestInstructionsActivity;
 
 public class PracticePaperDetailsAdapter extends RecyclerView.Adapter<PracticePaperDetailsAdapter.PracticePaperDetailsHolder>{
 
@@ -48,9 +49,10 @@ public class PracticePaperDetailsAdapter extends RecyclerView.Adapter<PracticePa
         holder.practicePaperDetailsCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(context, PracticeTestActivity.class);
+                Intent intent=new Intent(context, PracticeTestInstructionsActivity.class);
                 intent.putExtra("test_id",idDataSet.get(position));
                 intent.putExtra("test_name",titleDataSet.get(position));
+                intent.putExtra("num_ques",numQuesDataSet.get(position));
                 intent.putExtra("test_duration",durationDataSet.get(position));
                 context.startActivity(intent);
             }

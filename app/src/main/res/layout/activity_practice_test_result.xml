@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activities.singleActivities.PracticeTestResultActivity">
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:id="@+id/practiceTestResultToolbar"></android.support.v7.widget.Toolbar>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="0">
+            <com.github.lzyzsd.circleprogress.DonutProgress
+                android:id="@+id/practiceTestResultProgress"
+                android:layout_width="180dp"
+                android:layout_height="180dp"
+                app:donut_circle_starting_degree="270"
+                app:donut_unfinished_stroke_width="4dp"
+                app:donut_finished_color="@color/colorAccent"
+                app:donut_finished_stroke_width="4dp"
+                app:donut_progress="30" />
+            <TextView
+                android:id="@+id/practiceTestResultMarks"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:background="#fff"
+                android:gravity="center"
+                android:layout_centerInParent="true"
+                android:scaleType="fitXY"
+                android:text="23/50" />
+        </RelativeLayout>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="To Dashboard"
+            android:layout_margin="15dp"
+            android:id="@+id/toDashboardActivity"
+            android:onClick="onToDashboardBtnClick"
+            android:textColor="#fff"
+            android:layout_alignParentBottom="true"
+            android:backgroundTint="@color/colorAccent"
+            android:background="@drawable/button_shape_color"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="To Test Home"
+            android:layout_margin="15dp"
+            android:id="@+id/toPracticeTest"
+            android:onClick="onToPracticeActivityClick"
+            android:textColor="#fff"
+            android:layout_alignParentBottom="true"
+            android:backgroundTint="@color/colorAccent"
+            android:background="@drawable/button_shape_color"/>
+    </LinearLayout>
+</LinearLayout>

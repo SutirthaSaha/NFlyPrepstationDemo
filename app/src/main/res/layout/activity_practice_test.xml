@@ -25,7 +25,8 @@
         android:text="CountDown Timer"/>
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="0dp"
+        android:layout_weight="1">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -69,50 +70,50 @@
                     android:text="Option four"
                     android:id="@+id/practiceTestOption4"/>
             </RadioGroup>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <Button
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:text="Previous"
-                    android:visibility="gone"
-                    android:layout_margin="10dp"
-                    android:paddingTop="15dp"
-                    android:paddingBottom="15dp"
-                    android:background="@color/colorAccent"
-                    android:textColor="#fff"
-                    android:id="@+id/practiceTestPreviousBtn"
-                    android:onClick="onTestPreviousBtnClick"/>
-                <Button
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0.5"
-                    android:text="Next"
-                    android:paddingTop="15dp"
-                    android:paddingBottom="15dp"
-                    android:visibility="visible"
-                    android:layout_margin="10dp"
-                    android:background="@color/colorAccent"
-                    android:textColor="#fff"
-                    android:id="@+id/practiceTestNextBtn"
-                    android:onClick="onTestNextBtnClick"/>
-            </LinearLayout>
-            <Button
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Submit"
-                android:visibility="gone"
-                android:layout_margin="10dp"
-                android:paddingTop="15dp"
-                android:paddingBottom="15dp"
-                android:background="@color/colorAccent"
-                android:textColor="#fff"
-                android:id="@+id/practiceTestSubmitBtn"
-                android:onClick="onTestSubmitBtnClick"/>
         </LinearLayout>
     </ScrollView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="Previous"
+            android:visibility="gone"
+            android:layout_margin="10dp"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:background="@color/colorAccent"
+            android:textColor="#fff"
+            android:id="@+id/practiceTestPreviousBtn"
+            android:onClick="onTestPreviousBtnClick"/>
+        <Button
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:text="Next"
+            android:paddingTop="15dp"
+            android:paddingBottom="15dp"
+            android:visibility="visible"
+            android:layout_margin="10dp"
+            android:background="@color/colorAccent"
+            android:textColor="#fff"
+            android:id="@+id/practiceTestNextBtn"
+            android:onClick="onTestNextBtnClick"/>
+    </LinearLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:visibility="gone"
+        android:layout_margin="10dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:background="@color/colorAccent"
+        android:textColor="#fff"
+        android:id="@+id/practiceTestSubmitBtn"
+        android:onClick="onTestSubmitBtnClick"/>
 
 </LinearLayout>

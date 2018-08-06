@@ -101,6 +101,10 @@ public class PracticeTestActivity extends AppCompatActivity {
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent=new Intent(PracticeTestActivity.this,PracticeTestResultActivity.class);
+                intent.putExtra("user_score",user_score);
+                intent.putExtra("max_score",max_score);
+                startActivity(intent);
                 finish();
             }
         });
@@ -126,20 +130,6 @@ public class PracticeTestActivity extends AppCompatActivity {
                         user_score=user_score+3;
                     }
                 }
-                AlertDialog.Builder dlgAlert  = new AlertDialog.Builder(PracticeTestActivity.this);
-
-                dlgAlert.setMessage(user_score+"/"+max_score);
-                dlgAlert.setTitle("Your Score...");
-                dlgAlert.setPositiveButton("OK", null);
-                dlgAlert.setCancelable(true);
-                dlgAlert.create().show();
-
-                dlgAlert.setPositiveButton("Ok",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int which) {
-
-                            }
-                        });
                 //Toast.makeText(PracticeTestActivity.this, user_score+"/"+max_score, Toast.LENGTH_SHORT).show();
                 //updateTestTable();
                 practiceTestNextBtn.setVisibility(View.INVISIBLE);
@@ -188,7 +178,7 @@ public class PracticeTestActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(PracticeTestActivity.this, "Waah pehla attempt mubaarak ho", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(PracticeTestActivity.this, "Waah pehla attempt mubaarak ho", Toast.LENGTH_SHORT).show();
                 previous_attempt_id=0;
                 attempt_id=1;
                 setTestQuestions();
@@ -285,7 +275,7 @@ public class PracticeTestActivity extends AppCompatActivity {
                         questionOptionsSet.put(questionDataSet.get(i),optionsDataSet);
                     }
 
-                    Toast.makeText(PracticeTestActivity.this, quesIdDataSet.toString(), Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(PracticeTestActivity.this, quesIdDataSet.toString(), Toast.LENGTH_SHORT).show();
 
                     if (questionDataSet.isEmpty()){
                         Toast.makeText(PracticeTestActivity.this, "No Questions There", Toast.LENGTH_SHORT).show();
@@ -433,14 +423,14 @@ public class PracticeTestActivity extends AppCompatActivity {
 
     public void onTestSubmitBtnClick(View view) {
         saveUserOption();
-        Toast.makeText(this, Integer.toString(userOptions[count]), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, Integer.toString(userOptions[count]), Toast.LENGTH_SHORT).show();
 
         for(int i=0;i<answerDataSet.size();i++){
             if(userOptions[i]==Integer.parseInt(answerDataSet.get(i))){
                 user_score=user_score+3;
             }
         }
-        Toast.makeText(this, user_score+"/"+max_score, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, user_score+"/"+max_score, Toast.LENGTH_SHORT).show();
         //updateTestTable();
         for(int i=0;i<quesIdDataSet.size();i++){
             int marks=0;
@@ -462,6 +452,10 @@ public class PracticeTestActivity extends AppCompatActivity {
                     JSONObject arrayObject=new JSONObject(response);
                     status=arrayObject.getInt("status");
                     if(status==200){
+                        Intent intent=new Intent(PracticeTestActivity.this,PracticeTestResultActivity.class);
+                        intent.putExtra("user_score",user_score);
+                        intent.putExtra("max_score",max_score);
+                        startActivity(intent);
                         finish();
                     }
                     else{
@@ -514,7 +508,7 @@ public class PracticeTestActivity extends AppCompatActivity {
                         //Toast.makeText(PracticeTestActivity.this, "Response Insertion "+ i+" Successful", Toast.LENGTH_SHORT).show();
                     }
                     else{
-                        Toast.makeText(PracticeTestActivity.this, "Insertion Failed", Toast.LENGTH_SHORT).show();
+                       //Toast.makeText(PracticeTestActivity.this, "Insertion Failed", Toast.LENGTH_SHORT).show();
                     }
 
                 } catch (JSONException e) {
