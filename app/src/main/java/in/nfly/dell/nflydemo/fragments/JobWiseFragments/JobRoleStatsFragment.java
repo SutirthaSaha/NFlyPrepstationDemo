@@ -55,13 +55,13 @@ public class JobRoleStatsFragment extends Fragment {
             add(R.drawable.colored_prep);
             add(R.drawable.colorresume);}};
     private ArrayList<String> jobRoleStatsTitleDataSet=new ArrayList<String>(){
-        {add("Median Salary");
+        {add("Median\n Salary");
             add("Unemployment");
             add("Jobs");
-            add("Job Market");
-            add("Future Growth");
-            add("Work-life Balance");
-            add("Stress at Work");
+            add("Job\n Market");
+            add("Future\n Growth");
+            add("Work-life\n Balance");
+            add("Stress \nat Work");
             add("Flexibility");
         }};
 

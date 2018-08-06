@@ -22,7 +22,7 @@
                     android:layout_width="match_parent"
                     android:layout_centerHorizontal="true"
                     android:layout_centerVertical="true"
-                    android:src="@drawable/gradient_header"
+                    android:src="@drawable/gradient_three"
                     android:layout_height="210dp"
                     android:id="@+id/learnTipsImage"
                     android:scaleType="fitXY"/>

@@ -102,12 +102,12 @@ public class MainActivity extends AppCompatActivity {
             add(R.drawable.colored_prep);
             add(R.drawable.colorresume);}};
     private ArrayList<String> featureTitleDataSet=new ArrayList<String>(){
-        {add("Video Courses");
-            add("Weekly Test Series");
-            add("Company/Topic Test");
-            add("Placement Papers");
-            add("Preparation Hub");
-            add("Resume Builder");}};
+        {add("  Video \n Courses");
+            add("Weekly \n Test Series");
+            add("Company/ \nTopic Test");
+            add("Placement \nPapers");
+            add("Preparation \nHub");
+            add("  Resume \n Builder");}};
     private ArrayList<Integer> prepHubImageDataSet=new ArrayList<Integer>(){
         {
             add(R.drawable.presentation);
