@@ -53,30 +53,35 @@ public class ProfileAcademicFragment extends Fragment {
     public RecyclerView trainingsRecyclerView;
     public RecyclerView projectsRecyclerView;
     public RecyclerView achievementsRecyclerView;
+    public RecyclerView skillsRecyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
 
     private String urlAcademic="http://nfly.in/profileapi/academic_details";
     private String oneRow="http://nfly.in/gapi/load_rows_one";
+    private String allRows="http://nfly.in/gapi/load_all_rows";
     private String urlUpdate="http://nfly.in/gapi/update";
     private String urlInsert="http://nfly.in/gapi/insert";
     private String urlDelete="http://nfly.in/gapi/delete_with_one";
     private String urlDataExists="http://nfly.in/gapi/data_exists_one";
+    private String urlGetDetails="http://nfly.in/gapi/get_details_one";
     private String urlGetCPoints="http://nfly.in/gapi/get_cpoints";
 
     private String user_id,cpoints;
     private int status;
     private int xcount=0,xiicount=0;
     private String date;
+    private String skill_id;
 
     private TextView profileWorkExperienceTextDialog,profileTrainingsTextDialog,profileProjectsTextDialog,profileAchievementsTextDialog;
     private TextView profileCollegeName,profileCourse,profileBranch,profileClassOf,profileCGPA;
     private TextView profileXIISchool,profileXIIBoard,profileXIIStream,profileXIIPassingyear,profileXIIPercentage;
     private TextView profileXSchool,profileXBoard,profileXStream,profileXPassingyear,profileXPercentage;
     private TextView profileGitHub,profilePlayStore,profileBehance,profileBlogLink;
+    private TextView profileSkillsTextDialog;
 
     private ImageView workExperienceAddBtn, collegeEducationEditBtn, schoolEducationEditBtn, trainingsAddBtn,
-            projectsAddBtn, achievementsAddBtn, workSampleEditBtn;
+            projectsAddBtn, achievementsAddBtn,skillsAddBtn, workSampleEditBtn;
     private ImageView editWorkExperienceStartDateCalendarBtn,editWorkExperienceLastDateCalendarBtn;
 
     private EditText editSchoolEducationXIISchoolName,editSchoolEducationXIIBoard,editSchoolEducationXIIStream,editSchoolEducationXIIPassingYear,editSchoolEducationXIIPercentage;
@@ -90,6 +95,9 @@ public class ProfileAcademicFragment extends Fragment {
     private EditText editTrainingsCourse,editTrainingsCertifiedBy,editTrainingsDuration,editTrainingsDetails;
     private EditText editProjectsTitle,editProjectsDescription,editProjectsLink;
     private EditText editAchievementsName,editAchievementsDescription;
+    private EditText editSkills;
+
+    private HashMap<String,String> skillMap=new HashMap<String,String>(){};
 
     private ArrayList<String> DataSet=new ArrayList<String>(){
         {  add("blahblah");
@@ -118,6 +126,10 @@ public class ProfileAcademicFragment extends Fragment {
     private ArrayList<String> achievementIdDataSet=new ArrayList<String>(){};
     private ArrayList<String> achievementNameDataSet=new ArrayList<String>(){};
     private ArrayList<String> achievementDescriptionDataSet=new ArrayList<String>(){};
+
+    private ArrayList<String> skillIdDataSet=new ArrayList<String>(){};
+    private ArrayList<String> skillNameDataSet=new ArrayList<String>(){};
+
 
     public ProfileAcademicFragment() {
         // Required empty public constructor
@@ -158,6 +170,7 @@ public class ProfileAcademicFragment extends Fragment {
         profileTrainingsTextDialog=view.findViewById(R.id.profileTrainingsTextDialog);
         profileProjectsTextDialog=view.findViewById(R.id.profileProjectsTextDialog);
         profileAchievementsTextDialog=view.findViewById(R.id.profileAchievementsTextDialog);
+        profileSkillsTextDialog=view.findViewById(R.id.profileSkillsTextDialog);
 
         workExperienceAddBtn=view.findViewById(R.id.workExperienceAddBtn);
         collegeEducationEditBtn=view.findViewById(R.id.collegeEducationEditBtn);
@@ -166,12 +179,13 @@ public class ProfileAcademicFragment extends Fragment {
         projectsAddBtn=view.findViewById(R.id.projectsAddBtn);
         achievementsAddBtn=view.findViewById(R.id.achievementsAddBtn);
         workSampleEditBtn=view.findViewById(R.id.workSampleEditBtn);
+        skillsAddBtn=view.findViewById(R.id.skillsAddBtn);
 
         setWorkExperience(view);
         setTrainings(view);
         setProjects(view);
         setAchievements(view);
-
+        setSkills(view);
         checkSchoolDetails();
         workExperienceAddBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -486,7 +500,42 @@ public class ProfileAcademicFragment extends Fragment {
 
             }
         });
+        skillsAddBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LayoutInflater layoutInflater=getLayoutInflater();
+                View skillsAddLayout=layoutInflater.inflate(R.layout.dialog_edit_skills,null);
 
+                editSkills=skillsAddLayout.findViewById(R.id.editSkills);
+
+                AlertDialog.Builder alertDialog=new AlertDialog.Builder(getActivity());
+                alertDialog.setView(skillsAddLayout);
+                alertDialog.setCancelable(false);
+
+                alertDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getActivity(), "Cancel clicked", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+                alertDialog.setPositiveButton("Submit", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        skillNameDataSet.clear();
+                        skillIdDataSet.clear();
+                        skillMap.clear();
+                        checkSkillExists();
+                        getCPoints();
+                        //Toast.makeText(getActivity(), "Submit Clicked", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                AlertDialog alert=alertDialog.create();
+                alert.show();
+
+            }
+        });
         workSampleEditBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -538,6 +587,406 @@ public class ProfileAcademicFragment extends Fragment {
         return view;
     }
 
+    private void checkSkillExists() {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST,urlDataExists, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject arrayObject=new JSONObject(response);
+                    status=arrayObject.getInt("status");
+                    if(status==200){
+                        getSkillDetails();
+                    }
+                    else{
+                        Toast.makeText(getActivity(), "Check Again", Toast.LENGTH_SHORT).show();
+                        addToSkillTable();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //Toast.makeText(getActivity(), "Skill Doesnt Exists", Toast.LENGTH_SHORT).show();
+                addToSkillTable();
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+
+            @Override
+            protected Map<String,String> getParams() throws AuthFailureError{
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("key","skill_name");
+                params.put("value",editSkills.getText().toString());
+                params.put("table","skills");
+                return params;
+            }
+        };
+        MySingleton.getmInstance(getActivity()).addToRequestQueue(stringRequest);
+    }
+
+    private void getSkillDetails() {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST,urlGetDetails, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject arrayObject=new JSONObject(response);
+                    skill_id=arrayObject.getString("skill_id");
+                    addSkill();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity(), "Error Get Language Details", Toast.LENGTH_SHORT).show();
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+
+            @Override
+            protected Map<String,String> getParams() throws AuthFailureError{
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("key","skill_name");
+                params.put("value",editSkills.getText().toString());
+                params.put("table","skills");
+                return params;
+            }
+        };
+        MySingleton.getmInstance(getActivity()).addToRequestQueue(stringRequest);
+    }
+
+    private void addSkill() {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST,urlInsert, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject arrayObject=new JSONObject(response);
+                    status=arrayObject.getInt("status");
+                    if(status==200){
+                        getSkills();
+                    }
+                    else{
+                        Toast.makeText(getActivity(), "Registration Failed", Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity(), "Error Add Language", Toast.LENGTH_SHORT).show();
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+
+            @Override
+            protected Map<String,String> getParams() throws AuthFailureError{
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("insert_array[user_id]", user_id);
+                params.put("insert_array[skill_id]",skill_id);
+                params.put("table","user_skills");
+                return params;
+            }
+        };
+        MySingleton.getmInstance(getActivity()).addToRequestQueue(stringRequest);
+    }
+
+    private void addToSkillTable() {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST,urlInsert, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject arrayObject=new JSONObject(response);
+                    status=arrayObject.getInt("status");
+                    if(status==200){
+                        checkSkillExists();
+                    }
+                    else{
+                        Toast.makeText(getActivity(), "Registration Failed", Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getActivity(), "Error Add to Table", Toast.LENGTH_SHORT).show();
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+
+            @Override
+            protected Map<String,String> getParams() throws AuthFailureError{
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("insert_array[skill_name]",editSkills.getText().toString());
+                params.put("table","skills");
+                return params;
+            }
+        };
+        MySingleton.getmInstance(getActivity()).addToRequestQueue(stringRequest);
+    }
+
+
+    private void setSkills(View view) {
+        skillsRecyclerView=view.findViewById(R.id.profileSkillsRecyclerView);
+        layoutManager=new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL,false);
+        skillsRecyclerView.setLayoutManager(layoutManager);
+
+        getSkills();
+    }
+
+    private void getSkills() {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, allRows, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                //Toast.makeText(getContext(), "Successful", Toast.LENGTH_SHORT).show();
+                try {
+                    JSONObject arrayObject;
+                    JSONArray parentArray=new JSONArray(response);
+                    for(int i=0;i<parentArray.length();i++) {
+                        arrayObject = parentArray.getJSONObject(i);
+                        skillMap.put(arrayObject.getString("skill_id"),arrayObject.getString("skill_name"));
+                    }
+                    setSkills();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("key", "skill_id");
+                params.put("order", "ASC");
+                params.put("table", "skills");
+                return params;
+            }
+        };
+        MySingleton.getmInstance(getContext()).addToRequestQueue(stringRequest);
+    }
+
+    private void setSkills(){
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, oneRow, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                profileSkillsTextDialog.setVisibility(View.INVISIBLE);
+                //Toast.makeText(getContext(), "Successful", Toast.LENGTH_SHORT).show();
+                try {
+                    JSONObject arrayObject;
+                    JSONArray parentArray=new JSONArray(response);
+                    if(parentArray.length()==0){
+                        profileSkillsTextDialog.setVisibility(View.VISIBLE);
+                    }
+                    for(int i=0;i<parentArray.length();i++) {
+                        arrayObject = parentArray.getJSONObject(i);
+                        skillIdDataSet.add(arrayObject.getString("us_id"));
+                        skillNameDataSet.add(skillMap.get(arrayObject.getString("skill_id")));
+                    }
+                    adapter= new ProfileSkillsAdapter(getActivity(),skillIdDataSet,skillNameDataSet);
+                    skillsRecyclerView.setAdapter(adapter);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+                profileSkillsTextDialog.setVisibility(View.VISIBLE);
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("key", "user_id");
+                params.put("value", user_id);
+                params.put("table", "user_skills");
+                return params;
+            }
+        };
+        MySingleton.getmInstance(getContext()).addToRequestQueue(stringRequest);
+    }
+    public class ProfileSkillsAdapter extends RecyclerView.Adapter<ProfileSkillsAdapter.ProfileSkillsHolder> {
+
+        private Context context;
+        private ArrayList<String> idDataSet,titleDataSet;
+
+        public ProfileSkillsAdapter(Context context, ArrayList<String> idDataSet, ArrayList<String> titleDataSet) {
+            this.context = context;
+            this.idDataSet = idDataSet;
+            this.titleDataSet = titleDataSet;
+        }
+
+        @NonNull
+        @Override
+        public ProfileSkillsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_profile_skills,parent,false);
+            ProfileSkillsHolder holder=new ProfileSkillsHolder(view);
+            return holder;
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull ProfileSkillsHolder holder, final int position) {
+            holder.ProfileSkillTitle.setText(titleDataSet.get(position));
+            holder.profileSkillDeleteBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //Toast.makeText(context, idDataSet.get(position), Toast.LENGTH_SHORT).show();
+                    AlertDialog.Builder alert = new AlertDialog.Builder(
+                            getActivity());
+                    alert.setTitle("Alert!!");
+                    alert.setMessage("Are you sure to delete record");
+                    alert.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            //do your work here
+                            deleteSkill(idDataSet.get(position));
+                            dialog.dismiss();
+
+                        }
+                    });
+                    alert.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                            dialog.dismiss();
+                        }
+                    });
+
+                    alert.show();
+                }
+            });
+        }
+
+        @Override
+        public int getItemCount() {
+            return titleDataSet.size();
+        }
+
+        public class ProfileSkillsHolder extends RecyclerView.ViewHolder{
+
+            public TextView ProfileSkillTitle;
+            public ImageView profileSkillDeleteBtn;
+
+            public ProfileSkillsHolder(View itemView) {
+                super(itemView);
+                ProfileSkillTitle=itemView.findViewById(R.id.profileSkill);
+                profileSkillDeleteBtn=itemView.findViewById(R.id.profileSkillDeleteBtn);
+            }
+        }
+    }
+
+    private void deleteSkill(final String skill_id) {
+        //Toast.makeText(getActivity(), "Delete Skill Clicked", Toast.LENGTH_SHORT).show();
+        StringRequest stringRequest=new StringRequest(Request.Method.POST,urlDelete, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject arrayObject=new JSONObject(response);
+                    //status=arrayObject.getInt("status");
+                    if(arrayObject.getString("status").equals("deleted")){
+                        skillIdDataSet.clear();
+                        skillNameDataSet.clear();
+                        setSkills();
+                        Toast.makeText(getActivity(), "Deletion done", Toast.LENGTH_SHORT).show();
+                        getCPoints();
+                    }
+                    else{
+                        Toast.makeText(getActivity(), "Check Again", Toast.LENGTH_SHORT).show();
+                        addToSkillTable();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("key", "us_id");
+                params.put("value", skill_id);
+                params.put("table", "user_skills");
+                return params;
+            }
+        };
+        MySingleton.getmInstance(getContext()).addToRequestQueue(stringRequest);
+    }
+
     private void getCPoints() {
         StringRequest stringRequest=new StringRequest(Request.Method.POST,urlGetCPoints, new Response.Listener<String>() {
             @Override
@@ -580,7 +1029,7 @@ public class ProfileAcademicFragment extends Fragment {
         StringRequest stringRequest=new StringRequest(Request.Method.POST, urlUpdate, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(getContext(), "C Points updated", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "C Points updated", Toast.LENGTH_SHORT).show();
                 ((ProfileActivity)getActivity()).setValues();
             }
         }, new Response.ErrorListener() {

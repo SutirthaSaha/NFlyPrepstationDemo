@@ -1,5 +1,6 @@
 package in.nfly.dell.nflydemo.activities.singleActivities;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -30,6 +31,7 @@ import java.util.Map;
 import in.nfly.dell.nflydemo.MySingleton;
 import in.nfly.dell.nflydemo.R;
 import in.nfly.dell.nflydemo.User;
+import in.nfly.dell.nflydemo.activities.ProfileActivity;
 
 public class PersonalityTestActivity extends AppCompatActivity {
 
@@ -379,6 +381,8 @@ public class PersonalityTestActivity extends AppCompatActivity {
                     JSONObject arrayObject=new JSONObject(response);
                     status=arrayObject.getInt("status");
                     if(status==200){
+                        Intent intent=new Intent(PersonalityTestActivity.this, ProfileActivity.class);
+                        startActivity(intent);
                         finish();
                     }
                     else{

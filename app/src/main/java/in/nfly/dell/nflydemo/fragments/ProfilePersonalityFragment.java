@@ -167,7 +167,7 @@ public class ProfilePersonalityFragment extends Fragment {
         StringRequest stringRequest=new StringRequest(Request.Method.POST, urlUpdate, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(getContext(), "C Points updated", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "C Points updated", Toast.LENGTH_SHORT).show();
                 ((ProfileActivity)getActivity()).setValues();
             }
         }, new Response.ErrorListener() {

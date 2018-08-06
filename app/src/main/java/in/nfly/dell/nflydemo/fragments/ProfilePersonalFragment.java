@@ -266,6 +266,7 @@ public class ProfilePersonalFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int which) {
                         languageTitleDataSet.clear();
                         languageIdDataSet.clear();
+                        languageMap.clear();
                         checkLanguageExists();
                         getCPoints();
                     }
@@ -301,6 +302,7 @@ public class ProfilePersonalFragment extends Fragment {
                     public void onClick(DialogInterface dialog, int which) {
                         hobbyTitleDataSet.clear();
                         hobbyIdDataSet.clear();
+                        hobbyMap.clear();
                         checkHobbyExists();
                         getCPoints();
                     }
@@ -472,7 +474,7 @@ public class ProfilePersonalFragment extends Fragment {
         StringRequest stringRequest=new StringRequest(Request.Method.POST, urlUpdate, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Toast.makeText(getContext(), "C Points updated", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "C Points updated", Toast.LENGTH_SHORT).show();
                 ((ProfileActivity)getActivity()).setValues();
             }
         }, new Response.ErrorListener() {
@@ -989,7 +991,7 @@ public class ProfilePersonalFragment extends Fragment {
                     JSONObject arrayObject=new JSONObject(response);
                     status=arrayObject.getInt("status");
                     if(status==200){
-                        setHobbies();
+                        getHobbies();
                     }
                     else{
                         Toast.makeText(getActivity(), "Registration Failed", Toast.LENGTH_SHORT).show();
@@ -1034,7 +1036,7 @@ public class ProfilePersonalFragment extends Fragment {
                     JSONObject arrayObject=new JSONObject(response);
                     status=arrayObject.getInt("status");
                     if(status==200){
-                        setLanguages();
+                        getLanguages();
                     }
                     else{
                         Toast.makeText(getActivity(), "Registration Failed", Toast.LENGTH_SHORT).show();
@@ -1614,6 +1616,7 @@ public class ProfilePersonalFragment extends Fragment {
                         languageTitleDataSet.clear();
                         setLanguages();
                         Toast.makeText(getActivity(), "Deletion done", Toast.LENGTH_SHORT).show();
+                        getCPoints();
                     }
                     else{
                         Toast.makeText(getActivity(), "Check Again", Toast.LENGTH_SHORT).show();
@@ -1737,6 +1740,7 @@ public class ProfilePersonalFragment extends Fragment {
                             hobbyTitleDataSet.clear();
                             setHobbies();
                             Toast.makeText(getActivity(), "Deletion done", Toast.LENGTH_SHORT).show();
+                            getCPoints();
                         }
                         else{
                             Toast.makeText(getActivity(), "Check Again", Toast.LENGTH_SHORT).show();
