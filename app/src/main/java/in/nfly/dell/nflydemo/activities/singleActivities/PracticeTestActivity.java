@@ -98,16 +98,6 @@ public class PracticeTestActivity extends AppCompatActivity {
         user_id=user.getUser_id();
 
         setToolbar();
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent=new Intent(PracticeTestActivity.this,PracticeTestResultActivity.class);
-                intent.putExtra("user_score",user_score);
-                intent.putExtra("max_score",max_score);
-                startActivity(intent);
-                finish();
-            }
-        });
         practiceCountdownTimerText=findViewById(R.id.practiceCountdownTimerText);
         new CountDownTimer(Integer.parseInt(test_duration)*60*1000, 1000) { // adjust the milli seconds here
 
@@ -165,7 +155,11 @@ public class PracticeTestActivity extends AppCompatActivity {
         toolbar=findViewById(R.id.practiceTestToolbar);
         toolbar.setTitle(test_name);
         toolbar.setTitleTextColor(Color.WHITE);
-        toolbar.setNavigationIcon(R.drawable.arrow_left);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 
     private void checkUserGivenTest(){
@@ -216,7 +210,6 @@ public class PracticeTestActivity extends AppCompatActivity {
                     previous_attempt_id = Integer.parseInt(prev_attempt_id);
                     attempt_id = previous_attempt_id + 1;
 
-                    //insertAttempt();
                     setTestQuestions();
 
                 } catch (JSONException e) {
@@ -279,6 +272,9 @@ public class PracticeTestActivity extends AppCompatActivity {
 
                     if (questionDataSet.isEmpty()){
                         Toast.makeText(PracticeTestActivity.this, "No Questions There", Toast.LENGTH_SHORT).show();
+                        Intent intent=new Intent(PracticeTestActivity.this,PracticeActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
                         finish();
                     }
                     else {
@@ -423,6 +419,7 @@ public class PracticeTestActivity extends AppCompatActivity {
 
     public void onTestSubmitBtnClick(View view) {
         saveUserOption();
+        practiceTestSubmitBtn.setEnabled(false);
         //Toast.makeText(this, Integer.toString(userOptions[count]), Toast.LENGTH_SHORT).show();
 
         for(int i=0;i<answerDataSet.size();i++){
@@ -540,60 +537,6 @@ public class PracticeTestActivity extends AppCompatActivity {
                 params.put("insert_array[user_response]",Integer.toString(userOptions[i]));
                 params.put("insert_array[marks]",Integer.toString(marks));
                 params.put("table","nfly_test_response");
-                return params;
-            }
-        };
-        MySingleton.getmInstance(PracticeTestActivity.this).addToRequestQueue(stringRequest);
-    }
-
-
-    private void updateTestTable() {
-        StringRequest stringRequest=new StringRequest(Request.Method.POST,urlUpdateTest, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                Toast.makeText(PracticeTestActivity.this, response, Toast.LENGTH_SHORT).show();
-                try {
-                    JSONObject arrayObject=new JSONObject(response);
-                    status=arrayObject.getInt("status");
-                    if(status==200){
-                        Toast.makeText(PracticeTestActivity.this, "Update Successful", Toast.LENGTH_SHORT).show();
-                        finish();
-                    }
-                    else{
-                        Toast.makeText(PracticeTestActivity.this, "Update Failed", Toast.LENGTH_SHORT).show();
-                    }
-
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(PracticeTestActivity.this, "Error", Toast.LENGTH_SHORT).show();
-            }
-        })
-        {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> headers = new HashMap<String, String>();
-                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
-                return headers;
-            }
-
-            @Override
-            protected Map<String,String> getParams() throws AuthFailureError{
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("key1","user_id");
-                params.put("value1",user_id);
-                params.put("key2","test_id");
-                params.put("value2",test_id);
-                params.put("key3","attempt_id");
-                params.put("value3",Integer.toString(attempt_id));
-                params.put("update_array[state]","1");
-                params.put("update_array[score]",Integer.toString(user_score));
-                params.put("table","nfly_test_result");
                 return params;
             }
         };

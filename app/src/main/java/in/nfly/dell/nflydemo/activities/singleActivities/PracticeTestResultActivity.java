@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.github.lzyzsd.circleprogress.DonutProgress;
@@ -20,6 +21,8 @@ public class PracticeTestResultActivity extends AppCompatActivity {
     private int user_score,max_score;
     private TextView practiceTestResultMarks;
     private DonutProgress practiceTestResultProgress;
+    private Button toPracticeTestActivity,toDashboardActivity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +30,9 @@ public class PracticeTestResultActivity extends AppCompatActivity {
 
         practiceTestResultMarks=findViewById(R.id.practiceTestResultMarks);
         practiceTestResultProgress=findViewById(R.id.practiceTestResultProgress);
+        toPracticeTestActivity=findViewById(R.id.toPracticeTestActivity);
+        toDashboardActivity=findViewById(R.id.toDashboardActivity);
+
         Intent intent=getIntent();
         user_score=intent.getIntExtra("user_score",0);
         max_score=intent.getIntExtra("max_score",30);
@@ -35,23 +41,30 @@ public class PracticeTestResultActivity extends AppCompatActivity {
         practiceTestResultProgress.setMax(max_score);
         practiceTestResultProgress.setProgress(user_score);
         setToolbar();
+        toPracticeTestActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(PracticeTestResultActivity.this, PracticeActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                finish();
+            }
+        });
+
+        toDashboardActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(PracticeTestResultActivity.this, DashboardActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 
     private void setToolbar() {
         toolbar=findViewById(R.id.practiceTestResultToolbar);
         toolbar.setTitle("Your Score");
         toolbar.setTitleTextColor(Color.WHITE);
-    }
-
-    public void onToDashboardBtnClick(View view) {
-        Intent intent=new Intent(PracticeTestResultActivity.this, DashboardActivity.class);
-        startActivity(intent);
-        finish();
-    }
-
-    public void onToPracticeActivityClick(View view) {
-        Intent intent=new Intent(PracticeTestResultActivity.this, PracticeActivity.class);
-        startActivity(intent);
-        finish();
     }
 }

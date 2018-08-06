@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -36,6 +37,7 @@ public class LearnInterviewSubtopicsActivity extends AppCompatActivity {
     private RecyclerView interviewSubTopicsRecyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.Adapter adapter;
+    private LinearLayout noInterviewSubtopics;
 
     private String urlInterviewSubTopics="http://nfly.in/gapi/load_rows_one";
 
@@ -59,6 +61,7 @@ public class LearnInterviewSubtopicsActivity extends AppCompatActivity {
             }
         });
 
+        noInterviewSubtopics=findViewById(R.id.noInterviewSubtopics);
         interviewSubTopicsRecyclerView=findViewById(R.id.interviewSubTopicsRecyclerView);
         layoutManager=new LinearLayoutManager(LearnInterviewSubtopicsActivity.this,LinearLayoutManager.VERTICAL,false);
         interviewSubTopicsRecyclerView.setLayoutManager(layoutManager);
@@ -78,6 +81,13 @@ public class LearnInterviewSubtopicsActivity extends AppCompatActivity {
                 try {
                     JSONObject arrayObject;
                     JSONArray parentArray=new JSONArray(response);
+                    if(parentArray.length()==0){
+                        noInterviewSubtopics.setVisibility(View.VISIBLE);
+                        interviewSubTopicsRecyclerView.setVisibility(View.INVISIBLE);
+                    }else{
+                        noInterviewSubtopics.setVisibility(View.INVISIBLE);
+                        interviewSubTopicsRecyclerView.setVisibility(View.VISIBLE);
+                    }
                     for(int i=0;i<parentArray.length();i++){
                         arrayObject=parentArray.getJSONObject(i);
                         titleDataSet.add(arrayObject.getString("subtopic_name"));
@@ -87,6 +97,8 @@ public class LearnInterviewSubtopicsActivity extends AppCompatActivity {
                     interviewSubTopicsRecyclerView.setAdapter(adapter);
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    noInterviewSubtopics.setVisibility(View.VISIBLE);
+                    interviewSubTopicsRecyclerView.setVisibility(View.INVISIBLE);
                 }
             }
         }, new Response.ErrorListener() {

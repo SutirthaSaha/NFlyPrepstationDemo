@@ -84,8 +84,6 @@ public class DashboardActivity extends AppCompatActivity {
         Picasso.with(this).load("http://www.vactualpapers.com/web/wallpapers/material-design-hd-wallpaper-no-0769/1920x1920.png").into(dashboardImage);
         numberOfTestsTextView=findViewById(R.id.numberOfTests);
         percentageTextView=findViewById(R.id.percentage);
-
-
         layoutManager=new LinearLayoutManager(DashboardActivity.this, LinearLayoutManager.VERTICAL,false);
         dashboardRecyclerView.setLayoutManager(layoutManager);
         setValues();

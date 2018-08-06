@@ -34,7 +34,7 @@ public class ProfileResumeAdapter extends RecyclerView.Adapter<ProfileResumeAdap
     @NonNull
     @Override
     public ProfileResumeHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.card_learn_course_item,parent,false);
+        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.card_profile_resume_item,parent,false);
         ProfileResumeHolder holder=new ProfileResumeHolder(view);
         return holder;
     }
@@ -66,9 +66,9 @@ public class ProfileResumeAdapter extends RecyclerView.Adapter<ProfileResumeAdap
         public ImageView ProfileResumeCardImage;
         public ProfileResumeHolder(View itemView) {
             super(itemView);
-            ProfileResumeCardView=itemView.findViewById(R.id.learnCourseCardView);
-            ProfileResumeCardImage=itemView.findViewById(R.id.learnCourseCardImage);
-            ProfileResumeCardTitle=itemView.findViewById(R.id.learnCourseCardTitle);
+            ProfileResumeCardView=itemView.findViewById(R.id.resumeCardView);
+            ProfileResumeCardImage=itemView.findViewById(R.id.resumeCardImage);
+            ProfileResumeCardTitle=itemView.findViewById(R.id.resumeCardTitle);
         }
     }
 }

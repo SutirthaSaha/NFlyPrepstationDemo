@@ -107,7 +107,7 @@ public class KnowledgeBaseCompanyWiseFragment extends Fragment {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("key", "company_id");
+                params.put("key", "company_name");
                 params.put("order", "ASC");
                 params.put("table", "company");
                 return params;
@@ -115,6 +115,4 @@ public class KnowledgeBaseCompanyWiseFragment extends Fragment {
         };
         MySingleton.getmInstance(getContext()).addToRequestQueue(stringRequest);
     }
-
-
 }

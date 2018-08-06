@@ -28,7 +28,7 @@ public class FeedBackActivity extends AppCompatActivity {
             }
         });
         feedbackWebView.setWebViewClient(new WebViewClient());
-        feedbackWebView.loadUrl("http://www.google.com");
+        feedbackWebView.loadUrl("https://docs.google.com/forms/d/e/1FAIpQLScuSUYmZpPDRQUEtCGvv_DYqcLYVi1dd-mBtM2jLg5VTCxeXg/viewform");
         //feedbackWebView.loadUrl("http://docs.google.com/gview?embedded=true&url=" +"http://nfly.in/profileapi/resume/12/sdf5614dflfd5");
 
     }

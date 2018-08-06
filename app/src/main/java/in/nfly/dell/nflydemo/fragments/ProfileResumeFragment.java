@@ -45,7 +45,7 @@ public class ProfileResumeFragment extends Fragment {
         linkDataSet.add("http://nfly.in/profileapi/resume4/"+user_id+"/sdf5614dflfd5");
 
         profileResumeRecyclerView=v.findViewById(R.id.profileResumeRecyclerView);
-        layoutManager=new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
+        layoutManager=new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false);
         profileResumeRecyclerView.setLayoutManager(layoutManager);
         adapter=new ProfileResumeAdapter(getContext(),titleDataSet,imageDataSet,linkDataSet);
         profileResumeRecyclerView.setAdapter(adapter);
