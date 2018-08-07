@@ -117,6 +117,12 @@ public class SalaryCalculatorActivity extends AppCompatActivity {
         checkSalary();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        MySingleton.release();
+    }
+
     private void checkSalary() {
         if(!salaryCalcCTCEditText.getText().toString().isEmpty() && !salaryCalcCompanyAutoText.getText().toString().isEmpty()) {
 

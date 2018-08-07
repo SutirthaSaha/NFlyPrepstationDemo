@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import in.nfly.dell.nflydemo.MySingleton;
 import in.nfly.dell.nflydemo.R;
 import in.nfly.dell.nflydemo.User;
 import in.nfly.dell.nflydemo.fragments.PracticeCompanyWiseFragment;
@@ -71,6 +72,12 @@ public class PracticeActivity extends AppCompatActivity {
         drawerLayoutPractice=findViewById(R.id.drawerLayoutPractice);
         setToolbar();
         setNavigationDrawer();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        MySingleton.release();
     }
 
     private void setNavigationDrawer() {

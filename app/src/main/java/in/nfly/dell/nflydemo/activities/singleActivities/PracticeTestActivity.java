@@ -543,4 +543,9 @@ public class PracticeTestActivity extends AppCompatActivity {
         MySingleton.getmInstance(PracticeTestActivity.this).addToRequestQueue(stringRequest);
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        MySingleton.release();
+    }
 }

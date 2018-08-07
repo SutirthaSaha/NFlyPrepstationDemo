@@ -133,6 +133,12 @@ public class ProfileActivity extends AppCompatActivity {
             MySingleton.getmInstance(ProfileActivity.this).addToRequestQueue(stringRequest);
         }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        MySingleton.release();
+    }
+
     private void setToolbar() {
         toolbar=findViewById(R.id.profileToolbar);
         toolbar.setTitle("Profile");

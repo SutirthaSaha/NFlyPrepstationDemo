@@ -55,6 +55,12 @@ public class LearnTipsDetailsActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        tipsDetailsImage.setImageDrawable(null);
+    }
+
     private void setToolbar() {
         toolbar=findViewById(R.id.tipsDetailsToolbar);
         toolbar.setTitle(topic_name);

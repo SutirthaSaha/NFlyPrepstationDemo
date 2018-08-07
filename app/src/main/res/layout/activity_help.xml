@@ -21,7 +21,35 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             >
+            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical" android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_height="191dp"
+                    android:background="@drawable/gradient_three"
+                    android:scaleType="fitXY"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:foregroundGravity="center"
+                    android:textColor="#fff"
+                    android:text="Help"
+                    android:gravity="center"
+                    android:shadowColor="#000000"
+                    android:shadowDx="1.5"
+                    android:shadowDy="1.5"
+                    android:shadowRadius="1.6"
+                    android:layout_marginTop="25dp"/>
+
+            </RelativeLayout>
             <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -60,10 +88,11 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:textColor="#000"
                         android:textSize="15sp"
                         android:layout_gravity="center"
-                        android:text="8420166148"/>
+                        android:id="@+id/helpPhoneNumber"
+                        android:textColor="#00B8D4"
+                        android:text="033 4062 3141"/>
                     </LinearLayout>
                 </LinearLayout>
             </android.support.v7.widget.CardView>
@@ -105,10 +134,57 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColor="#000"
+                            android:textColor="#00B8D4"
                             android:textSize="15sp"
+                            android:id="@+id/helpEmailId"
                             android:layout_gravity="center"
                             android:text="support@nfly.in"/>
+                    </LinearLayout>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="15dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="17dp"
+                    android:layout_marginRight="17dp"
+                    android:layout_marginTop="10dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:padding="15dp"
+                        android:layout_marginRight="20dp"
+                        android:contentDescription="Image"
+                        android:src="@drawable/whatsapp"/>
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:textSize="17sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:text="Whatsapp: "/>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="#00B8D4"
+                            android:id="@+id/helpWhatsappNumber"
+                            android:textSize="15sp"
+                            android:layout_gravity="center"
+                            android:text="8420166148"/>
                     </LinearLayout>
                 </LinearLayout>
             </android.support.v7.widget.CardView>
@@ -151,8 +227,9 @@
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textColor="#000"
                             android:textSize="15sp"
+                            android:textColor="#00B8D4"
+                            android:id="@+id/helpLocation"
                             android:layout_gravity="center"
                             android:text="E 2/4, Netguru Building, Salt Lake Sector-V, Kolkata, West Bengal"/>
                     </LinearLayout>

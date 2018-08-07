@@ -233,4 +233,11 @@ public class DashboardActivity extends AppCompatActivity {
         };
         MySingleton.getmInstance(DashboardActivity.this).addToRequestQueue(stringRequest);
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        MySingleton.release();
+        dashboardRecyclerView.setAdapter(null);
+    }
 }

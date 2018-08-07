@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import in.nfly.dell.nflydemo.MySingleton;
 import in.nfly.dell.nflydemo.R;
 import in.nfly.dell.nflydemo.User;
 import in.nfly.dell.nflydemo.fragments.LearnCourseFragment;
@@ -183,5 +184,11 @@ public class LearnActivity extends AppCompatActivity {
         toolbar=findViewById(R.id.learnToolbar);
         toolbar.setTitle("Learn");
         toolbar.setTitleTextColor(Color.WHITE);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        MySingleton.release();
     }
 }

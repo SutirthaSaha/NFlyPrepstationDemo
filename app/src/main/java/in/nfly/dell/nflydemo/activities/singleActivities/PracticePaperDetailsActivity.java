@@ -69,6 +69,13 @@ public class PracticePaperDetailsActivity extends AppCompatActivity {
         setValues();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        practicePaperDetailsRecyclerView.setAdapter(null);
+        MySingleton.release();
+    }
+
     private void setToolbar() {
         toolbar=findViewById(R.id.practicePaperDetailsToolbar);
         toolbar.setTitle(subtopic_name);

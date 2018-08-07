@@ -126,4 +126,11 @@ public class LearnInterviewSubtopicsActivity extends AppCompatActivity {
         };
         MySingleton.getmInstance(LearnInterviewSubtopicsActivity.this).addToRequestQueue(stringRequest);
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        interviewSubTopicsRecyclerView.setAdapter(null);
+        MySingleton.release();
+    }
 }

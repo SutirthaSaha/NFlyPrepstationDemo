@@ -128,4 +128,11 @@ public class LearnGDTopicsActivity extends AppCompatActivity {
         };
         MySingleton.getmInstance(LearnGDTopicsActivity.this).addToRequestQueue(stringRequest);
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        gdTopicsRecyclerView.setAdapter(null);
+        MySingleton.release();
+    }
 }

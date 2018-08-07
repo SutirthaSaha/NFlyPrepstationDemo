@@ -243,4 +243,9 @@ public class RegisterActivity extends AppCompatActivity {
         return null;
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        MySingleton.release();
+    }
 }
