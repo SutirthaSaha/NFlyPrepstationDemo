@@ -3,6 +3,7 @@ package in.nfly.dell.nflydemo.activities;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -33,7 +34,9 @@ import in.nfly.dell.nflydemo.activities.singleActivities.ForgotPasswordActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private EditText emailId,passWord;
+    private EditText emailId;//
+    // passWord;
+    private TextInputEditText passWord;
     private Button loginBtn;
     private TextView loginForgotPasswordText;
     private String userLogin="http://nfly.in/gapi/data_exists_two";

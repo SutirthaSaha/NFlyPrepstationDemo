@@ -280,7 +280,7 @@ public class PracticeTestActivity extends AppCompatActivity {
                     else {
                         practiceTestNextBtn.setVisibility(View.VISIBLE);
                         practiceTestNextBtn.setEnabled(true);
-                        practiceTestQuestion.setText(questionDataSet.get(count));
+                        practiceTestQuestion.setText((count+1)+". "+questionDataSet.get(count));
                         practiceTestOption1.setText(questionOptionsSet.get(questionDataSet.get(count)).get(0));
                         practiceTestOption2.setText(questionOptionsSet.get(questionDataSet.get(count)).get(1));
                         practiceTestOption3.setText(questionOptionsSet.get(questionDataSet.get(count)).get(2));
@@ -342,7 +342,7 @@ public class PracticeTestActivity extends AppCompatActivity {
         showUserOption(count);
         practiceTestNextBtn.setVisibility(View.VISIBLE);
         practiceTestNextBtn.setEnabled(true);
-        practiceTestQuestion.setText(questionDataSet.get(count));
+        practiceTestQuestion.setText((count+1)+". "+questionDataSet.get(count));
         practiceTestOption1.setText(questionOptionsSet.get(questionDataSet.get(count)).get(0));
         practiceTestOption2.setText(questionOptionsSet.get(questionDataSet.get(count)).get(1));
         practiceTestOption3.setText(questionOptionsSet.get(questionDataSet.get(count)).get(2));
@@ -366,7 +366,7 @@ public class PracticeTestActivity extends AppCompatActivity {
         showUserOption(count);
         practiceTestPreviousBtn.setVisibility(View.VISIBLE);
         practiceTestPreviousBtn.setEnabled(true);
-        practiceTestQuestion.setText(questionDataSet.get(count));
+        practiceTestQuestion.setText((count+1)+". "+questionDataSet.get(count));
         practiceTestOption1.setText(questionOptionsSet.get(questionDataSet.get(count)).get(0));
         practiceTestOption2.setText(questionOptionsSet.get(questionDataSet.get(count)).get(1));
         practiceTestOption3.setText(questionOptionsSet.get(questionDataSet.get(count)).get(2));
@@ -420,6 +420,7 @@ public class PracticeTestActivity extends AppCompatActivity {
     public void onTestSubmitBtnClick(View view) {
         saveUserOption();
         practiceTestSubmitBtn.setEnabled(false);
+        practiceTestSubmitBtn.setText("Please wait...");
         //Toast.makeText(this, Integer.toString(userOptions[count]), Toast.LENGTH_SHORT).show();
 
         for(int i=0;i<answerDataSet.size();i++){
