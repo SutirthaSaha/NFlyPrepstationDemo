@@ -20,7 +20,7 @@ import me.relex.circleindicator.CircleIndicator;
 public class SplashScreenSliderActivity extends AppCompatActivity {
     private int[] swipeImageDataSet= {R.drawable.cv,R.drawable.presentation,R.drawable.exam};
     private String[] swipeTitleDataSet={"Resume Builder","Video Courses","Mock Tests"};
-    private String[] swipeSubtitleDataSet={"Build your own resume with no effort","Watch videos to learn etc etc","Solve mock tests blahblah this and that"};
+    private String[] swipeSubtitleDataSet={"Build your own resume with no effort","Watch videos to expand your knowledge horizons","Solve mock to improve your performance"};
 
     private int currentPage = 0;
     private int NUM_PAGES;

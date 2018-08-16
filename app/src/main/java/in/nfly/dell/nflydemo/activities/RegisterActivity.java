@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -36,9 +37,9 @@ import in.nfly.dell.nflydemo.R;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    private EditText fNameRegister,lNameRegister,emailRegister,passwordRegister,passwordConfirmRegister;
+    private EditText fNameRegister,lNameRegister,emailRegister;//passwordRegister,passwordConfirmRegister;
     private TextInputLayout fNameWrapper,lNameWrapper,emailRegisterWrapper,passWordRegisterWrapper;
-
+    private TextInputEditText passwordRegister;
     private Button registerBtn;
 
     private String urlCollege="http://nfly.in/gapi/load_all_rows";

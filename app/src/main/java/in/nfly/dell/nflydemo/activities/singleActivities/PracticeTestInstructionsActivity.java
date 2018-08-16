@@ -26,7 +26,7 @@ public class PracticeTestInstructionsActivity extends AppCompatActivity {
         num_ques=intent.getStringExtra("num_ques");
 
         practiceTestInstructionText=findViewById(R.id.practiceTestInstructionText);
-        practiceTestInstructionText.setText("1. Marks : "+3*Integer.parseInt(num_ques)+"\n\n2. Per Question Marks : "+3+"\n\n3. Duration : "+test_duration+" minutes "+"\n\n4. No negative marking \n\n5. Can't leave the test midway\n");
+        practiceTestInstructionText.setText("1. Marks : "+3*Integer.parseInt(num_ques)+"\n\n2. Per Question Marks : "+3+"\n\n3. Number of Questions : "+num_ques+"\n\n4. Duration : "+test_duration+" minutes "+"\n\n5. No negative marking \n\n6. Can't leave the test midway\n");
         setToolbar();
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override

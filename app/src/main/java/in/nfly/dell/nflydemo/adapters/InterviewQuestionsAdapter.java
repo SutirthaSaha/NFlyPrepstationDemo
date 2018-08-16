@@ -1,9 +1,11 @@
 package in.nfly.dell.nflydemo.adapters;
 
 import android.content.Context;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +41,12 @@ public class InterviewQuestionsAdapter extends RecyclerView.Adapter<InterviewQue
             holder.InterviewQuestionsCardAnswerText.setText("No Answer Found");
         }
         else{
-            holder.InterviewQuestionsCardAnswerText.setText(answerDataSet.get(position));
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                holder.InterviewQuestionsCardAnswerText.setText(Html.fromHtml(answerDataSet.get(position),Html.FROM_HTML_MODE_COMPACT));
+            }
+            else{
+                holder.InterviewQuestionsCardAnswerText.setText(Html.fromHtml(answerDataSet.get(position)));
+            }
         }
     }
 
