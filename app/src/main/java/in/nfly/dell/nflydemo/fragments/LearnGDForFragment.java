@@ -8,6 +8,8 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import in.nfly.dell.nflydemo.R;
@@ -19,6 +21,8 @@ public class LearnGDForFragment extends Fragment {
 
     private String for_logic;
     private TextView gdForTextView;
+    private LinearLayout noGdForText;
+    private ScrollView gdForScroll;
 
     public LearnGDForFragment() {
         // Required empty public constructor
@@ -48,11 +52,17 @@ public class LearnGDForFragment extends Fragment {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_learn_gdfor, container, false);
         gdForTextView=view.findViewById(R.id.gdForTextView);
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
-            gdForTextView.setText(Html.fromHtml(for_logic,Html.FROM_HTML_MODE_COMPACT));
-        }
-        else{
-            gdForTextView.setText(Html.fromHtml(for_logic));
+        noGdForText=view.findViewById(R.id.noGdForText);
+        gdForScroll=view.findViewById(R.id.gdForScroll);
+        if(for_logic.isEmpty()){
+            noGdForText.setVisibility(View.VISIBLE);
+        }else {
+            gdForScroll.setVisibility(View.VISIBLE);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                gdForTextView.setText(Html.fromHtml(for_logic, Html.FROM_HTML_MODE_COMPACT));
+            } else {
+                gdForTextView.setText(Html.fromHtml(for_logic));
+            }
         }
         return view;
     }

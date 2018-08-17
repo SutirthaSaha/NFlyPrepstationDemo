@@ -5,19 +5,43 @@
     android:layout_height="match_parent"
     tools:context=".fragments.LearnGDForFragment">
 
-    <ScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="invisible"
+            android:gravity="center"
+            android:id="@+id/noGdForText">
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="No Answers Found Here"
+            android:gravity="center"
             android:layout_margin="5dp"
             android:textColor="#000"
             android:textSize="17sp"
             android:lineSpacingMultiplier="1.3"
-            android:fontFamily="@font/roboto"
-            android:id="@+id/gdForTextView"
-            />
-    </ScrollView>
+            android:fontFamily="@font/roboto"/>
+        </LinearLayout>
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/gdForScroll"
+            android:visibility="invisible">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:textColor="#000"
+                android:textSize="17sp"
+                android:lineSpacingMultiplier="1.3"
+                android:fontFamily="@font/roboto"
+                android:id="@+id/gdForTextView"
+                />
+        </ScrollView>
+    </RelativeLayout>
 
 </FrameLayout>

@@ -8,6 +8,8 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import in.nfly.dell.nflydemo.R;
@@ -19,6 +21,8 @@ public class LearnGDAgainstFragment extends Fragment {
 
     private String against_logic;
     private TextView gdAgainstTextView;
+    private LinearLayout noGdAgainstText;
+    private ScrollView gdAgainstScroll;
 
     public LearnGDAgainstFragment() {
         // Required empty public constructor
@@ -36,11 +40,18 @@ public class LearnGDAgainstFragment extends Fragment {
         // Inflate the layout for this fragment
         View view= inflater.inflate(R.layout.fragment_learn_gdagainst, container, false);
         gdAgainstTextView=view.findViewById(R.id.gdAgainstTextView);
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
-            gdAgainstTextView.setText(Html.fromHtml(against_logic,Html.FROM_HTML_MODE_COMPACT));
+        noGdAgainstText=view.findViewById(R.id.noGdAgainstText);
+        gdAgainstScroll=view.findViewById(R.id.gdAgainstScroll);
+        if(against_logic.isEmpty()){
+            noGdAgainstText.setVisibility(View.VISIBLE);
         }
-        else{
-            gdAgainstTextView.setText(Html.fromHtml(against_logic));
+        else {
+            gdAgainstScroll.setVisibility(View.VISIBLE);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                gdAgainstTextView.setText(Html.fromHtml(against_logic, Html.FROM_HTML_MODE_COMPACT));
+            } else {
+                gdAgainstTextView.setText(Html.fromHtml(against_logic));
+            }
         }
         return view;
     }
