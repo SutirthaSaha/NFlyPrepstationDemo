@@ -33,6 +33,7 @@ public class LearnGDTopicsActivity extends AppCompatActivity {
 
     private String section_id,section_name;
     private String urlGdTopics="http://nfly.in/gapi/load_rows_one";
+    
     private Toolbar toolbar;
 
     private ArrayList<String> titleDataSet=new ArrayList<String>(){};
