@@ -59,7 +59,11 @@
         <activity android:name=".activities.HelpActivity" />
         <activity android:name=".activities.singleActivities.PersonalityTestActivity" />
         <activity android:name=".activities.singleActivities.PracticeTestInstructionsActivity" />
-        <activity android:name=".activities.singleActivities.PracticeTestResultActivity"></activity>
+        <activity android:name=".activities.singleActivities.PracticeTestResultActivity" />
+        <activity android:name=".activities.CoursesActivity" />
+        <activity android:name=".activities.CompanyWisePrepActivity" />
+        <activity android:name=".activities.JobInfoActivity" />
+        <activity android:name=".activities.InterviewGdPrepActivity"></activity>
     </application>
 
 </manifest>

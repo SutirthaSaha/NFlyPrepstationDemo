@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.os.Handler;
+import android.provider.SyncStateContract;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -20,6 +21,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -216,6 +218,8 @@ public class MainActivity extends AppCompatActivity {
         Intent intent=getIntent();
         email=intent.getStringExtra("email");
         getUserDetails(email);
+        toolbar=findViewById(R.id.homeToolbar);
+        setSupportActionBar(toolbar);
         setToolbar();
         drawerLayoutHome=findViewById(R.id.drawerLayoutHome);
         progressDialog=new ProgressDialog(MainActivity.this);
@@ -289,6 +293,34 @@ public class MainActivity extends AppCompatActivity {
         };
         MySingleton.getmInstance(MainActivity.this).addToRequestQueue(stringRequest);
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_toolbar, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent;
+        if (item.getTitle().equals("Feedback")){
+            intent=new Intent(MainActivity.this,FeedBackActivity.class);
+            startActivity(intent);
+        }
+        if (item.getTitle().equals("Help")){
+            intent=new Intent(MainActivity.this,HelpActivity.class);
+            startActivity(intent);
+        }
+        if(item.getTitle().equals("Sign Out")) {
+            User user = new User(MainActivity.this);
+            user.logOut();
+            intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     private void setTestomialCards()
     {
         TestimonialsRecyclerView=findViewById(R.id.homeTestimonialsRecyclerView);
@@ -576,50 +608,38 @@ public class MainActivity extends AppCompatActivity {
                 if (item.getTitle().equals("Home")){
                     intent=new Intent(MainActivity.this,MainActivity.class);
                     startActivity(intent);
-                    finish();
                 }
                 if (item.getTitle().equals("Dashboard")){
                     intent=new Intent(MainActivity.this,DashboardActivity.class);
                     startActivity(intent);
-                    finish();
                 }
-                if (item.getTitle().equals("Profile")){
-                    intent=new Intent(MainActivity.this,ProfileActivity.class);
+                if (item.getTitle().equals("Courses")){
+                    intent=new Intent(MainActivity.this,CoursesActivity.class);
                     startActivity(intent);
                 }
-                if (item.getTitle().equals("Learn")){
-                    intent=new Intent(MainActivity.this,LearnActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-                if(item.getTitle().equals("Practice")){
+                if(item.getTitle().equals("Topic Wise Prep")){
                     intent=new Intent(MainActivity.this,PracticeActivity.class);
                     startActivity(intent);
-                    finish();
                 }
-                if (item.getTitle().equals("Knowledge Base")){
-                    intent=new Intent(MainActivity.this,KnowledgeBaseActivity.class);
+                if (item.getTitle().equals("Company Wise Prep")){
+                    intent=new Intent(MainActivity.this,CompanyWisePrepActivity.class);
                     startActivity(intent);
-                    finish();
                 }
                 if (item.getTitle().equals("Salary Calculator")){
                     intent=new Intent(MainActivity.this,SalaryCalculatorActivity.class);
                     startActivity(intent);
                 }
-                if (item.getTitle().equals("Feedback")){
-                    intent=new Intent(MainActivity.this,FeedBackActivity.class);
+                if (item.getTitle().equals("Resume Builder")) {
+                    intent = new Intent(MainActivity.this, ProfileActivity.class);
                     startActivity(intent);
                 }
-                if (item.getTitle().equals("Help")){
-                    intent=new Intent(MainActivity.this,HelpActivity.class);
+                if (item.getTitle().equals("Job Info")) {
+                    intent = new Intent(MainActivity.this, JobInfoActivity.class);
                     startActivity(intent);
                 }
-                if(item.getTitle().equals("Sign Out")){
-                    User user=new User(MainActivity.this);
-                    user.logOut();
-                    intent=new Intent(MainActivity.this,LoginActivity.class);
+                if (item.getTitle().equals("Interview and GD Prep")) {
+                    intent = new Intent(MainActivity.this, InterviewGdPrepActivity.class);
                     startActivity(intent);
-                    finish();
                 }
                 drawerLayoutHome.closeDrawer(GravityCompat.START);
                 return true;
@@ -628,7 +648,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setToolbar() {
-        toolbar=findViewById(R.id.homeToolbar);
         toolbar.setTitle("Home");
         toolbar.setTitleTextColor(Color.WHITE);
     }

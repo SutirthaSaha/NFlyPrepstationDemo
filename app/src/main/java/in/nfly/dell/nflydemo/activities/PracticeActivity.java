@@ -106,40 +106,33 @@ public class PracticeActivity extends AppCompatActivity {
                     intent=new Intent(PracticeActivity.this,DashboardActivity.class);
                     startActivity(intent);
                 }
-                if (item.getTitle().equals("Learn")){
-                    intent=new Intent(PracticeActivity.this,LearnActivity.class);
+                if (item.getTitle().equals("Courses")){
+                    intent=new Intent(PracticeActivity.this,CoursesActivity.class);
                     startActivity(intent);
                 }
-                if(item.getTitle().equals("Practice")){
+                if(item.getTitle().equals("Topic Wise Prep")){
                     intent=new Intent(PracticeActivity.this,PracticeActivity.class);
                     startActivity(intent);
                 }
-                if (item.getTitle().equals("Knowledge Base")){
-                    intent=new Intent(PracticeActivity.this,KnowledgeBaseActivity.class);
-                    startActivity(intent);
-                }
-                if (item.getTitle().equals("Profile")){
-                    intent=new Intent(PracticeActivity.this,ProfileActivity.class);
+                if (item.getTitle().equals("Company Wise Prep")){
+                    intent=new Intent(PracticeActivity.this,CompanyWisePrepActivity.class);
                     startActivity(intent);
                 }
                 if (item.getTitle().equals("Salary Calculator")){
                     intent=new Intent(PracticeActivity.this,SalaryCalculatorActivity.class);
                     startActivity(intent);
                 }
-                if (item.getTitle().equals("Help")){
-                    intent=new Intent(PracticeActivity.this,HelpActivity.class);
+                if (item.getTitle().equals("Resume Builder")) {
+                    intent = new Intent(PracticeActivity.this, ProfileActivity.class);
                     startActivity(intent);
                 }
-                if (item.getTitle().equals("Feedback")){
-                    intent=new Intent(PracticeActivity.this,FeedBackActivity.class);
+                if (item.getTitle().equals("Job Info")) {
+                    intent = new Intent(PracticeActivity.this, JobInfoActivity.class);
                     startActivity(intent);
                 }
-                if(item.getTitle().equals("Sign Out")){
-                    User user=new User(PracticeActivity.this);
-                    user.logOut();
-                    intent=new Intent(PracticeActivity.this,LoginActivity.class);
+                if (item.getTitle().equals("Interview and GD Prep")) {
+                    intent = new Intent(PracticeActivity.this, InterviewGdPrepActivity.class);
                     startActivity(intent);
-                    finish();
                 }
                 drawerLayoutPractice.closeDrawer(GravityCompat.START);
                 return true;
@@ -149,7 +142,7 @@ public class PracticeActivity extends AppCompatActivity {
 
     private void setToolbar() {
         toolbar=findViewById(R.id.practiceToolbar);
-        toolbar.setTitle("Practice");
+        toolbar.setTitle("Topic Wise Prep");
         toolbar.setTitleTextColor(Color.WHITE);
     }
 

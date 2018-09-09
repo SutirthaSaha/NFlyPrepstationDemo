@@ -113,41 +113,33 @@ public class DashboardActivity extends AppCompatActivity {
                     intent=new Intent(DashboardActivity.this,DashboardActivity.class);
                     startActivity(intent);
                 }
-                if (item.getTitle().equals("Learn")){
-                    intent=new Intent(DashboardActivity.this,LearnActivity.class);
+                if (item.getTitle().equals("Courses")){
+                    intent=new Intent(DashboardActivity.this,CoursesActivity.class);
                     startActivity(intent);
                 }
-                if(item.getTitle().equals("Practice")){
+                if(item.getTitle().equals("Topic Wise Prep")){
                     intent=new Intent(DashboardActivity.this,PracticeActivity.class);
                     startActivity(intent);
                 }
-                if (item.getTitle().equals("Knowledge Base")){
-                    intent=new Intent(DashboardActivity.this,KnowledgeBaseActivity.class);
-                    startActivity(intent);
-                }
-                if (item.getTitle().equals("Feedback")){
-                    intent=new Intent(DashboardActivity.this,FeedBackActivity.class);
+                if (item.getTitle().equals("Company Wise Prep")){
+                    intent=new Intent(DashboardActivity.this,CompanyWisePrepActivity.class);
                     startActivity(intent);
                 }
                 if (item.getTitle().equals("Salary Calculator")){
                     intent=new Intent(DashboardActivity.this,SalaryCalculatorActivity.class);
                     startActivity(intent);
                 }
-                if (item.getTitle().equals("Profile")){
-                    intent=new Intent(DashboardActivity.this,ProfileActivity.class);
+                if (item.getTitle().equals("Resume Builder")) {
+                    intent = new Intent(DashboardActivity.this, ProfileActivity.class);
                     startActivity(intent);
                 }
-                if (item.getTitle().equals("Help")){
-                    intent=new Intent(DashboardActivity.this,HelpActivity.class);
+                if (item.getTitle().equals("Job Info")) {
+                    intent = new Intent(DashboardActivity.this, JobInfoActivity.class);
                     startActivity(intent);
                 }
-                if(item.getTitle().equals("Sign Out")){
-                    User user=new User(DashboardActivity.this);
-                    user.logOut();
-                    intent=new Intent(DashboardActivity.this,LoginActivity.class);
+                if (item.getTitle().equals("Interview and GD Prep")) {
+                    intent = new Intent(DashboardActivity.this, InterviewGdPrepActivity.class);
                     startActivity(intent);
-                    finish();
-
                 }
                 drawerLayoutDashboard.closeDrawer(GravityCompat.START);
                 return true;

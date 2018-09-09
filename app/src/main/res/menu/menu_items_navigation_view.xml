@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
     <group
         android:id="@+id/grp1"
         android:checkableBehavior="single">
@@ -17,30 +16,48 @@
             android:icon="@drawable/dashboard"
             ></item>
         <item
-            android:id="@+id/learn"
-            android:title="Learn"
+            android:id="@+id/courses"
+            android:title="Courses"
             android:checkable="true"
-            android:icon="@drawable/learn"
+            android:icon="@drawable/courses"
             ></item>
         <item
-            android:id="@+id/practice"
-            android:title="Practice"
+            android:id="@+id/interviewGdPrep"
+            android:title="Interview and GD Prep"
             android:checkable="true"
-            android:icon="@drawable/practise"
+            android:icon="@drawable/gd"
             ></item>
         <item
-            android:id="@+id/knowledgeBase"
-            android:title="Knowledge Base"
+            android:id="@+id/companyWisePrep"
+            android:title="Company Wise Prep"
             android:checkable="true"
             android:icon="@drawable/knowledgehub"
+            ></item>
+        <item
+            android:id="@+id/topicWisePrep"
+            android:title="Topic Wise Prep"
+            android:checkable="true"
+            android:icon="@drawable/exam"
+            ></item>
+        <item
+            android:id="@+id/examWisePrep"
+            android:title="Exam Wise Prep"
+            android:checkable="true"
+            android:icon="@drawable/tips"
             ></item>
     </group>
     <group
         android:id="@+id/grp2"
         android:checkableBehavior="single">
         <item
-            android:id="@+id/profile"
-            android:title="Profile"
+            android:id="@+id/jobInfo"
+            android:title="Job Info"
+            android:checkable="true"
+            android:icon="@drawable/interview"
+            ></item>
+        <item
+            android:id="@+id/resumeBuilder"
+            android:title="Resume Builder"
             android:checkable="true"
             android:icon="@drawable/account"
             ></item>
@@ -50,24 +67,5 @@
             android:checkable="true"
             android:icon="@drawable/salarycalculator"
             ></item>
-        <item
-            android:id="@+id/feedback"
-            android:title="Feedback"
-            android:icon="@drawable/feedback"
-            android:checkable="true"
-            />
-        <item
-            android:id="@+id/help"
-            android:title="Help"
-            android:icon="@drawable/help"
-            android:checkable="true"
-            />
-        <item
-            android:id="@+id/signout"
-            android:title="Sign Out"
-            android:checkable="true"
-            android:icon="@drawable/signout"
-            ></item>
     </group>
-
 </menu>
