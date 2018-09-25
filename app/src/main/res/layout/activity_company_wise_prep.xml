@@ -17,13 +17,52 @@
             android:background="@color/colorPrimary"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             android:id="@+id/companyWisePrepToolbar"></android.support.v7.widget.Toolbar>
-
-        <android.support.v7.widget.RecyclerView
+        <android.support.v4.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/companyWisePrepRecyclerView"
-            ></android.support.v7.widget.RecyclerView>
-
+            android:layout_height="match_parent">
+            <LinearLayout android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:descendantFocusability="blocksDescendants"
+                xmlns:android="http://schemas.android.com/apk/res/android" >
+                <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:orientation="vertical" android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:src="@drawable/gradient_four"
+                        android:layout_height="210dp"
+                        android:id="@+id/companyWisePrepImage"
+                        android:scaleType="fitXY"/>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/companyWisePrepImageTitle"
+                        android:textSize="23sp"
+                        android:textStyle="bold"
+                        android:layout_centerHorizontal="true"
+                        android:layout_centerVertical="true"
+                        android:foregroundGravity="center"
+                        android:textColor="#fff"
+                        android:text="Company-wise Prep"
+                        android:gravity="center"
+                        android:shadowColor="#000000"
+                        android:shadowDx="1.5"
+                        android:shadowDy="1.5"
+                        android:shadowRadius="1.6"
+                        android:layout_marginTop="25dp"/>
+                </RelativeLayout>
+                <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:nestedScrollingEnabled="false"
+                    android:layout_margin="5dp"
+                    android:id="@+id/companyWisePrepRecyclerView"
+                    ></android.support.v7.widget.RecyclerView>
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
     </LinearLayout>
 
     <android.support.design.widget.NavigationView

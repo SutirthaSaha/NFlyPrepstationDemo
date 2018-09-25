@@ -1,12 +1,8 @@
 package in.nfly.dell.nflydemo.activities.singleActivities;
 
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.CountDownTimer;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -38,13 +34,7 @@ import java.util.concurrent.TimeUnit;
 import in.nfly.dell.nflydemo.MySingleton;
 import in.nfly.dell.nflydemo.R;
 import in.nfly.dell.nflydemo.User;
-import in.nfly.dell.nflydemo.activities.LoginActivity;
-import in.nfly.dell.nflydemo.activities.OnBoardRegisterActivity;
-import in.nfly.dell.nflydemo.activities.PracticeActivity;
-import in.nfly.dell.nflydemo.activities.RegisterActivity;
-import in.nfly.dell.nflydemo.adapters.PracticePaperDetailsAdapter;
-
-import static android.media.MediaExtractor.MetricsConstants.FORMAT;
+import in.nfly.dell.nflydemo.activities.TopicWiseActivity;
 
 public class PracticeTestActivity extends AppCompatActivity {
 
@@ -272,7 +262,7 @@ public class PracticeTestActivity extends AppCompatActivity {
 
                     if (questionDataSet.isEmpty()){
                         Toast.makeText(PracticeTestActivity.this, "No Questions There", Toast.LENGTH_SHORT).show();
-                        Intent intent=new Intent(PracticeTestActivity.this,PracticeActivity.class);
+                        Intent intent=new Intent(PracticeTestActivity.this,TopicWiseActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                         finish();

@@ -20,7 +20,7 @@
         <activity android:name=".activities.MainActivity" />
         <activity android:name=".activities.DashboardActivity" />
         <activity android:name=".activities.LearnActivity" />
-        <activity android:name=".activities.PracticeActivity" />
+        <activity android:name=".activities.TopicWiseActivity" />
         <activity android:name=".activities.KnowledgeBaseActivity" />
         <activity android:name=".activities.SplashScreenActivity">
             <intent-filter>
@@ -63,7 +63,9 @@
         <activity android:name=".activities.CoursesActivity" />
         <activity android:name=".activities.CompanyWisePrepActivity" />
         <activity android:name=".activities.JobInfoActivity" />
-        <activity android:name=".activities.InterviewGdPrepActivity"></activity>
+        <activity android:name=".activities.InterviewGdPrepActivity" />
+        <activity android:name=".activities.singleActivities.CompanyTypeWiseActivity" />
+        <activity android:name=".activities.singleActivities.TopicWiseTestActivity"></activity>
     </application>
 
 </manifest>

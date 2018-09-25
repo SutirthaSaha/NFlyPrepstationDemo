@@ -126,7 +126,7 @@ public class LearnActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
                 if(item.getTitle().equals("Practice")){
-                    intent=new Intent(LearnActivity.this,PracticeActivity.class);
+                    intent=new Intent(LearnActivity.this,TopicWiseActivity.class);
                     startActivity(intent);
                 }
                 if (item.getTitle().equals("Knowledge Base")){

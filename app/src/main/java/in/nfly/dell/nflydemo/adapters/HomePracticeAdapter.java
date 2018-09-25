@@ -10,14 +10,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 import in.nfly.dell.nflydemo.R;
-import in.nfly.dell.nflydemo.activities.PracticeActivity;
+import in.nfly.dell.nflydemo.activities.TopicWiseActivity;
 
 public class HomePracticeAdapter extends RecyclerView.Adapter<HomePracticeAdapter.HomePracticeHolder>{
 
@@ -51,7 +50,7 @@ public class HomePracticeAdapter extends RecyclerView.Adapter<HomePracticeAdapte
             @Override
             public void onClick(View v) {
                 //Toast.makeText(context, Integer.toString(idDataSet.get(position)), Toast.LENGTH_SHORT).show();
-                Intent intent=new Intent(context, PracticeActivity.class);
+                Intent intent=new Intent(context, TopicWiseActivity.class);
                 intent.putExtra("fragment_id",idDataSet.get(position));
                 context.startActivity(intent);
             }

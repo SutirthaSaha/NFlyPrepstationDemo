@@ -15,7 +15,6 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import in.nfly.dell.nflydemo.MySingleton;
 import in.nfly.dell.nflydemo.R;
@@ -85,7 +84,7 @@ public class KnowledgeBaseActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
                 if(item.getTitle().equals("Practice")){
-                    intent=new Intent(KnowledgeBaseActivity.this,PracticeActivity.class);
+                    intent=new Intent(KnowledgeBaseActivity.this,TopicWiseActivity.class);
                     startActivity(intent);
                 }
                 if (item.getTitle().equals("Knowledge Base")){

@@ -90,7 +90,7 @@ public class InterviewGdPrepActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
                 if(item.getTitle().equals("Topic Wise Prep")){
-                    intent=new Intent(InterviewGdPrepActivity.this,PracticeActivity.class);
+                    intent=new Intent(InterviewGdPrepActivity.this,TopicWiseActivity.class);
                     startActivity(intent);
                 }
                 if (item.getTitle().equals("Company Wise Prep")){

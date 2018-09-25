@@ -42,7 +42,6 @@ import in.nfly.dell.nflydemo.MySingleton;
 import in.nfly.dell.nflydemo.R;
 import in.nfly.dell.nflydemo.User;
 import in.nfly.dell.nflydemo.adapters.DashBoardAdapter;
-import in.nfly.dell.nflydemo.adapters.LearnTipsAdapter;
 
 public class DashboardActivity extends AppCompatActivity {
 
@@ -118,7 +117,7 @@ public class DashboardActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
                 if(item.getTitle().equals("Topic Wise Prep")){
-                    intent=new Intent(DashboardActivity.this,PracticeActivity.class);
+                    intent=new Intent(DashboardActivity.this,TopicWiseActivity.class);
                     startActivity(intent);
                 }
                 if (item.getTitle().equals("Company Wise Prep")){

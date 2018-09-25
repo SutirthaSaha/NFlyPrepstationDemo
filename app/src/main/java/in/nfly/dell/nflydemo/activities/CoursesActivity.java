@@ -118,7 +118,7 @@ public class CoursesActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
                 if(item.getTitle().equals("Topic Wise Prep")){
-                    intent=new Intent(CoursesActivity.this,PracticeActivity.class);
+                    intent=new Intent(CoursesActivity.this,TopicWiseActivity.class);
                     startActivity(intent);
                 }
                 if (item.getTitle().equals("Company Wise Prep")){

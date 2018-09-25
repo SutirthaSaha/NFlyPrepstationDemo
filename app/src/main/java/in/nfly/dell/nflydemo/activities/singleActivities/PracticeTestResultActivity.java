@@ -13,7 +13,7 @@ import com.github.lzyzsd.circleprogress.DonutProgress;
 
 import in.nfly.dell.nflydemo.R;
 import in.nfly.dell.nflydemo.activities.DashboardActivity;
-import in.nfly.dell.nflydemo.activities.PracticeActivity;
+import in.nfly.dell.nflydemo.activities.TopicWiseActivity;
 
 public class PracticeTestResultActivity extends AppCompatActivity {
 
@@ -44,7 +44,7 @@ public class PracticeTestResultActivity extends AppCompatActivity {
         toPracticeTestActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(PracticeTestResultActivity.this, PracticeActivity.class);
+                Intent intent=new Intent(PracticeTestResultActivity.this, TopicWiseActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 finish();

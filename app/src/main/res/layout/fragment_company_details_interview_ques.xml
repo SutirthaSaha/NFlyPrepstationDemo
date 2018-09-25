@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.CompanyWiseFragments.CompanyDetailsInterviewQuesFragment">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:visibility="invisible"
+        android:gravity="center"
+        android:id="@+id/noCompanyInterviewQuestions">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No Questions Found"
+            android:gravity="center"
+            android:layout_margin="5dp"
+            android:textColor="#000"
+            android:textSize="17sp"
+            android:lineSpacingMultiplier="1.3"
+            android:fontFamily="@font/roboto"/>
+    </LinearLayout>
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="invisible"
+        android:id="@+id/companyWiseInterviewQuestionsRecyclerView"
+        android:layout_margin="5dp"/>
+
+</RelativeLayout>

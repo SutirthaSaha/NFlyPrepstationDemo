@@ -5,9 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.net.ConnectivityManager;
 import android.os.Handler;
-import android.provider.SyncStateContract;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -20,11 +18,9 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,7 +53,6 @@ import in.nfly.dell.nflydemo.adapters.HomePracticeAdapter;
 import in.nfly.dell.nflydemo.adapters.HomePrepHubAdapter;
 import in.nfly.dell.nflydemo.adapters.HomeSwipeAdapter;
 import in.nfly.dell.nflydemo.adapters.HomeTestimonialsAdapter;
-import in.nfly.dell.nflydemo.adapters.KnowledgeBaseCompanyWiseAdapter;
 import me.relex.circleindicator.CircleIndicator;
 
 public class MainActivity extends AppCompatActivity {
@@ -618,7 +613,7 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                 }
                 if(item.getTitle().equals("Topic Wise Prep")){
-                    intent=new Intent(MainActivity.this,PracticeActivity.class);
+                    intent=new Intent(MainActivity.this,TopicWiseActivity.class);
                     startActivity(intent);
                 }
                 if (item.getTitle().equals("Company Wise Prep")){

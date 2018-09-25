@@ -1,4 +1,4 @@
-package in.nfly.dell.nflydemo.fragments;
+package in.nfly.dell.nflydemo.fragments.CompanyWiseFragments;
 
 
 import android.os.Build;
@@ -30,19 +30,18 @@ import in.nfly.dell.nflydemo.R;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CompanyDetailsHiringProcessFragment extends Fragment {
-
+public class CompanyDetailsStrategyFragment extends Fragment {
+    
     public String company_id,company_name;
     private String urlCompany="http://nfly.in/gapi/load_rows_one";
-    private TextView companyDetailsCompanyHiringText;
-    private String companyHire;
-
-    public CompanyDetailsHiringProcessFragment() {
+    private TextView companyDetailsStrategyText;
+    private String companyIntro;
+    public CompanyDetailsStrategyFragment() {
         // Required empty public constructor
     }
-
-    public static CompanyDetailsHiringProcessFragment newInstance(String company_id, String company_name) {
-        CompanyDetailsHiringProcessFragment fragment = new CompanyDetailsHiringProcessFragment();
+    
+    public static CompanyDetailsStrategyFragment  newInstance(String company_id, String company_name) {
+        CompanyDetailsStrategyFragment fragment = new CompanyDetailsStrategyFragment();
         fragment.company_id=company_id;
         fragment.company_name=company_name;
         return fragment;
@@ -52,8 +51,8 @@ public class CompanyDetailsHiringProcessFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v= inflater.inflate(R.layout.fragment_company_details_hiring_process, container, false);
-        companyDetailsCompanyHiringText=v.findViewById(R.id.companyDetailsCompanyHiringText);
+        View v= inflater.inflate(R.layout.fragment_company_details_strategy, container, false);
+        companyDetailsStrategyText=v.findViewById(R.id.companyDetailsStrategyText);
         setValues();
         return v;
     }
@@ -66,14 +65,13 @@ public class CompanyDetailsHiringProcessFragment extends Fragment {
                     JSONObject jsonObject;
                     JSONArray parentArray=new JSONArray(response);
                     jsonObject=parentArray.getJSONObject(0);
-                    companyHire=jsonObject.getString("company_hiring_process");
+                    companyIntro=jsonObject.getString("strategy");
                     if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
-                        companyDetailsCompanyHiringText.setText(Html.fromHtml(companyHire,Html.FROM_HTML_MODE_COMPACT));
+                        companyDetailsStrategyText.setText(Html.fromHtml(companyIntro,Html.FROM_HTML_MODE_COMPACT));
                     }
                     else{
-                        companyDetailsCompanyHiringText.setText(Html.fromHtml(companyHire));
+                        companyDetailsStrategyText.setText(Html.fromHtml(companyIntro));
                     }
-
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -95,9 +93,9 @@ public class CompanyDetailsHiringProcessFragment extends Fragment {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("key", "company_id");
+                params.put("key", "company_type");
                 params.put("value", company_id);
-                params.put("table", "company");
+                params.put("table", "nfly_company");
                 return params;
             }
         };

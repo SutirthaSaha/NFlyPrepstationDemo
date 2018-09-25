@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -18,7 +17,6 @@ import java.util.ArrayList;
 
 import in.nfly.dell.nflydemo.R;
 import in.nfly.dell.nflydemo.activities.LearnActivity;
-import in.nfly.dell.nflydemo.activities.PracticeActivity;
 
 public class HomePrepHubAdapter extends RecyclerView.Adapter<HomePrepHubAdapter.HomePrepHubHolder> {
 

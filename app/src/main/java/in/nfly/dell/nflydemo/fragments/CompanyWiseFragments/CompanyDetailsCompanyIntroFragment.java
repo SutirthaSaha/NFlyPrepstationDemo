@@ -1,16 +1,13 @@
-package in.nfly.dell.nflydemo.fragments;
+package in.nfly.dell.nflydemo.fragments.CompanyWiseFragments;
 
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,36 +21,27 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import in.nfly.dell.nflydemo.MySingleton;
 import in.nfly.dell.nflydemo.R;
-import in.nfly.dell.nflydemo.adapters.CompDetailsInterviewExpAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CompanyDetailsInterviewExpFragment extends Fragment {
+public class CompanyDetailsCompanyIntroFragment extends Fragment {
 
     public String company_id,company_name;
     private String urlCompany="http://nfly.in/gapi/load_rows_one";
+    private TextView companyDetailsCompanyIntroText;
+    private String companyIntro;
 
-    private RecyclerView companyDetailsInterviewExpRecyclerView;
-    private RecyclerView.Adapter adapter;
-    private RecyclerView.LayoutManager layoutManager;
-
-    private ArrayList<String> expDataSet=new ArrayList<String>(){};
-    private ArrayList<String> nameDataSet=new ArrayList<String>(){};
-    private ArrayList<String> listDataSet=new ArrayList<String>(){};
-
-    public CompanyDetailsInterviewExpFragment() {
+    public CompanyDetailsCompanyIntroFragment() {
         // Required empty public constructor
     }
-
-    public static CompanyDetailsInterviewExpFragment newInstance(String company_id, String company_name) {
-        CompanyDetailsInterviewExpFragment fragment = new CompanyDetailsInterviewExpFragment();
+    public static CompanyDetailsCompanyIntroFragment  newInstance(String company_id, String company_name) {
+        CompanyDetailsCompanyIntroFragment fragment = new CompanyDetailsCompanyIntroFragment();
         fragment.company_id=company_id;
         fragment.company_name=company_name;
         return fragment;
@@ -63,10 +51,9 @@ public class CompanyDetailsInterviewExpFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v= inflater.inflate(R.layout.fragment_company_details_interview_exp, container, false);
-        companyDetailsInterviewExpRecyclerView=v.findViewById(R.id.companyDetailsInterviewExpRecyclerView);
-        layoutManager=new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
-        companyDetailsInterviewExpRecyclerView.setLayoutManager(layoutManager);
+        View v= inflater.inflate(R.layout.fragment_company_details_company_intro, container, false);
+        //Toast.makeText(getContext(), company_id+company_name, Toast.LENGTH_SHORT).show();
+        companyDetailsCompanyIntroText=v.findViewById(R.id.companyDetailsCompanyIntroText);
         setValues();
         return v;
     }
@@ -76,16 +63,16 @@ public class CompanyDetailsInterviewExpFragment extends Fragment {
             @Override
             public void onResponse(String response) {
                 try {
-                    JSONObject arrayObject;
+                    JSONObject jsonObject;
                     JSONArray parentArray=new JSONArray(response);
-                    for(int i=0;i<parentArray.length();i++){
-                        arrayObject=parentArray.getJSONObject(i);
-                        expDataSet.add(arrayObject.getString("experience_details"));
-                        nameDataSet.add(arrayObject.getString("person_name"));
+                    jsonObject=parentArray.getJSONObject(0);
+                    companyIntro=jsonObject.getString("company_info");
+                    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+                        companyDetailsCompanyIntroText.setText(Html.fromHtml(companyIntro,Html.FROM_HTML_MODE_COMPACT));
                     }
-                    adapter=new CompDetailsInterviewExpAdapter(getContext(),expDataSet,nameDataSet);
-                    companyDetailsInterviewExpRecyclerView.setAdapter(adapter);
-
+                    else{
+                        companyDetailsCompanyIntroText.setText(Html.fromHtml(companyIntro));
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -107,13 +94,15 @@ public class CompanyDetailsInterviewExpFragment extends Fragment {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("key", "company_id");
+                params.put("key", "company_type");
                 params.put("value", company_id);
-                params.put("table", "company_interview_experience");
+                params.put("table", "nfly_company");
+                /*params.put("key", "company_id");
+                params.put("value", company_id);
+                params.put("table", "company");*/
                 return params;
             }
         };
         MySingleton.getmInstance(getContext()).addToRequestQueue(stringRequest);
     }
-
 }

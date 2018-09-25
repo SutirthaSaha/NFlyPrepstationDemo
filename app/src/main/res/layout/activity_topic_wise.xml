@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/drawerLayoutPractice"
-    tools:context=".activities.PracticeActivity">
+    tools:context=".activities.TopicWiseActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -18,21 +18,24 @@
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
             android:id="@+id/practiceToolbar"></android.support.v7.widget.Toolbar>
 
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:id="@+id/practiceFragmentContainer"></FrameLayout>
-
-        <android.support.design.widget.BottomNavigationView
-            android:id="@+id/practiceBottomNavigation"
+        <android.support.design.widget.TabLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorAccent"
-            app:itemIconTint="#fff"
-            app:itemTextColor="#fff"
-            android:layout_alignParentBottom="true"
-            app:menu="@menu/bottom_navigation_practice" />
+            android:id="@+id/tabLayoutTopicWise"
+            app:tabMode="fixed"
+            app:tabGravity="fill"
+            android:background="#fff"
+            app:tabTextColor="#000"
+            app:tabSelectedTextColor="@color/colorAccent"
+            android:elevation="6dp"
+            ></android.support.design.widget.TabLayout>
+
+        <android.support.v4.view.ViewPager
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"
+            android:id="@+id/viewPagerTopicWise"
+            ></android.support.v4.view.ViewPager>
     </LinearLayout>
 
     <android.support.design.widget.NavigationView
