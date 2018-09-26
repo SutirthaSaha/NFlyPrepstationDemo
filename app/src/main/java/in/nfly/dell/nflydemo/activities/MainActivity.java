@@ -604,6 +604,10 @@ public class MainActivity extends AppCompatActivity {
                     intent=new Intent(MainActivity.this,MainActivity.class);
                     startActivity(intent);
                 }
+                if (item.getTitle().equals("Exam Wise Prep")){
+                    intent=new Intent(MainActivity.this,ExamWisePrepActivity.class);
+                    startActivity(intent);
+                }
                 if (item.getTitle().equals("Dashboard")){
                     intent=new Intent(MainActivity.this,DashboardActivity.class);
                     startActivity(intent);

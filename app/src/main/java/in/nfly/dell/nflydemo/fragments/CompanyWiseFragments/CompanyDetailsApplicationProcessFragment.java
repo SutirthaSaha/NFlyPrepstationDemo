@@ -93,12 +93,9 @@ public class CompanyDetailsApplicationProcessFragment extends Fragment {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("key", "company_type");
+                params.put("key", "nfly_company_id");
                 params.put("value", company_id);
                 params.put("table", "nfly_company");
-                /*params.put("key", "company_id");
-                params.put("value", company_id);
-                params.put("table", "company");*/
                 return params;
             }
         };

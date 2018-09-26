@@ -65,7 +65,10 @@
         <activity android:name=".activities.JobInfoActivity" />
         <activity android:name=".activities.InterviewGdPrepActivity" />
         <activity android:name=".activities.singleActivities.CompanyTypeWiseActivity" />
-        <activity android:name=".activities.singleActivities.TopicWiseTestActivity"></activity>
+        <activity android:name=".activities.singleActivities.TopicWiseTestActivity" />
+        <activity android:name=".activities.ExamWisePrepActivity" />
+        <activity android:name=".activities.singleActivities.ExamWiseDetailsActivity" />
+        <activity android:name=".activities.singleActivities.TopicWiseSubTopicsActivity"></activity>
     </application>
 
 </manifest>

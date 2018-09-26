@@ -17,6 +17,7 @@ import java.util.ArrayList;
 
 import in.nfly.dell.nflydemo.R;
 import in.nfly.dell.nflydemo.activities.NoInternetActivity;
+import in.nfly.dell.nflydemo.activities.singleActivities.TopicWiseSubTopicsActivity;
 import in.nfly.dell.nflydemo.activities.singleActivities.TopicWiseTestActivity;
 
 public class TopicWiseAdapter extends RecyclerView.Adapter<TopicWiseAdapter.TopicWiseHolder>{
@@ -47,9 +48,9 @@ public class TopicWiseAdapter extends RecyclerView.Adapter<TopicWiseAdapter.Topi
         holder.topicWiseCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(context, TopicWiseTestActivity.class);
-                intent.putExtra("topic_id",idDataSet.get(position));
-                intent.putExtra("topic_name",titleDataSet.get(position));
+                Intent intent=new Intent(context, TopicWiseSubTopicsActivity.class);
+                intent.putExtra("sub_topic_id",idDataSet.get(position));
+                intent.putExtra("sub_topic_name",titleDataSet.get(position));
                 context.startActivity(intent);
             }
         });

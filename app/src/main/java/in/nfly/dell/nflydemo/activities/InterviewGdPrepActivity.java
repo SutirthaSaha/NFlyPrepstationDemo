@@ -81,6 +81,10 @@ public class InterviewGdPrepActivity extends AppCompatActivity {
                     intent=new Intent(InterviewGdPrepActivity.this,MainActivity.class);
                     startActivity(intent);
                 }
+                if (item.getTitle().equals("Exam Wise Prep")){
+                    intent=new Intent(InterviewGdPrepActivity.this,ExamWisePrepActivity.class);
+                    startActivity(intent);
+                }
                 if (item.getTitle().equals("Dashboard")){
                     intent=new Intent(InterviewGdPrepActivity.this,DashboardActivity.class);
                     startActivity(intent);

@@ -13,15 +13,21 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 import in.nfly.dell.nflydemo.MySingleton;
 import in.nfly.dell.nflydemo.R;
 import in.nfly.dell.nflydemo.User;
+import in.nfly.dell.nflydemo.adapters.CompanyTypesAdapter;
+import in.nfly.dell.nflydemo.adapters.TopicWiseAdapter;
 import in.nfly.dell.nflydemo.adapters.ViewPagerAdapter;
 import in.nfly.dell.nflydemo.fragments.LearnGDFragment;
 import in.nfly.dell.nflydemo.fragments.LearnInterviewFragment;
@@ -39,9 +45,12 @@ public class TopicWiseActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private DrawerLayout drawerLayoutPractice;
     private TextView headerTitle;
-    private TabLayout tabLayoutTopicWise;
-    private ViewPager viewPagerTopicWise;
-    private ViewPagerAdapter viewPagerAdapter;
+    private RecyclerView topicWisePrepRecyclerView;
+    private RecyclerView.Adapter adapter;
+    private RecyclerView.LayoutManager layoutManager;
+    private ArrayList<String> titleDataSet=new ArrayList<String>(){{add("Quantitative Aptitude");add("Logical and Reasoning");add("Verbal Ability");add("Technical");}};
+    private ArrayList<String> imageDataSet=new ArrayList<String>(){{add(Integer.toString(R.drawable.learn_interview_company_wise));add(Integer.toString(R.drawable.ic_computer_white));add(Integer.toString(R.drawable.ic_computer_white));add(Integer.toString(R.drawable.ic_computer_white));}};
+    private ArrayList<String> idDataSet=new ArrayList<String>(){{add("1");add("2");add("3");add("4");}};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,26 +58,18 @@ public class TopicWiseActivity extends AppCompatActivity {
         setContentView(R.layout.activity_topic_wise);
 
         drawerLayoutPractice=findViewById(R.id.drawerLayoutPractice);
-        tabLayoutTopicWise=findViewById(R.id.tabLayoutTopicWise);
-        viewPagerTopicWise=findViewById(R.id.viewPagerTopicWise);
-
-        viewPagerAdapter=new ViewPagerAdapter(getSupportFragmentManager());
-
-        viewPagerAdapter.addFragments(new TopicWiseQuantFragment(),"Quantitative");
-        viewPagerAdapter.addFragments(new TopicWiseLRFragment(),"Logical Reasoning");
-        viewPagerAdapter.addFragments(new TopicWiseVerbalFragment(),"Verbal");
-        viewPagerAdapter.addFragments(new TopicWiseTechFragment(),"Technical");
-
-        viewPagerTopicWise.setAdapter(viewPagerAdapter);
-        tabLayoutTopicWise.setupWithViewPager(viewPagerTopicWise);
-
-        Intent intent=getIntent();
-        viewPagerTopicWise.setCurrentItem(intent.getIntExtra("fragment_no",0));
-
+        topicWisePrepRecyclerView=findViewById(R.id.topicWisePrepRecyclerView);
+        layoutManager=new GridLayoutManager(TopicWiseActivity.this,2);
+        topicWisePrepRecyclerView.setLayoutManager(layoutManager);
         setToolbar();
         setNavigationDrawer();
+        setValues();
     }
 
+    private void setValues() {
+        adapter=new TopicWiseAdapter(TopicWiseActivity.this,titleDataSet,imageDataSet,idDataSet);
+        topicWisePrepRecyclerView.setAdapter(adapter);
+    }
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -127,6 +128,10 @@ public class TopicWiseActivity extends AppCompatActivity {
                 }
                 if (item.getTitle().equals("Interview and GD Prep")) {
                     intent = new Intent(TopicWiseActivity.this, InterviewGdPrepActivity.class);
+                    startActivity(intent);
+                }
+                if (item.getTitle().equals("Exam Wise Prep")){
+                    intent=new Intent(TopicWiseActivity.this,ExamWisePrepActivity.class);
                     startActivity(intent);
                 }
                 drawerLayoutPractice.closeDrawer(GravityCompat.START);

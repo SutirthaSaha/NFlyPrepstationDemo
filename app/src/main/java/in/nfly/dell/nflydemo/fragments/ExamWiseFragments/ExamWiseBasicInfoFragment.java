@@ -1,22 +1,50 @@
 package in.nfly.dell.nflydemo.fragments.ExamWiseFragments;
 
 
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import in.nfly.dell.nflydemo.MySingleton;
 import in.nfly.dell.nflydemo.R;
+import in.nfly.dell.nflydemo.fragments.CompanyWiseFragments.CompanyDetailsCompanyIntroFragment;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class ExamWiseBasicInfoFragment extends Fragment {
 
-
+    private String urlExam="http://nfly.in/gapi/load_rows_one";
+    private TextView examWiseBasicInfoText;
+    private String basicInfo;
     public ExamWiseBasicInfoFragment() {
         // Required empty public constructor
+    }
+    String exam_id,exam_name;
+    public static ExamWiseBasicInfoFragment newInstance(String exam_id, String exam_name) {
+        ExamWiseBasicInfoFragment fragment=new ExamWiseBasicInfoFragment();
+        fragment.exam_id=exam_id;
+        fragment.exam_name=exam_name;
+        return fragment;
     }
 
 
@@ -24,7 +52,55 @@ public class ExamWiseBasicInfoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_exam_wise_basic_info, container, false);
+        View v=inflater.inflate(R.layout.fragment_exam_wise_basic_info, container, false);
+        examWiseBasicInfoText=v.findViewById(R.id.examWiseBasicInfoText);
+        setValues();
+        return v;
+    }
+
+    private void setValues() {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, urlExam, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    JSONObject jsonObject;
+                    JSONArray parentArray=new JSONArray(response);
+                    jsonObject=parentArray.getJSONObject(0);
+                    basicInfo=jsonObject.getString("exam_info");
+                    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+                        examWiseBasicInfoText.setText(Html.fromHtml(basicInfo,Html.FROM_HTML_MODE_COMPACT));
+                    }
+                    else{
+                        examWiseBasicInfoText.setText(Html.fromHtml(basicInfo));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
+            }
+        })
+        {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                headers.put("X-Api-Key", "59671596837f42d974c7e9dcf38d17e8");
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("key", "exam_id");
+                params.put("value",exam_id);
+                params.put("table", "nfly_exam");
+                return params;
+            }
+        };
+        MySingleton.getmInstance(getContext()).addToRequestQueue(stringRequest);
     }
 
 }

@@ -6,9 +6,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.CompanyWiseFragments.CompanyDetailsSyllabusFragment">
 
-    <ScrollView
+    <!--<ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent">-->
         <WebView
             android:id="@+id/companyDetailsSyllabusText"
             android:layout_width="match_parent"
@@ -18,6 +18,6 @@
             android:textColor="#000"
             android:textSize="15sp"
             app:fontFamily="@font/roboto" />
-    </ScrollView>
+    <!--</ScrollView>-->
 
 </FrameLayout>

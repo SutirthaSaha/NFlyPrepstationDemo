@@ -77,6 +77,10 @@ public class CompanyWisePrepActivity extends AppCompatActivity {
                     intent=new Intent(CompanyWisePrepActivity.this,DashboardActivity.class);
                     startActivity(intent);
                 }
+                if (item.getTitle().equals("Exam Wise Prep")){
+                    intent=new Intent(CompanyWisePrepActivity.this,ExamWisePrepActivity.class);
+                    startActivity(intent);
+                }
                 if (item.getTitle().equals("Courses")){
                     intent=new Intent(CompanyWisePrepActivity.this,CoursesActivity.class);
                     startActivity(intent);

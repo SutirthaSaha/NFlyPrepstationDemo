@@ -10,12 +10,6 @@
             android:icon="@drawable/home"
             />
         <item
-            android:id="@+id/dashboard"
-            android:title="Dashboard"
-            android:checkable="true"
-            android:icon="@drawable/dashboard"
-            ></item>
-        <item
             android:id="@+id/courses"
             android:title="Courses"
             android:checkable="true"

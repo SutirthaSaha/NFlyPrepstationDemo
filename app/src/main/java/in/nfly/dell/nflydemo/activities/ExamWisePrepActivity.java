@@ -10,11 +10,11 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -35,142 +35,108 @@ import java.util.Map;
 import in.nfly.dell.nflydemo.MySingleton;
 import in.nfly.dell.nflydemo.R;
 import in.nfly.dell.nflydemo.User;
-import in.nfly.dell.nflydemo.adapters.HomeIconsAdapter;
+import in.nfly.dell.nflydemo.adapters.CompanyTypeWiseAdapter;
+import in.nfly.dell.nflydemo.adapters.ExamWiseAdapter;
 import in.nfly.dell.nflydemo.adapters.LearnCourseAdapter;
 
-public class CoursesActivity extends AppCompatActivity {
-    private DrawerLayout drawerLayoutCourses;
+public class ExamWisePrepActivity extends AppCompatActivity {
+
+    private DrawerLayout drawerLayoutExamWisePrep;
     private Toolbar toolbar;
     private TextView headerTitle;
-    private RecyclerView learnCourseRecyclerView, LearnCourseBannerIconsRecyclerView;
+    private RecyclerView examWisePrepRecyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
-    private ImageView learnCourseImage;
-    //private ArrayList<String> titleDataSet=new ArrayList<Str   private RecyclerView.Adapter adapter;
-    //    private RecyclerView.LayoutManager layoutManager;ing>(){{add("HR Questions");add("Software Tools");add("Eng. Topics");add("Company wise");add("Puzzles");add("Miscellaneous");}};
-    //private ArrayList<String> imageDataSet=new ArrayList<String>(){{add(Integer.toString(R.drawable.ic_computer_black));add(Integer.toString(R.drawable.ic_computer_black));add(Integer.toString(R.drawable.ic_computer_black));add(Integer.toString(R.drawable.ic_computer_black));add(Integer.toString(R.drawable.ic_computer_black));add(Integer.toString(R.drawable.ic_computer_black));}};
 
-    String urlCourse="http://nfly.in/gapi/load_all_rows";
+    String urlAll="http://nfly.in/gapi/load_all_rows";
     private ArrayList<String> titleDataSet=new ArrayList<String>(){};
     private ArrayList<String> imageDataSet=new ArrayList<String>(){};
     private ArrayList<String> idDataSet=new ArrayList<String>(){};
+    private ArrayList<String> paperDataSet=new ArrayList<String>(){};
 
-
-    private ArrayList<Integer> bannerImageDataSet=new ArrayList<Integer>(){
-        {
-            add(R.drawable.colored_video);
-            add(R.drawable.hourglass);
-            add(R.drawable.presentation);}};
-
-    private ArrayList<String> bannerTitleDataSet=new ArrayList<String>(){
-        {
-            add("7 detailed courses");
-            add("100+ hours of video");
-            add("200+ videos");}};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_courses);
+        setContentView(R.layout.activity_exam_wise_prep);
         headerTitle=findViewById(R.id.headerTitle);
-        drawerLayoutCourses=findViewById(R.id.drawerLayoutCourses);
-        learnCourseImage=findViewById(R.id.coursesImage);
-        learnCourseRecyclerView=findViewById(R.id.coursesRecyclerView);
-        layoutManager=new GridLayoutManager(CoursesActivity.this,2);
-        learnCourseRecyclerView.setLayoutManager(layoutManager);
+        drawerLayoutExamWisePrep=findViewById(R.id.drawerLayoutExamWisePrep);
+        examWisePrepRecyclerView=findViewById(R.id.examWisePrepRecyclerView);
+        layoutManager=new LinearLayoutManager(ExamWisePrepActivity.this);
+        examWisePrepRecyclerView.setLayoutManager(layoutManager);
         setToolbar();
         setNavigationDrawer();
         //Picasso.with(getContext()).load("https://newevolutiondesigns.com/images/freebies/google-material-design-wallpaper-2.jpg").into(learnCourseImage);
         setValues();
-        setBanner();
     }
     private void setToolbar() {
-        toolbar=findViewById(R.id.coursesToolbar);
+        toolbar=findViewById(R.id.examWisePrepToolbar);
         toolbar.setTitle("Courses");
         toolbar.setTitleTextColor(Color.WHITE);
     }
     private void setNavigationDrawer() {
         final NavigationView navigationView;
-        navigationView = findViewById(R.id.navigationViewCourses);
+        navigationView = findViewById(R.id.navigationViewExamWisePrep);
 
-        User user=new User(CoursesActivity.this);
+        User user=new User(ExamWisePrepActivity.this);
         View header=navigationView. getHeaderView(0);
         headerTitle=header.findViewById(R.id.headerTitle);
         headerTitle.setText(user.getFname());
-        ActionBarDrawerToggle actionBarDrawerToggle=new ActionBarDrawerToggle(CoursesActivity.this,drawerLayoutCourses,toolbar,R.string.drawer_open,R.string.drawer_close);
+        ActionBarDrawerToggle actionBarDrawerToggle=new ActionBarDrawerToggle(ExamWisePrepActivity.this,drawerLayoutExamWisePrep,toolbar,R.string.drawer_open,R.string.drawer_close);
 
-        drawerLayoutCourses.addDrawerListener(actionBarDrawerToggle);
+        drawerLayoutExamWisePrep.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                Toast.makeText(CoursesActivity.this,item.getTitle(),Toast.LENGTH_LONG).show();
+                Toast.makeText(ExamWisePrepActivity.this,item.getTitle(),Toast.LENGTH_LONG).show();
                 Intent intent;
                 if (item.getTitle().equals("Home")){
-                    intent=new Intent(CoursesActivity.this,MainActivity.class);
-                    startActivity(intent);
-                }
-                if (item.getTitle().equals("Dashboard")){
-                    intent=new Intent(CoursesActivity.this,DashboardActivity.class);
+                    intent=new Intent(ExamWisePrepActivity.this,MainActivity.class);
                     startActivity(intent);
                 }
                 if (item.getTitle().equals("Exam Wise Prep")){
-                    intent=new Intent(CoursesActivity.this,ExamWisePrepActivity.class);
+                    intent=new Intent(ExamWisePrepActivity.this,ExamWisePrepActivity.class);
+                    startActivity(intent);
+                }
+                if (item.getTitle().equals("Dashboard")){
+                    intent=new Intent(ExamWisePrepActivity.this,DashboardActivity.class);
                     startActivity(intent);
                 }
                 if (item.getTitle().equals("Courses")){
-                    intent=new Intent(CoursesActivity.this,CoursesActivity.class);
+                    intent=new Intent(ExamWisePrepActivity.this,CoursesActivity.class);
                     startActivity(intent);
                 }
                 if(item.getTitle().equals("Topic Wise Prep")){
-                    intent=new Intent(CoursesActivity.this,TopicWiseActivity.class);
+                    intent=new Intent(ExamWisePrepActivity.this,TopicWiseActivity.class);
                     startActivity(intent);
                 }
                 if (item.getTitle().equals("Company Wise Prep")){
-                    intent=new Intent(CoursesActivity.this,CompanyWisePrepActivity.class);
+                    intent=new Intent(ExamWisePrepActivity.this,CompanyWisePrepActivity.class);
                     startActivity(intent);
                 }
                 if (item.getTitle().equals("Salary Calculator")){
-                    intent=new Intent(CoursesActivity.this,SalaryCalculatorActivity.class);
+                    intent=new Intent(ExamWisePrepActivity.this,SalaryCalculatorActivity.class);
                     startActivity(intent);
                 }
                 if (item.getTitle().equals("Resume Builder")) {
-                    intent = new Intent(CoursesActivity.this, ProfileActivity.class);
+                    intent = new Intent(ExamWisePrepActivity.this, ProfileActivity.class);
                     startActivity(intent);
                 }
                 if (item.getTitle().equals("Job Info")) {
-                    intent = new Intent(CoursesActivity.this, JobInfoActivity.class);
+                    intent = new Intent(ExamWisePrepActivity.this, JobInfoActivity.class);
                     startActivity(intent);
                 }
                 if (item.getTitle().equals("Interview and GD Prep")) {
-                    intent = new Intent(CoursesActivity.this, InterviewGdPrepActivity.class);
+                    intent = new Intent(ExamWisePrepActivity.this, InterviewGdPrepActivity.class);
                     startActivity(intent);
                 }
-                drawerLayoutCourses.closeDrawer(GravityCompat.START);
+                drawerLayoutExamWisePrep.closeDrawer(GravityCompat.START);
                 return true;
             }
         });
     }
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        MySingleton.release();
-        LearnCourseBannerIconsRecyclerView.setAdapter(null);
-        learnCourseRecyclerView.setAdapter(null);
-    }
-    private void setBanner()
-    {
-        LearnCourseBannerIconsRecyclerView=findViewById(R.id.coursesBannerIconsRecyclerView);
-        layoutManager=new GridLayoutManager(CoursesActivity.this,3);
-        LearnCourseBannerIconsRecyclerView.setLayoutManager(layoutManager);
-
-        adapter= new HomeIconsAdapter(CoursesActivity.this,bannerTitleDataSet,bannerImageDataSet);
-        LearnCourseBannerIconsRecyclerView.setAdapter(adapter);
-
-    }
-
-
     private void setValues() {
-        StringRequest stringRequest=new StringRequest(Request.Method.POST, urlCourse, new Response.Listener<String>() {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, urlAll, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 //Toast.makeText(getContext(), "Successful", Toast.LENGTH_SHORT).show();
@@ -179,12 +145,14 @@ public class CoursesActivity extends AppCompatActivity {
                     JSONArray parentArray=new JSONArray(response);
                     for(int i=0;i<parentArray.length();i++){
                         arrayObject=parentArray.getJSONObject(i);
-                        titleDataSet.add(arrayObject.getString("nfly_course_name"));
-                        imageDataSet.add(arrayObject.getString("nfly_course_bg"));
-                        idDataSet.add(arrayObject.getString("nfly_course_id"));
+                        titleDataSet.add(arrayObject.getString("exam_name"));
+                        imageDataSet.add(Integer.toString(R.drawable.ic_computer_white));
+                        paperDataSet.add("5 Tests");
+                        //imageDataSet.add(arrayObject.getString("nfly_course_bg"));
+                        idDataSet.add(arrayObject.getString("exam_id"));
                     }
-                    adapter=new LearnCourseAdapter(imageDataSet,titleDataSet,idDataSet,CoursesActivity.this);
-                    learnCourseRecyclerView.setAdapter(adapter);
+                    adapter=new ExamWiseAdapter(imageDataSet,titleDataSet,idDataSet,paperDataSet,ExamWisePrepActivity.this);
+                    examWisePrepRecyclerView.setAdapter(adapter);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -192,7 +160,7 @@ public class CoursesActivity extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(CoursesActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ExamWisePrepActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
 
             }
         })
@@ -207,13 +175,13 @@ public class CoursesActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
-                params.put("key", "course_id");
+                params.put("key", "exam_id");
                 params.put("order", "ASC");
-                params.put("table", "nfly_course");
+                params.put("table", "nfly_exam");
                 return params;
             }
         };
-        MySingleton.getmInstance(CoursesActivity.this).addToRequestQueue(stringRequest);
+        MySingleton.getmInstance(ExamWisePrepActivity.this).addToRequestQueue(stringRequest);
     }
 
 }

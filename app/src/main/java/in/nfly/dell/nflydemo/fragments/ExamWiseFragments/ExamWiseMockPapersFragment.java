@@ -19,7 +19,13 @@ public class ExamWiseMockPapersFragment extends Fragment {
         // Required empty public constructor
     }
 
-
+    String exam_id,exam_name;
+    public static ExamWiseMockPapersFragment newInstance(String exam_id, String exam_name) {
+        ExamWiseMockPapersFragment fragment=new ExamWiseMockPapersFragment();
+        fragment.exam_id=exam_id;
+        fragment.exam_name=exam_name;
+        return fragment;
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
