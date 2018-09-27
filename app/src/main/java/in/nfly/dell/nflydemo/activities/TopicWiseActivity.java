@@ -35,10 +35,6 @@ import in.nfly.dell.nflydemo.fragments.PracticeCompanyWiseFragment;
 import in.nfly.dell.nflydemo.fragments.PracticeExamWiseFragment;
 import in.nfly.dell.nflydemo.fragments.PracticeTestSeriesFragment;
 import in.nfly.dell.nflydemo.fragments.PracticeTopicWiseFragment;
-import in.nfly.dell.nflydemo.fragments.TopicWiseFragments.TopicWiseLRFragment;
-import in.nfly.dell.nflydemo.fragments.TopicWiseFragments.TopicWiseQuantFragment;
-import in.nfly.dell.nflydemo.fragments.TopicWiseFragments.TopicWiseTechFragment;
-import in.nfly.dell.nflydemo.fragments.TopicWiseFragments.TopicWiseVerbalFragment;
 
 public class TopicWiseActivity extends AppCompatActivity {
 

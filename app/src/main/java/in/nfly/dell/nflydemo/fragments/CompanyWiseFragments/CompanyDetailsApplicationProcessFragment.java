@@ -8,6 +8,8 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +23,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,7 +38,9 @@ public class CompanyDetailsApplicationProcessFragment extends Fragment {
     public String company_id,company_name;
     private String urlCompany="http://nfly.in/gapi/load_rows_one";
     private TextView companyDetailsApplicationProcessText;
+    private ListView companyDetailsApplicationProcessList;
     private String applicationProcess;
+    private String[] steps;
 
     public CompanyDetailsApplicationProcessFragment() {
         // Required empty public constructor
@@ -52,7 +57,8 @@ public class CompanyDetailsApplicationProcessFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v= inflater.inflate(R.layout.fragment_company_details_application_process, container, false);
-        companyDetailsApplicationProcessText=v.findViewById(R.id.companyDetailsApplicationProcessText);
+        //companyDetailsApplicationProcessText=v.findViewById(R.id.companyDetailsApplicationProcessText);
+        companyDetailsApplicationProcessList=v.findViewById(R.id.companyDetailsApplicationProcessList);
         setValues();
         return v;
     }
@@ -66,12 +72,15 @@ public class CompanyDetailsApplicationProcessFragment extends Fragment {
                     JSONArray parentArray=new JSONArray(response);
                     jsonObject=parentArray.getJSONObject(0);
                     applicationProcess=jsonObject.getString("application_process");
-                    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+                    steps=applicationProcess.split(",");
+                    ArrayAdapter<String> adapter=new ArrayAdapter<>(getContext(),android.R.layout.simple_list_item_1,steps);
+                    companyDetailsApplicationProcessList.setAdapter(adapter);
+                    /*if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
                         companyDetailsApplicationProcessText.setText(Html.fromHtml(applicationProcess,Html.FROM_HTML_MODE_COMPACT));
                     }
                     else{
                         companyDetailsApplicationProcessText.setText(Html.fromHtml(applicationProcess));
-                    }
+                    }*/
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -56,7 +57,7 @@ public class JobInfoActivity extends AppCompatActivity {
             }
         });
         jobInfoRecyclerView=findViewById(R.id.jobInfoRecyclerView);
-        layoutManager=new GridLayoutManager(JobInfoActivity.this,2);
+        layoutManager=new LinearLayoutManager(JobInfoActivity.this);
         jobInfoRecyclerView.setLayoutManager(layoutManager);
         setValues();
     }
