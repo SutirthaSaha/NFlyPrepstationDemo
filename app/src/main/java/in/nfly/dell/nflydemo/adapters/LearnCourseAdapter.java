@@ -20,20 +20,21 @@ import in.nfly.dell.nflydemo.activities.CourseStudyActivity;
 
 public class LearnCourseAdapter extends RecyclerView.Adapter<LearnCourseAdapter.LearnCourseHolder> {
 
-    private ArrayList<String> imageDataSet,titleDataSet,idDataSet;
+    private ArrayList<String> imageDataSet,titleDataSet,idDataSet,subTitleDataSet;
     private Context context;
 
-    public LearnCourseAdapter(ArrayList<String> imageDataSet, ArrayList<String> titleDataSet, ArrayList<String> idDataSet, Context context) {
+    public LearnCourseAdapter(ArrayList<String> imageDataSet, ArrayList<String> titleDataSet, ArrayList<String> idDataSet, ArrayList<String> subTitleDataSet, Context context) {
         this.imageDataSet = imageDataSet;
         this.titleDataSet = titleDataSet;
         this.idDataSet = idDataSet;
+        this.subTitleDataSet = subTitleDataSet;
         this.context = context;
     }
 
     @NonNull
     @Override
     public LearnCourseHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.card_learn_course_item,parent,false);
+        View view= LayoutInflater.from(parent.getContext()).inflate(R.layout.card_knowledge_base_company_wise,parent,false);
         LearnCourseAdapter.LearnCourseHolder holder=new LearnCourseAdapter.LearnCourseHolder(view);
         return holder;
     }
@@ -41,6 +42,7 @@ public class LearnCourseAdapter extends RecyclerView.Adapter<LearnCourseAdapter.
     @Override
     public void onBindViewHolder(@NonNull LearnCourseHolder holder, final int position) {
         holder.learnCourseCardTitle.setText(titleDataSet.get(position));
+        holder.learnCourseCardSubTitle.setText(subTitleDataSet.get(position));
         Picasso.with(context).load(imageDataSet.get(position)).into(holder.learnCourseCardImage);
         holder.learnCourseCardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,13 +62,14 @@ public class LearnCourseAdapter extends RecyclerView.Adapter<LearnCourseAdapter.
     public class LearnCourseHolder extends RecyclerView.ViewHolder{
 
         public CardView learnCourseCardView;
-        public TextView learnCourseCardTitle;
+        public TextView learnCourseCardTitle,learnCourseCardSubTitle;
         public ImageView learnCourseCardImage;
         public LearnCourseHolder(View itemView) {
             super(itemView);
-            learnCourseCardView=itemView.findViewById(R.id.learnCourseCardView);
-            learnCourseCardImage=itemView.findViewById(R.id.learnCourseCardImage);
-            learnCourseCardTitle=itemView.findViewById(R.id.learnCourseCardTitle);
+            learnCourseCardView=itemView.findViewById(R.id.knowBaseCompanyWiseCard);
+            learnCourseCardImage=itemView.findViewById(R.id.knowBaseCompanyWiseCardImage);
+            learnCourseCardTitle=itemView.findViewById(R.id.knowBaseCompanyWiseCardTitle);
+            learnCourseCardSubTitle=itemView.findViewById(R.id.knowBaseCompanyWiseCardSector);
         }
     }
 }

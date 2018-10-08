@@ -10,8 +10,10 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
@@ -52,6 +54,7 @@ public class CoursesActivity extends AppCompatActivity {
 
     String urlCourse="http://nfly.in/gapi/load_all_rows";
     private ArrayList<String> titleDataSet=new ArrayList<String>(){};
+    private ArrayList<String> subTitleDataSet=new ArrayList<String>(){};
     private ArrayList<String> imageDataSet=new ArrayList<String>(){};
     private ArrayList<String> idDataSet=new ArrayList<String>(){};
 
@@ -75,7 +78,7 @@ public class CoursesActivity extends AppCompatActivity {
         drawerLayoutCourses=findViewById(R.id.drawerLayoutCourses);
         learnCourseImage=findViewById(R.id.coursesImage);
         learnCourseRecyclerView=findViewById(R.id.coursesRecyclerView);
-        layoutManager=new GridLayoutManager(CoursesActivity.this,2);
+        layoutManager=new LinearLayoutManager(CoursesActivity.this);
         learnCourseRecyclerView.setLayoutManager(layoutManager);
         setToolbar();
         setNavigationDrawer();
@@ -86,6 +89,7 @@ public class CoursesActivity extends AppCompatActivity {
     private void setToolbar() {
         toolbar=findViewById(R.id.coursesToolbar);
         toolbar.setTitle("Courses");
+        setSupportActionBar(toolbar);
         toolbar.setTitleTextColor(Color.WHITE);
     }
     private void setNavigationDrawer() {
@@ -151,6 +155,33 @@ public class CoursesActivity extends AppCompatActivity {
         });
     }
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_toolbar, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent;
+        if (item.getTitle().equals("Feedback")){
+            intent=new Intent(CoursesActivity.this,FeedBackActivity.class);
+            startActivity(intent);
+        }
+        if (item.getTitle().equals("Help")){
+            intent=new Intent(CoursesActivity.this,HelpActivity.class);
+            startActivity(intent);
+        }
+        if(item.getTitle().equals("Sign Out")) {
+            User user = new User(CoursesActivity.this);
+            user.logOut();
+            intent = new Intent(CoursesActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         MySingleton.release();
@@ -179,11 +210,12 @@ public class CoursesActivity extends AppCompatActivity {
                     JSONArray parentArray=new JSONArray(response);
                     for(int i=0;i<parentArray.length();i++){
                         arrayObject=parentArray.getJSONObject(i);
+                        subTitleDataSet.add("10+ videos");
                         titleDataSet.add(arrayObject.getString("nfly_course_name"));
                         imageDataSet.add(arrayObject.getString("nfly_course_bg"));
                         idDataSet.add(arrayObject.getString("nfly_course_id"));
                     }
-                    adapter=new LearnCourseAdapter(imageDataSet,titleDataSet,idDataSet,CoursesActivity.this);
+                    adapter=new LearnCourseAdapter(imageDataSet,titleDataSet,idDataSet,subTitleDataSet,CoursesActivity.this);
                     learnCourseRecyclerView.setAdapter(adapter);
                 } catch (JSONException e) {
                     e.printStackTrace();

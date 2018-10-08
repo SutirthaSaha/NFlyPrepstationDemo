@@ -42,6 +42,7 @@ public class LearnCourseFragment extends Fragment {
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private ImageView learnCourseImage;
+    private ArrayList<String> subTitleDataSet=new ArrayList<String>(){};
     //private ArrayList<String> titleDataSet=new ArrayList<Str   private RecyclerView.Adapter adapter;
     //    private RecyclerView.LayoutManager layoutManager;ing>(){{add("HR Questions");add("Software Tools");add("Eng. Topics");add("Company wise");add("Puzzles");add("Miscellaneous");}};
     //private ArrayList<String> imageDataSet=new ArrayList<String>(){{add(Integer.toString(R.drawable.ic_computer_black));add(Integer.toString(R.drawable.ic_computer_black));add(Integer.toString(R.drawable.ic_computer_black));add(Integer.toString(R.drawable.ic_computer_black));add(Integer.toString(R.drawable.ic_computer_black));add(Integer.toString(R.drawable.ic_computer_black));}};
@@ -93,7 +94,7 @@ public class LearnCourseFragment extends Fragment {
     private void setBanner(View view)
     {
         LearnCourseBannerIconsRecyclerView=view.findViewById(R.id.learnCourseBannerIconsRecyclerView);
-        layoutManager=new GridLayoutManager(getContext(),3);
+        layoutManager=new LinearLayoutManager(getContext());
         LearnCourseBannerIconsRecyclerView.setLayoutManager(layoutManager);
 
         adapter= new HomeIconsAdapter(getContext(),bannerTitleDataSet,bannerImageDataSet);
@@ -115,8 +116,9 @@ public class LearnCourseFragment extends Fragment {
                         titleDataSet.add(arrayObject.getString("nfly_course_name"));
                         imageDataSet.add(arrayObject.getString("nfly_course_bg"));
                         idDataSet.add(arrayObject.getString("nfly_course_id"));
+                        subTitleDataSet.add("10+ videos");
                     }
-                    adapter=new LearnCourseAdapter(imageDataSet,titleDataSet,idDataSet,getContext());
+                    adapter=new LearnCourseAdapter(imageDataSet,titleDataSet,idDataSet,subTitleDataSet,getContext());
                     learnCourseRecyclerView.setAdapter(adapter);
                 } catch (JSONException e) {
                     e.printStackTrace();

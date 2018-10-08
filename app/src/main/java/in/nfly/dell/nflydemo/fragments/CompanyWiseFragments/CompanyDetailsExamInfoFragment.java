@@ -8,6 +8,7 @@ import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,7 +35,7 @@ public class CompanyDetailsExamInfoFragment extends Fragment {
 
     public String company_id,company_name;
     private String urlCompany="http://nfly.in/gapi/load_rows_one";
-    private TextView companyDetailsExamInfoText;
+    private WebView companyDetailsExamInfoText;
     private String examInfo;
     public CompanyDetailsExamInfoFragment() {
         // Required empty public constructor
@@ -66,12 +67,13 @@ public class CompanyDetailsExamInfoFragment extends Fragment {
                     JSONArray parentArray=new JSONArray(response);
                     jsonObject=parentArray.getJSONObject(0);
                     examInfo=jsonObject.getString("exam_info");
-                    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+                    companyDetailsExamInfoText.loadDataWithBaseURL(null, examInfo, "text/html", "utf-8", null);
+                    /*if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
                         companyDetailsExamInfoText.setText(Html.fromHtml(examInfo,Html.FROM_HTML_MODE_COMPACT));
                     }
                     else{
                         companyDetailsExamInfoText.setText(Html.fromHtml(examInfo));
-                    }
+                    }*/
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

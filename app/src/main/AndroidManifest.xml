@@ -68,7 +68,9 @@
         <activity android:name=".activities.singleActivities.TopicWiseTestActivity" />
         <activity android:name=".activities.ExamWisePrepActivity" />
         <activity android:name=".activities.singleActivities.ExamWiseDetailsActivity" />
-        <activity android:name=".activities.singleActivities.TopicWiseSubTopicsActivity"></activity>
+        <activity android:name=".activities.singleActivities.TopicWiseSubTopicsActivity" />
+        <activity android:name=".activities.singleActivities.CompanyMockTestDetailsActivity" />
+        <activity android:name=".activities.singleActivities.CompanySolvedPaperDetailsActivity"></activity>
     </application>
 
 </manifest>

@@ -40,9 +40,9 @@ public class TopicsSubTopicsAdapter extends RecyclerView.Adapter<TopicsSubTopics
     @Override
     public void onBindViewHolder(@NonNull TopicsSubTopicsAdapter.TopicsSubTopicsHolder holder, final int position) {
         holder.TopicsSubTopicsCardTitle.setText(titleDataSet.get(position));
-        //Picasso.with(context).load(imageDataSet.get(position)).into(holder.TopicsSubTopicsCardImage);
+        Picasso.with(context).load(imageDataSet.get(position)).into(holder.TopicsSubTopicsCardImage);
         holder.TopicsSubTopicsCardQuestions.setText(questionsDataSet.get(position));
-        Picasso.with(context).load(R.drawable.colored_placementpapers).into(holder.TopicsSubTopicsCardImage);
+        //Picasso.with(context).load(R.drawable.colored_placementpapers).into(holder.TopicsSubTopicsCardImage);
         holder.TopicsSubTopicsCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

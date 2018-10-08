@@ -13,6 +13,7 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -70,9 +71,37 @@ public class ExamWisePrepActivity extends AppCompatActivity {
     }
     private void setToolbar() {
         toolbar=findViewById(R.id.examWisePrepToolbar);
-        toolbar.setTitle("Courses");
+        toolbar.setTitle("Exam Wise Prep");
+        setSupportActionBar(toolbar);
         toolbar.setTitleTextColor(Color.WHITE);
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_toolbar, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent;
+        if (item.getTitle().equals("Feedback")){
+            intent=new Intent(ExamWisePrepActivity.this,FeedBackActivity.class);
+            startActivity(intent);
+        }
+        if (item.getTitle().equals("Help")){
+            intent=new Intent(ExamWisePrepActivity.this,HelpActivity.class);
+            startActivity(intent);
+        }
+        if(item.getTitle().equals("Sign Out")) {
+            User user = new User(ExamWisePrepActivity.this);
+            user.logOut();
+            intent = new Intent(ExamWisePrepActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     private void setNavigationDrawer() {
         final NavigationView navigationView;
         navigationView = findViewById(R.id.navigationViewExamWisePrep);

@@ -87,7 +87,7 @@ public class TopicWiseSubTopicsActivity extends AppCompatActivity {
                     for(int i=0;i<parentArray.length();i++){
                         arrayObject=parentArray.getJSONObject(i);
                         titleDataSet.add(arrayObject.getString("topic_name"));
-                        imageDataSet.add(Integer.toString(R.drawable.colored_company));
+                        imageDataSet.add("http://nfly.in/assets/images/app_icons/"+arrayObject.getString("icon"));
                         idDataSet.add(arrayObject.getString("topic_id"));
                         questionsDataSet.add(arrayObject.getString("num_questions")+" Questions");
                     }

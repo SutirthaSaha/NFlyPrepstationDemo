@@ -12,6 +12,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -58,8 +59,37 @@ public class InterviewGdPrepActivity extends AppCompatActivity {
     private void setToolbar() {
         toolbar=findViewById(R.id.interviewGdPrepToolbar);
         toolbar.setTitle("Interview and GD Prep");
+        setSupportActionBar(toolbar);
         toolbar.setTitleTextColor(Color.WHITE);
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_toolbar, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent;
+        if (item.getTitle().equals("Feedback")){
+            intent=new Intent(InterviewGdPrepActivity.this,FeedBackActivity.class);
+            startActivity(intent);
+        }
+        if (item.getTitle().equals("Help")){
+            intent=new Intent(InterviewGdPrepActivity.this,HelpActivity.class);
+            startActivity(intent);
+        }
+        if(item.getTitle().equals("Sign Out")) {
+            User user = new User(InterviewGdPrepActivity.this);
+            user.logOut();
+            intent = new Intent(InterviewGdPrepActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     private void setNavigationDrawer() {
         final NavigationView navigationView;
         navigationView = findViewById(R.id.navigationViewInterviewGdPrep);

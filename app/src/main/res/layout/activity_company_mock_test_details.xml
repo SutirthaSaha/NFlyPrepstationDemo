@@ -5,24 +5,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activities.singleActivities.TopicWiseTestActivity">
+    tools:context=".activities.singleActivities.CompanyMockTestDetailsActivity">
 
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        android:id="@+id/topicWiseTestToolbar"></android.support.v7.widget.Toolbar>
-    <!--
+        android:id="@+id/companyMockTestDetailsToolbar"></android.support.v7.widget.Toolbar>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="start"
+        android:layout_gravity="end"
         android:layout_margin="10dp"
-        android:textSize="15sp"
-        android:textColor="@color/colorPrimaryDark"
+        android:textSize="20sp"
+        android:textColor="@color/colorAccent"
         android:id="@+id/practiceCountdownTimerText"
-        android:text="Question x of y"/>-->
+        android:text="CountDown Timer"/>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -42,54 +42,34 @@
                 android:text="What is your name?"
                 android:layout_marginTop="5dp"
                 android:layout_marginBottom="5dp"
-                android:id="@+id/topicWiseTestQuestion"/>
+                android:id="@+id/companyMockTestDetailsQuestion"/>
             <RadioGroup
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/topicWiseTestOptions">
+                android:id="@+id/companyMockTestDetailsOptions">
 
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Option one"
-                    android:onClick="onOptionClick"
-                    android:id="@+id/topicWiseTestOption1"/>
+                    android:id="@+id/companyMockTestDetailsOption1"/>
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Option two"
-                    android:onClick="onOptionClick"
-                    android:id="@+id/topicWiseTestOption2"/>
+                    android:id="@+id/companyMockTestDetailsOption2"/>
 
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Option three"
-                    android:onClick="onOptionClick"
-                    android:id="@+id/topicWiseTestOption3"/>
+                    android:id="@+id/companyMockTestDetailsOption3"/>
                 <RadioButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Option four"
-                    android:onClick="onOptionClick"
-                    android:id="@+id/topicWiseTestOption4"/>
+                    android:id="@+id/companyMockTestDetailsOption4"/>
             </RadioGroup>
-
-            <android.support.v7.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:elevation="5dp"
-                android:visibility="gone"
-                android:id="@+id/topicWiseExplanationCard"
-                android:padding="10dp">
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="#000"
-                    android:padding="10dp"
-                    android:id="@+id/topicWiseExplanationText"/>
-            </android.support.v7.widget.CardView>
         </LinearLayout>
     </ScrollView>
     <LinearLayout
@@ -107,7 +87,7 @@
             android:paddingBottom="15dp"
             android:background="@color/colorAccent"
             android:textColor="#fff"
-            android:id="@+id/topicWiseTestPreviousBtn"
+            android:id="@+id/companyMockTestDetailsPreviousBtn"
             android:onClick="onTestPreviousBtnClick"/>
         <Button
             android:layout_width="0dp"
@@ -120,7 +100,19 @@
             android:layout_margin="10dp"
             android:background="@color/colorAccent"
             android:textColor="#fff"
-            android:id="@+id/topicWiseTestNextBtn"
+            android:id="@+id/companyMockTestDetailsNextBtn"
             android:onClick="onTestNextBtnClick"/>
     </LinearLayout>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:visibility="gone"
+        android:layout_margin="10dp"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:background="@color/colorAccent"
+        android:textColor="#fff"
+        android:id="@+id/companyMockTestDetailsSubmitBtn"
+        android:onClick="onTestSubmitBtnClick"/>
 </LinearLayout>
