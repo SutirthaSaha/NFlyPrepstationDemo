@@ -33,7 +33,7 @@ public class CompanyWisePrepActivity extends AppCompatActivity {
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
     private ArrayList<String> titleDataSet=new ArrayList<String>(){{add("IT Companies");add("Core Companies");add("Start-ups");add("Dream Companies");}};
-    private ArrayList<String> imageDataSet=new ArrayList<String>(){{add(Integer.toString(R.drawable.learn_interview_company_wise));add(Integer.toString(R.drawable.ic_computer_white));add(Integer.toString(R.drawable.ic_computer_white));add(Integer.toString(R.drawable.ic_computer_white));}};
+    private ArrayList<String> imageDataSet=new ArrayList<String>(){{add("http://nfly.in/assets/images/app_icons/cwp_it");add("http://nfly.in/assets/images/app_icons/cwp_core");add("http://nfly.in/assets/images/app_icons/cwp_startup");add("http://nfly.in/assets/images/app_icons/cwp_dream");}};
     private ArrayList<String> idDataSet=new ArrayList<String>(){{add("1");add("2");add("3");add("4");}};
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -45,8 +45,8 @@ public class TopicWiseActivity extends AppCompatActivity {
     private RecyclerView topicWisePrepRecyclerView;
     private RecyclerView.Adapter adapter;
     private RecyclerView.LayoutManager layoutManager;
-    private ArrayList<String> titleDataSet=new ArrayList<String>(){{add("Quantitative Aptitude");add("Logical and Reasoning");add("Verbal Ability");add("Technical");}};
-    private ArrayList<String> imageDataSet=new ArrayList<String>(){{add(Integer.toString(R.drawable.learn_interview_company_wise));add(Integer.toString(R.drawable.ic_computer_white));add(Integer.toString(R.drawable.ic_computer_white));add(Integer.toString(R.drawable.ic_computer_white));}};
+    private ArrayList<String> titleDataSet=new ArrayList<String>(){{add("Quantitative Aptitude");add("Logical Reasoning");add("Verbal Ability");add("Technical");}};
+    private ArrayList<String> imageDataSet=new ArrayList<String>(){{add("http://nfly.in/assets/images/app_icons/twp_quants");add("http://nfly.in/assets/images/app_icons/twp_logical");add("http://nfly.in/assets/images/app_icons/twp_verbal");add("http://nfly.in/assets/images/app_icons/twp_techincal");}};
     private ArrayList<String> idDataSet=new ArrayList<String>(){{add("1");add("2");add("3");add("4");}};
 
     @Override
@@ -169,4 +169,5 @@ public class TopicWiseActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         toolbar.setTitleTextColor(Color.WHITE);
     }
+
 }

@@ -51,7 +51,7 @@ public class ExamWisePrepActivity extends AppCompatActivity {
 
     String urlAll="http://nfly.in/gapi/load_all_rows";
     private ArrayList<String> titleDataSet=new ArrayList<String>(){};
-    private ArrayList<String> imageDataSet=new ArrayList<String>(){};
+    private ArrayList<String> imageDataSet=new ArrayList<String>(){{add("http://nfly.in/assets/images/app_icons/ewp_elitmus");add("http://nfly.in/assets/images/app_icons/ewp_amcat");add("http://nfly.in/assets/images/app_icons/ewp_cocubes");}};
     private ArrayList<String> idDataSet=new ArrayList<String>(){};
     private ArrayList<String> paperDataSet=new ArrayList<String>(){};
 
@@ -175,7 +175,7 @@ public class ExamWisePrepActivity extends AppCompatActivity {
                     for(int i=0;i<parentArray.length();i++){
                         arrayObject=parentArray.getJSONObject(i);
                         titleDataSet.add(arrayObject.getString("exam_name"));
-                        imageDataSet.add(Integer.toString(R.drawable.ic_computer_white));
+                        //imageDataSet.add(Integer.toString(R.drawable.ic_computer_white));
                         paperDataSet.add("5 Tests");
                         //imageDataSet.add(arrayObject.getString("nfly_course_bg"));
                         idDataSet.add(arrayObject.getString("exam_id"));

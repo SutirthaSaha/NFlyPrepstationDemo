@@ -42,9 +42,9 @@ public class TopicWiseAdapter extends RecyclerView.Adapter<TopicWiseAdapter.Topi
     @Override
     public void onBindViewHolder(@NonNull TopicWiseAdapter.TopicWiseHolder holder, final int position) {
         holder.topicWiseTitle.setText(titleDataSet.get(position));
-        //Picasso.with(context).load(imageDataSet.get(position)).into(holder.topicWiseImage);
-        Picasso.with(context).load(R.drawable.ic_computer_white).into(holder.topicWiseImage);
-        //  holder.learnInterviewImage.setImageResource(Integer.parseInt(imageDataSet.get(0)));
+        Picasso.with(context).load(imageDataSet.get(position)).into(holder.topicWiseImage);
+        //Picasso.with(context).load(R.drawable.ic_computer_white).into(holder.topicWiseImage);
+        //holder.learnInterviewImage.setImageResource(Integer.parseInt(imageDataSet.get(0)));
         holder.topicWiseCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

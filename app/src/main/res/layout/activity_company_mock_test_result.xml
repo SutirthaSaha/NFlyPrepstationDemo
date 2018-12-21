@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".activities.singleActivities.PracticeTestResultActivity">
+    tools:context=".activities.singleActivities.CompanyMockTestResultActivity">
     <android.support.v7.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -44,7 +44,7 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="To Dashboard"
+            android:text="To Home"
             android:layout_margin="15dp"
             android:id="@+id/toDashboardActivity"
             android:textColor="#fff"
@@ -54,7 +54,7 @@
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="To Test Home"
+            android:text="To Company Wise Prep"
             android:layout_margin="15dp"
             android:id="@+id/toPracticeTestActivity"
             android:textColor="#fff"

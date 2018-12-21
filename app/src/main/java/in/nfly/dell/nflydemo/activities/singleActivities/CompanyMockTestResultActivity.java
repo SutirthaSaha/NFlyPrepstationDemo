@@ -12,10 +12,12 @@ import android.widget.TextView;
 import com.github.lzyzsd.circleprogress.DonutProgress;
 
 import in.nfly.dell.nflydemo.R;
+import in.nfly.dell.nflydemo.activities.CompanyWisePrepActivity;
 import in.nfly.dell.nflydemo.activities.DashboardActivity;
+import in.nfly.dell.nflydemo.activities.MainActivity;
 import in.nfly.dell.nflydemo.activities.TopicWiseActivity;
 
-public class PracticeTestResultActivity extends AppCompatActivity {
+public class CompanyMockTestResultActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
     private int user_score,max_score;
@@ -26,7 +28,7 @@ public class PracticeTestResultActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_practice_test_result);
+        setContentView(R.layout.activity_company_mock_test_result);
 
         practiceTestResultMarks=findViewById(R.id.practiceTestResultMarks);
         practiceTestResultProgress=findViewById(R.id.practiceTestResultProgress);
@@ -44,7 +46,7 @@ public class PracticeTestResultActivity extends AppCompatActivity {
         toPracticeTestActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(PracticeTestResultActivity.this, TopicWiseActivity.class);
+                Intent intent=new Intent(CompanyMockTestResultActivity.this, CompanyWisePrepActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 finish();
@@ -54,7 +56,7 @@ public class PracticeTestResultActivity extends AppCompatActivity {
         toDashboardActivity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(PracticeTestResultActivity.this, DashboardActivity.class);
+                Intent intent=new Intent(CompanyMockTestResultActivity.this, MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 finish();

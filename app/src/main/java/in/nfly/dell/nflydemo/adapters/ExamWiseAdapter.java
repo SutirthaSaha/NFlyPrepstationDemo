@@ -43,9 +43,9 @@ public class ExamWiseAdapter extends RecyclerView.Adapter<ExamWiseAdapter.ExamWi
     @Override
     public void onBindViewHolder(@NonNull ExamWiseAdapter.ExamWiseHolder holder, final int position) {
         holder.ExamWiseCardTitle.setText(titleDataSet.get(position));
-        //Picasso.with(context).load(imageDataSet.get(position)).into(holder.ExamWiseCardImage);
+        Picasso.with(context).load(imageDataSet.get(position)).into(holder.ExamWiseCardImage);
         holder.ExamWiseCardtests.setText(testsDataSet.get(position));
-        Picasso.with(context).load(R.drawable.colored_placementpapers).into(holder.ExamWiseCardImage);
+        //Picasso.with(context).load(R.drawable.colored_placementpapers).into(holder.ExamWiseCardImage);
         holder.ExamWiseCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

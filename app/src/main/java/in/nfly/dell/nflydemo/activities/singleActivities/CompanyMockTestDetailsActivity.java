@@ -2,7 +2,6 @@ package in.nfly.dell.nflydemo.activities.singleActivities;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -29,12 +28,10 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 import in.nfly.dell.nflydemo.MySingleton;
 import in.nfly.dell.nflydemo.R;
 import in.nfly.dell.nflydemo.User;
-import in.nfly.dell.nflydemo.activities.TopicWiseActivity;
 
 public class CompanyMockTestDetailsActivity extends AppCompatActivity {
     private Toolbar toolbar;
@@ -182,7 +179,7 @@ public class CompanyMockTestDetailsActivity extends AppCompatActivity {
                 params.put("value1", user_id);
                 params.put("key2", "test_id");
                 params.put("value2", test_id);
-                params.put("table", "nfly_test_result");
+                params.put("table", "nfly_company_test_result");
                 return params;
             }
         };
@@ -226,7 +223,7 @@ public class CompanyMockTestDetailsActivity extends AppCompatActivity {
                 params.put("value1", user_id);
                 params.put("key2", "test_id");
                 params.put("value2", test_id);
-                params.put("table", "nfly_test_result");
+                params.put("table", "nfly_company_test_result");
                 return params;
             }
         };
@@ -303,7 +300,7 @@ public class CompanyMockTestDetailsActivity extends AppCompatActivity {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("key", "test_id");
                 params.put("value",test_id);
-                params.put("table","nfly_test_question");
+                params.put("table","nfly_company_test_questions");
                 return params;
             }
         };
@@ -321,9 +318,6 @@ public class CompanyMockTestDetailsActivity extends AppCompatActivity {
         if(count>0){
             companyMockTestDetailsPreviousBtn.setVisibility(View.VISIBLE);
             companyMockTestDetailsPreviousBtn.setEnabled(true);
-
-            companyMockTestDetailsSubmitBtn.setVisibility(View.INVISIBLE);
-            companyMockTestDetailsSubmitBtn.setEnabled(false);
         }
         showUserOption(count);
         companyMockTestDetailsNextBtn.setVisibility(View.VISIBLE);
@@ -436,7 +430,7 @@ public class CompanyMockTestDetailsActivity extends AppCompatActivity {
                     JSONObject arrayObject=new JSONObject(response);
                     status=arrayObject.getInt("status");
                     if(status==200){
-                        Intent intent=new Intent(CompanyMockTestDetailsActivity.this,PracticeTestResultActivity.class);
+                        Intent intent=new Intent(CompanyMockTestDetailsActivity.this,CompanyMockTestResultActivity.class);
                         intent.putExtra("user_score",user_score);
                         intent.putExtra("max_score",max_score);
                         startActivity(intent);
@@ -474,7 +468,7 @@ public class CompanyMockTestDetailsActivity extends AppCompatActivity {
                 params.put("insert_array[state]","1");
                 params.put("insert_array[score]",Integer.toString(user_score));
                 params.put("insert_array[date]",date);
-                params.put("table","nfly_test_result");
+                params.put("table","nfly_company_test_result");
                 return params;
             }
         };
@@ -523,7 +517,7 @@ public class CompanyMockTestDetailsActivity extends AppCompatActivity {
                 params.put("insert_array[question_id]",question_id);
                 params.put("insert_array[user_response]",Integer.toString(userOptions[i]));
                 params.put("insert_array[marks]",Integer.toString(marks));
-                params.put("table","nfly_test_response");
+                params.put("table","nfly_company_test_response");
                 return params;
             }
         };

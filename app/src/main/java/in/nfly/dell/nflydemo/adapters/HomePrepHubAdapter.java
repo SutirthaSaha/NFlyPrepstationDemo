@@ -16,6 +16,8 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 
 import in.nfly.dell.nflydemo.R;
+import in.nfly.dell.nflydemo.activities.CoursesActivity;
+import in.nfly.dell.nflydemo.activities.InterviewGdPrepActivity;
 import in.nfly.dell.nflydemo.activities.LearnActivity;
 
 public class HomePrepHubAdapter extends RecyclerView.Adapter<HomePrepHubAdapter.HomePrepHubHolder> {
@@ -50,9 +52,18 @@ public class HomePrepHubAdapter extends RecyclerView.Adapter<HomePrepHubAdapter.
             @Override
             public void onClick(View v) {
                 //Toast.makeText(context, Integer.toString(idDataSet.get(position)), Toast.LENGTH_SHORT).show();
-                Intent intent=new Intent(context, LearnActivity.class);
-                intent.putExtra("fragment_id",idDataSet.get(position));
-                context.startActivity(intent);
+                if(position==0){
+                    Intent intent=new Intent(context, CoursesActivity.class);
+                    context.startActivity(intent);
+                }else if(position==1){
+                    Intent intent=new Intent(context, InterviewGdPrepActivity.class);
+                    //intent.putExtra("fragment_id",idDataSet.get(position));
+                    context.startActivity(intent);
+                }else if(position==2){
+                    Intent intent=new Intent(context, InterviewGdPrepActivity.class);
+                    //intent.putExtra("fragment_id",idDataSet.get(position));
+                    context.startActivity(intent);
+                } 
             }
         });
     }

@@ -110,29 +110,30 @@ public class MainActivity extends AppCompatActivity {
             add(R.drawable.presentation);
             add(R.drawable.meeting);
             add(R.drawable.reunion);
-            add(R.drawable.planning);
-            add(R.drawable.tipps);}};
+            //add(R.drawable.planning);
+            //add(R.drawable.tipps);
+        }};
     private ArrayList<Integer> prepHubIdDataSet=new ArrayList<Integer>(){
         {   add(R.id.learn_navigation_course);
             add(R.id.learn_navigation_interview);
             add(R.id.learn_navigation_gd);
-            add(R.id.learn_navigation_papers);
-            add(R.id.learn_navigation_tips);
+            //add(R.id.learn_navigation_papers);
+            //add(R.id.learn_navigation_tips);
         }
     };
     private ArrayList<String> prepHubTitleDataSet=new ArrayList<String>(){
         {add("Video Courses");
             add("Interviews");
             add("Group Discussions");
-            add("Placement Papers");
-            add("Tips");
+            //add("Placement Papers");
+            //add("Tips");
            }};
     private ArrayList<String> prepHubSubTitleDataSet=new ArrayList<String>(){
         {add("7 courses");
             add("500+ questions");
             add("100+ topics");
-            add("50+ companies");
-            add("10 topics");
+            //add("50+ companies");
+            //add("10 topics");
         }};
     private ArrayList<Integer> practiceIdDataSet=new ArrayList<Integer>(){
         {
@@ -217,15 +218,15 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         setToolbar();
         drawerLayoutHome=findViewById(R.id.drawerLayoutHome);
-        progressDialog=new ProgressDialog(MainActivity.this);
-        progressDialog.setTitle("Loading...");
-        progressDialog.setCancelable(false);
-        progressDialog.show();
+        //progressDialog=new ProgressDialog(MainActivity.this);
+        //progressDialog.setTitle("Loading...");
+        //progressDialog.setCancelable(false);
+        //progressDialog.show();
         setToolbar();
         setNavigationDrawer();
         setViewPager();
         setBanner();
-        setFeaturesIcons();
+        //setFeaturesIcons();
         setPrepHubIcons();
         setPractiseIcons();
         setCompanyCards();
@@ -409,7 +410,7 @@ public class MainActivity extends AppCompatActivity {
                     companyTitleDataSet.add("View All");
                     companyImageDataSet.add("none");
 
-                    progressDialog.cancel();
+                    //progressDialog.cancel();
                     adapter= new HomeCompanyAdapter(MainActivity.this,companyIdDataSet,companyTitleDataSet,companyImageDataSet);
                     CompanyRecyclerView.setAdapter(adapter);
                 } catch (JSONException e) {
@@ -465,7 +466,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setFeaturesIcons()
     {
-        HomeFeatureIconsRecyclerView=findViewById(R.id.homeFeaturesIconsRecyclerView);
+        //HomeFeatureIconsRecyclerView=findViewById(R.id.homeFeaturesIconsRecyclerView);
         layoutManager=new GridLayoutManager(MainActivity.this,3);
         HomeFeatureIconsRecyclerView.setLayoutManager(layoutManager);
 
@@ -481,7 +482,6 @@ public class MainActivity extends AppCompatActivity {
 
         adapter= new HomeIconsAdapter(MainActivity.this ,bannerTitleDataSet,bannerImageDataSet);
         HomeBannerIconsRecyclerView.setAdapter(adapter);
-
     }
 
     private void setViewPager()
@@ -700,7 +700,6 @@ public class MainActivity extends AppCompatActivity {
                 return params;
             }
         };
-
         MySingleton.getmInstance(MainActivity.this).addToRequestQueue(stringRequest);
     }
 }

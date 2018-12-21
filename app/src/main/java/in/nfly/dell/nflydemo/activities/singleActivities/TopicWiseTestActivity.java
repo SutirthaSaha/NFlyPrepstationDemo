@@ -110,10 +110,10 @@ public class TopicWiseTestActivity extends AppCompatActivity {
                         questionDataSet.add(arrayObject.getString("question"));
                         answerDataSet.add(arrayObject.getString("correct_option"));
 
-                        optionsDataSet.add(arrayObject.getString("option_1"));
-                        optionsDataSet.add(arrayObject.getString("option_2"));
-                        optionsDataSet.add(arrayObject.getString("option_3"));
-                        optionsDataSet.add(arrayObject.getString("option_4"));
+                        optionsDataSet.add("  1. "+arrayObject.getString("option_1"));
+                        optionsDataSet.add("  2. "+arrayObject.getString("option_2"));
+                        optionsDataSet.add("  3. "+arrayObject.getString("option_3"));
+                        optionsDataSet.add("  4. "+arrayObject.getString("option_4"));
 
                         explanationDataSet.add(arrayObject.getString("explanation"));
                         questionOptionsSet.put(questionDataSet.get(i),optionsDataSet);

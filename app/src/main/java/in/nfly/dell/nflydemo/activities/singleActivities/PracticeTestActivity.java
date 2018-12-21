@@ -440,7 +440,7 @@ public class PracticeTestActivity extends AppCompatActivity {
                     JSONObject arrayObject=new JSONObject(response);
                     status=arrayObject.getInt("status");
                     if(status==200){
-                        Intent intent=new Intent(PracticeTestActivity.this,PracticeTestResultActivity.class);
+                        Intent intent=new Intent(PracticeTestActivity.this,CompanyMockTestResultActivity.class);
                         intent.putExtra("user_score",user_score);
                         intent.putExtra("max_score",max_score);
                         startActivity(intent);

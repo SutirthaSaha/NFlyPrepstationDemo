@@ -10,12 +10,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
 import in.nfly.dell.nflydemo.R;
+import in.nfly.dell.nflydemo.activities.CompanyWisePrepActivity;
+import in.nfly.dell.nflydemo.activities.ExamWisePrepActivity;
 import in.nfly.dell.nflydemo.activities.TopicWiseActivity;
 
 public class HomePracticeAdapter extends RecyclerView.Adapter<HomePracticeAdapter.HomePracticeHolder>{
@@ -50,9 +53,18 @@ public class HomePracticeAdapter extends RecyclerView.Adapter<HomePracticeAdapte
             @Override
             public void onClick(View v) {
                 //Toast.makeText(context, Integer.toString(idDataSet.get(position)), Toast.LENGTH_SHORT).show();
-                Intent intent=new Intent(context, TopicWiseActivity.class);
-                intent.putExtra("fragment_id",idDataSet.get(position));
-                context.startActivity(intent);
+                if (position==0){
+                    Intent intent=new Intent(context,CompanyWisePrepActivity.class);
+                    context.startActivity(intent);
+                }else if (position==1){
+                    Intent intent=new Intent(context, TopicWiseActivity.class);
+                    context.startActivity(intent);
+                }else if(position==2){
+                    Intent intent=new Intent(context, ExamWisePrepActivity.class);
+                    context.startActivity(intent);
+                }else{
+                    Toast.makeText(context, "Coming Soon", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

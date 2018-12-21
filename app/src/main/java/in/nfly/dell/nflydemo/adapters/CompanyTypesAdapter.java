@@ -41,8 +41,8 @@ public class CompanyTypesAdapter  extends RecyclerView.Adapter<CompanyTypesAdapt
     @Override
     public void onBindViewHolder(@NonNull CompanyTypesAdapter.CompanyTypesHolder holder, final int position) {
         holder.companyTypesTitle.setText(titleDataSet.get(position));
-        //Picasso.with(context).load(imageDataSet.get(position)).into(holder.companyTypesImage);
-        holder.companyTypesImage.setImageResource(Integer.parseInt(imageDataSet.get(0)));
+        Picasso.with(context).load(imageDataSet.get(position)).into(holder.companyTypesImage);
+        //holder.companyTypesImage.setImageResource(Integer.parseInt(imageDataSet.get(0)));
         holder.companyTypesCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
